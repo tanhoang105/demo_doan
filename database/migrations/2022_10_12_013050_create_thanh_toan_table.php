@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('gia');
             $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

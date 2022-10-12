@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ten_danh_muc');
             $table->integer('trang_thai')->default(1);
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

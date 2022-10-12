@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ten_vai_tro');
             $table->string('mo_ta')->nullable();
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

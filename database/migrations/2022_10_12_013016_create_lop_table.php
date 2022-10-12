@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('ngay_ket_thuc');
             $table->integer('id_giang_vien');
             $table->integer('id_co_so');
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }
