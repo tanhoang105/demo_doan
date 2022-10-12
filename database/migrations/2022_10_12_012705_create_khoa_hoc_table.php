@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('khoa_hoc', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->integer('sdt')->nullable();
-            $table->string('dia_chi')->nullable();
+            $table->integer('id_danh_muc');
+            $table->string('ten_khoa_hoc');
+            $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->string('hinh_anh')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('khoa_hoc');
     }
 };

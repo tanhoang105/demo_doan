@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('thanh_toan', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->integer('sdt')->nullable();
-            $table->string('dia_chi')->nullable();
+            $table->integer('phuong_thuc_thanh_toan');
+            $table->date('ngay_thanh_toan');
+            $table->decimal('gia');
+            $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
-            $table->string('hinh_anh')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('thanh_toan');
     }
 };
