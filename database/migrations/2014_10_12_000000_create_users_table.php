@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('sdt')->nullable();
+            $table->string('dia_chi')->nullable();
+            $table->integer('trang_thai')->default(1);
+            $table->string('hinh_anh')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

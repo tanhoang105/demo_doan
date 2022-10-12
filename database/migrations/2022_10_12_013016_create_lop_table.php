@@ -21,8 +21,8 @@ return new class extends Migration
             $table->integer('so_luong')->nullable(); //số lượng học viên lớp
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
-            $table->integer('id_giangvien');
-            $table->integer('id_coso');
+            $table->integer('id_giang_vien');
+            $table->integer('id_co_so');
             $table->timestamps();
         });
     }

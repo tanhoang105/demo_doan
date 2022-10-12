@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_danh_muc');
             $table->string('ten_khoa_hoc');
-            $table->string('mo_ta');
+            $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->string('hinh_anh')->nullable();
             $table->timestamps();
