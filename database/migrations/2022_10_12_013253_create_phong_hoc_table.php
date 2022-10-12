@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ten_phong');
             $table->string('mo_ta')->nullable();
             $table->integer('id_co_so');
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('password');
             $table->integer('sdt')->nullable();
             $table->string('dia_chi')->nullable();
-            $table->integer('trang_thai')->default(1);
             $table->string('hinh_anh')->nullable();
+            $table->integer('trang_thai')->default(1);
+            $table->integer('delete_at')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

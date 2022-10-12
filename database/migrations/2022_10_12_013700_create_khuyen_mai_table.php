@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('giam_gia');
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

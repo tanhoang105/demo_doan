@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('id_lop');
             $table->integer('id_user');
             $table->integer('trang_thai')->default(1);
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

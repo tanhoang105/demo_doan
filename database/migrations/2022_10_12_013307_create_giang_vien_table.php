@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('sdt')->nullable();
             $table->integer('gioi_tinh')->nullable();
             $table->integer('trang_thai')->default(1);
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }
