@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('co_so', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_coso');
+            $table->string('ten_co_so');
             $table->string('dia_chi');
-            $table->string('mo_ta');
+            $table->string('mo_ta')->nullable();
             $table->timestamps();
         });
     }

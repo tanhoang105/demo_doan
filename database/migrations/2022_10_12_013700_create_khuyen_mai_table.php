@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('khuyen_mai', function (Blueprint $table) {
             $table->id();
-            $table->string('ma_khuyenmai');
-            $table->string('loai_khuyenmai');
-            $table->string('mo_ta');
+            $table->string('ma_khuyen_mai');
+            $table->string('loai_khuyen_mai');
+            $table->string('mo_ta')->nullable();
             $table->integer('giam_gia');
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');

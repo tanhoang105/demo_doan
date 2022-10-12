@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vaitro_nguoidung', function (Blueprint $table) {
+        Schema::create('phuong_thuc_thanh_toan', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_vaitro');
-            $table->integer('id_user');
+            $table->string('ten');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaitro_nguoidung');
+        Schema::dropIfExists('phuongthuc_thanhtoan');
     }
 };

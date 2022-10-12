@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('khoa_hoc', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_danhmuc');
-            $table->string('ten_khoahoc');
+            $table->integer('id_danh_muc');
+            $table->string('ten_khoa_hoc');
             $table->string('mo_ta');
             $table->integer('trang_thai')->default(1);
-            $table->string('hinh_anh');
+            $table->string('hinh_anh')->nullable();
             $table->timestamps();
         });
     }

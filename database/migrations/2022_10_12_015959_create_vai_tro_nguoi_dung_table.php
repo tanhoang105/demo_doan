@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('phuongthuc_thanhtoan', function (Blueprint $table) {
+        Schema::create('vai_tro_nguoi_dung', function (Blueprint $table) {
             $table->id();
-            $table->string('ten');
+            $table->integer('id_vai_tro');
+            $table->integer('id_user');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phuongthuc_thanhtoan');
+        Schema::dropIfExists('vaitro_nguoidung');
     }
 };

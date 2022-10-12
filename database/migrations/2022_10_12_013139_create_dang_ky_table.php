@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('dang_ky', function (Blueprint $table) {
             $table->id();
-            $table->date('ngay_dangky');
-            $table->integer('id_thanhtoan');
-            $table->decimal('gia');
+            $table->date('ngay_dang_ky');
+            $table->integer('id_thanh_toan');
+            $table->decimal('gia')->nullable();
             $table->integer('id_lop');
             $table->integer('id_user');
             $table->integer('trang_thai')->default(1);

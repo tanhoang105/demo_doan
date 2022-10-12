@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('xep_lop', function (Blueprint $table) {
             $table->id();
-            $table->date('ngay_dangky');
+            $table->date('ngay_dang_ky');
             $table->integer('id_lop');
             $table->integer('id_user');
             $table->integer('trang_thai');

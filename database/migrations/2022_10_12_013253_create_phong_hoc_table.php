@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('phong_hoc', function (Blueprint $table) {
             $table->id();
             $table->string('ten_phong');
-            $table->string('mo_ta');
-            $table->integer('id_coso');
+            $table->string('mo_ta')->nullable();
+            $table->integer('id_co_so');
             $table->timestamps();
         });
     }

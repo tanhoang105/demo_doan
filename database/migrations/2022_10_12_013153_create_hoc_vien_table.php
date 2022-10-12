@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('hoc_vien', function (Blueprint $table) {
             $table->id('user_id');
-            $table->string('ten_hocvien');
+            $table->string('ten_hoc_vien');
             $table->string('dia_chi');
             $table->string('email')->unique();
             $table->integer('sdt');
-            $table->string('hinh_anh');
+            $table->string('hinh_anh')->nullable();
             $table->integer('gioi_tinh');
             $table->integer('trang_thai')->default(1);
             $table->timestamps();

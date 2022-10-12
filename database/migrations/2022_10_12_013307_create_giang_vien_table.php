@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('giang_vien', function (Blueprint $table) {
             $table->id('user_id');
-            $table->string('ten_giangvien');
+            $table->string('ten_giang_vien');
             $table->string('dia_chi');
             $table->string('email');
             $table->integer('sdt');

@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('thanh_toan', function (Blueprint $table) {
             $table->id();
-            $table->integer('phupngthuc_thanhtoan');
-            $table->date('ngay_thanhtoan');
+            $table->integer('phuong_thuc_thanh_toan');
+            $table->date('ngay_thanh_toan');
             $table->decimal('gia');
-            $table->string('mo_ta');
+            $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->timestamps();
         });

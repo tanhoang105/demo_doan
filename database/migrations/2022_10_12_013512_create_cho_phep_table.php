@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('cho_phep', function (Blueprint $table) {
             $table->id();
             $table->string('ten');
-            $table->string('mo_ta');
+            $table->string('mo_ta')->nullable();
             $table->timestamps();
         });
     }

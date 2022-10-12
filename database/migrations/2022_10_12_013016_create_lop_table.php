@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('lop', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_khoahoc');
+            $table->integer('id_khoa_hoc');
             $table->string('ten_lop');
-            $table->decimal('gia');
-            $table->integer('so_luong'); //số lượng học viên lớp
+            $table->decimal('gia')->nullable();
+            $table->integer('so_luong')->nullable(); //số lượng học viên lớp
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
             $table->integer('id_giangvien');

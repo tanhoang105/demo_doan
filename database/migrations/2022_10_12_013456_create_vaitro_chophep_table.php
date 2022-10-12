@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vaitro_chophep', function (Blueprint $table) {
+        Schema::create('vai_tro_cho_phep', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_vaitro');
-            $table->integer('id_chophep');
+            $table->integer('id_vai_tro');
+            $table->integer('id_cho_phep');
             $table->timestamps();
         });
     }

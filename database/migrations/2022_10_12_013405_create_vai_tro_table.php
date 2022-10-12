@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('vai_tro', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_vaitro');
-            $table->string('mo_ta');
+            $table->string('ten_vai_tro');
+            $table->string('mo_ta')->nullable();
             $table->timestamps();
         });
     }
