@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaitro_nguoidung');
+        Schema::dropIfExists('vai_tro_nguoi_dung');
     }
 };

@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phuongthuc_thanhtoan');
+        Schema::dropIfExists('phuong_thuc_thanh_toan');
     }
 };
