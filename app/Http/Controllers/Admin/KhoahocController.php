@@ -24,10 +24,7 @@ class KhoahocController extends Controller
     public function index()
     {
         $khoahoc =  $this->khoahoc->index(null, false, null);
-        return response()->json([
-            'data' => $khoahoc,
-            'status' => 200
-         ]);
+        
     }
 
     /**
