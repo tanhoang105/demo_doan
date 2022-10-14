@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.templates.layout');
 });
 Route::get('/khoa-hoc', [KhoahocController::class, 'index']); // hiển thị danh sách
 Route::get('/khoa-hoc/{id}', [KhoahocController::class, 'show']); // hiển thị chi tiết bản ghi
