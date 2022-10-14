@@ -25,6 +25,8 @@ class KhoahocController extends Controller
     {
         $khoahoc =  $this->khoahoc->index(null, false, null);
         
+       
+        
     }
 
     /**
