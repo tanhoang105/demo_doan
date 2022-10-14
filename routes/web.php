@@ -17,4 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/cahoc', [CahocController::class, 'ShowAllList']);
+// khóa học
+
+
+// vai trò
