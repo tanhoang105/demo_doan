@@ -23,16 +23,19 @@ use Symfony\Component\Routing\RouterInterface;
 Route::get('/', function () {
     return view('admin.templates.layout');
 });
-Route::get('/khoa-hoc', [KhoahocController::class, 'index']); // hiển thị danh sách
-Route::get('/khoa-hoc/{id}', [KhoahocController::class, 'show']); // hiển thị chi tiết bản ghi
-Route::match(['get', 'post'], '/add-khoa-hoc', [KhoahocController::class, 'create']); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
-Route::get('/khoa-hoc-edit/{id}', [KhoahocController::class, 'edit']);
+
+// khóa học
+Route::get('/khoa-hoc', [KhoahocController::class, 'index'])->name('route_BE_Admin_Khoa_Hoc'); // hiển thị danh sách
+Route::match(['get', 'post'], '/add-khoa-hoc', [KhoahocController::class, 'store'])->name('route_BE_Admin_Add_Khoa_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+Route::get('/khoa-hoc-delete/{id}', [KhoahocController::class, 'destroy'])->name('route_BE_Admin_Xoa_Khoa_Hoc');
+Route::get('/khoa-hoc-chi-tiet/{id}', [KhoahocController::class, 'edit'])->name('route_BE_Admin_Chi_Tiet_Khoa_Hoc'); // hiển thị chi tiết bản ghi
+Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('route_BE_Admin_Update_Khoa_Hoc');
 // khóa học
 
 
 // xếp lớp
 Route::get('/xep-lop', [XepLopController::class, 'index'])->name('route_BE_Admin_Xep_Lop'); // hiển thị danh sách
-Route::get('/xep-lop-chi-tiet/{id}', [XepLopController::class, 'show'])->name('route_Admin_BE_Chi_Tiet_Xep_Lop'); // hiển thị danh sách
+// Route::get('/xep-lop-chi-tiet/{id}', [XepLopController::class, 'show'])->name('route_Admin_BE_Chi_Tiet_Xep_Lop'); // hiển thị danh sách
 Route::get('/xep-lop-xoa/{id}', [XepLopController::class, 'destroy'])->name('route_Admin_BE_Xoa_Xep_Lop');
 Route::get('/xep-lop-edit/{id}', [XepLopController::class, 'edit'])->name('route_Admin_BE_Edit_Xep_Lop');
 Route::post('/xep-lop-update', [XepLopController::class, 'update'])->name('route_Admin_BE_Update_Xep_Lop');

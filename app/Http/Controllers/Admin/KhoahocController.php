@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DanhMuc;
 use App\Models\KhoaHoc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class KhoahocController extends Controller
 {
@@ -15,18 +17,19 @@ class KhoahocController extends Controller
     {
         $this->v = [];
         $this->khoahoc  = new KhoaHoc();
+        $this->danhmuc = new DanhMuc();
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $khoahoc =  $this->khoahoc->index(null, false, null);
-        
-       
-        
+        $this->v['params'] = $request->all();
+        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 2);
+        $this->v['list'] = $khoahoc;
+        return view('admin.khoahoc.index', $this->v);
     }
 
     /**
@@ -36,12 +39,24 @@ class KhoahocController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->v['params'] = $request->all();
+
+        $danhmuc = $this->danhmuc->index($this->v['params'], false, null);
+        $this->v['danhmuc'] = $danhmuc;
+
+
         if ($request->isMethod('POST')) {
-            // if ($request->file('anh_khoa_hoc')) {
-            //     $file = $request->file('anh_khoa_hoc');
-            //     $filename = date('YmdHi') . $file->getClientOriginalName();
-            //     $file->move(public_path('/assets/admin/img_maybay'), $filename);
-            // }
+
             $params = [];
             $params['cols'] = array_map(function ($item) {
 
@@ -55,29 +70,20 @@ class KhoahocController extends Controller
             }, $request->post());
             unset($params['cols']['_token']);
             // nếu có ảnh 
-            if ($request->file('anh_khoa_hoc')) {
-                $params['cols']['anh_khoa_hoc'] = $this->uploadFile($request->file('anh_khoa_hoc'));
+            if ($request->file('hinh_anh')) {
+                $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
             }
             $query = $this->khoahoc->create($params);
             if ($query > 0) {
-                // thêm thành công bản ghi 
-
+                Session::flash('success', 'Thêm thành công');
+                return redirect()->route('route_BE_Admin_Khoa_Hoc');
             } else {
                 // không thêm thành công bản ghi
-
+                Session::flash('error', 'Thêm Không thành công');
+                return redirect()->route('route_BE_Admin_Khoa_Hoc');
             }
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return  view('admin.khoahoc.add', $this->v);
     }
 
     /**
@@ -108,12 +114,18 @@ class KhoahocController extends Controller
     {
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
         if (!empty($id)) {
+        $this->v['params'] = $request->all();
+
+            $danhmuc = $this->danhmuc->index($this->v['params'], false, null);
+            $this->v['danhmuc'] = $danhmuc;
             $request->session()->put('id', $id);
             $khoahoc = $this->khoahoc->show($id);
-            return $khoahoc;
+            $this->v['khoahoc'] = $khoahoc;
+            return view('admin.khoahoc.update', $this->v);
         } else {
-            // nếu không tìm thấy id của bản ghi 
-
+            // nếu không tìm thấy id của bản ghi
+            Session::flash('error', 'Lỗi');
+            return back();
         }
     }
 
@@ -124,7 +136,7 @@ class KhoahocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // sau khi chỉnh sửa xong thì update vào cơ sở dữ liệu
         // cần thực hiện validate 
@@ -142,15 +154,18 @@ class KhoahocController extends Controller
         }, $request->post());
         unset($params['cols']['_token']);
         $params['cols']['id'] = $id;
-        if ($request->file('anh_khoa_hoc')) {
-            $params['cols']['anh_khoa_hoc'] = $this->uploadFile($request->file('anh_khoa_hoc'));
+        if ($request->file('hinh_anh')) {
+            $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
         }
         // dd($params);
-        $query  = $this->khoahoc->saveupdate($id, $params);
+        $query  = $this->khoahoc->saveupdate($params);
         if ($query > 0) {
-            // update thành công
+            Session::flash('success', 'Cập nhập thành công');
+            return redirect()->route('route_BE_Admin_Khoa_Hoc');
         } else {
             // update không thành công 
+            Session::flash('error', 'Cập nhập không thành công');
+            return redirect()->route('route_BE_Admin_Khoa_Hoc');
         }
     }
 
@@ -163,7 +178,17 @@ class KhoahocController extends Controller
     public function destroy($id)
     {
         // xóa bản ghi theo id - xóa mềm
+        if ($id) {
 
+            $res  = $this->khoahoc->remove($id);
+            if ($res > 0) {
+                Session::flash('success', 'Xóa thành công');
+                return back();
+            } else {
+                Session::flash('error', 'Xóa không thành công thành công');
+                return back();
+            }
+        }
     }
 
 
@@ -171,6 +196,6 @@ class KhoahocController extends Controller
     public function uploadFile($file)
     {
         $filename =  time() . '_' . $file->getClientOriginalName();
-        return $file->storeAs('ing_khoa_hoc', $filename,  'public');
+        return $file->storeAs('imageKhoaHoc', $filename,  'public');
     }
 }

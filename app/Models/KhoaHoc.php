@@ -24,7 +24,8 @@ class KhoaHoc extends Model
             // nếu phần trang 
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'khoa_hoc.*')
+                ->select($this->table . '.*', 'danh_muc.*')
+                ->where( $this->table . '.delete_at', '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -36,7 +37,8 @@ class KhoaHoc extends Model
             // nếu không phần trang 
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'khoa_hoc.*')
+                ->select($this->table . '.*', 'danh_muc.*')
+                ->where( $this->table . '.delete_at', '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {

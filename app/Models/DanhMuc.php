@@ -12,7 +12,7 @@ class DanhMuc extends Model
     protected $table = 'danh_muc';
     protected $guarded = [];
 
-    public function index($params, $pagination = true, $perpage)
+    public function index($params, $pagination = true, $perpage )
     {
         if ($pagination) {
             $query  = DB::table($this->table)
@@ -79,6 +79,8 @@ class DanhMuc extends Model
     // hàm update bản ghi 
     public function saveupdate( $params)
     {
+
+        // dd($this->guarded);
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
         
