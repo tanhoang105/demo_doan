@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class VaiTroChoPhep extends Model
+class GiangVien extends Model
 {
     use HasFactory;
-    protected $table = 'vai_tro_cho_phep';
+    protected $table = 'giang_vien';
     protected $guarded = [];
 
     public function index($params, $pagination = true, $perpage)
@@ -17,29 +17,30 @@ class VaiTroChoPhep extends Model
         if ($pagination) {
             $query  = DB::table($this->table)
                 ->where('delete_at', '=', 1)
-                ->select($this->table . '.*')
+                ->join('users',$this->table . '.id_user' , 'users.id')
+                ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
-                ->select($this->table . '.*')
-                ->orderByDesc($this->table . '.id');
+            ->where('delete_at', '=', 1)
+            ->join('users',$this->table . '.id_user' , 'users.id')
+            ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
+            ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();
         }
         return $list;
     }
-
      // hiển thị ra chi tiết 1 bản ghi
      public function show($id){
         if(!empty($id)){

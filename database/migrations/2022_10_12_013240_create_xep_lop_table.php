@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('ngay_dang_ky');
             $table->integer('id_lop');
             $table->integer('id_user');
+            $table->integer('id_ca_hoc');
             $table->integer('trang_thai');
             $table->integer('delete_at')->default(1);
 

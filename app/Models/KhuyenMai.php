@@ -6,33 +6,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class VaiTroChoPhep extends Model
+class KhuyenMai extends Model
 {
     use HasFactory;
-    protected $table = 'vai_tro_cho_phep';
-    protected $guarded = [];
+    protected $table = 'khuyen_mai'; // định nghĩa tên bảng
 
-    public function index($params, $pagination = true, $perpage)
+    protected $guarded = []; // định nghĩa các trường dữ liệu muốn làm việc
+
+    // định nghĩa các hàm muốn thao tác với cơ sở dữ liệu
+
+    // hàm lấy tất cả các bản ghi 
+    public function index($params, $pagination = true,  $perpage)
     {
+
+        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang 
         if ($pagination) {
-            $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
+            // nếu phần trang 
+            $query = DB::table($this->table)
                 ->select($this->table . '.*')
+                ->where('delete_at' , '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
-            $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
+            // nếu không phần trang 
+            $query = DB::table($this->table)
                 ->select($this->table . '.*')
+                ->where('delete_at' , '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();

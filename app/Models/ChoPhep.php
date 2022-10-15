@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class VaiTroChoPhep extends Model
+class ChoPhep extends Model
 {
     use HasFactory;
-    protected $table = 'vai_tro_cho_phep';
+    protected $table = 'cho_phep';
     protected $guarded = [];
 
     public function index($params, $pagination = true, $perpage)
@@ -21,7 +21,7 @@ class VaiTroChoPhep extends Model
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -32,14 +32,13 @@ class VaiTroChoPhep extends Model
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_vai_tro', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();
         }
         return $list;
     }
-
      // hiển thị ra chi tiết 1 bản ghi
      public function show($id){
         if(!empty($id)){

@@ -25,7 +25,7 @@ class KhoaHoc extends Model
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
                 ->select($this->table . '.*', 'khoa_hoc.*')
-                ->orderBy($this->table . '.id');
+                ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -37,7 +37,7 @@ class KhoaHoc extends Model
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
                 ->select($this->table . '.*', 'khoa_hoc.*')
-                ->orderBy($this->table . '.id');
+                ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -48,8 +48,8 @@ class KhoaHoc extends Model
         return $list;
     }
 
-    // hàm lấy 1 bản ghi theo id - chi tiết bản ghi
-    public function show($id){
+     // hiển thị ra chi tiết 1 bản ghi
+     public function show($id){
         if(!empty($id)){
             $query = DB::table($this->table)
                     ->where('id' , '=' , $id)
@@ -65,7 +65,7 @@ class KhoaHoc extends Model
     {
         $data  = array_merge($params['cols'], [
             // 'created_at' => date('Y-m-d H:i:s'),
-            // 'anh_khoa_hoc' => $filename // nếu bảng nào có phần ảnh cần update thì bổ sung thêm phần code này
+            'delete_at' => 1,
         ]);
 
         $query = DB::table($this->table)->insertGetId($data);
@@ -86,20 +86,14 @@ class KhoaHoc extends Model
 
 
     // hàm update bản ghi 
-    public function saveupdate($id, $params)
+    public function saveupdate( $params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-            
+        
         ]); 
-        if(!empty($guarded)){
-
-            $data = array_merge($params['cols'] , [
-                'anh_mb'=> $guarded
-            ]);
-        }
         $query =  DB::table($this->table)
-            ->where('id', '=', $id)
+            ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
     }
