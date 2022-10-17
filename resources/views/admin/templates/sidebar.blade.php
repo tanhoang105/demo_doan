@@ -158,6 +158,28 @@
                 
             </li>
 
+            <li class="nav-item">
+                <a href="{{route('route_BE_Admin_Phong_Hoc')}}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Phòng Học
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route('route_BE_Admin_Vai_Tro')}}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Vai Tro
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                
+            </li>
+
            
             
            

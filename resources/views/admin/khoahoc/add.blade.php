@@ -45,7 +45,7 @@
 
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ảnh</label>
+                    <label for="" class="form-label">Ảnh</label>
                     <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Mô Tả</label>
+                    <label for="" class="form-label">Mô Tả</label>
                     <textarea class="form-control" name="mo_ta" id="" ></textarea>
                 </div>
 
