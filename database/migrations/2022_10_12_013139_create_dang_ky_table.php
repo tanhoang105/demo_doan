@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('ngay_dang_ky');
             $table->integer('id_thanh_toan');
-            $table->decimal('gia')->nullable();
+            $table->integer('gia')->nullable();
             $table->integer('id_lop');
             $table->integer('id_user');
             $table->integer('trang_thai')->default(1);

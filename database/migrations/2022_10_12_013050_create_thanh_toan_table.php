@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('thanh_toan', function (Blueprint $table) {
             $table->id();
-            $table->integer('phuong_thuc_thanh_toan');
+            $table->integer('id_phuong_thuc_thanh_toan');
             $table->date('ngay_thanh_toan');
-            $table->decimal('gia');
+            $table->integer('gia');
             $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
