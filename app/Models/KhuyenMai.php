@@ -24,11 +24,11 @@ class KhuyenMai extends Model
             // nếu phần trang 
             $query = DB::table($this->table)
                 ->select($this->table . '.*')
-                ->where('delete_at' , '=' , 1)
+                ->where('delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.   ', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -36,7 +36,7 @@ class KhuyenMai extends Model
             // nếu không phần trang 
             $query = DB::table($this->table)
                 ->select($this->table . '.*')
-                ->where('delete_at' , '=' , 1)
+                ->where('delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -48,14 +48,14 @@ class KhuyenMai extends Model
         return $list;
     }
 
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
-            return $query;        
-
+                ->where('id', '=', $id)
+                ->first();
+            return $query;
         }
     }
 
@@ -73,25 +73,26 @@ class KhuyenMai extends Model
     }
 
     // hàm xóa bản ghi theo id 
-    public function remove($id){
-        if(!empty($id)) {
+    public function remove($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
     // hàm update bản ghi 
-    public function saveupdate( $params)
+    public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

@@ -12,11 +12,12 @@ class CaHoc extends Model
     protected $table = 'ca_hoc';
     protected $guarded = [];
 
-    public function index($params, $pagination = true, $perpage)
+    public function index($params, $pagination = true, $perpage )
     {
         if ($pagination) {
             $query  = DB::table($this->table)
                 ->where('delete_at', '=', 1)
+                ->select($this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -27,6 +28,7 @@ class CaHoc extends Model
         } else {
             $query  = DB::table($this->table)
                 ->where('delete_at', '=', 1)
+                ->select($this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {

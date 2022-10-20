@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_Admin_BE_Add_Danh_Muc') }}">Thêm</a></button>
+                href="{{ route('route_BE_Admin_Add_Ca_Hoc') }} ">Thêm</a></button>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -22,8 +22,8 @@
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên danh mục </th>
-
+                <th scope="col">Ca học</th>
+                <th scope="col">Thời gian</th>
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -32,12 +32,14 @@
             @foreach ($list as $key => $item)
                 <tr>
                     <th scope="row"> {{ $key++ }}</th>
-                    <td> {{ $item->ten_danh_muc }}</td>
+                    <td> {{ $item->ca_hoc }}</td>
+                    <td> {{ $item->thoi_gian }}</td>
+
                     <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}"> Sửa
+                                href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
                     <td> <button class="btn btn-danger"><a
-                                href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
                                 Xóa</a></button></td>
 
                 </tr>

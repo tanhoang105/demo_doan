@@ -20,11 +20,11 @@ class XepLop extends Model
         if ($pagination) {
             // nếu phần trang 
             $query = DB::table($this->table)
-                ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
                 ->join('ca_hoc', $this->table . '.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
-                ->join('giang_vien', 'giang_vien.id', '=', 'lop.id_giang_vien')
+                ->join('users', $this->table . '.id_user', '=', 'users.id')
+                ->join('giang_vien', 'giang_vien.id', '=', 'users.id')
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
@@ -55,14 +55,14 @@ class XepLop extends Model
         return $list;
     }
 
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
-            return $query;        
-
+                ->where('id', '=', $id)
+                ->first();
+            return $query;
         }
     }
 
@@ -80,25 +80,26 @@ class XepLop extends Model
     }
 
     // hàm xóa bản ghi theo id 
-    public function remove($id){
-        if(!empty($id)) {
+    public function remove($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
     // hàm update bản ghi 
-    public function saveupdate( $params)
+    public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

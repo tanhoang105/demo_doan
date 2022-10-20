@@ -4,33 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CaHoc;
-use App\Models\GiangVien;
-use App\Models\KhoaHoc;
-use App\Models\Lop;
-use App\Models\PhongHoc;
-use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class XepLopController extends Controller
+class CaHocController extends Controller
 {
-    protected $v;
-    protected $xep_lop;
-    protected $khoa_hoc;
-    protected $ca_hoc;
-
+    protected $v = [];
+    protected $cahoc;
     public function __construct()
     {
         $this->v = [];
-        $this->xep_lop = new XepLop();
-        $this->khoa_hoc = new KhoaHoc();
-        $this->giang_vien = new GiangVien();
-        $this->phong_hoc = new PhongHoc();
-        $this->ca_hoc = new CaHoc();
-        $this->lop_hoc = new Lop();
+        $this->cahoc = new CaHoc();
     }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -38,12 +24,11 @@ class XepLopController extends Controller
      */
     public function index(Request $request)
     {
+
         $this->v['params'] = $request->all();
+        $this->v['list']  = $this->cahoc->index($this->v['params'], true, 3);
 
-        $list = $this->xep_lop->index($this->v['params'], true, 3);
-        $this->v['list'] = $list;
-
-        return view('admin.xeplop.index', $this->v);
+        return view('admin.cahoc.index', $this->v);
     }
 
     /**
@@ -51,9 +36,9 @@ class XepLopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // hiển thị ra form thêm
-    public function create(Request $request)
+    public function create()
     {
+        //
     }
 
     /**
@@ -62,7 +47,6 @@ class XepLopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // sau khi nhập dữ liệu thêm và submit form 
     public function store(Request $request)
     {
         //
@@ -81,25 +65,17 @@ class XepLopController extends Controller
             }, $request->post());
 
             unset($params['cols']['_token']);
-            // dd($params);
-            $res = $this->xep_lop->create($params);
+            $res = $this->cahoc->create($params);
             if ($res > 0) {
                 // thêm thành công
-                Session::flash('success', "Thêm thành cônng");
-                return redirect()->route('route_BE_Admin_Xep_Lop');
+                Session::flash('seccuss', 'Thêm thành công');
+                return redirect()->route('route_BE_Admin_Ca_Hoc');
             } else {
-                Session::flash('error', "Thêm không thành cônng");
-                return redirect()->route('route_BE_Admin_Xep_Lop');
+                Session::flash('error', 'Thêm không thành công');
+                return redirect()->route('route_BE_Admin_Ca_Hoc');
             }
         }
-
-        $this->v['khoahoc'] = $this->khoa_hoc->index(null, false, null);
-        $this->v['giangvien'] = $this->giang_vien->index(null, false, null);
-        $this->v['phonghoc'] = $this->phong_hoc->index(null, false, null);
-        $this->v['cahoc'] = $this->ca_hoc->index(null, false, null);
-        $this->v['lophoc'] = $this->lop_hoc->index(null, false, null);
-        // dd($this->v['giangvien']);
-        return view('admin.xeplop.add', $this->v);
+        return view('admin.cahoc.add');
     }
 
     /**
@@ -110,7 +86,7 @@ class XepLopController extends Controller
      */
     public function show($id)
     {
-        $this->v['result'] = $this->xep_lop->show($id);
+        //
     }
 
     /**
@@ -119,14 +95,15 @@ class XepLopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        if (!empty($id)) {
+        //
 
-            $result  = $this->xep_lop->show($id);
-            if ($result) {
-                // hiển thị dữ liệu lên form chỉnh sửa
-            }
+        if ($id) {
+            $request->session()->put('id', $id);
+            $res = $this->cahoc->show($id);
+            $this->v['cahoc'] = $res;
+            return view('admin.cahoc.update', $this->v);
         }
     }
 
@@ -140,6 +117,32 @@ class XepLopController extends Controller
     public function update(Request $request)
     {
         //
+        if (session('id')) {
+            $id  = session('id');
+            $params = [];
+            $params['cols'] = array_map(function ($item) {
+                if ($item == '') {
+                    $item = null;
+                }
+
+                if (is_string($item)) {
+                    $item = trim($item);
+                }
+                return $item;
+            }, $request->post());
+
+            unset($params['cols']['_token']);
+            $params['cols']['id'] = $id;
+            $res = $this->cahoc->saveupdate($params);
+            if ($res > 0) {
+                // thêm thành công
+                Session::flash('seccuss', 'Cập nhập thành công');
+                return redirect()->route('route_BE_Admin_Ca_Hoc');
+            } else {
+                Session::flash('error', 'Cập nhập không thành công');
+                return redirect()->route('route_BE_Admin_Ca_Hoc');
+            }
+        }
     }
 
     /**
@@ -150,14 +153,14 @@ class XepLopController extends Controller
      */
     public function destroy($id)
     {
-        if (!empty($id)) {
-
-            $query =  $this->xep_lop->remove($id);
-            if ($query > 0) {
-                Session::flash('success', 'Xóa thành công');
+        //
+        if ($id) {
+            $res = $this->cahoc->remove($id);
+            if ($res > 0) {
+                Session::flash('success', "Xóa thành công");
                 return back();
             } else {
-                Session::flash('error', 'Xóa không thành công');
+                Session::flash('error', "Xóa không thành công");
                 return back();
             }
         }

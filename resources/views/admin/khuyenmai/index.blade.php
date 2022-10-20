@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_Admin_BE_Add_Danh_Muc') }}">Thêm</a></button>
+                href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">Thêm</a></button>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -22,8 +22,12 @@
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên danh mục </th>
-
+                <th scope="col">Mã khuyến mại </th>
+                <th scope="col">Loại khuyến mại </th>
+                <th scope="col">Giảm giá </th>
+                <th scope="col">Ngày bắt đầu </th>
+                <th scope="col">Ngày kết thúc</th>
+                <th scope="col">Mô tả</th>
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -32,12 +36,17 @@
             @foreach ($list as $key => $item)
                 <tr>
                     <th scope="row"> {{ $key++ }}</th>
-                    <td> {{ $item->ten_danh_muc }}</td>
+                    <td> {{ $item->ma_khuyen_mai }}</td>
+                    <td> {{ $item->loai_khuyen_mai }}</td>
+                    <td> {{ $item->giam_gia . '%' }}</td>
+                    <td> {{ $item->ngay_bat_dau }}</td>
+                    <td> {{ $item->ngay_ket_thuc }}</td>
+                    <td> {{ $item->mo_ta }}</td>
                     <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}"> Sửa
+                                href="{{ route('route_BE_Admin_Edit_Khuyen_Mai', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
                     <td> <button class="btn btn-danger"><a
-                                href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
                                 Xóa</a></button></td>
 
                 </tr>

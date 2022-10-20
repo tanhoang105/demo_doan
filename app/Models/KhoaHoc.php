@@ -24,8 +24,8 @@ class KhoaHoc extends Model
             // nếu phần trang 
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'danh_muc.*')
-                ->where( $this->table . '.delete_at', '=' , 1)
+                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc',  'danh_muc.*')
+                ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -37,8 +37,8 @@ class KhoaHoc extends Model
             // nếu không phần trang 
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'danh_muc.*')
-                ->where( $this->table . '.delete_at', '=' , 1)
+                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc', 'danh_muc.*')
+                ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -50,14 +50,14 @@ class KhoaHoc extends Model
         return $list;
     }
 
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
-            return $query;        
-
+                ->where('id', '=', $id)
+                ->first();
+            return $query;
         }
     }
 
@@ -75,30 +75,30 @@ class KhoaHoc extends Model
     }
 
     // hàm xóa bản ghi theo id 
-    public function remove($id){
-        if(!empty($id)) {
+    public function remove($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
     // hàm update bản ghi 
-    public function saveupdate( $params)
+    public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
+        // dd($data);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
     }
-
-
 }
