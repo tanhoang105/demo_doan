@@ -83,7 +83,6 @@ Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
     Route::match(['get', 'post'], '/add', [LopController::class, 'store'])->name('Add_Lop');
 });
 
-
 // ca học 
 Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
     Route::get('/list', [CaHocController::class, 'index'])->name('Ca_Hoc');
@@ -92,7 +91,6 @@ Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
     Route::post('/update', [CaHocController::class, 'update'])->name('Update_Ca_Hoc');
     Route::match(['get', 'post'], '/add', [CaHocController::class, 'store'])->name('Add_Ca_Hoc');
 });
-
 
 //khuyến mại
 Route::prefix('/khuyen-mai')->name('route_BE_Admin_')->group(function () {

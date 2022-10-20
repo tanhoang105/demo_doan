@@ -24,9 +24,9 @@ class KhoaHoc extends Model
             // nếu phần trang 
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc',  'danh_muc.*')
+                ->select('danh_muc.*' , $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id');
+                ->orderByDesc($this->table . '.id' , $this->table . '.*' );
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
