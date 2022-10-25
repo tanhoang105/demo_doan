@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\LopController;
 use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
+use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
 */
 
 Route::get('/', function () {
-    return view('admin.templates.layout');
+    return redirect()->route('route_BE_Admin_Khoa_Hoc');
 });
 
 // khóa học
@@ -99,4 +100,14 @@ Route::prefix('/khuyen-mai')->name('route_BE_Admin_')->group(function () {
     Route::get('/edit/{id}', [KhuyenMaiController::class, 'edit'])->name('Edit_Khuyen_Mai');
     Route::post('/update', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
     Route::match(['get', 'post'], '/add', [KhuyenMaiController::class, 'store'])->name('Add_Khuyen_Mai');
+});
+
+
+//khuyến mại
+Route::prefix('/phuong-thuc-thanh-toan')->name('route_BE_Admin_')->group(function () {
+    Route::get('/list', [PhuongThucThanhToan::class, 'index'])->name('Phuong_Thuc_Thanh_Toan');
+    Route::get('/xoa/{id}', [PhuongThucThanhToan::class, 'destroy'])->name('Xoa_Phuong_Thuc_Thanh_Toan');
+    Route::get('/edit/{id}', [PhuongThucThanhToan::class, 'edit'])->name('Edit_Phuong_Thuc_Thanh_Toan');
+    Route::post('/update', [PhuongThucThanhToan::class, 'update'])->name('Update_Phuong_Thuc_Thanh_Toan');
+    Route::match(['get', 'post'], '/add', [PhuongThucThanhToan::class, 'store'])->name('Add_Phuong_Thuc_Thanh_Toan');
 });

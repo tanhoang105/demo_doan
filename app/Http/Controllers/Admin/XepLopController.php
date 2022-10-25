@@ -41,9 +41,10 @@ class XepLopController extends Controller
     {
         $this->v['params'] = $request->all();
 
-        $list = $this->xep_lop->index($this->v['params'], true, 3);
-        $this->v['list'] = $list;
 
+        $list = $this->xep_lop->index($this->v['params'], true, 3);
+
+        $this->v['list'] = $list;
         return view('admin.xeplop.index', $this->v);
     }
 

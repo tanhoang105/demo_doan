@@ -13,20 +13,26 @@ class KhoaHoc extends Model
 
     protected $guarded = []; // định nghĩa các trường dữ liệu muốn làm việc
 
+    public function danhMuc()
+    {
+        return $this->belongsTo(DanhMuc::class);
+    }
     // định nghĩa các hàm muốn thao tác với cơ sở dữ liệu
 
-    // hàm lấy tất cả các bản ghi 
+    // hàm lấy tất cả các bản ghi
     public function index($params, $pagination = true,  $perpage)
     {
 
-        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang 
+        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
-            // nếu phần trang 
+            // nếu phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select('danh_muc.*' , $this->table . '.*')
+
+                ->select('danh_muc.*', $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id' , $this->table . '.*' );
+                ->orderByDesc($this->table . '.id', $this->table . '.*');
+
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -34,12 +40,13 @@ class KhoaHoc extends Model
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
-            // nếu không phần trang 
+            // nếu không phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc', 'danh_muc.*')
+
+                ->select('danh_muc.*', $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id');
+                ->orderByDesc($this->table . '.id', $this->table . '.*');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -55,6 +62,7 @@ class KhoaHoc extends Model
     {
         if (!empty($id)) {
             $query = DB::table($this->table)
+
                 ->where('id', '=', $id)
                 ->first();
             return $query;
@@ -74,10 +82,12 @@ class KhoaHoc extends Model
         return $query;
     }
 
+
     // hàm xóa bản ghi theo id 
     public function remove($id)
     {
         if (!empty($id)) {
+
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
@@ -90,12 +100,13 @@ class KhoaHoc extends Model
 
     // hàm update bản ghi 
     public function saveupdate($params)
+
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
-        // dd($data);
+
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

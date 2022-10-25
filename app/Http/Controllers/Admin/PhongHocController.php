@@ -64,7 +64,7 @@ class PhongHocController extends Controller
             }, $request->post());
 
             unset($params['cols']['_token']);
-            // nếu có ảnh 
+            // nếu có ảnh
             if ($request->file('hinh_anh')) {
                 $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
             }
@@ -133,7 +133,7 @@ class PhongHocController extends Controller
         unset($params['cols']['_token']);
         $params['cols']['id'] = $id;
         $res = $this->phonghoc->saveupdate($params);
-    
+
         if($res > 0){
             Session::flash('success' , "Cập nhập thành công");
             return redirect()->route('route_BE_Admin_Phong_Hoc');
@@ -169,6 +169,6 @@ class PhongHocController extends Controller
     public function uploadFile($file){
         $filename = time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('imagePhongHoc', $filename,  'public');
- 
+
     }
 }
