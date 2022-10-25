@@ -15,10 +15,9 @@ class XepLop extends Model
 
     public function index($params, $pagination = true,  $perpage)
     {
-
-        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang 
+        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
-            // nếu phần trang 
+            // nếu phần trang
             $query = DB::table($this->table)
                 ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
@@ -35,21 +34,15 @@ class XepLop extends Model
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
-            // nếu không phần trang 
+            // nếu không phần trang
             $query = DB::table($this->table)
                 ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
                 ->join('ca_hoc', $this->table . '.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 ->join('giang_vien', 'giang_vien.id', '=', 'lop.id_giang_vien')
-                ->select($this->table . '.*', $this->table . '.id ' . ' as  ' . 'id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*',  'phong_hoc.*')
-                ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id');
-            if (!empty($params['keyword'])) {
-                $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.id_lop', 'like', '%' . $params['keyword']  . '%');
-                });
-            }
+//                ->where($this->table . '.delete_at', '=', 1)
+                ->select($this->table . '.*', $this->table . '.id ' . ' as  ' . 'id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*',  'phong_hoc.*');
             $list = $query->get();
         }
         return $list;
@@ -61,7 +54,7 @@ class XepLop extends Model
             $query = DB::table($this->table)
                     ->where('id' , '=' , $id)
                     ->first();
-            return $query;        
+            return $query;
 
         }
     }
@@ -79,7 +72,7 @@ class XepLop extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id){
         if(!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
@@ -87,18 +80,18 @@ class XepLop extends Model
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate( $params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

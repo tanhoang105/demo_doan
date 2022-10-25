@@ -13,18 +13,21 @@ class KhoaHoc extends Model
 
     protected $guarded = []; // định nghĩa các trường dữ liệu muốn làm việc
 
+    public function danhMuc(){
+        return $this->belongsTo(DanhMuc::class);
+    }
     // định nghĩa các hàm muốn thao tác với cơ sở dữ liệu
 
-    // hàm lấy tất cả các bản ghi 
+    // hàm lấy tất cả các bản ghi
     public function index($params, $pagination = true,  $perpage)
     {
 
-        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang 
+        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
-            // nếu phần trang 
+            // nếu phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'danh_muc.*')
+                ->select( 'danh_muc.*',$this->table . '.*')
                 ->where( $this->table . '.delete_at', '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -34,10 +37,10 @@ class KhoaHoc extends Model
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
-            // nếu không phần trang 
+            // nếu không phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select($this->table . '.*', 'danh_muc.*')
+                ->select( 'danh_muc.*',$this->table . '.*')
                 ->where( $this->table . '.delete_at', '=' , 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -56,7 +59,7 @@ class KhoaHoc extends Model
             $query = DB::table($this->table)
                     ->where('id' , '=' , $id)
                     ->first();
-            return $query;        
+            return $query;
 
         }
     }
@@ -74,7 +77,7 @@ class KhoaHoc extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id){
         if(!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
@@ -82,18 +85,18 @@ class KhoaHoc extends Model
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate( $params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('ca_hoc', function (Blueprint $table) {
             $table->id();
             $table->string('ca_hoc');
+            $table->time('thoi_gian')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();

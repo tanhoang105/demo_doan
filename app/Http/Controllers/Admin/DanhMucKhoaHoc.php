@@ -40,7 +40,7 @@ class DanhMucKhoaHoc extends Controller
      */
     public function create()
     {
-        // không cần hàm này 
+        // không cần hàm này
     }
 
     /**
@@ -56,7 +56,7 @@ class DanhMucKhoaHoc extends Controller
         $this->v['exParam'] = $request->all();
         if ($request->isMethod('POST')) {
 
-           
+
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -69,7 +69,7 @@ class DanhMucKhoaHoc extends Controller
             }, $request->post());
             unset($params['cols']['_token']);
             if ($request->file('anh_danh_muc')) {
-                // hàm uploadFile này đc định nghĩa ra để upload ảnh bản ghi nếu có 
+                // hàm uploadFile này đc định nghĩa ra để upload ảnh bản ghi nếu có
                 $params['cols']['anh_danh_muc'] = $this->uploadFile($request->file('anh_danh_muc'));
             }
             $res =  $this->danh_muc->create($params);
@@ -115,7 +115,7 @@ class DanhMucKhoaHoc extends Controller
                 return view('admin.danhmuc.update' , $this->v);
             }
         }
-        
+
     }
 
     /**

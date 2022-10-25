@@ -11,7 +11,9 @@ class Lop extends Model
     use HasFactory;
     protected $table = 'lop';
     protected $guarded = [];
-
+    public function khoaHoc(){
+        return $this->hasMany(KhoaHoc::class);
+    }
     public function index($params, $pagination = true, $perpage)
     {
         if ($pagination) {
@@ -29,7 +31,7 @@ class Lop extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
+//                ->where('delete_at', '=', 1)
                 ->join('khoa_hoc', $this->table  . '.id_khoa_hoc', 'khoa_hoc.id')
                 ->join('giang_vien', $this->table  . '.id_giang_vien', 'giang_vien.id')
                 ->select($this->table . '.*' , 'khoa_hoc.*' , 'giang_vien.*')
@@ -50,7 +52,7 @@ class Lop extends Model
             $query = DB::table($this->table)
                     ->where('id' , '=' , $id)
                     ->first();
-            return $query;        
+            return $query;
 
         }
     }
@@ -68,7 +70,7 @@ class Lop extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id){
         if(!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
@@ -76,18 +78,18 @@ class Lop extends Model
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate( $params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);

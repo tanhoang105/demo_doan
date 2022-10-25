@@ -27,9 +27,8 @@ class XepLopController extends Controller
     {
         $this->v['params'] = $request->all();
 
-        $list = $this->xep_lop->index($this->v['pramas'], true, 3);
+        $list = $this->xep_lop->index($this->v['params'], false, '');
         $this->v['list'] = $list;
-
         return view('admin.xeplop.index', $this->v);
     }
 
@@ -49,7 +48,7 @@ class XepLopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // sau khi nhập dữ liệu thêm và submit form 
+    // sau khi nhập dữ liệu thêm và submit form
     public function store(Request $request)
     {
         //
