@@ -13,7 +13,8 @@ class KhoaHoc extends Model
 
     protected $guarded = []; // định nghĩa các trường dữ liệu muốn làm việc
 
-    public function danhMuc(){
+    public function danhMuc()
+    {
         return $this->belongsTo(DanhMuc::class);
     }
     // định nghĩa các hàm muốn thao tác với cơ sở dữ liệu
@@ -28,9 +29,9 @@ class KhoaHoc extends Model
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
 
-                ->select('danh_muc.*' , $this->table . '.*')
+                ->select('danh_muc.*', $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id' , $this->table . '.*' );
+                ->orderByDesc($this->table . '.id', $this->table . '.*');
 
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -43,10 +44,9 @@ class KhoaHoc extends Model
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
 
-                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc', 'danh_muc.*')
+                ->select('danh_muc.*', $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-
-                ->orderByDesc($this->table . '.id');
+                ->orderByDesc($this->table . '.id', $this->table . '.*');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -66,7 +66,6 @@ class KhoaHoc extends Model
                 ->where('id', '=', $id)
                 ->first();
             return $query;
-
         }
     }
 
