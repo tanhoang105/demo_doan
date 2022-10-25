@@ -28,10 +28,10 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-                <a href="" class="nav-link ">
+                <a href=" {{ route('route_BE_Admin_List_Lop')}}" class="nav-link ">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                            Vai tro
+                            Lớp Học
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -174,6 +174,28 @@
                     <i class="nav-icon fas fa-edit"></i>
                     <p>
                         Vai Tro
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                
+            </li>
+
+            <li class="nav-item">
+                <a href=" {{ route('route_BE_Admin_Khuyen_Mai')}} " class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Khuyến Mại
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                
+            </li>
+
+            <li class="nav-item">
+                <a href="{{route('route_BE_Admin_Ca_Hoc')}}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                       Ca Học
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>

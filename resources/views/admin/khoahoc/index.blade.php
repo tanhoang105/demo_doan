@@ -34,7 +34,7 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $key++ }}</th>
+                    <th scope="row"> {{ $loop->iteration}}</th>
                     <td> {{ $item->ten_khoa_hoc }}</td>
                     <td> {{ $item->ten_danh_muc }}</td>
                     <td> <img width="150px" src="{{ Storage::url($item->hinh_anh)  }}" alt=""></td>

@@ -16,9 +16,9 @@ class GiangVien extends Model
     {
         if ($pagination) {
             $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
-                ->join('users',$this->table . '.id_user' , 'users.id')
-                ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('users', $this->table . '.id_user', 'users.id')
+                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', 'users.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -28,11 +28,12 @@ class GiangVien extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-                // sai
-            ->where('giang_vien.delete_at', '=', 1)
-            ->join('users',$this->table . '.id_user' ,'=', 'users.id')
-            ->select('giang_vien.*'  , 'users.*')
-            ->orderByDesc($this->table . '.id');
+
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('users', $this->table . '.id_user', 'users.id')
+                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', 'users.*')
+                ->orderByDesc($this->table . '.id');
+
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
@@ -42,10 +43,12 @@ class GiangVien extends Model
         }
         return $list;
     }
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
+
                     ->where('id' , '=' , $id)
                     ->first();
             return $query;
@@ -66,9 +69,13 @@ class GiangVien extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id
-    public function remove($id){
-        if(!empty($id)) {
+
+   
+    // hàm xóa bản ghi theo id 
+    public function remove($id)
+    {
+        if (!empty($id)) {
+
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
@@ -79,8 +86,12 @@ class GiangVien extends Model
     }
 
 
-    // hàm update bản ghi
-    public function saveupdate( $params)
+
+   
+
+    // hàm update bản ghi 
+    public function saveupdate($params)
+
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),

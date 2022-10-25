@@ -1,10 +1,10 @@
 @extends('Admin.templates.layout')
 @section('content')
-
     <div class="row p-3">
         <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_Admin_BE_Add_Danh_Muc') }}">Thêm</a></button>
+                href=" {{ route('route_BE_Admin_Add_Lop') }}">Thêm</a></button>
     </div>
+    {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
@@ -23,8 +23,13 @@
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên danh mục </th>
-
+                <th scope="col">Khóa học </th>
+                <th scope="col">Tên Lớp </th>
+                <th scope="col">Giá </th>
+                <th scope="col">Số lượng học viên </th>
+                <th scope="col">Ngày bắt đầu </th>
+                <th scope="col">Ngày kết thúc </th>
+                <th scope="col">Giảng viên </th>
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -33,12 +38,26 @@
             @foreach ($list as $key => $item)
                 <tr>
                     <th scope="row"> {{ $key++ }}</th>
-                    <td> {{ $item->ten_danh_muc }}</td>
+                    <td> {{ $item->ten_khoa_hoc }}</td>
+                    <td> {{ $item->ten_lop }}</td>
+                    <td> {{ $item->gia }}</td>
+                    <td> {{ $item->so_luong }}</td>
+                    <td> {{ $item->ngay_bat_dau }}</td>
+                    <td> {{ $item->ngay_ket_thuc }}</td>
+                    <td>
+                        @foreach ($giangvien as $gv)
+                              @if($item->id_giang_vien == $gv->id)
+                                 {{$gv->ten_giang_vien}}
+                             
+                                  
+                              @endif
+                        @endforeach
+                    </td>
                     <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}"> Sửa
+                                href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}"> Sửa
                             </a></button></td>
                     <td> <button class="btn btn-danger"><a
-                                href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
                                 Xóa</a></button></td>
 
                 </tr>

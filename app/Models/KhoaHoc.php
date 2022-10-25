@@ -27,9 +27,11 @@ class KhoaHoc extends Model
             // nếu phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select( 'danh_muc.*',$this->table . '.*')
-                ->where( $this->table . '.delete_at', '=' , 1)
-                ->orderByDesc($this->table . '.id');
+
+                ->select('danh_muc.*' , $this->table . '.*')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->orderByDesc($this->table . '.id' , $this->table . '.*' );
+
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
@@ -40,8 +42,10 @@ class KhoaHoc extends Model
             // nếu không phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-                ->select( 'danh_muc.*',$this->table . '.*')
-                ->where( $this->table . '.delete_at', '=' , 1)
+
+                ->select($this->table . '.*', $this->table . '.id as id_khoa_hoc', 'danh_muc.*')
+                ->where($this->table . '.delete_at', '=', 1)
+
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -53,12 +57,14 @@ class KhoaHoc extends Model
         return $list;
     }
 
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
+
+                ->where('id', '=', $id)
+                ->first();
             return $query;
 
         }
@@ -77,9 +83,12 @@ class KhoaHoc extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id
-    public function remove($id){
-        if(!empty($id)) {
+
+    // hàm xóa bản ghi theo id 
+    public function remove($id)
+    {
+        if (!empty($id)) {
+
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
@@ -90,18 +99,18 @@ class KhoaHoc extends Model
     }
 
 
-    // hàm update bản ghi
-    public function saveupdate( $params)
+    // hàm update bản ghi 
+    public function saveupdate($params)
+
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
+
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
     }
-
-
 }
