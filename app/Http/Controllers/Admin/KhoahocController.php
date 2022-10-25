@@ -29,6 +29,7 @@ class KhoahocController extends Controller
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 2);
         $this->v['list'] = $khoahoc;
+//        dd($khoahoc);
         return view('admin.khoahoc.index', $this->v);
     }
 
@@ -69,7 +70,7 @@ class KhoahocController extends Controller
                 return $item;
             }, $request->post());
             unset($params['cols']['_token']);
-            // nếu có ảnh 
+            // nếu có ảnh
             if ($request->file('hinh_anh')) {
                 $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
             }
@@ -99,7 +100,7 @@ class KhoahocController extends Controller
             $khoahoc = $this->khoahoc->show($id);
             return $khoahoc;
         } else {
-            // nếu không tìm thấy id của bản ghi 
+            // nếu không tìm thấy id của bản ghi
 
         }
     }
@@ -139,7 +140,7 @@ class KhoahocController extends Controller
     public function update(Request $request)
     {
         // sau khi chỉnh sửa xong thì update vào cơ sở dữ liệu
-        // cần thực hiện validate 
+        // cần thực hiện validate
         $id  = session('id');
         $params = [];
         $params['cols'] = array_map(function ($item) {
@@ -163,7 +164,7 @@ class KhoahocController extends Controller
             Session::flash('success', 'Cập nhập thành công');
             return redirect()->route('route_BE_Admin_Khoa_Hoc');
         } else {
-            // update không thành công 
+            // update không thành công
             Session::flash('error', 'Cập nhập không thành công');
             return redirect()->route('route_BE_Admin_Khoa_Hoc');
         }
@@ -192,7 +193,7 @@ class KhoahocController extends Controller
     }
 
 
-    // hàm upload ảnh 
+    // hàm upload ảnh
     public function uploadFile($file)
     {
         $filename =  time() . '_' . $file->getClientOriginalName();
