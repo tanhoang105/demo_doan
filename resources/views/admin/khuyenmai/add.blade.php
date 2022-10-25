@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Loại khuyến mại</label>
+                    <label for="" class="form-label">Mô tả</label>
                     <textarea name="mo_ta" id="" class="form-control"></textarea>
-                    @error('loai_khuyen_mai')
+                    @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>

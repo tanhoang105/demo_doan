@@ -75,12 +75,18 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày bắt đầu</label>
                     <input class="form-control" type="date" name="ngay_bat_dau" id="">
+                    @error('ngay_bat_dau')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
 
 
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày kết thúc</label>
                     <input class="form-control" type="date" name="ngay_ket_thuc" id="">
+                    @error('ngay_ket_thuc')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
 
 

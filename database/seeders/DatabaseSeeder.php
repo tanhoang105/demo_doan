@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
             ];
             $ca_hoc[]=[
                 'ca_hoc'=>'Ca '.$i,
+                'thoi_gian'=>date('H:i:s'),
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s')
             ];

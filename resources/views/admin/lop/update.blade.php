@@ -96,7 +96,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày kết thúc</label>
-                    <input value="{{ old('ngay_ket_thuc') ?? $lop->ngay_ket_thuc }}" type="date" name="ngay_ket_thuc"
+                    <input value="{{ old('ngay_ket_thuc') ?? $lop->ngay_ket_thuc ?? request()->ngay_ket_thuc}}" type="date" name="ngay_ket_thuc"
                         class="form-control" id="" aria-describedby="">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('ngay_ket_thuc')

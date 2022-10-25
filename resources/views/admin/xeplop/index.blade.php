@@ -46,7 +46,7 @@
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Xep_Lop', ['id' => $item->id_xep_lop]) }}"> Sửa
                             </a></button></td>
-                    <td> <button class="btn btn-danger"><a
+                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
                                 href="{{ route('route_BE_Admin_Xoa_Xep_Lop', ['id' => $item->id_xep_lop]) }}">
                                 Xóa</a></button></td>
 

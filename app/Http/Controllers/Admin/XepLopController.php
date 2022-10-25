@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\XeplopRequest;
 use App\Models\CaHoc;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
@@ -63,7 +64,7 @@ class XepLopController extends Controller
      * @return \Illuminate\Http\Response
      */
     // sau khi nhập dữ liệu thêm và submit form 
-    public function store(Request $request)
+    public function store(XeplopRequest $request)
     {
         //
         if ($request->isMethod('POST')) {
@@ -137,7 +138,7 @@ class XepLopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(XeplopRequest $request)
     {
         //
     }

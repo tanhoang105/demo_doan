@@ -41,9 +41,9 @@
                             @endif
                         @endforeach
                     </select>
-                    @error('ten_khoa_hoc')
+                    {{-- @error('ten_khoa_hoc')
                         <span style="color: red"> {{ $message }} </span>
-                    @enderror
+                    @enderror --}}
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô Tả</label>

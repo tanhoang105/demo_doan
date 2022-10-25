@@ -1,8 +1,9 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_BE_Admin_Add_Lop') }}">Thêm</a></button>
+        <a href="{{ route('route_BE_Admin_Add_Lop') }}">
+            <button class='btn btn-success'>Thêm</button>
+        </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
@@ -46,17 +47,17 @@
                     <td> {{ $item->ngay_ket_thuc }}</td>
                     <td>
                         @foreach ($giangvien as $gv)
-                              @if($item->id_giang_vien == $gv->id)
-                                 {{$gv->ten_giang_vien}}
-                             
-                                  
-                              @endif
+                            @if ($item->id_giang_vien == $gv->id)
+                                {{ $gv->ten_giang_vien }}
+                            @endif
                         @endforeach
                     </td>
-                    <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}"> Sửa
-                            </a></button></td>
-                    <td> <button class="btn btn-danger"><a
+                    <td> <button class="btn btn-warning">
+                            <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}"> Sửa
+                            </a>
+                        </button>
+                    </td>
+                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
                                 href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
                                 Xóa</a></button></td>
 
