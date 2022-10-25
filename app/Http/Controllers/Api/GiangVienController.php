@@ -16,7 +16,6 @@ class GiangVienController extends Controller
         $objGiangVien=new GiangVien();
         $params = $request->all();
         $list = $objGiangVien->index($params, false, '');
-        dd($list);
         return new GiangVienCollection($list);
 //        return response()->json($list);
     }

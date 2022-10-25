@@ -1,5 +1,6 @@
 @extends('Admin.templates.layout')
 @section('content')
+
     <div class="row p-3">
         <button class="btn btn-primary"><a style="color: red" href=" {{route('route_Admin_BE_Add_Danh_Muc')}}">Thêm</a></button>
     </div>

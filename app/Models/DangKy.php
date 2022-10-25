@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DangKy extends Model
 {
     use HasFactory;
+    protected $table="dang_ky";
 }

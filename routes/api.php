@@ -31,4 +31,8 @@ Route::get('/phong-hoc',[\App\Http\Controllers\Api\PhongHocController::class,'in
 Route::get('/hoc-vien',[\App\Http\Controllers\Api\HocVienController::class,'index']);
 Route::get('/giang-vien',[\App\Http\Controllers\Api\GiangVienController::class,'index']);
 Route::get('/xep-lop',[\App\Http\Controllers\Api\XepLopController::class,'index']);
+Route::get('/dang-ky',[\App\Http\Controllers\Api\DangKyController::class,'index']);
+Route::get('/thanh-toan',[\App\Http\Controllers\Api\ThanhToanController::class,'index']);
+Route::get('/ca-hoc',[\App\Http\Controllers\Api\CaHocController::class,'index']);
+Route::get('/khuyen-mai',[\App\Http\Controllers\Api\KhuyenMaiController::class,'index']);
 

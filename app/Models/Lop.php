@@ -31,7 +31,7 @@ class Lop extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-//                ->where('delete_at', '=', 1)
+                ->where('lop.delete_at', '=', 1)
                 ->join('khoa_hoc', $this->table  . '.id_khoa_hoc', 'khoa_hoc.id')
                 ->join('giang_vien', $this->table  . '.id_giang_vien', 'giang_vien.id')
                 ->select($this->table . '.*' , 'khoa_hoc.*' , 'giang_vien.*')

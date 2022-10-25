@@ -28,9 +28,10 @@ class GiangVien extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-//            ->where('delete_at', '=', 1)
-            ->join('users',$this->table . '.id_user' , 'users.id')
-            ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
+                // sai
+            ->where('giang_vien.delete_at', '=', 1)
+            ->join('users',$this->table . '.id_user' ,'=', 'users.id')
+            ->select('giang_vien.*'  , 'users.*')
             ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {

@@ -21,10 +21,18 @@ class PhongHocCollection extends ResourceCollection
                     'ten_phong'=>$data->ten_phong,
                     'mo_ta'=>$data->mo_ta,
                     'dia_chi'=>$data->dia_chi,
+                    'delete_at'=>$data->delete_at,
                     'created_at'=>$data->created_at,
                     'updated_at'=>$data->updated_at,
                 ];
             })
+        ];
+    }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200
         ];
     }
 }

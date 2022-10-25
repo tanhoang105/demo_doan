@@ -24,10 +24,18 @@ class XepLopCollection extends ResourceCollection
                     'id_ca_hoc'=>$data->id_ca_hoc,
                     'id_phong_hoc'=>$data->id_phong_hoc,
                     'trang_thai'=>$data->trang_thai,
+                    'delete_at'=>$data->delete_at,
                     'created_at'=>$data->created_at,
                     'updated_at'=>$data->updated_at,
                 ];
             })
+        ];
+    }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200
         ];
     }
 }

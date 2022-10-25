@@ -8,6 +8,7 @@ use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
+use App\Http\cc;
 
 class DanhMucKhoaHoc extends Controller
 {

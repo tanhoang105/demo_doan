@@ -20,16 +20,18 @@ class DanhMucCollection extends ResourceCollection
                     'id' => $data->id,
                     'ten_danh_muc'=>$data->ten_danh_muc,
                     'trang_thai'=>$data->trang_thai,
+                    'delete_at'=>$data->delete_at,
                     'created_at'=>$data->created_at,
                     'updated_at'=>$data->updated_at,
                 ];
             })
         ];
     }
-//    public function with(){
-//        return[
-//            'success'=>true,
-//            'status'=>200,
-//        ];
-//    }
+    public function with($request)
+    {
+        return [
+            'success' => true,
+            'status' => 200
+        ];
+    }
 }
