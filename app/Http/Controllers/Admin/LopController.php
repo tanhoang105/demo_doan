@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LopRequest;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
@@ -55,7 +56,7 @@ class LopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LopRequest $request)
     {
         //
 
@@ -130,7 +131,7 @@ class LopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(LopRequest $request)
     {
 
         if (session('id')) {

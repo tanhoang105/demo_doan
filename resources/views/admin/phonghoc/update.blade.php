@@ -40,6 +40,7 @@
 
 
             </div>
+            <input type="text" name="dia_chi" id="" hidden value="hà nội">
 
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>

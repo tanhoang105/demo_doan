@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KhoahocRequest;
 use App\Models\DanhMuc;
 use App\Models\KhoaHoc;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class KhoahocController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KhoahocRequest $request)
     {
         $this->v['params'] = $request->all();
 
@@ -137,7 +138,7 @@ class KhoahocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(KhoahocRequest $request)
     {
         // sau khi chỉnh sửa xong thì update vào cơ sở dữ liệu
         // cần thực hiện validate
@@ -191,9 +192,7 @@ class KhoahocController extends Controller
             }
         }
     }
-
-
-    // hàm upload ảnh
+    // hàm upload ảnh 
     public function uploadFile($file)
     {
         $filename =  time() . '_' . $file->getClientOriginalName();

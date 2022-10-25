@@ -37,9 +37,9 @@
                             <option value="{{ $item->id }}">{{ $item->ten_danh_muc }}</option>
                         @endforeach
                     </select>
-                    @error('ten_khoa_hoc')
+                    {{-- @error('ten_khoa_hoc')
                         <span style="color: red"> {{ $message }} </span>
-                    @enderror
+                    @enderror --}}
                 </div>
             </div>
 
@@ -57,6 +57,9 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Mô Tả</label>
                     <textarea class="form-control" name="mo_ta" id="" ></textarea>
+                    @error('mo_ta')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
 
 

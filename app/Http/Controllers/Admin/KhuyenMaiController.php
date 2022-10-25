@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KhuyenmaiRequest;
 use App\Models\KhuyenMai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -46,7 +47,7 @@ class KhuyenMaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KhuyenmaiRequest $request)
     {
         //
         $this->v['params'] = $request->all();
@@ -116,7 +117,7 @@ class KhuyenMaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(KhuyenmaiRequest $request)
     {
         if (session('id')) {
             $id = session('id');

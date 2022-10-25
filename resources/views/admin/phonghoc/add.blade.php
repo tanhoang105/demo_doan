@@ -43,7 +43,7 @@
 
 
             </div>
-
+            <input type="text" hidden value="hà nội" name="dia_chi" id="">
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
 

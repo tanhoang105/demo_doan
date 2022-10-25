@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CaHocRequest;
 use App\Models\CaHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -47,7 +48,7 @@ class CaHocController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CaHocRequest $request)
     {
         //
         if ($request->isMethod('POST')) {
@@ -114,7 +115,7 @@ class CaHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(CaHocRequest $request)
     {
         //
         if (session('id')) {
