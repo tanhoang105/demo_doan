@@ -23,9 +23,7 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Khóa Học </th>
-               
                 <th scope="col">Mô Tả </th>
-
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -35,8 +33,7 @@
                 <tr>
                     <th scope="row"> {{ $key++ }}</th>
                     <td> {{ $item->ten_phong }}</td>
-                    <td> {{ $item->mo_ta }}</td>
-                    
+                    <td> {!! $item->mo_ta !!}</td>
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>

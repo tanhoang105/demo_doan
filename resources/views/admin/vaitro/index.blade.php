@@ -35,7 +35,7 @@
                 <tr>
                     <th scope="row"> {{ $key++ }}</th>
                     <td> {{ $item->ten_vai_tro }}</td>
-                    <td> {{ $item->mo_ta }}</td>
+                    <td> {!! $item->mo_ta !!}</td>
                     
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}"> Sửa

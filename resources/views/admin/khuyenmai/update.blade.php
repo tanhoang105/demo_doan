@@ -46,7 +46,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Mô tả</label>
-                    <textarea name="mo_ta" id="" class="form-control"> {{ $khuyenmai->mo_ta }} </textarea>
+                    <textarea id="ckeditor1" name="mo_ta" id="" class="form-control"> {{ $khuyenmai->mo_ta }} </textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -92,6 +92,9 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Cập nhập</button>
-
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ckeditor1');
+    </script>
 @endsection

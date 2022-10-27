@@ -56,7 +56,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Mô Tả</label>
-                    <textarea class="form-control" name="mo_ta" id="" ></textarea>
+                    <textarea id="ckeditor2" class="form-control" name="mo_ta" id="" ></textarea>
                     @error('mo_ta')
                     <span style="color: red"> {{ $message }} </span>
                 @enderror
@@ -67,6 +67,9 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ckeditor2');
+    </script>
 @endsection

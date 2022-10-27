@@ -41,7 +41,7 @@
                     <td> {{ $item->giam_gia . '%' }}</td>
                     <td> {{ $item->ngay_bat_dau }}</td>
                     <td> {{ $item->ngay_ket_thuc }}</td>
-                    <td> {{ $item->mo_ta }}</td>
+                    <td> {!! $item->mo_ta !!}</td>
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Khuyen_Mai', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
