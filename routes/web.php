@@ -66,7 +66,7 @@ Route::post('/phong-hoc-update', [PhongHocController::class, 'update'])->name('r
 Route::get('/phong-hoc-xoa/{id}', [PhongHocController::class, 'destroy'])->name('route_BE_Admin_Xoa_Phong_Hoc');
 
 
-// vai tro 
+// vai tro
 Route::get('vai-tro', [VaiTroController::class, 'index'])->name('route_BE_Admin_Vai_Tro');
 Route::get('vai-tro-edit/{id}', [VaiTroController::class, 'edit'])->name('route_BE_Admin_Edit_Vai_Tro');
 Route::post('vai-tro-update', [VaiTroController::class, 'update'])->name('route_BE_Admin_Update_Vai_Tro');
@@ -74,7 +74,7 @@ Route::get('vai-tro-xoa/{id}', [VaiTroController::class, 'destroy'])->name('rout
 Route::match(['get', 'post'], 'vai-tro-add', [VaiTroController::class, 'store'])->name('route_BE_Admin_Add_Vai_Tro');
 
 
-// lớp học 
+// lớp học
 Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
 
     Route::get('/list', [LopController::class, 'index'])->name('List_Lop');
@@ -84,7 +84,7 @@ Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
     Route::match(['get', 'post'], '/add', [LopController::class, 'store'])->name('Add_Lop');
 });
 
-// ca học 
+// ca học
 Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
     Route::get('/list', [CaHocController::class, 'index'])->name('Ca_Hoc');
     Route::get('/xoa/{id}', [CaHocController::class, 'destroy'])->name('Xoa_Ca_Hoc');
@@ -110,4 +110,15 @@ Route::prefix('/phuong-thuc-thanh-toan')->name('route_BE_Admin_')->group(functio
     Route::get('/edit/{id}', [PhuongThucThanhToan::class, 'edit'])->name('Edit_Phuong_Thuc_Thanh_Toan');
     Route::post('/update', [PhuongThucThanhToan::class, 'update'])->name('Update_Phuong_Thuc_Thanh_Toan');
     Route::match(['get', 'post'], '/add', [PhuongThucThanhToan::class, 'store'])->name('Add_Phuong_Thuc_Thanh_Toan');
+});
+
+
+// tài khoản
+
+Route::prefix('/tai-khoan')->name('route_BE_Admin_')->group(function () {
+    Route::get('/list', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'index'])->name('Tai_Khoan');
+    Route::get('/xoa/{id}', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'destroy'])->name('Xoa_Tai_Khoan');
+    Route::get('/edit/{id}', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'edit'])->name('Edit_Tai_Khoan');
+    Route::post('/update', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'update'])->name('Update_Tai_Khoan');
+    Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
 });

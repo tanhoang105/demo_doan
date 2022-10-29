@@ -23,7 +23,7 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Vai Tro </th>
-               
+
                 <th scope="col">Mô Tả </th>
 
                 <th scope="col">Sửa</th>
@@ -33,10 +33,10 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $key++ }}</th>
+                    <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten_vai_tro }}</td>
                     <td> {{ $item->mo_ta }}</td>
-                    
+
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
