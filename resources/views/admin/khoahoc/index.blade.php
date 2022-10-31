@@ -38,7 +38,7 @@
                     <td> {{ $item->ten_khoa_hoc }}</td>
                     <td> {{ $item->ten_danh_muc }}</td>
                     <td> <img width="150px" src="{{ Storage::url($item->hinh_anh)  }}" alt=""></td>
-                    <td> {{ $item->mo_ta }}</td>
+                    <td> {!!$item->mo_ta!!}</td>
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Chi_Tiet_Khoa_Hoc', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>

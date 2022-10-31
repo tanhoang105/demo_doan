@@ -15,7 +15,6 @@ class PhonghocRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +24,6 @@ class PhonghocRequest extends FormRequest
     {
         $rules = [];
         $ActionCurrent  = $this->route()->getActionMethod(); // trả về method đang hoạt động 
-
         switch ($this->method()) {
             case 'POST':
                 switch ($ActionCurrent) {
@@ -39,7 +37,7 @@ class PhonghocRequest extends FormRequest
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'ten_phong' => 'required | min:4| unique:phong_hoc,ten_phong',
+                            'ten_phong' => 'required | min:4',
                         ];
                         break;
 
