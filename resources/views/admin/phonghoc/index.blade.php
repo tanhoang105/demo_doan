@@ -31,9 +31,11 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $key++ }}</th>
+                    <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten_phong }}</td>
+
                     <td> {!! $item->mo_ta !!}</td>
+
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
