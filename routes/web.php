@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\VaiTroController;
+use App\Http\Controllers\Client\ClientController;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
 use LDAP\ResultEntry;
@@ -26,8 +27,14 @@ use Symfony\Component\Routing\RouterInterface;
 */
 
 
-Route::get('/', function () {
-    return redirect()->route('route_BE_Admin_Khoa_Hoc');
+// Route::get('/', function () {
+//     return redirect()->route('route_BE_Admin_Khoa_Hoc');
+// });
+
+Route::prefix('/')->name('route_FE_Home')->group(function () {
+
+    Route::get('/', [ClientController::class, 'index'])->name('route_FE_Home');
+
 });
 
 // khóa học
