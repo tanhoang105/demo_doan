@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('vai_tro_cho_phep', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_vai_tro');
-            $table->integer('id_cho_phep');
+            $table->integer('vai_tro_id');
+            $table->integer('cho_phep_id');
             $table->integer('delete_at')->default(1);
 
             $table->timestamps();

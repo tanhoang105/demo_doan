@@ -1,13 +1,18 @@
   <!-- Sidebar -->
+
+
   <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
-          <div class="info">
-              <a href="#" class="d-block">Alexander Pierce</a>
-          </div>
+          @if(isset($objUser))
+              <div class="image">
+                  <img style="border-radius: 100px;width: 50px; height: 50px;%" src= "{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh)}}" class="img-circle elevation-2" alt="User Image">
+              </div>
+              <div class="info">
+
+                        <a href="#" class="d-block" >{{$objUser->name}}</a>
+              </div>
+          @endif
       </div>
 
       <!-- SidebarSearch Form -->
@@ -51,7 +56,7 @@
                   <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
-                          Vai Trò Cho Phép
+                          Quyền  tài khoản
                           <i class="fas fa-angle-left right"></i>
                           <span class="badge badge-info right">6</span>
                       </p>
@@ -107,16 +112,7 @@
                     </li>
                 </ul> --}}
               </li>
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-chart-pie"></i>
-                      <p>
-                          Vai Trò Người Dùng
-                          <i class="right fas fa-angle-left"></i>
-                      </p>
-                  </a>
 
-              </li>
               <li class="nav-item">
                   <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-tree"></i>
@@ -174,7 +170,7 @@
                   <a href="{{ route('route_BE_Admin_Vai_Tro') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                       <p>
-                          Vai Tro
+                          Vai Trò
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>

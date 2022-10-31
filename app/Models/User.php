@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\HasApiTokens;
-
+use App\Models\ChoPhep;
+use App\Models\VaiTroNguoiDung;
+use App\Models\VaiTroChoPhep;
+use App\Models\VaiTro;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -49,6 +52,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * @var mixed
+     */
 
     public function giangVien()
     {
@@ -141,5 +147,48 @@ class User extends Authenticatable
             return $res;
         }
     }
+
+    public function role(){
+
+//        return $this->belongsToMany(VaiTro::class , 'vai_tro_nguoi_dung');
+
+        // dung
+          return $this->belongsTo(VaiTro::class , 'vai_tro_id');
+
+    }
+
+
+
+    public  function  HasVaiTro($choPhep){
+
+
+
+        // lấy ra tất cả vai trò theo tài khoản user
+//        $role = $this->role;
+
+//
+//        foreach ($role as $v){
+//            echo '<pre>';
+//            echo $v->ten_vai_tro;
+//            echo '<pre>';
+//            echo($choPhep);
+//            echo '<pre>';
+////            return !!($v->permissions);
+//            $res = !! optional(optional(($v->permissions))->contains($choPhep));
+//           echo !!$res;
+////            if($res == []){
+////                dd($res);
+//////                return 0;
+////            }
+////            return !! optional(optional(($v->permissions))->contains($choPhep));
+////
+//
+//        }
+//        dd($this->role);
+        return !! optional(optional($this->role)->permissions)->contains($choPhep);
+
+    }
+
+
 
 }

@@ -60,6 +60,22 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="" class="form-label">Vai trò</label>
+                    <select class="form-control" name="vai_tro_id" id="">
+                        @foreach($vaitro as $item)
+                            @if($item->id == $res->vai_tro_id)
+                                <option selected value=" {{$item->id}}"> {{$item->ten_vai_tro}} </option>
+                            @else
+                                <option value=" {{$item->id}}"> {{$item->ten_vai_tro}} </option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('vai_tro_id')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
 
             </div>
 
@@ -87,7 +103,9 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
-                    <img width="100px" id="anh" src="{{ \Illuminate\Support\Facades\Storage::URL($res->hinh_anh) }}" alt=""><br>
+                    <td>
+                        <img style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
+                    </td>
                     <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                            class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

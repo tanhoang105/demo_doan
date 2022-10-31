@@ -25,6 +25,7 @@ use Symfony\Component\Routing\RouterInterface;
 |
 */
 
+
 Route::get('/', function () {
     return redirect()->route('route_BE_Admin_Khoa_Hoc');
 });
@@ -113,7 +114,7 @@ Route::prefix('/phuong-thuc-thanh-toan')->name('route_BE_Admin_')->group(functio
 });
 
 
-// tài khoản
+// admin quản lý tài khoản
 
 Route::prefix('/tai-khoan')->name('route_BE_Admin_')->group(function () {
     Route::get('/list', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'index'])->name('Tai_Khoan');
@@ -122,3 +123,6 @@ Route::prefix('/tai-khoan')->name('route_BE_Admin_')->group(function () {
     Route::post('/update', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'update'])->name('Update_Tai_Khoan');
     Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
 });
+
+// client đăng ký hoặc đăng nhập tài khoản
+Route::match(['post' , 'get'] , '/login', [\App\Http\Controllers\Auth\AuthController::class , 'store'] )->name('route_FE_Client_Login');

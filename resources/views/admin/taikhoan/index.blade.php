@@ -32,8 +32,8 @@
             <th scope="col">STT</th>
             <th scope="col">Tên </th>
             <th scope="col">Email</th>
+            <th scope="col">Vai trò </th>
             <th scope="col">Avatar </th>
-
             <th scope="col">Sửa</th>
             <th scope="col">Xóa </th>
         </tr>
@@ -43,9 +43,19 @@
             <tr>
                 <th scope="row"> {{ $loop->iteration }}</th>
                 <td> {{ $item->name }}</td>
+
                 <td> {{ $item->email }}</td>
                 <td>
-                    <img width="100px" src=" {{Storage::URL($item ->hinh_anh)}} " alt="">
+                    @foreach($vaitro as $res)
+                        @if($res->id  ==  $item->vai_tro_id )
+                            {{ $res->ten_vai_tro }}
+
+                        @endif
+                    @endforeach
+                </td>
+
+                <td>
+                    <img style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($item ->hinh_anh)}} " alt="">
                 </td>
 
                 <td> <button class="btn btn-warning"><a

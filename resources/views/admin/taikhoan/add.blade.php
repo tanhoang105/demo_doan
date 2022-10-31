@@ -83,6 +83,18 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="" class="form-label">Vai trò</label>
+                    <select class="form-control" name="vai_tro_id" id="">
+                        @foreach($vaitro as $item)
+                            <option value=" {{$item->id}}"> {{$item->ten_vai_tro}} </option>
+                        @endforeach
+                    </select>
+                    @error('vai_tro_id')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>

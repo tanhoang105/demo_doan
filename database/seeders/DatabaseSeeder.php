@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s')
             ];
+
             $khoa_hoc[]=[
                 'ten_khoa_hoc'=>'Php3'.$i,
                 'hinh_anh'=>'1.jpg',
@@ -147,6 +148,12 @@ class DatabaseSeeder extends Seeder
             'sdt'=>'0392725483',
             'dia_chi'=>'Thạch Thất',
             'password' => Hash::make('123456'),
+        ]);
+
+        DB::table('vai_tro_cho_phep')->insert([
+            'vai_tro_id' => 1,
+            'cho_phep_id' => 1,
+
         ]);
     }
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\VaiTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 
 class TaiKhoanController extends Controller
 {
@@ -15,17 +17,19 @@ class TaiKhoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $v, $taikhoan;
+    protected $v, $taikhoan , $vaitro;
 
     public function __construct()
     {
         $this->v = [];
         $this->taikhoan = new User();
+        $this->vaitro = new VaiTro();
     }
 
     public function index(Request $request)
     {
         $this->v['params'] = $request->all();
+        $this->v['vaitro'] = $this->vaitro->index(null , false , null);
         $this->v['list'] = $this->taikhoan->index($this->v['params'], true, 4);
 //        dd($this->v['list']);
 
@@ -50,6 +54,13 @@ class TaiKhoanController extends Controller
      */
     public function store(Request $request)
     {
+//        dd(123);
+//        dd($this->authorize());
+        $permission = $request->route()->getActionMethod();
+        $this->authorize($permission);
+
+        $this->v['vaitro'] = $this->vaitro->index(null , false , null);
+//        dd($this->v['vaitro']);
         if($request->isMethod('POST')){
             // thực hiện thêm dữ liệu
             $params = [];
@@ -79,7 +90,7 @@ class TaiKhoanController extends Controller
             }
         }
 
-        return view('admin.taikhoan.add');
+        return view('admin.taikhoan.add' , $this->v);
     }
 
     /**
@@ -101,9 +112,12 @@ class TaiKhoanController extends Controller
      */
     public function edit($id , Request $request)
     {
+        $permission = $request->route()->getActionMethod();
+        $this->authorize($permission);
         if($id){
             $request->session()->put('id' ,$id);
             $res = $this->taikhoan->show($id);
+            $this->v['vaitro'] = $this->vaitro->index(null , false , null);
 
             if($res){
                 $this->v['res'] = $res ;
@@ -151,7 +165,7 @@ class TaiKhoanController extends Controller
             } else {
                 unset($params['cols']['password']);
             }
-            dd($params['cols']);
+//            dd($params['cols']);
             $res = $this->taikhoan->saveupdate($params);
             if($res > 0){
                 Session::flash('success' , 'Cập nhập thành công');
