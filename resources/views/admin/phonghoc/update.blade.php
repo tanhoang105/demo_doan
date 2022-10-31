@@ -19,31 +19,28 @@
         <div class="row">
             @csrf
             <div class="col-6">
-
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Tên Phòng Học</label>
-                    <input value="{{ old('ten_phong') ?? request()->ten_phong ?? $phonghoc->ten_phong }}" type="text" name="ten_phong"
-                        class="form-control" id="" aria-describedby="emailHelp">
+                    <input value="{{ old('ten_phong') ?? (request()->ten_phong ?? $phonghoc->ten_phong) }}" type="text"
+                        name="ten_phong" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('ten_phong')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
-                </div>                
+                </div>
             </div>
-
             <div class="col-6">
-          
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô Tả</label>
-                    <textarea class="form-control" name="mo_ta" id="" > {{$phonghoc->mo_ta}} </textarea>
+                    <textarea class="form-control" name="mo_ta" id="content2"> {{ $phonghoc->mo_ta }} </textarea>
                 </div>
-
-
             </div>
             <input type="text" name="dia_chi" id="" hidden value="hà nội">
-
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
-
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content2');
+    </script>
 @endsection

@@ -166,6 +166,4 @@ class CaHocController extends Controller
             }
         }
     }
-
-    
 }

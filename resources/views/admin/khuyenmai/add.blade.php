@@ -29,8 +29,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
                 <div class="mb-3">
                     <label for="" class="form-label">Loại khuyến mại</label>
                     <input value="{{ old('loai_khuyen_mai') ?? request()->loai_khuyen_mai }}" type="text"
@@ -40,19 +38,15 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label">Mô tả</label>
-                    <textarea name="mo_ta" id="" class="form-control"></textarea>
+                    <textarea id="ckeditor" name="mo_ta" class="form-control"></textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
             </div>
-
-
             <div class="col-6">
-
                 <div class="mb-3">
                     <label for="" class="form-label">Giảm giá (%)</label>
                     <input value="{{ old('giam_gia') ?? request()->giam_gia }}" type="text" name="giam_gia"
@@ -62,8 +56,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày bắt đầu</label>
                     <input value="{{ old('ngay_bat_dau') ?? request()->ngay_bat_dau }}" type="date" name="ngay_bat_dau"
@@ -73,7 +65,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày kết thúc</label>
                     <input value="{{ old('ngay_ket_thuc') ?? request()->ngay_ket_thuc }}" type="date"
@@ -82,12 +73,14 @@
                     @error('ngay_ket_thuc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
-
                 </div>
             </div>
-
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
 
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ckeditor');
+    </script>
 @endsection

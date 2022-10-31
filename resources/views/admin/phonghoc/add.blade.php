@@ -28,24 +28,20 @@
                     @error('ten_phong')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
-                </div>
-
-                
+                </div>     
             </div>
-
             <div class="col-6">
-               
-
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô Tả</label>
-                    <textarea class="form-control" name="mo_ta" id="" ></textarea>
+                    <textarea class="form-control" name="mo_ta" id="content" ></textarea>
                 </div>
-
-
             </div>
             <input type="text" hidden value="hà nội" name="dia_chi" id="">
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 @endsection
