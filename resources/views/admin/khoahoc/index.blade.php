@@ -26,7 +26,6 @@
                 <th scope="col">Tên Danh Mục </th>
                 <th scope="col">Ảnh </th>
                 <th scope="col">Mô Tả </th>
-
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>

@@ -1,7 +1,8 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <button class="btn btn-primary"><a style="color: red" href=" {{route('route_BE_Admin_Add_Vai_Tro')}}">Thêm</a></button>
+        <button class="btn btn-primary"><a style="color: red"
+                href=" {{ route('route_BE_Admin_Add_Vai_Tro') }}">Thêm</a></button>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
@@ -23,9 +24,11 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Vai Tro </th>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 346a37e994d081db6d19cd488a5134dd0c06a978
                 <th scope="col">Mô Tả </th>
-
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -37,8 +40,11 @@
                     <td> {{ $item->ten_vai_tro }}</td>
 
                     <td> {!! $item->mo_ta !!}</td>
+<<<<<<< HEAD
+=======
                     
 
+>>>>>>> 346a37e994d081db6d19cd488a5134dd0c06a978
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>

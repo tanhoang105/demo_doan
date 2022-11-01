@@ -34,10 +34,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     {{-- CKEditor --}}
     <link rel="stylesheet" href="{{ asset('plugins/ckeditor/ckeditor.js') }}">
-    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('ckeditor');
-    </script>
+  
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -138,5 +135,14 @@
         });
     </script>
 </body>
-
+<script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+{{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>    --}}
+<script>
+    CKEDITOR.replace('ckeditor');
+    CKEDITOR.replace('mo_ta1');
+    CKEDITOR.replace('mo_ta2');
+    CKEDITOR.replace('content');
+    CKEDITOR.replace('content2');
+    CKEDITOR.replace('ckeditor1');
+</script>
 </html>

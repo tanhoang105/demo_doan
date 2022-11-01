@@ -16,13 +16,13 @@
     <!-- ======= Trainers Section ======= -->
     <section id="trainers" class="trainers">
         <div class="container" data-aos="fade-up">
-
-            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+               <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                @foreach ($giang_vien as $value )
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                     <div class="member">
                         <img src="{{ asset('plugins/assets/img/trainers/trainer-1.jpg') }}" class="img-fluid" alt="">
                         <div class="member-content">
-                            <h4>Walter White</h4>
+                            <h4>{{$value->ten_giang_vien}}</h4>
                             <span>Web Development</span>
                             <p>
                                 Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
@@ -36,9 +36,8 @@
                         </div>
                     </div>
                 </div>
-
+                @endforeach
             </div>
-
         </div>
     </section><!-- End Trainers Section -->
 

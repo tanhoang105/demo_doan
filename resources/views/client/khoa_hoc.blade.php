@@ -28,7 +28,7 @@
                                 <p class="price">{{ $item -> gia_khoa_hoc }} VNĐ</p>
                             </div>
 
-                            <h3><a href="course-details.html">{{ $item -> ten_khoa_hoc }}</a></h3>
+                            <h3><a href="{{route('route_FE_Homeroute_FE_Khoa_Hoc_Chi_Tiet',['id' => $item->id])}}">{{ $item -> ten_khoa_hoc }}</a></h3>
                             <p>{{ $item -> mo_ta }}</p>
                             <div class="trainer d-flex justify-content-between align-items-center">
                                 <div class="trainer-profile d-flex align-items-center">

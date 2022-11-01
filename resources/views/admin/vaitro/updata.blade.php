@@ -47,8 +47,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
     </form>
-    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    {{-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('mo_ta2');
-    </script>
+    </script> --}}
 @endsection
