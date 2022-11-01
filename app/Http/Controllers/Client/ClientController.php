@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DanhMuc;
 use App\Models\KhoaHoc;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -25,10 +26,14 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
+        $data = DB::table('giang_vien')->select('giang_vien.*')
+            ->skip(0)->take(3)
+            ->get();
+        // dd($data);
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 3);
         $this->v['list'] = $khoahoc;
-//        dd($khoahoc);
-        return view('client.index', $this->v);
+        //    dd($khoahoc);
+        return view('client.index', $this->v, compact('data'));
     }
 }
