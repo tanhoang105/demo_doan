@@ -33,7 +33,7 @@ class KhoahocRequest extends FormRequest
                         case 'store':
                                 $rules = [
                                     'ten_khoa_hoc' => 'required | min:3 | max:50 | unique:khoa_hoc,ten_khoa_hoc',
-                                    'mo_ta' => 'required | min:20 |',
+                                    'mo_ta' => 'min:20S',
                                     'hinh_anh' => 'required'
                                 ];
                             break;
@@ -42,8 +42,8 @@ class KhoahocRequest extends FormRequest
                             case 'update':
                                 $rules = [
                                     'ten_khoa_hoc' => 'required | min:3 | max:50 | unique:ten_khoa_hoc',
-                                    'mo_ta' => 'required | min:20 |',
-                                    'hinh_anh' => 'required'
+                                    // 'mo_ta' => 'required | min:20 |',
+                                    // 'hinh_anh' => 'required'
                                 ];
                             break;    
                         
@@ -65,7 +65,7 @@ class KhoahocRequest extends FormRequest
     {
         return [
             'required' => ':attribute bắt buộc phải nhập',
-            'min' => ':attribute lớn hơn 4 ký tự',
+            'min' => ':attribute lớn hơn 20 ký tự',
             'unique' => ':attribute đã tồn tại',
             'max' => ':attribute vượt quá kí tự cho phép',
         ];
