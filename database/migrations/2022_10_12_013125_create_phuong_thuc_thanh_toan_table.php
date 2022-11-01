@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('phuong_thuc_thanh_toan', function (Blueprint $table) {
             $table->id();
             $table->string('ten');
+            $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
-
             $table->timestamps();
         });
     }
