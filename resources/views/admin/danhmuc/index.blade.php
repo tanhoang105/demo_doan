@@ -32,7 +32,7 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $key++ }}</th>
+                    <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten_danh_muc }}</td>
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}"> Sửa

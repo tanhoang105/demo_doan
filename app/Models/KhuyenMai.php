@@ -15,13 +15,13 @@ class KhuyenMai extends Model
 
     // định nghĩa các hàm muốn thao tác với cơ sở dữ liệu
 
-    // hàm lấy tất cả các bản ghi 
+    // hàm lấy tất cả các bản ghi
     public function index($params, $pagination = true,  $perpage)
     {
 
-        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang 
+        // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
-            // nếu phần trang 
+            // nếu phần trang
             $query = DB::table($this->table)
                 ->select($this->table . '.*')
                 ->where('delete_at', '=', 1)
@@ -33,7 +33,7 @@ class KhuyenMai extends Model
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
-            // nếu không phần trang 
+            // nếu không phần trang
             $query = DB::table($this->table)
                 ->select($this->table . '.*')
                 ->where('delete_at', '=', 1)
@@ -72,11 +72,12 @@ class KhuyenMai extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id)
     {
         if (!empty($id)) {
-            $query = DB::table($this->table)->where('id', '=', $id);
+            $query = DB::table($this->table)
+                    ->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
@@ -86,7 +87,7 @@ class KhuyenMai extends Model
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [

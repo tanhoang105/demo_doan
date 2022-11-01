@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Models\ChoPhep;
+use Illuminate\Support\Facades\Gate;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -25,6 +27,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        if(! $this->app->runningInConsole()){
+
+            foreach (ChoPhep::all() as $chophep){
+//                echo '<pre>';
+//                echo $chophep;
+//                $v['cols'] = $chophep->ten;
+//                dd($v);
+                Gate::define($chophep->ten , function ($user) use ($chophep){
+//
+
+                    return $user->HasVaiTro($chophep);
+                });
+            }
+
+        }
     }
 }

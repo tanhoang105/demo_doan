@@ -46,7 +46,7 @@ class VaiTroChoPhep extends Model
             $query = DB::table($this->table)
                     ->where('id' , '=' , $id)
                     ->first();
-            return $query;        
+            return $query;
 
         }
     }
@@ -64,7 +64,7 @@ class VaiTroChoPhep extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id){
         if(!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
@@ -72,21 +72,22 @@ class VaiTroChoPhep extends Model
                 'delete_at' => 0
             ];
             $query = $query->update($data);
-            return $query;           
+            return $query;
         }
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate( $params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-        
-        ]); 
+
+        ]);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
     }
+
 }

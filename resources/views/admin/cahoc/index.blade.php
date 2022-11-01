@@ -31,7 +31,7 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $key++ }}</th>
+                    <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ca_hoc }}</td>
                     <td> {{ $item->thoi_gian }}</td>
 
