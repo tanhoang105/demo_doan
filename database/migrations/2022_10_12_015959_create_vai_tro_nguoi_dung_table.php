@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_vai_tro');
             $table->integer('id_user');
+            $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
 
 //            $table->unsignedInteger('user_id');

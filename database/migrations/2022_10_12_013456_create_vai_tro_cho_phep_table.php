@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('vai_tro_id');
             $table->integer('cho_phep_id');
+            $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
-
             $table->timestamps();
         });
     }

@@ -23,8 +23,6 @@ return new class extends Migration
             $table->date('ngay_ket_thuc');
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
-
-
             $table->timestamps();
         });
     }
