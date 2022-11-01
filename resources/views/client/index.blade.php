@@ -1,5 +1,5 @@
 @extends('Client.templates.layout')
-@section('title')Home
+@section('title') - Home
 @endsection
 @section('content')
 
@@ -229,11 +229,11 @@
                             <div class="course-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4>Web Development</h4>
-                                    <p class="price">{{ $item -> gia_khoa_hoc }}</p>
+                                    <p class="price">{{ $item -> gia_khoa_hoc }} VNĐ</p>
                                 </div>
 
                                 <h3><a href="">{{ $item -> ten_khoa_hoc }}</a></h3>
-                                <p>Et architecto provident deleniti facere repellat nobis iste. Id facere quia quae dolores dolorem tempore.</p>
+                                <p>{{ $item -> mo_ta }}</p>
                                 <div class="trainer d-flex justify-content-between align-items-center">
                                     <div class="trainer-profile d-flex align-items-center">
                                         <img src="{{ asset('plugins/assets/img/trainers/trainer-1.jpg') }}" class="img-fluid" alt="">

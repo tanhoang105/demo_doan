@@ -30,5 +30,51 @@ class ClientController extends Controller
         $this->v['list'] = $khoahoc;
 //        dd($khoahoc);
         return view('client.index', $this->v);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function khoa_hoc(Request $request)
+    {
+        $this->v['params'] = $request->all();
+        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 3);
+        $this->v['list'] = $khoahoc;
+//        dd($khoahoc);
+        return view('client.khoa_hoc', $this->v);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lien_he()
+    {
+        return view('client.lien_he', $this->v);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function giang_vien($request)
+    {
+        return view('client.giang_vien', $this->v);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gioi_thieu()
+    {
+        return view('client.gioi_thieu', $this->v);
     }
 }
+

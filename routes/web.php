@@ -34,6 +34,10 @@ use Symfony\Component\Routing\RouterInterface;
 Route::prefix('/')->name('route_FE_Home')->group(function () {
 
     Route::get('/', [ClientController::class, 'index'])->name('route_FE_Home');
+    Route::get('/khoa-hoc', [ClientController::class, 'khoa_hoc'])->name('route_FE_Khoa-Hoc');
+    Route::get('/lien-he', [ClientController::class, 'lien_he'])->name('route_FE_Lien_He');
+    Route::get('/giang-vien', [ClientController::class, 'giang_vien'])->name('route_FE_Giang_Vien');
+    Route::get('/gioi-thieu', [ClientController::class, 'gioi_thieu'])->name('route_FE_Gioi_Thieu');
 
 });
 
