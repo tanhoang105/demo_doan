@@ -1,43 +1,49 @@
-<!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="#">Mentor</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
+<div class="navigation navigation_two">
+    <div class="container">
+        <div class="logo">
+            <a href="{{route('home')}}"><img class="img-responsive" src="{{asset('client/images/logo.png')}}" alt="">
+            </a>
+        </div>
+        <div id="navigation" class="menu-wrap">
             <ul>
-                <li><a class="active" href="{{route('route_FE_Homeroute_FE_Home')}}">Trang chủ</a></li>
-                <li><a href="{{route('route_FE_Homeroute_FE_Gioi_Thieu')}}">giới thiệu</a></li>
-                <li><a href="{{route('route_FE_Homeroute_FE_Khoa_Hoc')}}">Khóa học </a></li>
-                <li><a href="{{route('route_FE_Homeroute_FE_Giang_Vien')}}">Giang viên</a></li>
-
-                {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                <li><a href="{{route('home')}}">Trang Chủ</a></li>
+                <li><a href="{{route('client_giang_vien')}}">Giáo Viên</a></li>
+                <li class="has-sub"><a href="{{route('client_khoa_hoc')}}"> Khóa Học</a>
                     <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 1</a></li>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                                <li><a href="#">Deep Drop Down 3</a></li>
-                                <li><a href="#">Deep Drop Down 4</a></li>
-                                <li><a href="#">Deep Drop Down 5</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
+                        <li><a href="">Danh Mục Khóa Học</a> </li>
+                        <li><a href="{{route('client_khoa_hoc')}}">Tất Cả Khóa Học</a> </li>
                     </ul>
-                </li> --}}
-                <li><a href="{{route('route_FE_Homeroute_FE_Lien_He')}}">Liên hệ</a></li>
+                </li>
+                <li><a href="{{route('client_lien_he')}}">Liên Hệ</a></li>
+                <li><a href="{{route('client_gioi_thieu')}}">Giới Thiệu</a></li>
             </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
-
-        <a href="#" class="get-started-btn">Get Started</a>
-
+        </div>
+        <!-- End: navigation  -->
+        <div class="header_sign">
+           
+            {{-- @if (Auth::user()) --}}
+            <nav id="navigation">
+                <ul>
+                  <li><a href="#" style="color: red" aria-haspopup="true"></a>
+                    <ul class="dropdown" aria-label="submenu">
+                      <li><a href="#"></a></li>
+                      <li> <a href="" class="dropdown-item">Sign out</a></li>
+                      <li> <a href="" class="dropdown-item">Lịch sử đăng ký </a></li>
+                      <li>
+                        {{-- @if (Auth::user()->id_role!=2)
+                        <a href="{{route('admin.user.index')}}" class="dropdown-item">Admin</a>
+                        @endif --}}
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+              {{-- @else
+              <a href="{{route('login')}}" class="more-link"> Sign in  </a>     
+              @endif --}}
+        </div>
+        <!-- End: Sign in -->
     </div>
-</header>
-<!-- End Header -->
+    <!--/ container -->
+</div>
