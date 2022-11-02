@@ -10,8 +10,8 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Contact Us</h3>
-                    <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Contact </h4>
+                    <h3>Liên Hệ Với Chúng Tôi</h3>
+                    <h4><a href="index-2.html"> Trang Chủ </a> <span> &vert; </span> Liên Hệ </h4>
                 </div>
             </div>
             <!-- End: .row -->
@@ -27,23 +27,23 @@
             <div class="row">
                 <div class="col-md-5 col-lg-4 col-sm-12">
                     <div class="contact_pg_address">
-                        <h3>Hello there <br>got a project?</h3>
+                        <h3>Xin chào, <br>có một dự án?</h3>
                         <div class="single_con_add">
                             <a href="#"><i class="pe-7s-home"></i></a>
-                            <p>Company Address :</p>
+                            <p>Địa chỉ công ty :</p>
                             <span>3567 New Alaska, <br> Washington, United State</span>
                         </div>
                         <div class="single_con_add">
                             <a href="#"><i class="pe-7s-mail-open-file"></i></a>
-                            <p>Email Address : </p>
+                            <p>Địa chỉ email :</p>
                             <span>example@email .com</span>
                             <span>exmtwo@email .com</span>
                         </div>
                         <div class="single_con_add">
                             <a href="#"><i class="pe-7s-headphones"></i></a>
-                            <p>Contact Us :</p>
-                            <span>+77-00-222-1111</span>
-                            <span>+88-00-222-3333</span>
+                            <p>Liên hệ chúng tôi :</p>
+                            <span>+84-12-345-6789</span>
+                            <span>+84-12-345-6789</span>
                         </div>
                         <div class="contact_social">
                             <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -56,11 +56,11 @@
                 <div class="col-md-7 col-lg-8 col-sm-12 inner-contact">
                     <!--  Contact Form  -->
                     <div class="contact-form">
-                        <h3>Send Us Message</h3>
+                        <h3>Liên Hệ Với Chúng Tôi</h3>
                         <form method="post" action="https://santhemes.com/tidytheme/aducat/mailer.php" id="contact-form">
                             <div class="row">
                                 <div class="col-lg-6 col-sm-12">
-                                    <input class="con-field" name="name" id="name" type="text" placeholder="Name">
+                                    <input class="con-field" name="name" id="name" type="text" placeholder="Tên">
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
                                     <input class="con-field" name="email" id="email2" type="text"
@@ -68,19 +68,19 @@
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
                                     <input class="con-field" name="phone" id="phone" type="text"
-                                        placeholder="Phone">
+                                        placeholder="Điện thoại">
                                 </div>
                                 <div class="col-lg-6 col-sm-12">
                                     <input class="con-field" name="website" id="website" type="text"
-                                        placeholder="Website">
+                                        placeholder="Trang Web">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12">
                                     <textarea class="con-field" name="message" id="message2" rows="6"
-                                        placeholder="Your Message"></textarea>
+                                        placeholder="Nội Dung"></textarea>
                                     <div class="submit-area">
-                                        <input type="submit" class="submit-contact" value="submit Now">
+                                        <input type="submit" class="submit-contact" value="Gửi">
                                         <div id="msg" class="message"></div>
                                     </div>
                                 </div>
