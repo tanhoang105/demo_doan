@@ -228,21 +228,5 @@ Route::prefix('/admin')->group(function () {
     });
 });
 
-
-
-
-
-// ====================== code route phần client 
-
-Route::prefix('/')->name('route_FE_Home')->group(function () {
-
-    Route::get('/', [ClientController::class, 'index'])->name('route_FE_Home');
-    Route::get('/khoa_hoc', [ClientController::class, 'khoa_hoc'])->name('route_FE_Khoa_Hoc');
-    Route::get('/lien-he', [ClientController::class, 'lien_he'])->name('route_FE_Lien_He');
-    Route::get('/giang-vien', [ClientController::class, 'giang_vien'])->name('route_FE_Giang_Vien');
-    Route::get('/gioi-thieu', [ClientController::class, 'gioi_thieu'])->name('route_FE_Gioi_Thieu');
-    Route::get('/khoa_hoc_chi_tiet/{id}', [ClientController::class, 'khoa_hoc_chi_tiet'])->name('route_FE_Khoa_Hoc_Chi_Tiet');
-});
-
 // client đăng ký hoặc đăng nhập tài khoản
 Route::match(['post', 'get'], '/login', [\App\Http\Controllers\Auth\AuthController::class, 'store'])->name('route_FE_Client_Login');
