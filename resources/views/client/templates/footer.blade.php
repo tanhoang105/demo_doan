@@ -8,7 +8,7 @@
                     <img src="{{asset('client/images/logo.png')}}" alt="">
                     <ul>
                         <li>
-                            <a href="#">(+75) 36 6552 9564 </a>
+                            <a href="#">(+84) 01 2345 6789 </a>
                         </li>
                         <li>
                             <a href="services.html">contact@domain.com</a>
@@ -43,19 +43,19 @@
                     <h5>Danh mục</h5>
                     <ul>
                         <li>
-                            <a href="courses.html">Privacy & Poilicy</a>
+                            <a href="courses.html">Quyền riêng tư & Chính sách</a>
                         </li>
                         <li>
-                            <a href="courses.html">Terms & Condition</a>
+                            <a href="courses.html">Điều khoản & Điều kiện</a>
                         </li>
                         <li>
-                            <a href="courses.html">Customer Support</a>
+                            <a href="courses.html">Hỗ trợ khách hàng</a>
                         </li>
                         <li>
-                            <a href="courses.html">For Business </a>
+                            <a href="courses.html">Cho doanh nghiệp</a>
                         </li>
                         <li>
-                            <a href="courses.html">Support</a>
+                            <a href="courses.html">Ủng hộ</a>
                         </li>
                     </ul>
                 </div>
@@ -65,22 +65,22 @@
             <!-- Start: Useful Link -->
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="foo_widgetuseful_lnk">
-                    <h5>Useful Links</h5>
+                    <h5>Liên kết hữu ích</h5>
                     <ul>
                         <li>
-                            <a href="courses.html">About Us</a>
+                            <a href="courses.html">Giới thiệu</a>
                         </li>
                         <li>
-                            <a href="courses.html">Refer A Friend</a>
+                            <a href="courses.html">Tham khảo một người bạn</a>
                         </li>
                         <li>
                             <a href="courses.html">Scolarship</a>
                         </li>
                         <li>
-                            <a href="courses.html">Marketing</a>
+                            <a href="courses.html">Tiếp thị</a>
                         </li>
                         <li>
-                            <a href="courses.html">Free Courses</a>
+                            <a href="courses.html">Các khóa học miễn phí</a>
                         </li>
                     </ul>
                 </div>
@@ -90,12 +90,12 @@
             <!-- Start: Contact Form -->
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="foo_widget footer_contact_form">
-                    <h5>Send Message</h5>
+                    <h5>Gửi tin nhắn</h5>
                     <form method="post" action="https://santhemes.com/tidytheme/aducat/mailer.php">
-                        <input class="con-field" name="email" id="email" type="text" placeholder="Your Email">
+                        <input class="con-field" name="email" id="email" type="text" placeholder="Email của bạn">
                         <textarea class="con-field" name="email" id="message"
                             placeholder="Your Message"> </textarea>
-                        <input type="submit" id="submit-contact" class="btn-alt" value="Submit">
+                        <input type="submit" id="submit-contact" class="btn-alt" value="Gửi">
                     </form>
                 </div>
             </div>

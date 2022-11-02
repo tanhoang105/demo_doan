@@ -8,7 +8,7 @@
         <div id="navigation" class="menu-wrap">
             <ul>
                 <li><a href="{{route('home')}}">Trang Chủ</a></li>
-                <li><a href="{{route('client_giang_vien')}}">Giáo Viên</a></li>
+                <li><a href="{{route('client_giang_vien')}}">Giảng Viên</a></li>
                 <li class="has-sub"><a href="{{route('client_khoa_hoc')}}"> Khóa Học</a>
                     <ul>
                         <li><a href="">Danh Mục Khóa Học</a> </li>
@@ -21,7 +21,7 @@
         </div>
         <!-- End: navigation  -->
         <div class="header_sign">
-           
+
             {{-- @if (Auth::user()) --}}
             <nav id="navigation">
                 <ul>
@@ -40,7 +40,7 @@
                 </ul>
               </nav>
               {{-- @else
-              <a href="{{route('login')}}" class="more-link"> Sign in  </a>     
+              <a href="{{route('login')}}" class="more-link"> Sign in  </a>
               @endif --}}
         </div>
         <!-- End: Sign in -->
