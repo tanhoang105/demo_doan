@@ -7,8 +7,8 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
         <div class="container">
-            <h2>About Us</h2>
-            <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+            <h2>Giới Thiệu</h2>
+            <p>Đó là một nỗi đau mà chúng tôi không thể làm cho một số người có được niềm vui của sự lựa chọn. Bởi vì điều đó hay tương tự, bởi vì nó là niềm vui, anh ta tìm kiếm những gì anh ta mắc nợ. Không ai trong số những người có mặt này sẽ thấy việc mở đầu của mọi thứ trở nên khó khăn. </p>
         </div>
     </div><!-- End Breadcrumbs -->
 
@@ -21,18 +21,17 @@
                     <img src="{{ asset('plugins/assets/img/about.jpg') }}" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                    <h3>Họ cung cấp cho những thú vui xứng đáng nhất, như thể những thú vui của thể xác đã được giả định.</h3>
                     <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Điều quan trọng là phải chăm sóc bệnh nhân, được bác sĩ theo dõi, nhưng đó là khoảng thời gian rất đau đớn và đau khổ.
                     </p>
                     <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                        <li><i class="bi bi-check-circle"></i> Ullamco labris yêu cầu và aliquip ex và hậu quả thoải mái.</li>
+                        <li><i class="bi bi-check-circle"></i> Nghi ngờ hoặc đau đớn khó chịu trong những lời khiển trách trong niềm vui mà anh ta muốn.</li>
+                        <li><i class="bi bi-check-circle"></i> Tôi không làm việc gì cả ngoại trừ để có được một số lợi thế từ nó. Duis aureur irure đau trong sự trừng phạt trong niềm vui tridetas stracalaperda mastir đau eu fu no be sinh.</li>
                     </ul>
                     <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        Tôi không làm việc gì cả ngoại trừ để có được một số lợi thế từ nó. Nghi ngờ hoặc đau đớn khó chịu khi khiển trách trong niềm vui
                     </p>
 
                 </div>
@@ -49,22 +48,22 @@
 
                 <div class="col-lg-3 col-6 text-center">
                     <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Students</p>
+                    <p>Sinh viên</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
                     <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Courses</p>
+                    <p>Các khóa học</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
                     <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Events</p>
+                    <p>Sự kiện</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
                     <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Trainers</p>
+                    <p>Giảng viên</p>
                 </div>
 
             </div>
@@ -77,8 +76,8 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Testimonials</h2>
-                <p>What are they saying</p>
+                <h2>Lời chứng thực</h2>
+                <p>Họ đang nói gì</p>
             </div>
 
             <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -92,7 +91,7 @@
                                 <h4>Ceo &amp; Founder</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                                    Đối với nhóm đối tượng, kết quả là đáng quan tâm cho đến khi hãng hàng không tiếp quản. Những người tố cáo, tuy nhiên, cần điều đó, và cần một số kỷ luật. Một chút mờ nhạt, nhưng luôn là một nụ cười.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -104,10 +103,10 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('plugins/assets/img/testimonials/testimonials-2.jpg') }}" class="testimonial-img" alt="">
                                 <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
+                                <h4>Nhà thiết kế</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                                    Tuy nhiên, thời gian xuất ngoại, tôi đã vì những tệ nạn mà tôi sẽ tức giận với nỗ lực rằng tôi sẽ trở thành kẻ mà tôi đã phải đối mặt với những tệ nạn mà tôi mong muốn trở thành mà một số người của chúng ta nên làm. chạy trốn khỏi cơn giận.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -119,10 +118,12 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('plugins/assets/img/testimonials/testimonials-3.jpg') }}" class="testimonial-img" alt="">
                                 <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
+                                <h4>Chủ cửa hàng</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                                    Vả, nếu ta không xuất một sợi tóc từ nhà ngươi, là điều tuyệt vời, trong đó không có một sợi tóc nào ta đem đến nhà ngươi, thì thời gian lao động ít nhất sẽ là ta ở trong nhà chúng ta.
+
+
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -137,7 +138,7 @@
                                 <h4>Freelancer</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                                    Vì tôi đang trốn chạy khỏi nỗi đau đớn, không có lỗi gì trong việc xuất khẩu nhiều người.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -149,10 +150,10 @@
                             <div class="testimonial-item">
                                 <img src="{{ asset('plugins/assets/img/testimonials/testimonials-5.jpg') }}" class="testimonial-img" alt="">
                                 <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
+                                <h4>Doanh nhân</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                                    Tôi sẽ đọc ai trong số họ?
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>

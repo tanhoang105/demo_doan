@@ -10,6 +10,6 @@ class GioiThieuController extends Controller
     //
     public function index()
     {
-        return view('client.gioi-thieu.gioi-thieu');
+        return view('client.gioi-thieu.gioi_thieu');
     }
 }

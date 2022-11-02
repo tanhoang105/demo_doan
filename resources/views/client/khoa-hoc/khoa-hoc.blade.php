@@ -10,8 +10,8 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Contact Us</h3>
-                    <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Contact </h4>
+                    <h3>Các Khóa Học</h3>
+                    <h4><a href="{{ route('home') }}"> Trang Chủ </a> <span> &vert; </span> Khóa Học </h4>
                 </div>
             </div>
             <!-- End: .row -->
@@ -268,7 +268,7 @@
                                 <div class="widget widget-search">
                                     <!-- input-group -->
                                     <div class="input-group">
-                                        <input class="form-control" placeholder="Search" type="text">
+                                        <input class="form-control" placeholder="Tìm kiếm" type="text">
                                         <span class="input-group-btn">
                                             <button type="button"><i class="pe-7s-search"></i></button>
                                         </span>
@@ -280,23 +280,23 @@
                             <div class="cat_selectbox">
                                 <div class="select-box">
                                     <select class="form-select" aria-label="select">
-                                        <option selected="">Most Viewed</option>
-                                        <option value="1">Java programming</option>
-                                        <option value="2">Designer</option>
-                                        <option value="3"> English </option>
+                                        <option selected="">Xem nhiều nhất</option>
+                                        <option value="1">Lập trình Java</option>
+                                        <option value="2">Thiết Kế</option>
+                                        <option value="3"> Tiếng Anh </option>
                                     </select>
                                 </div>
                             </div>
                             <!-- end: select box -->
                             <div class="cat_item_count">
-                                Showing 1-8 of 22 results
+                                Hiển thị 1-8 trong số 22 kết quả
                             </div>
                         </div>
                         <!--  End: Search Filter -->
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses1.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Development </span>
                                     <span class="feat_cour_p"> $170 </span>
@@ -317,7 +317,7 @@
                                         <i class="fa fa-star"></i>
                                         (3,539)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +325,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses2.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> UI/UX Design </span>
                                     <span class="feat_cour_p"> $180 </span>
@@ -346,7 +346,7 @@
                                         <i class="fa fa-star"></i>
                                         (4,5609)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -354,7 +354,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses3.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses3.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Art & Craft </span>
                                     <span class="feat_cour_p"> $370 </span>
@@ -376,7 +376,7 @@
                                         <i class="fa fa-star"></i>
                                         (2,3399)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -384,7 +384,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses4.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses4.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Lifestyle </span>
                                     <span class="feat_cour_p"> $370 </span>
@@ -405,7 +405,7 @@
                                         <i class="fa fa-star"></i>
                                         (2,539)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses5.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses5.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Business </span>
                                     <span class="feat_cour_p"> $470 </span>
@@ -434,7 +434,7 @@
                                         <i class="fa fa-star"></i>
                                         (1,5559)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>
@@ -442,7 +442,7 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="images/courses6.jpg" alt="image">
+                                <img src="{{ asset('client/images/courses6.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Marketing </span>
                                     <span class="feat_cour_p"> $570 </span>
@@ -463,7 +463,7 @@
                                         <i class="fa fa-star"></i>
                                         (4,4000)
                                     </span>
-                                    <a href="single-course.html"> <i class="arrow_right"></i> </a>
+                                    <a href="#"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
                         </div>

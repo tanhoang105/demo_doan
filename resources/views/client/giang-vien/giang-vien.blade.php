@@ -10,8 +10,8 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Teachers</h3>
-                    <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Teachers </h4>
+                    <h3>Giảng Viên</h3>
+                    <h4><a href="{{ route('home') }}"> Trang Chủ </a> <span> &vert; </span> Giảng Viên </h4>
                 </div>
             </div>
             <!-- End: .row -->
@@ -32,7 +32,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher1.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -51,7 +51,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Ben Stcoks </h4>
                         </a>
                         <p> Developer</p>
@@ -62,7 +62,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher2.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher2.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -81,7 +81,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Adam Crew </h4>
                         </a>
                         <p> Enginner</p>
@@ -91,7 +91,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher3.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher3.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -110,7 +110,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Marfi Jon </h4>
                         </a>
                         <p> Architecture </p>
@@ -121,7 +121,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher4.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher4.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -140,7 +140,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Moris Jon </h4>
                         </a>
                         <p> Designer </p>
@@ -150,7 +150,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher5.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher5.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -169,7 +169,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Moris Jon </h4>
                         </a>
                         <p> Marketer</p>
@@ -179,7 +179,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher6.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher6.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -198,7 +198,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Alex Carry </h4>
                         </a>
                         <p> Marketer</p>
@@ -208,7 +208,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher2.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher2.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -227,7 +227,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Moris Jon </h4>
                         </a>
                         <p> Marketer</p>
@@ -237,7 +237,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <!-- teacher-list -->
                     <div class="teacher-img">
-                        <img src="images/teacher1.jpg" alt="image">
+                        <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
                     </div>
                     <div class="teacher-info">
                         <div class="teacher-social">
@@ -256,7 +256,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="single-teacher.html">
+                        <a href="#">
                             <h4>Yalina De </h4>
                         </a>
                         <p> Marketer</p>
@@ -266,14 +266,14 @@
             </div>
             <div class="row teacher_partner">
                 <div class="partner_col">
-                    <span> Exceptional opportunities</span>
-                    <h2> Become a Instractor</h2>
-                    <a href="contact.html" class="more-link"> Contact Us </a>
+                    <span>Cơ hội đặc biệt</span>
+                    <h2> Trở thành một Instractor</h2>
+                    <a href="contact.html" class="more-link"> Liên Hệ Chúng Tôi </a>
                 </div>
                 <div class="partner_col">
-                    <span> Exceptional opportunities</span>
-                    <h2> Join our community</h2>
-                    <a href="contact.html" class="more-link"> Contact Us </a>
+                    <span>Cơ hội đặc biệt</span>
+                    <h2> Tham gia cộng đồng chúng tôi</h2>
+                    <a href="contact.html" class="more-link"> Liên Hệ Chúng Tôi </a>
                 </div>
             </div>
             <!-- /. row -->
