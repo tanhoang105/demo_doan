@@ -27,29 +27,25 @@ use Symfony\Component\Routing\RouterInterface;
 */
 
 
-// Route::get('/', function () {
-//     return redirect()->route('route_BE_Admin_Khoa_Hoc');
-// });
+Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+Route::get('/coures', [\App\Http\Controllers\Client\KhoaHocController::class, 'index'])->name('client_khoa_hoc');
+Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'index'])->name('client_lien_he');
+Route::get('/giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'index'])->name('client_giang_vien');
+Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::class, 'index'])->name('client_gioi_thieu');
+Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
+Route::get('/chi-tiet-giang-vien',[\App\Http\Controllers\Client\GiangVienController::class,'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 
-Route::prefix('/')->name('route_FE_Home')->group(function () {
 
-    Route::get('/', [ClientController::class, 'index'])->name('route_FE_Home');
-    Route::get('/khoa_hoc', [ClientController::class, 'khoa_hoc'])->name('route_FE_Khoa_Hoc');
-    Route::get('/lien-he', [ClientController::class, 'lien_he'])->name('route_FE_Lien_He');
-    Route::get('/giang-vien', [ClientController::class, 'giang_vien'])->name('route_FE_Giang_Vien');
-    Route::get('/gioi-thieu', [ClientController::class, 'gioi_thieu'])->name('route_FE_Gioi_Thieu');
-    Route::get('/khoa_hoc_chi_tiet/{id}', [ClientController::class, 'khoa_hoc_chi_tiet'])->name('route_FE_Khoa_Hoc_Chi_Tiet');
 
+Route::prefix('/khoa-hoc')->name('route_BE_Admin_')->group(function () {
+// khóa học
+Route::get('/', [KhoahocController::class, 'index'])->name('Khoa_Hoc'); // hiển thị danh sách
+Route::match(['get', 'post'], '/add-khoa-hoc',   [KhoahocController::class, 'store'])->name('Add_Khoa_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+Route::get('/khoa-hoc-delete/{id}', [KhoahocController::class, 'destroy'])->name('Xoa_Khoa_Hoc');
+Route::get('/khoa-hoc-chi-tiet/{id}', [KhoahocController::class, 'edit'])->name('Chi_Tiet_Khoa_Hoc'); // hiển thị chi tiết bản ghi
+Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('Update_Khoa_Hoc');
+// khóa học
 });
-
-// khóa học
-Route::get('/khoa-hoc', [KhoahocController::class, 'index'])->name('route_BE_Admin_Khoa_Hoc'); // hiển thị danh sách
-Route::match(['get', 'post'], '/add-khoa-hoc',   [KhoahocController::class, 'store'])->name('route_BE_Admin_Add_Khoa_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
-Route::get('/khoa-hoc-delete/{id}', [KhoahocController::class, 'destroy'])->name('route_BE_Admin_Xoa_Khoa_Hoc');
-Route::get('/khoa-hoc-chi-tiet/{id}', [KhoahocController::class, 'edit'])->name('route_BE_Admin_Chi_Tiet_Khoa_Hoc'); // hiển thị chi tiết bản ghi
-Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('route_BE_Admin_Update_Khoa_Hoc');
-// khóa học
-
 
 // xếp lớp
 
