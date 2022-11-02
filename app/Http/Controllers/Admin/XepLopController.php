@@ -18,7 +18,7 @@ class XepLopController extends Controller
     protected $v;
     protected $xep_lop;
     protected $khoa_hoc;
-    protected $ca_hoc;
+    protected $ca_hoc, $lop_hoc, $giang_vien, $phong_hoc;
 
     public function __construct()
     {
@@ -121,14 +121,23 @@ class XepLopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         if (!empty($id)) {
+            $request->session()->put('id', $id);
 
             $result  = $this->xep_lop->show($id);
             if ($result) {
-                // hiển thị dữ liệu lên form chỉnh sửa
+                $this->v['res'] = $result;
+                $this->v['listLop'] = $this->lop_hoc->index(null, false, null);
+                $this->v['listGiangVien'] = $this->giang_vien->index(null, false, null);
+                $this->v['listPhongHoc'] = $this->phong_hoc->index(null, false, null);
+                // dd($this->v['res']);
+                return view('admin.xeplop.update', $this->v);
             }
+        } else {
+            Session::flash('error', 'Lỗi chỉnh sửa');
+            return back();
         }
     }
 
@@ -141,7 +150,34 @@ class XepLopController extends Controller
      */
     public function update(XeplopRequest $request)
     {
-        //
+        if (session('id')) {
+            $id  =  session('id');
+
+            $params = [];
+            $params['cols'] = array_map(function ($item) {
+                if ($item == '') {
+                    $item = null;
+                }
+
+                if (is_string($item)) {
+                    $item = trim($item);
+                }
+                return $item;
+            }, $request->post());
+
+            unset($params['cols']['_token']);
+            $params['cols']['id'] = $id;
+            // dd($params);
+            $res = $this->xep_lop->saveupdate($params);
+            if ($res > 0) {
+                // thêm thành công
+                Session::flash('success', "Cập nhập thành cônng");
+                return redirect()->route('route_BE_Admin_Xep_Lop');
+            } else {
+                Session::flash('error', "Cập nhập không thành cônng");
+                return redirect()->route('route_BE_Admin_Xep_Lop');
+            }
+        }
     }
 
     /**

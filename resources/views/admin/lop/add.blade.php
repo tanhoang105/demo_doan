@@ -31,6 +31,18 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Ca học</label>
+                    <select class="form-control" name="id_ca_hoc" id="">
+                        @foreach ($cahoc as $item)
+                            <option value="{{ $item->id }}">{{ $item->ca_hoc }}</option>
+                        @endforeach
+                    </select>
+                    @error('ten_khoa_hoc')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học</label>
                     <select class="form-control" name="id_khoa_hoc" id="">
                         @foreach ($khoahoc as $item)

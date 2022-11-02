@@ -21,6 +21,7 @@
         </div>
     @endif
     <table class="table table-bordered">
+
         <thead>
             <tr>
                 <th scope="col">STT</th>
@@ -65,10 +66,19 @@
             @endforeach
 
         </tbody>
+
     </table>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $list->appends('extParams')->links() }}
+            <div class="d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
+                <button style="margin-right : 55px"  class="btn btn-secondary"><a href=" {{route('route_BE_Admin_List_Lop' , ['checkgiangvien' => true]) }} ">
+                        Lớp  có giảng viên</a></button>
+                <button style="margin-right : 55px"  class="btn btn-light"><a href=" {{route('route_BE_Admin_List_Lop' , ['checkgiangvien' => 'no']) }}">
+                        Lớp chưa có giảng viên</a></button>
+            </div>
+
         </div>
+
     </div>
 @endsection

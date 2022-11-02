@@ -41,12 +41,12 @@ class LopRequest extends FormRequest
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'ten_lop' => 'required | unique:lop,ten_lop',
+                            'ten_lop' => 'required',
                             // 'mo_ta' => 'required | min:20 |',
                             'gia' => 'required | integer | max:10000000',
                             'so_luong' => 'required | integer | max:40',
-                            'ngay_bat_dau' => 'required | after:now',
-                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            // 'ngay_bat_dau' => 'required | after:now',
+                            // 'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
                         ];
                         break;
                     default:

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('so_luong')->nullable(); //số lượng học viên lớp
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
-            $table->integer('id_giang_vien');
+            $table->integer('id_giang_vien')->nullable();
             $table->integer('id_ca_hoc');
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);

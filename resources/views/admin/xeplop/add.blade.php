@@ -20,17 +20,7 @@
             @csrf
             <div class="col-6">
 
-                <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ca học</label>
-                    <select class="form-control" name="id_ca_hoc" id="">
-                        @foreach ($cahoc as $item)
-                            <option value=" {{ $item->id }} ">{{ $item->ca_hoc }}</option>
-                        @endforeach
-                    </select>
-                    @error('id_ca_hoc')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
+                
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Ngày đăng ký</label>
@@ -46,7 +36,7 @@
                     <label for="chuyenBay" class="form-label">Lớp học</label>
                     <select class="form-control" name="id_lop" id="">
                         @foreach ($lophoc as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_lop }}</option>
+                            <option value="{{$item->id}}">{{ $item->ten_lop }}</option>
                         @endforeach
                     </select>
                     @error('id_lopc')

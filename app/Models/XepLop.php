@@ -20,10 +20,10 @@ class XepLop extends Model
             // nếu phần trang
             $query = DB::table($this->table)
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
-                ->join('ca_hoc', $this->table . '.id_ca_hoc', '=', 'ca_hoc.id')
+                ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 ->join('users', $this->table . '.id_user', '=', 'users.id')
-                ->join('giang_vien', 'giang_vien.id', '=', 'users.id')
+                ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
@@ -36,13 +36,14 @@ class XepLop extends Model
         } else {
             // nếu không phần trang
             $query = DB::table($this->table)
-                ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
-                ->join('ca_hoc', $this->table . '.id_ca_hoc', '=', 'ca_hoc.id')
+                ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
-                ->join('giang_vien', 'giang_vien.id', '=', 'lop.id_giang_vien')
-//                ->where($this->table . '.delete_at', '=', 1)
-                ->select($this->table . '.*', $this->table . '.id ' . ' as  ' . 'id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*',  'phong_hoc.*');
+                ->join('users', $this->table . '.id_user', '=', 'users.id')
+                ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->orderByDesc($this->table . '.id');
             $list = $query->get();
         }
         return $list;
@@ -57,7 +58,6 @@ class XepLop extends Model
                 ->where('id', '=', $id)
                 ->first();
             return $query;
-
         }
     }
 

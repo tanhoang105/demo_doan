@@ -34,10 +34,10 @@
                     <label for="" class="form-label">Khóa học</label>
                     <select class="form-control" name="id_khoa_hoc" id="">
                         @foreach ($khoahoc as $item)
-                            @if ($item->id_khoa_hoc == $lop->id_khoa_hoc)
-                                <option selected value="{{ $item->id_khoa_hoc }}">{{ $item->ten_khoa_hoc }}</option>
+                            @if ($item->id == $lop->id_khoa_hoc)
+                                <option selected value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
                             @else
-                                <option value="{{ $item->id_khoa_hoc }}">{{ $item->ten_khoa_hoc }}</option>
+                                <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -49,6 +49,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Giảng Viên</label>
                     <select class="form-control" name="id_giang_vien" id="">
+                        <option value="">Chọn giảng viên</option>
                         @foreach ($giangvien as $item)
                             @if ($item->id == $lop->id_giang_vien)
                                 <option selected value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LopRequest;
+use App\Models\CaHoc;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
@@ -14,7 +15,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc;
+    protected $khoahoc  ,$cahoc , $giangvien;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class LopController extends Controller
         $this->lophoc =  new Lop();
         $this->giangvien  = new  GiangVien();
         $this->khoahoc = new KhoaHoc();
+        $this->cahoc = new CaHoc();
     }
     /**
      * 
@@ -32,7 +34,7 @@ class LopController extends Controller
     public function index(Request $request)
     {
         $this->v['params'] =  $request->all();
-        $list = $this->lophoc->index($this->v['params'], true, 5);
+        $list = $this->lophoc->index($this->v['params'], true, 5 , true);
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien']);
         $this->v['list'] = $list;
@@ -62,6 +64,7 @@ class LopController extends Controller
 
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
+        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
             $params = [];
@@ -97,8 +100,20 @@ class LopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_xep_lop)
     {
+        if(isset($id_xep_lop)){
+            // dd(12);
+            
+            $res =  $this->lophoc->show($id_xep_lop);
+            if($res){
+                $this->v['item'] = $res;
+                $this->v['giangvien'] = $this->giangvien->index(null , false , null);
+                $this->v['cahoc'] = $this->cahoc->index(null , false , null);
+                // dd($this->v['cahoc']);
+                return view('admin.xeplop.detail', $this->v);
+            }
+        }
     }
 
     /**
