@@ -26,11 +26,6 @@ use Symfony\Component\Routing\RouterInterface;
 |
 */
 
-
-// Route::get('/', function () {
-//     return redirect()->route('route_BE_Admin_Khoa_Hoc');
-// });
-
 Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 Route::get('/coures', [\App\Http\Controllers\Client\KhoaHocController::class, 'index'])->name('client_khoa_hoc');
 Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'index'])->name('client_lien_he');
@@ -39,9 +34,6 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
-
-
-
 
 Route::prefix('/admin')->group(function () {
 
@@ -140,7 +132,6 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
     });
 });
-
 
 
 // client đăng ký hoặc đăng nhập tài khoản
