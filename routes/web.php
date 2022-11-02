@@ -37,8 +37,8 @@ Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'i
 Route::get('/giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'index'])->name('client_giang_vien');
 Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::class, 'index'])->name('client_gioi_thieu');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
-Route::get('/chi-tiet-giang-vien',[\App\Http\Controllers\Client\GiangVienController::class,'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-Route::get('/dang-ky',[\App\Http\Controllers\Client\DangKyController::class,'index'])->name('client_dang_ky_khoa_hoc');
+Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
 
 
 

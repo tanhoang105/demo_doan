@@ -29,240 +29,37 @@
     <section class="teacher-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Ben Stcoks </h4>
-                        </a>
-                        <p> Developer</p>
-                    </div>
-                    <!-- End: .teacher-list -->
+              @foreach ($giang_vien as $value )
+              <div class="col-lg-3 col-md-6 col-sm-12">
+                <!-- teacher-list -->
+                <div class="teacher-img">
+                    <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
                 </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher2.jpg') }}" alt="image">
+                <div class="teacher-info">
+                    <div class="teacher-social">
+                        <ul>
+                            <li>
+                                <a href="#" class="fab fa-facebook-f"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fab fa-twitter"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fab fa-linkedin-in"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fab fa-skype"></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Adam Crew </h4>
-                        </a>
-                        <p> Enginner</p>
-                    </div>
-                    <!-- End: .teacher-list -->
+                    <a href="{{route('client_chi_tiet_giang_vien',$value->id)}}">
+                        <h4>{{$value->ten_giang_vien}} </h4>
+                    </a>
+                    <p> Developer</p>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher3.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Marfi Jon </h4>
-                        </a>
-                        <p> Architecture </p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher4.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Moris Jon </h4>
-                        </a>
-                        <p> Designer </p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher5.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Moris Jon </h4>
-                        </a>
-                        <p> Marketer</p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher6.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Alex Carry </h4>
-                        </a>
-                        <p> Marketer</p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher2.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Moris Jon </h4>
-                        </a>
-                        <p> Marketer</p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <!-- teacher-list -->
-                    <div class="teacher-img">
-                        <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
-                    </div>
-                    <div class="teacher-info">
-                        <div class="teacher-social">
-                            <ul>
-                                <li>
-                                    <a href="#" class="fab fa-facebook-f"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-linkedin-in"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="fab fa-skype"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4>Yalina De </h4>
-                        </a>
-                        <p> Marketer</p>
-                    </div>
-                    <!-- End: .teacher-list -->
-                </div>
+                <!-- End: .teacher-list -->
+            </div>
+              @endforeach
             </div>
             <div class="row teacher_partner">
                 <div class="partner_col">
