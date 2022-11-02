@@ -294,179 +294,34 @@
                         </div>
                         <!--  End: Search Filter -->
 
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Development </span>
-                                    <span class="feat_cour_p"> $170 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> Become a professional designer be
-                                    with passion & dignity </h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 20 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 237 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.6
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (3,539)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
+                       @foreach ($list as $value)
+                       <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="feat_course_item">
+                            <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                            <div class="feat_cour_price">
+                                <span class="feat_cour_tag">{{$value->ten_danh_muc}}</span>
+                                <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span>
+                            </div>
+                            <h4 class="feat_cour_tit">{{$value->ten_khoa_hoc}}</h4>
+                            <div class="feat_cour_lesson">
+                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 20 lessons </span>
+                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 237 Students </span>
+                            </div>
+                            <div class="feat_cour_rating">
+                                <span class="feat_cour_rat">
+                                    4.6
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    (3,539)
+                                </span>
+                                <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}"> <i class="arrow_right"></i> </a>
                             </div>
                         </div>
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> UI/UX Design </span>
-                                    <span class="feat_cour_p"> $180 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> Java programming A-Z fully classes
-                                    with full task </h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 24 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 259 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.7
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (4,5609)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses3.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Art & Craft </span>
-                                    <span class="feat_cour_p"> $370 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> You will fell in love with this mustly
-                                    if you have desire
-                                </h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 25 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 537 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.8
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (2,3399)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses4.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Lifestyle </span>
-                                    <span class="feat_cour_p"> $370 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> Be passionated with your regularly
-                                    exercise and stay fit </h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 30 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 337 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.9
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (2,539)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses5.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Business </span>
-                                    <span class="feat_cour_p"> $470 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> Grow your business by mastered in
-                                    some technique</h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 40 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 737 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.2
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (1,5559)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
-
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses6.jpg') }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Marketing </span>
-                                    <span class="feat_cour_p"> $570 </span>
-                                </div>
-                                <h4 class="feat_cour_tit"> Top 10 tips to grow up audience to
-                                    progress business </h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 70 lessons </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 537 Students </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.9
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (4,4000)
-                                    </span>
-                                    <a href="#"> <i class="arrow_right"></i> </a>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                       @endforeach
                         <!-- /. col-lg-4 col-md-6 col-sm-12-->
                     </div>
 

@@ -3,8 +3,8 @@
     - Course Details
 @endsection
 @section('content')
-      <!-- header -->
-      <header class="single-header">
+    <!-- header -->
+    <header class="single-header">
         <!-- Start: Header Content -->
         <div class="container">
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
@@ -19,12 +19,12 @@
         <!-- End: Header Content -->
     </header>
     <!--/. header -->
-    <!--/    
-==================================================-->
+    <!--/
+        ==================================================-->
 
 
-    <!-- Start : Blog Page Content  
-==================================================-->
+    <!-- Start : Blog Page Content
+        ==================================================-->
     <div class="single_course">
         <div class="container">
             <div class="row">
@@ -32,12 +32,14 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="sing_course_wrap">
                         <div class="sin_course_img">
-                            <img class="img-responsive" src="images/blog1.jpg" alt="">
-                            <span>Development</span>
+                            <img class="img-responsive"
+                                src="{{ asset('client/images/blog3.jpg')}}"
+                                alt="">
                         </div>
-                        <h4>Java Programming A-Z Full Classes With Extra Task</h4>
+                        <h4>{{ $detail->ten_khoa_hoc }}</h4>
                         <div class="course_meta">
-                            <img src="images/author.png" alt="">
+                            <img
+                                src="{{ asset('client/images/author2.png')}}">
                             <p>Nelson Mandela</p>
                             <span class="sin_cour_stu"> <i class="fal fa-graduation-cap"></i> 20,153 Students </span>
                             <span class="sin_cour_rat">
@@ -56,62 +58,34 @@
                                 <li class="nav-item">
                                     <button class="nav-link active" id="pills-discription-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-discription" role="tab" aria-controls="pills-discription"
-                                        aria-selected="true" type="button">Discription</button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="nav-link" id="pills-curriculum-tab" data-bs-toggle="tab"
-                                        data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
-                                        aria-selected="false" type="button">Curriculum</button>
+                                        aria-selected="true" type="button">Mô tả</button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-instructors-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-instructors" role="tab" aria-controls="pills-instructors"
-                                        aria-selected="false" type="button">Instructors</button>
+                                        aria-selected="false" type="button">Các lớp học</button>
                                 </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" id="pills-curriculum-tab" data-bs-toggle="tab"
+                                        data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
+                                        aria-selected="false" type="button">Chương trình</button>
+                                </li>
+
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-reviews" role="tab" aria-controls="pills-reviews"
-                                        aria-selected="false" type="button">Reviews</button>
+                                        aria-selected="false" type="button">Nhận xét</button>
                                 </li>
                             </ul>
                             <div class="tab-content course_tab_cont" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-discription"
                                     aria-labelledby="pills-discription-tab" role="tabpanel">
-                                    <span> Description : </span>
+                                    <span> Mô tả : </span>
                                     <p>
-                                        E learning dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                                        vero eos keti accusam et justo duo dolores et ea rebum. Stet clita kasd
-                                        gubergren, no sea takimel.
-                                        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                        done sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore magna valiquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                                        duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                                        Lorem ipsum dolor sit.
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.
-                                    </p>
-                                    <span> What You Will Learn : </span>
-                                    <p>
-                                        E learning dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                                        vero eos keti accusam et justo duo dolores et ea rebum. Stet clita kasd
-                                        gubergren, no sea takimel.
-                                        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                        done sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore facts.
-                                    </p>
-                                    <span> Certification : </span>
-                                    <p>
-                                        E learning dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                                        vero eos keti accusam et justo duo dolores et ea rebum. Stet clita kasd
-                                        gubergren, no sea takimel.
-                                        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                        done sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore facts.
+                                        {{ $detail->mo_ta }}
                                     </p>
                                     <div class="share_course">
-                                        <span> Share Course : </span>
+                                        <span> Chia sẻ khóa học : </span>
                                         <a href="#" class="fab fa-facebook-f"></a>
                                         <a href="#" class="fab fa-pinterest"></a>
                                         <a href="#" class="fab fa-twitter"></a>
@@ -156,66 +130,59 @@
                                         <a href="#" class="fa fa-link"></a>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="pills-instructors"
-                                    aria-labelledby="pills-instructors-tab" role="tabpanel">
-                                    <span> Course Instructors : </span>
-                                    <div class="course_instractor">
-                                        <div class="course_instor_list">
-                                            <img src="images/instructor1.png" alt="">
-                                            <h4> Alex Benjamin </h4>
-                                            <span> Web Developer</span>
-                                            <div class="course_instor_soc">
-                                                <a href="#" class="fab fa-facebook-i"></a>
-                                                <a href="#" class="fab fa-pinterest"></a>
-                                                <a href="#" class="fab fa-twitter"></a>
-                                                <a href="#" class="fa fa-link"></a>
-                                            </div>
-                                        </div>
-                                        <!-- end: Course Instractor 1 -->
-                                        <div class="course_instor_list">
-                                            <img src="images/instructor2.png" alt="">
-                                            <h4> Alex Benjamin </h4>
-                                            <span> Web Developer</span>
-                                            <div class="course_instor_soc">
-                                                <a href="#" class="fab fa-facebook-i"></a>
-                                                <a href="#" class="fab fa-pinterest"></a>
-                                                <a href="#" class="fab fa-twitter"></a>
-                                                <a href="#" class="fa fa-link"></a>
-                                            </div>
-                                        </div>
-                                        <!-- end: Course Instractor 2 -->
-                                        <div class="course_instor_list">
-                                            <img src="images/instructor3.png" alt="">
-                                            <h4> Alex Benjamin </h4>
-                                            <span> Web Developer</span>
-                                            <div class="course_instor_soc">
-                                                <a href="#" class="fab fa-facebook-i"></a>
-                                                <a href="#" class="fab fa-pinterest"></a>
-                                                <a href="#" class="fab fa-twitter"></a>
-                                                <a href="#" class="fa fa-link"></a>
-                                            </div>
-                                        </div>
-                                        <!-- end: Course Instractor 3 -->
-                                        <div class="course_instor_list">
-                                            <img src="images/instructor4.png" alt="">
-                                            <h4> Alex Benjamin </h4>
-                                            <span> Web Developer</span>
-                                            <div class="course_instor_soc">
-                                                <a href="#" class="fab fa-facebook-i"></a>
-                                                <a href="#" class="fab fa-pinterest"></a>
-                                                <a href="#" class="fab fa-twitter"></a>
-                                                <a href="#" class="fa fa-link"></a>
-                                            </div>
-                                        </div>
-                                        <!-- end: Course Instractor 4 -->
-                                    </div>
+                                <div class="tab-pane fade" id="pills-instructors" aria-labelledby="pills-instructors-tab"
+                                    role="tabpanel">
+                                    <span> Các lớp học để học viên đăng kí : </span>
+                                    {{-- <div class="course_instractor">                 
+                                    </div> --}}
+                                    <table class="table table-bordered">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Tên Lớp </th>
+                                                <th scope="col">Giá </th>
+                                                <th scope="col">Số lượng học viên </th>
+                                                <th scope="col">Ngày bắt đầu </th>
+                                                <th scope="col">Ngày kết thúc </th>
+                                                <th scope="col">Giảng viên </th>
+                                                <th> Hành động </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($lop as $key => $item)
+                                                <tr>
+                                                    <th scope="row">{{ $item->id }}</th>
+                                                    <td> {{ $item->ten_lop }}</td>
+                                                    <td> {{ $item->gia }}</td>
+                                                    <td> {{ $item->so_luong }}</td>
+                                                    <td> {{ $item->ngay_bat_dau }}</td>
+                                                    <td> {{ $item->ngay_ket_thuc }}</td>
+                                                    <td>
+                                                        @foreach ($lop as $gv)
+                                                            @if ($item->id_giang_vien == $gv->id)
+                                                                {{ $gv->ten_giang_vien }}
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        <form action="">
+                                                            <button style="width: 100px" class="btn btn-primary">Đăng
+                                                                kí</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+
+                                    </table>
                                 </div>
                                 <div class="tab-pane fade" id="pills-reviews" aria-labelledby="pills-reviews-tab"
                                     role="tabpanel">
                                     <span> Students Reviews :</span>
 
-                                    <div id="revCarousel" class="carousel slide sturev_carousel"
-                                        data-bs-ride="carousel">
+                                    <div id="revCarousel" class="carousel slide sturev_carousel" data-bs-ride="carousel">
 
                                         <div class="carousel-item sturev_item active">
                                             <!-- Start: Heading -->
@@ -277,21 +244,21 @@
                                     <!--/ col-md-12  -->
                                     <div class="review_form">
                                         <span> Write A Review</span>
-                                        <form method="post" action="https://santhemes.com/tidytheme/aducat/mailer.php" id="contact-form">
+                                        <form method="post" action="https://santhemes.com/tidytheme/aducat/mailer.php"
+                                            id="contact-form">
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-12">
-                                                    <input class="con-field" name="name" id="rname" type="text"
-                                                        placeholder="Name">
+                                                    <input class="con-field" name="name" id="rname"
+                                                        type="text" placeholder="Name">
                                                 </div>
                                                 <div class="col-lg-6 col-sm-12">
-                                                    <input class="con-field" name="email" id="remail" type="text"
-                                                        placeholder="Email">
+                                                    <input class="con-field" name="email" id="remail"
+                                                        type="text" placeholder="Email">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-12 col-sm-12 rev_textarea">
-                                                    <textarea class="con-field" name="message" id="rmessage" rows="6"
-                                                        placeholder="Your Comment"></textarea>
+                                                    <textarea class="con-field" name="message" id="rmessage" rows="6" placeholder="Your Comment"></textarea>
                                                     <span class="sin_cour_rat">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -322,7 +289,7 @@
                 <div class="col-lg-4 col-sm-12 single_curs_right">
                     <!-- Widget Course Details -->
                     <aside class="widget-course-details">
-                        <h2> Price <span> $170 </span></h2>
+                        <h2> Price <span>{{ number_format($detail->gia_khoa_hoc) }}</span></h2>
                         <div class="course-detail-list">
                             <span> <i class="far fa-user"></i>Instructor </span>
                             <span> Nelson Mandela </span>
@@ -377,7 +344,6 @@
         </div>
         <!-- Container /- -->
     </div>
-    <!-- End : Blog Page Content 
-==================================================-->
-
+    <!-- End : Blog Page Content
+        ==================================================-->
 @endsection

@@ -22,8 +22,11 @@ class KhoaHocController extends Controller
         // $khoahoc =  $this->khoahoc->index($this->v['params'], true, 3);
         // $this->v['list'] = $khoahoc;
         //    dd($khoahoc);
-        $list = DB::table('khoa_hoc')->select('khoa_hoc.*')->get();
-        return view('client.khoa-hoc.khoa-hoc', compact('list'));
+        $list = DB::table('khoa_hoc')->select('khoa_hoc.*')
+        ->select('danh_muc.*','khoa_hoc.*')
+       ->join('danh_muc','khoa_hoc.id_danh_muc','=','danh_muc.id')
+        ->get();
+        return view('client.khoa-hoc.khoa-hoc',compact('list'));
     }
     public function chiTietKhoaHoc($id)
     {
