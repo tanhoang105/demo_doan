@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\VaiTroController;
-use App\Http\Controllers\Client\ClientController;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +26,6 @@ use Symfony\Component\Routing\RouterInterface;
 |
 */
 
-
 Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
 Route::get('/coures', [\App\Http\Controllers\Client\KhoaHocController::class, 'index'])->name('client_khoa_hoc');
 Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'index'])->name('client_lien_he');
@@ -35,8 +33,7 @@ Route::get('/giang-vien', [\App\Http\Controllers\Client\GiangVienController::cla
 Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::class, 'index'])->name('client_gioi_thieu');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien',[\App\Http\Controllers\Client\GiangVienController::class,'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-
-<<<<<<< HEAD
+Route::get('/dang-ky',[\App\Http\Controllers\Client\DangKyController::class,'index'])->name('client_dang_ky_khoa_hoc');
 
 // ================ code route phần admin
 Route::prefix('/admin')->group(function () {
@@ -141,19 +138,6 @@ Route::prefix('/admin')->group(function () {
 
 
 
-// ====================== code route phần client 
-
-Route::prefix('/')->name('route_FE_Home')->group(function () {
-
-    Route::get('/', [ClientController::class, 'index'])->name('route_FE_Home');
-    Route::get('/khoa_hoc', [ClientController::class, 'khoa_hoc'])->name('route_FE_Khoa_Hoc');
-    Route::get('/lien-he', [ClientController::class, 'lien_he'])->name('route_FE_Lien_He');
-    Route::get('/giang-vien', [ClientController::class, 'giang_vien'])->name('route_FE_Giang_Vien');
-    Route::get('/gioi-thieu', [ClientController::class, 'gioi_thieu'])->name('route_FE_Gioi_Thieu');
-    Route::get('/khoa_hoc_chi_tiet/{id}', [ClientController::class, 'khoa_hoc_chi_tiet'])->name('route_FE_Khoa_Hoc_Chi_Tiet');
-});
-=======
-
 
 Route::prefix('/khoa-hoc')->name('route_BE_Admin_')->group(function () {
 // khóa học
@@ -249,7 +233,5 @@ Route::prefix('/tai-khoan')->name('route_BE_Admin_')->group(function () {
     Route::post('/update', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'update'])->name('Update_Tai_Khoan');
     Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
 });
-
->>>>>>> fb3440ba493f84b4ecf05398afc6a327e7c07519
 // client đăng ký hoặc đăng nhập tài khoản
 Route::match(['post', 'get'], '/login', [\App\Http\Controllers\Auth\AuthController::class, 'store'])->name('route_FE_Client_Login');
