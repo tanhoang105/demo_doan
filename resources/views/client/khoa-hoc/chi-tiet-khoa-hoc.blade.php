@@ -133,7 +133,7 @@
                                 <div class="tab-pane fade" id="pills-instructors" aria-labelledby="pills-instructors-tab"
                                     role="tabpanel">
                                     <span> Các lớp học để học viên đăng kí : </span>
-                                    {{-- <div class="course_instractor">                 
+                                    {{-- <div class="course_instractor">
                                     </div> --}}
                                     <table class="table table-bordered">
 
@@ -166,7 +166,10 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <form action="">
+                                                        <form action="{{route('client_dang_ky')}}">
+                                                            <input name="id_khoa_hoc" value="{{$detail->id}}" hidden>
+                                                            <input name="id_lop" value="{{$item->id}}" hidden>
+                                                            <input name="gia_khoa_hoc" value="{{$detail->gia_khoa_hoc}}" hidden>
                                                             <button style="width: 100px" class="btn btn-primary">Đăng
                                                                 kí</button>
                                                         </form>

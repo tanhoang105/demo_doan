@@ -15,6 +15,7 @@
                         <li><a href="{{route('client_khoa_hoc')}}">Tất Cả Khóa Học</a> </li>
                     </ul>
                 </li>
+                <li><a href="{{route('client_dang_ky')}}">Đăng Ký</a></li>
                 <li><a href="{{route('client_lien_he')}}">Liên Hệ</a></li>
                 <li><a href="{{route('client_gioi_thieu')}}">Giới Thiệu</a></li>
             </ul>

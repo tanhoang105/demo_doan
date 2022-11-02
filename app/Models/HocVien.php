@@ -91,4 +91,18 @@ class HocVien extends Model
         return $query;
     }
 
+    // đăng ký khóa học
+    public function getHocVien($id_user){
+        $query=DB::table('hoc_vien')
+            ->find($id_user);
+        return $query;
+    }
+    public function saveNew($params){
+        $data=array_merge($params['cols']);
+        // dd($data);
+        $res=DB::table('hoc_vien')
+            ->insertGetId($data);
+        return $res;
+    }
+
 }
