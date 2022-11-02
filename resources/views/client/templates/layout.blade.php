@@ -65,7 +65,7 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
         #navigation {
         font-family: monospace;
         }
-        .name {       
+        .name {
         outline: none;
         }
 
@@ -128,8 +128,9 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
     <!-- Custom Scripts
 ========================================-->
     <script src="{{asset('client/js/main.js')}}"></script>
-
+    @yield('js')
 </body>
+
 
 
 <!-- Mirrored from santhemes.com/tidytheme/aducat/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Jul 2022 06:00:22 GMT -->

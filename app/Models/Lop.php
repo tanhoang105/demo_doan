@@ -15,7 +15,7 @@ class Lop extends Model
     {
         return $this->hasMany(KhoaHoc::class);
     }
-    public function index($params, $pagination = true, $perpage , $giaovien = null )
+    public function index($params, $pagination = true, $perpage , $giaovien = null)
     {
         if ($pagination) {
             $query  = DB::table($this->table)
@@ -25,8 +25,8 @@ class Lop extends Model
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*', 'giang_vien.*')
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*')
                 ->orderByDesc($this->table . '.id');
-            
-            
+
+
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['keyword']  . '%');
@@ -80,7 +80,7 @@ class Lop extends Model
     }
 
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id)
     {
         if (!empty($id)) {
@@ -99,7 +99,7 @@ class Lop extends Model
 
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
     {
         $data = array_merge($params['cols'], []);
@@ -107,5 +107,15 @@ class Lop extends Model
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
+    }
+
+    // hiển thị lớp
+    public function LoadLopofKhoaHoc($id){
+        $lop = Lop::select('lop.*','giang_vien.ten_giang_vien')
+            ->where('lop.id_khoa_hoc', '=', $id)
+            ->join('giang_vien','lop.id_giang_vien','=','giang_vien.id')
+            ->where('lop.id_giang_vien','<>','null')
+            ->get();
+        return $lop;
     }
 }

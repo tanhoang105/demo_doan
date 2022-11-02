@@ -64,7 +64,8 @@
                             <form method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-                                    <input type="text" name="id_user" id="" value="" hidden>
+                                    <input type="text" name="user_id" id="" value="{{Auth::user()->id??""}}" hidden>
+                                    <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="{{isset($giaKhoaHoc) ? $giaKhoaHoc: ""}}" hidden>
                                     <div class="col-md-6 col-sm-12">
                                         <label for="">Tên</label>
                                         <input class="signup-field" value="" name="name" id="name" type="text"
@@ -97,47 +98,33 @@
                                         <div class="text-danger">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="">Tên lớp</label>
-                                        <input class="signup-field" name="ten_lop" id="ten_lop" type="text" value="" disabled>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="">Giá</label>
-                                        <input class="signup-field" name="gia_khoahoc" id="ten_lop" type="text" value="" disabled>
-                                    </div>
                                     <div class="col-md-12 col-sm-12">
                                         <label for="">Tên khóa học</label>
-                                        <input class="signup-field" name="ten_khoahoc" id="ten_khoahoc" type="text" value="" disabled>
+                                        <select class="form-control" name="id_khoa_hoc" id="id_khoahoc" data-url="{{route('client_dang_ky')}}" >
+                                            <option>-- Chọn khóa học --</option>
+                                            @foreach ($listKhoaHoc as $item)
+                                                <option  value="{{ $item->id }}" {{$item->id == isset($idKhoaHoc) ? "selected" :""}}>{{ $item->ten_khoa_hoc }}</option>
+                                            @endforeach
+                                        </select>
                                         {{-- @error('ten_khoahoc')
                                       <div class="text-danger">{{$message}}</div>
                                   @enderror --}}
                                     </div>
-                                    {{-- <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="cpassword" id="cpassword" type="text"
-                                            placeholder="Confirm Password">
-                                    </div> --}}
-
-                                    {{-- <div class="col-lg-12 col-sm-12">
-                                        <input class="signup-field" name="dia_chi" id="dia_chi" type="text"
-                                            placeholder="Địa chỉ">
-                                            @error('dia_chi')
-                                          <div class="text-danger">{{$message}}</div>
-                                      @enderror
-                                    </div> --}}
-                                    {{-- <div class="col-lg-12 col-sm-12">
-                                        <label for="ten_de_thi" class="col-md-3 col-sm-4 control-label">Hình ảnh <span class="text-danger">(*)</span></label>
-
-                                        <div class="col-md-9 col-sm-8">
-                                          <input class="signup-field" type="file" name="hinh_anh" value="" id="">
-                                          @error('hinh_anh')
-                                          <div class="text-danger">{{$message}}</div>
-                                      @enderror
-                                        </div>
-                                    </div> --}}
-                                    {{-- <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="zip" id="zip" type="text"
-                                            placeholder="Postcode/Zip">
-                                    </div> --}}
+                                    <div class="col-md-12 col-sm-12">
+                                        <label for="">Tên lớp</label>
+                                        <select class="form-control" name="id_lop" id="id_lop" >
+                                            <option>--Chọn Lớp--</option>
+                                            @if(isset($listLop) && $listLop->count()>0)
+                                                @foreach($listLop as $lop)
+                                                    <option value="{{$lop->id}}" {{$lop->id == $idLop ? "selected" : ""}}>{{$lop->ten_lop}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <label for="">Giá</label>
+                                        <input class="signup-field" name=""  id="id_gia" type="text" value="{{isset($giaKhoaHoc) ? $giaKhoaHoc: ""}}" disabled>
+                                    </div>
                                     <div class="col-sm-12">
                                         <div class="term-and-condition">
                                             <input type="checkbox" id="term">
@@ -163,3 +150,35 @@
         <!-- container /- -->
     </section>
 @endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#id_khoahoc', function (event) {
+                const url = $(this).data('url')
+                const data = $(this).val();
+                console.log(url, data);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        id_khoahoc: data
+                    },
+                    success: function (res) {
+                        console.log(res)
+                        let htmls="<option>--Chọn Lớp--</option>"
+                        let ten_lop=Object.values(res.lop);
+                        console.log(res.lop);
+                        ten_lop.forEach(function (item) {
+                            console.log(item)
+                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`
+                        })
+                        $('#id_gia').val(res.gia_khoa_hoc)
+                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
+                        $('#id_lop').html(htmls)
+                    }
+                })
+            })
+        })
+    </script>
+@endsection
+
