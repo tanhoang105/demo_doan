@@ -13,8 +13,8 @@
         <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
             <div class="col-sm-12">
                 <!-- Headline Goes Here -->
-                <h3>Login Form</h3>
-                <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Login </h4>
+                <h3>Đăng Nhập</h3>
+                <h4><a href="{{ route('home') }} "> Trang chủ </a> <span> &vert; </span> Đăng Nhập </h4>
             </div>
         </div>
         <!-- End: .row -->
@@ -22,12 +22,12 @@
     <!-- End: Header Content -->
 </header>
 <!--/. header -->
-<!--/    
+<!--/
 ==================================================-->
 
 
 
-<!-- Start: Account Section 
+<!-- Start: Account Section
 ==================================================-->
 <section class="account-section">
     <div class="container">
@@ -36,26 +36,26 @@
                 <div class="reg_wrap">
                     <!-- Start: Image -->
                     <div class="reg_img">
-                        <img src="images/hero-men.png" alt="">
+                        <img src="{{ asset('client/images/hero-men.png') }}" alt="">
                     </div>
                     <!-- Start:  Login Form  -->
                     <div class="login-form">
-                        <h2> Login to Your Account </h2>
+                        <h2> Đăng Nhập </h2>
                         <form method="post">
                             <input class="login-field" name="email" id="lemail" type="text"
-                                placeholder="Enter Your Email">
+                                placeholder="Email">
                             <input class="login-field" name="password" id="lpassword" type="text"
-                                placeholder="Enter Your Password">
+                                placeholder="Password">
                             <div class="lost_pass">
                                 <input type="checkbox" id="rem-checkbox-input">
                                 <label for="rem-checkbox-input" class="rem-checkbox">
-                                    <span class="rem-me">Remember me</span>
+                                    <span class="rem-me">Lưu tài khoản</span>
                                 </label>
-                                <a href="#" class="forget"> Lost your password? </a>
+                                 <a href="#" class="forget" style="margin-left: 15px"> Quên mật khẩu? </a>
                             </div>
                             <div class="submit-area">
-                                <a href="login.html" class="submit more-link"> Đăng Nhập </a>
-                                <a href="register.html" class="submit more-link"> Đăng Ký Tài Khoản</a>
+                                <a href="#" class="submit more-link"> Đăng Nhập </a>
+                                <a href="#" class="submit more-link"> Đăng Ký Tài Khoản</a>
                                 <div id="lmsg" class="message"></div>
                             </div>
                         </form>
@@ -69,7 +69,7 @@
     </div>
     <!-- container /- -->
 </section>
-<!-- End : Account Section 
+<!-- End : Account Section
 ==================================================-->
 
 

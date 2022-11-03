@@ -262,16 +262,16 @@
         </div>
         <!-- End: Heading -->
         <div class="row">
-            @foreach ($khoahoc as $key => $item)
+            @foreach ($khoahoc as $value)
               <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="feat_course_item">
                     <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
-{{--                     <img src="{{ Storage::url($item->hinh_anh)  }}" alt="image">--}}
+{{--                     <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image">--}}
                     <div class="feat_cour_price">
                         <span class="feat_cour_tag"> UI/UX Design </span>
-                        <span class="feat_cour_p"> {{ $item->gia_khoa_hoc }} VND </span>
+                        <span class="feat_cour_p"> {{ $value->gia_khoa_hoc }} VND </span>
                     </div>
-                    <h4 class="feat_cour_tit"> {{ $item->ten_khoa_hoc }} </h4>
+                    <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
                     <div class="feat_cour_lesson">
                         <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 24 lessons </span>
                         <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 259 Students </span>
@@ -286,7 +286,7 @@
                             <i class="fa fa-star"></i>
                             (4,5609)
                         </span>
-                        <a href="#"> <i class="arrow_right"></i> </a>
+                        <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}"> <i class="arrow_right"></i> </a>
                     </div>
                 </div>
             </div>
@@ -304,7 +304,7 @@
 
 <!-- Start: Featured Calendar Section
 ==================================================-->
-<section class="feat-course-section">
+{{-- <section class="feat-course-section">
     <div class="container">
         <!-- Start: Heading -->
         <div class="base-header">
@@ -340,7 +340,7 @@
 
             </div>
             <!-- /. container -->
-        </section>
+        </section> --}}
 <!-- End: Featured Calendar Section
 ==================================================-->
 

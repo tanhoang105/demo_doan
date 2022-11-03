@@ -158,6 +158,16 @@ class User extends Authenticatable
     }
 
 
+    // client - dang ky
+    public function saveNew($params){
+        $data=array_merge($params['cols']);
+        // dd($data);
+        $res=DB::table('users')
+            ->insertGetId($data);
+        return $res;
+    }
+
+
 
     public  function  HasVaiTro($choPhep){
 

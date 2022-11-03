@@ -15,10 +15,16 @@
                         <li><a href="{{route('client_khoa_hoc')}}">Tất Cả Khóa Học</a> </li>
                     </ul>
                 </li>
+                <li><a href="{{route('client_dang_ky')}}">Đăng Ký</a></li>
                 <li><a href="{{route('client_lien_he')}}">Liên Hệ</a></li>
                 <li><a href="{{route('client_gioi_thieu')}}">Giới Thiệu</a></li>
             </ul>
         </div>
+        <!-- End: navigation  -->
+        <div class="header_sign">
+            <a href="{{ route('client_dang_nhap') }}" class="more-link"> Đăng Nhập  </a>
+        </div>
+        <!-- End: Sign in -->
         <!-- End: navigation  -->
         <div class="header_sign">
 
