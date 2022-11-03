@@ -14,7 +14,7 @@
                         <h2> Học mọi lúc mọi  <br />
                             nơi <br />
                             Chỉ từ một thiết bị</h2>
-                        <p> Học trực tuyến không phải là điều lớn lao tiếp theo,  <br />                           
+                        <p> Học trực tuyến không phải là điều lớn lao tiếp theo,  <br />
                             nó bây giờ là điều tuyệt vời nhất từ ​​trước đến nay. </p>
                         <a href="#" class="more-link"> Bắt đầu </a>
                     </div>
@@ -262,12 +262,11 @@
         </div>
         <!-- End: Heading -->
         <div class="row">
-            @foreach ($list as $key => $item)
+            @foreach ($khoahoc as $key => $item)
               <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="feat_course_item">
                     <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
-                    {{-- <img src="{{ Storage::url($item->hinh_anh)  }}" alt="image"> --}}
-                    
+{{--                     <img src="{{ Storage::url($item->hinh_anh)  }}" alt="image">--}}
                     <div class="feat_cour_price">
                         <span class="feat_cour_tag"> UI/UX Design </span>
                         <span class="feat_cour_p"> {{ $item->gia_khoa_hoc }} VND </span>
@@ -291,10 +290,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /. col-lg-4 col-md-6 col-sm-12-->  
             @endforeach
-            
-
         </div>
         <!-- /. row -->
         <div class="text-center">
@@ -304,6 +300,48 @@
     <!-- /. container -->
 </section>
 <!-- End: Featured Courses Section
+==================================================-->
+
+<!-- Start: Featured Calendar Section
+==================================================-->
+<section class="feat-course-section">
+    <div class="container">
+        <!-- Start: Heading -->
+        <div class="base-header">
+            <h3> Lịch Khai Giảng </h3>
+        </div>
+        <!-- End: Heading -->
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr class="">
+                    <th scope="col">Tên Lớp</th>
+                    <th scope="col">Khóa Học</th>
+                    <th scope="col">Ngày</th>
+                    <th scope="col">Thời Gian</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+            @foreach ($lop as $kay => $item)
+                <tr>
+                    <th scope="row">{{ $item->ten_lop}}</th>
+                    <td>1</td>
+                    <td>{{ $item->ngay_bat_dau }}</td>
+                    <td>@mdo</td>
+                    <td>
+                        <button class="btn btn-primary">Đăng Ký</button>
+                    </td>
+                </tr>
+            @endforeach
+                </tbody>
+            </table>
+                </div>
+
+            </div>
+            <!-- /. container -->
+        </section>
+<!-- End: Featured Calendar Section
 ==================================================-->
 
 <!-- Start:  Learners Feedback Section
@@ -354,7 +392,7 @@
 
 
 
-<!-- Start: Newsletter Section  
+<!-- Start: Newsletter Section
 ==================================================-->
 <section class="newsletter-section pb-130">
     <div class="container">

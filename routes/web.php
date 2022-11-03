@@ -30,6 +30,13 @@ use Symfony\Component\Routing\RouterInterface;
 // Route::get('/', function () {
 //     return redirect()->route('route_BE_Admin_Khoa_Hoc');
 // });
+Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+Route::get('/coures', [\App\Http\Controllers\Client\KhoaHocController::class, 'index'])->name('client_khoa_hoc');
+Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'index'])->name('client_lien_he');
+Route::get('/giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'index'])->name('client_giang_vien');
+Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::class, 'index'])->name('client_gioi_thieu');
+Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
+Route::get('/chi-tiet-giang-vien',[\App\Http\Controllers\Client\GiangVienController::class,'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 
 
 Route::prefix('/khoa-hoc')->name('route_BE_Admin_')->group(function () {
@@ -127,7 +134,6 @@ Route::prefix('/tai-khoan')->name('route_BE_Admin_')->group(function () {
     Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
 });
 
-=======
 
 // ================ code route phần admin
 Route::prefix('/admin')->group(function () {
