@@ -41,7 +41,7 @@
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td> {{ $item->ten_khoa_hoc }}</td>
                     <td> {{ $item->ten_lop }}</td>
-                  
+
                     <td> {{ $item->so_luong }}</td>
                     <td> {{ $item->ngay_bat_dau }}</td>
                     <td> {{ $item->ngay_ket_thuc }}</td>
@@ -50,7 +50,7 @@
                                 {{-- {{$gv->ten_giang_vien}} --}}
                             @if ($gv->id_user == $item->id_giang_vien)
                                 {{ $gv->ten_giang_vien }}
-                            {{-- @else 
+                            {{-- @else
                                 <button class="btn success"><a href="">Thêm giảng viên</a></button>     --}}
                             @endif
                         @endforeach
@@ -83,7 +83,7 @@
                 <button style="margin-right : 55px" class="btn btn-light"><a
                             href=" {{ route('route_BE_Admin_List_Lop') }}">
                             Tất cả lớp học</a></button>
-                        
+
             </div>
 
         </div>
