@@ -24,9 +24,6 @@
 <!--/. header -->
 <!--/    
 ==================================================-->
-
-
-
 <!-- Start: Account Section 
 ==================================================-->
 <section class="account-section">
@@ -41,7 +38,22 @@
                     <!-- Start:  Login Form  -->
                     <div class="login-form">
                         <h2> Login to Your Account </h2>
-                        <form method="post">
+                        <div>
+                            @if (session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('error') }}
+                                </div>
+                            @endif
+                        </div>
+                        <form method="post" action="{{route('auth.login')}}">
+                            @csrf
                             <input class="login-field" name="email" id="lemail" type="text"
                                 placeholder="Enter Your Email">
                             <input class="login-field" name="password" id="lpassword" type="text"
@@ -54,8 +66,9 @@
                                 <a href="#" class="forget"> Lost your password? </a>
                             </div>
                             <div class="submit-area">
-                                <a href="login.html" class="submit more-link"> Đăng Nhập </a>
-                                <a href="register.html" class="submit more-link"> Đăng Ký Tài Khoản</a>
+                                {{-- <a href="login.html" class="submit more-link"> Đăng Nhập </a> --}}
+                                <button class="submit more-link"> Đăng Nhập </button>
+                                <a href="{{route('auth.getdangki')}}" class="submit more-link"> Đăng Ký Tài Khoản</a>
                                 <div id="lmsg" class="message"></div>
                             </div>
                         </form>
