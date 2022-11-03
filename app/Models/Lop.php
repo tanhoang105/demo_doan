@@ -16,9 +16,6 @@ class Lop extends Model
     {
         return $this->hasMany(KhoaHoc::class);
     }
-<<<<<<< HEAD
-    public function index($params, $pagination = true, $perpage , $giaovien = null)
-=======
 
     public function listGiangVien($params, $pagination = true, $perpage)
     {
@@ -71,7 +68,6 @@ class Lop extends Model
 
 
     public function index($params, $pagination = true, $perpage)
->>>>>>> branch-lop
     {
         if ($pagination) {
             $query  = DB::table($this->table)

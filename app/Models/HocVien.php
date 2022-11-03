@@ -96,7 +96,6 @@ class HocVien extends Model
             ->update($data);
         return $query;
     }
-<<<<<<< HEAD
 
     // đăng ký khóa học
     public function getHocVien($id_user){
@@ -112,6 +111,4 @@ class HocVien extends Model
         return $res;
     }
 
-=======
->>>>>>> branch-lop
 }
