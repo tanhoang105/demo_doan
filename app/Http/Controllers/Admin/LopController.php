@@ -34,9 +34,9 @@ class LopController extends Controller
     public function index(Request $request)
     {
         $this->v['params'] =  $request->all();
-        $list = $this->lophoc->index($this->v['params'], true, 5 , true);
+        $list = $this->lophoc->listGiangVien($this->v['params'], true, 10 , true);
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
-        // dd($this->v['giangvien']);
+        // dd($this->v['giangvien'][2]);   
         $this->v['list'] = $list;
 
         return view('admin.lop.index', $this->v);

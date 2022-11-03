@@ -27,7 +27,7 @@ class CaHocController extends Controller
     {
 
         $this->v['params'] = $request->all();
-        $this->v['list']  = $this->cahoc->index($this->v['params'], true, 3);
+        $this->v['list']  = $this->cahoc->index($this->v['params'], true, 5);
 
         return view('admin.cahoc.index', $this->v);
     }

@@ -16,9 +16,11 @@ class HocVien extends Model
     {
         if ($pagination) {
             $query  = DB::table($this->table)
-                ->where('delete_at', '=', 1)
-                ->join('users', $this->table . '.user_id' , 'users.id')
-                ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('users', $this->table . '.user_id', 'users.id')
+                ->join('vai_tro', 'vai_tro.id', '=', 'users.vai_tro_id')
+                ->select('users.*' , $this->table . '.*')
+                ->where('vai_tro.ten_vai_tro', 'like', '%' . 'học viên' . '%')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -28,10 +30,13 @@ class HocVien extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-//            ->where('delete_at', '=', 1)
-            ->join('users', $this->table . '.user_id' , 'users.id')
-            ->select($this->table . '.*' , $this->table . '.id as id_giang_vien'  , 'users.*')
-            ->orderByDesc($this->table . '.id');
+                //            ->where('delete_at', '=', 1)
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('users', $this->table . '.user_id', 'users.id')
+                ->join('vai_tro', 'vai_tro.id', '=', 'users.vai_tro_id')
+                ->select($this->table . '.*', $this->table . '.id as id_hoc_vien', 'users.*')
+                ->where('vai_tro.ten_vai_tro', 'like', '%' . 'học viên' . '%')
+                ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_hoc_vien', 'like', '%' . $params['keyword']  . '%');
@@ -41,14 +46,14 @@ class HocVien extends Model
         }
         return $list;
     }
-     // hiển thị ra chi tiết 1 bản ghi
-     public function show($id){
-        if(!empty($id)){
+    // hiển thị ra chi tiết 1 bản ghi
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
+                ->where('id', '=', $id)
+                ->first();
             return $query;
-
         }
     }
 
@@ -66,8 +71,9 @@ class HocVien extends Model
     }
 
     // hàm xóa bản ghi theo id
-    public function remove($id){
-        if(!empty($id)) {
+    public function remove($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
@@ -79,7 +85,7 @@ class HocVien extends Model
 
 
     // hàm update bản ghi
-    public function saveupdate( $params)
+    public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
@@ -90,6 +96,7 @@ class HocVien extends Model
             ->update($data);
         return $query;
     }
+<<<<<<< HEAD
 
     // đăng ký khóa học
     public function getHocVien($id_user){
@@ -105,4 +112,6 @@ class HocVien extends Model
         return $res;
     }
 
+=======
+>>>>>>> branch-lop
 }
