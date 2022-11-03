@@ -27,9 +27,9 @@ class HomeController extends Controller
             ->get();
         // dd($data);
         $this->v['params'] = $request->all();
-        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 6);
+        $khoahoc =  $this->khoahoc->index($this->v['params'],false,'');
         $this->v['list'] = $khoahoc;
         //    dd($khoahoc);
-        return view('client.trang-chu.trang-chu', $this->v, compact('data'));
+        return view('client.trang-chu.trang-chu', $this->v);
     }
 }

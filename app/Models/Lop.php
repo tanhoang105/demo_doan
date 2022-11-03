@@ -27,12 +27,14 @@ class Lop extends Model
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*')
                 ->orderByDesc($this->table . '.id');
 
+
+            // hiển thị những lớp đã có giảng viên
             if (!empty($params['checkgv']) && $params['checkgv'] ==  1 ) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.id_giang_vien');
                 });
             }
-
+            // hiển thị những lớp chưa có giảng viên 
             if (!empty($params['checkgv']) && $params['checkgv'] ==  2 ) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhereNotNull($this->table . '.id_giang_vien');
