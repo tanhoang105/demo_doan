@@ -1,6 +1,6 @@
-
 @extends('client.templates.layout')
-@section('title') - About
+@section('title')
+    - About
 @endsection
 @section('content')
     <!-- header -->
@@ -19,13 +19,13 @@
         <!-- End: Header Content -->
     </header>
     <!--/. header -->
-    <!--/    
-==================================================-->
+    <!--/
+    ==================================================-->
 
 
 
-    <!-- Start: Account Section 
-==================================================-->
+    <!-- Start: Account Section
+    ==================================================-->
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -39,11 +39,12 @@
                         <!-- Start:  Signup  Form  -->
                         <div class="registration-form">
                             <h2> New User Signup! </h2>
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data" action="{{route('auth.store')}}">
+                                @csrf
                                 <div class="row">
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="fname" id="fname" type="text"
+                                        <input class="signup-field" name="name" id="fname" type="text"
                                             placeholder="Full Name">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -57,34 +58,32 @@
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="cpassword" id="cpassword" type="text"
-                                            placeholder="Confirm Password">
+                                        <input class="signup-field" name="sdt" id="cpassword" type="text"
+                                            placeholder="number phone">
                                     </div>
 
                                     <div class="col-lg-12 col-sm-12">
-                                        <input class="signup-field" name="adddress" id="address" type="text"
+                                        <input class="signup-field" name="dia_chi" id="address" type="text"
                                             placeholder="Address">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="city" id="city" type="text"
-                                            placeholder="Town/City">
+                                        <input class="signup-field" value="5" name="trang_thai" id="city" type="text">
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="zip" id="zip" type="text"
-                                            placeholder="Postcode/Zip">
+                                    <div hidden class="col-md-6 col-sm-12">
+                                        <input class="signup-field" name="hinh_anh" id="zip" type="file">
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="term-and-condition">
                                             <input type="checkbox" id="term">
-                                            <label for="term">I agree to <a href="#">term &amp; condition</a> and <a
-                                                    href="#">privacy policy</a></label>
+                                            <label for="term">I agree to <a href="#">term &amp; condition</a> and
+                                                <a href="#">privacy policy</a></label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 submit-area">
+                                    {{-- <div class="col-sm-12 submit-area">
                                         <a href="#" class="submit more-link"> Sign Up </a>
                                         <div id="msg" class="message"></div>
-                                    </div>
-
+                                    </div> --}}
+                                    <button class="btn btn-success">Sign Up</button>
                                 </div>
                             </form>
                         </div>
@@ -97,7 +96,6 @@
         </div>
         <!-- container /- -->
     </section>
-    <!-- End : Account Section 
-==================================================-->
-
+    <!-- End : Account Section
+    ==================================================-->
 @endsection
