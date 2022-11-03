@@ -29,15 +29,14 @@ class HomeController extends Controller
         $data = DB::table('giang_vien')->select('giang_vien.*')
             ->skip(0)->take(3)
             ->get();
-        // dd($data);
+//         dd($data);
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 6);
         $this->v['khoahoc'] = $khoahoc;
         //    dd($khoahoc);
 
-
         $lop = $this->lop->index($this->v['params'], true, 5);
         $this->v['lop'] = $lop;
-        return view('client.trang-chu.trang-chu', $this->v, compact('data'));
+        return view('client.trang-chu.trang-chu', $this->v);
     }
 }

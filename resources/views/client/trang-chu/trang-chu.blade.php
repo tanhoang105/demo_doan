@@ -304,7 +304,7 @@
 
 <!-- Start: Featured Calendar Section
 ==================================================-->
-{{-- <section class="feat-course-section">
+<section class="feat-course-section">
     <div class="container">
         <!-- Start: Heading -->
         <div class="base-header">
@@ -340,7 +340,7 @@
 
             </div>
             <!-- /. container -->
-        </section> --}}
+        </section>
 <!-- End: Featured Calendar Section
 ==================================================-->
 
