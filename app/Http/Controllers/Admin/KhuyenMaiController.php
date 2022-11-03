@@ -27,7 +27,7 @@ class KhuyenMaiController extends Controller
     {
         //
         $this->v['params']  = $request->all();
-        $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 3);
+        $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
         return view('admin.khuyenmai.index', $this->v);
     }
 

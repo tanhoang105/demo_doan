@@ -32,6 +32,7 @@
                 <th scope="col">STT</th>
                 <th scope="col">Tên Khóa Học </th>
                 <th scope="col">Tên Danh Mục </th>
+                <th scope="col">Giá khóa học </th>
                 <th scope="col">Ảnh </th>
                 <th scope="col">Mô Tả </th>
                 <th scope="col">Sửa</th>
@@ -44,6 +45,7 @@
                     <th scope="row"> {{ $loop->iteration}}</th>
                     <td> {{ $item->ten_khoa_hoc }}</td>
                     <td> {{ $item->ten_danh_muc }}</td>
+                    <td> {{ $item->gia_khoa_hoc . '  VNĐ' }}</td>
                     <td> <img width="150px" src="{{ Storage::url($item->hinh_anh)  }}" alt=""></td>
                     <td> {!!$item->mo_ta!!}</td>
                     <td> <button class="btn btn-warning"><a

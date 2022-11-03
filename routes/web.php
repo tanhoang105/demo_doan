@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CaHocController;
+use App\Http\Controllers\Admin\DangKyController;
 use App\Http\Controllers\Admin\DanhMucKhoaHoc;
+use App\Http\Controllers\Admin\GiangVienController;
+use App\Http\Controllers\Admin\HocVienController;
 use App\Http\Controllers\Admin\KhoahocController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\LopController;
@@ -36,6 +39,9 @@ Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocContr
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky',[\App\Http\Controllers\Client\DangKyController::class,'postDangKy'])->name('client_post_dang_ky');
+Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+// Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
+
 Route::prefix('/admin')->group(function () {
 
     // khóa học
@@ -45,6 +51,39 @@ Route::prefix('/admin')->group(function () {
     Route::get('/khoa-hoc-chi-tiet/{id}', [KhoahocController::class, 'edit'])->name('route_BE_Admin_Chi_Tiet_Khoa_Hoc'); // hiển thị chi tiết bản ghi
     Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('route_BE_Admin_Update_Khoa_Hoc');
     // khóa học
+
+
+    // đăng ký 
+    Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
+        // Route::match(['get', 'post'], '/add-khoa-hoc',   [DangKyController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/dang-ky-delete/{id}', [DangKyController::class, 'destroy'])->name('Xoa_Giang_Vien');
+        Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
+        Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
+    });
+    // khóa học
+
+    // giảng viên
+
+    Route::prefix('/giang-vien')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [GiangVienController::class, 'index'])->name('List_Giang_Vien'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-khoa-hoc',   [GiangVienController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/giang-vien-delete/{id}', [GiangVienController::class, 'destroy'])->name('Xoa_Giang_Vien');
+        Route::get('/giang-vien-edit/{id}', [GiangVienController::class, 'edit'])->name('Edit_Giang_Vien'); // hiển thị chi tiết bản ghi
+        Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
+    });
+    
+
+    // học viên
+
+    Route::prefix('/hoc-vien')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [HocVienController::class, 'index'])->name('List_Hoc_Vien'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-khoa-hoc',   [HocVienController::class, 'store'])->name('Add_Hoc_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/hoc-vien-delete/{id}', [HocVienController::class, 'destroy'])->name('Xoa_Hoc_Vien');
+        Route::get('/hoc-vien-edit/{id}', [HocVienController::class, 'edit'])->name('Edit_Hoc_Vien'); // hiển thị chi tiết bản ghi
+        Route::post('/hoc-vien-update', [HocVienController::class, 'update'])->name('Update_Hoc_Vien');
+    });
+
 
 
     // xếp lớp

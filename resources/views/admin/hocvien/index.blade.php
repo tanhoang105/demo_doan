@@ -22,12 +22,10 @@
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Mã khuyến mại </th>
-                <th scope="col">Loại khuyến mại </th>
-                <th scope="col">Giảm giá </th>
-                <th scope="col">Ngày bắt đầu </th>
-                <th scope="col">Ngày kết thúc</th>
-                <th scope="col">Mô tả</th>
+                <th scope="col">Tên học viên </th>
+                <th scope="col">Địa chỉ </th>
+                <th scope="col">Email </th>
+                <th scope="col">Số điện thoại</th>
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
             </tr>
@@ -35,18 +33,19 @@
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
-                    <th scope="row"> {{ $loop->iteration }}}</th>
-                    <td> {{ $item->ma_khuyen_mai }}</td>
-                    <td> {{ $item->loai_khuyen_mai }}</td>
-                    <td> {{ $item->giam_gia . '%' }}</td>
-                    <td> {{ $item->ngay_bat_dau }}</td>
-                    <td> {{ $item->ngay_ket_thuc }}</td>
-                    <td> {!! $item->mo_ta !!}</td>
+                    <th scope="row"> {{ $loop->iteration }}</th>
+                    <td> {{ $item->ten_hoc_vien }}</td>
+                    <td> {{ $item->dia_chi }}</td>
+                    <td> {{ $item->email}}</td>
+                    <td> 
+                        {{ $item->sdt}}
+                    </td>
+                    
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
                     <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id]) }}">
                                 Xóa</a></button></td>
 
                 </tr>

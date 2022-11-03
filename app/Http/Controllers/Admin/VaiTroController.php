@@ -26,7 +26,7 @@ class VaiTroController extends Controller
     public function index(Request $request)
     {
         $this->v['params'] = $request->all();
-        $list = $this->vaitro->index($this->v['params'], true, 2);
+        $list = $this->vaitro->index($this->v['params'], true, 10);
         $this->v['list'] = $list;
         return view('admin.vaitro.index', $this->v);
     }
