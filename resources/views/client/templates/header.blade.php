@@ -22,8 +22,6 @@
         </div>
         <!-- End: navigation  -->
         <div class="header_sign">
-
-            {{-- @if (Auth::user()) --}}
             <nav id="navigation">
                 <ul>
                   <li><a href="#" style="color: red" aria-haspopup="true"><i class="fas fa-user">@if (Auth::user())
@@ -39,10 +37,14 @@
                   </li>
                 </ul>
               </nav>
-              {{-- @else
-              <a href="{{route('login')}}" class="more-link"> Sign in  </a>
-              @endif --}}
+           
         </div>
+        @if (Auth::user())
+        @if (Auth::user()->trang_thai == 1)
+        <a class="btn btn-success" href="{{route('route_BE_Admin_Khoa_Hoc')}}">Admin</a>
+        @else
+        @endif
+        @endif
         <!-- End: Sign in -->
     </div>
     <!--/ container -->
