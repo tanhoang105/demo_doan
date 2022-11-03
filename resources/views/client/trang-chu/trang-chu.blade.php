@@ -287,7 +287,7 @@
                             <i class="fa fa-star"></i>
                             (4,5609)
                         </span>
-                        <a href="#"> <i class="arrow_right"></i> </a>
+                        <a href=" {{route('client_chi_tiet_khoa_hoc' , ['id'=>$item->id])}} "> <i class="arrow_right"></i> </a>
                     </div>
                 </div>
             </div>

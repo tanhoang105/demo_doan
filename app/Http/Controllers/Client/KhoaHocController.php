@@ -34,6 +34,7 @@ class KhoaHocController extends Controller
         $detail = KhoaHoc::find($id);
         $lop = Lop::select('lop.*','giang_vien.ten_giang_vien')
             ->where('lop.id_khoa_hoc', '=', $id)
+            // ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
             ->join('giang_vien','lop.id_giang_vien','=','giang_vien.id')
             ->get();
         // dd($lop);
