@@ -71,10 +71,10 @@ class AuthController extends Controller
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->status == 0) {
-                    if ($user->role == 1) {
+                    if ($user->vai_tro_id == 1) {
                         return redirect()->route('route_BE_Admin_Khoa_Hoc');
                     }
-                    if ($user->role != 1) {
+                    if ($user->vai_tro_id != 1) {
                         return redirect()->route('client_khoa_hoc');
                     }
                 } else {

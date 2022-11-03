@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\DangKy;
 use App\Models\HocVien;
 use App\Models\KhachHang;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Nette\Utils\Random;
@@ -60,6 +62,7 @@ class DangKyController extends Controller
                 },
                     $request->post());
                 unset($params['cols']['_token']);
+                // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
                 if (empty($request->id_user)){
                     $password=Str::random(8);
@@ -92,7 +95,9 @@ class DangKyController extends Controller
                             ];
                             $objDangKy->saveNew($data);
                             Session::flash('success','Đăng ký Khóa học thành công');
-
+                            
+                            // dd($params['cols']['email']);
+                            Mail::to($params['cols']['email'])->send(new SendMail(['message'=> 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                         }
                     }
                     else{
@@ -106,7 +111,7 @@ class DangKyController extends Controller
                     if ($query->count()>0){
                         $objDangKy=new DangKy();
                         $data=[
-                            'ngay_dang_ky'=>date(),
+                            'ngay_dang_ky'=>date('Y-m-d H:i:s'),
                             'id_lop'=>$request->id_lop,
                             'id_user'=>$request->id_user,
                         ];
@@ -121,7 +126,7 @@ class DangKyController extends Controller
                         if ($saveNewHocVien>0){
                             $objDangKy=new DangKy();
                             $data=[
-                                'ngay_dang_ky'=>date(),
+                                'ngay_dang_ky'=>date('Y-m-d H:i:s'),
                                 'id_lop'=>$request->id_lop,
                                 'id_user'=>$request->id_user,
                             ];
