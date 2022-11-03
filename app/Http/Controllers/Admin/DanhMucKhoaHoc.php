@@ -28,7 +28,7 @@ class DanhMucKhoaHoc extends Controller
     public function index(Request $request)
     {
         $this->v['pramas'] = $request->all();
-        $list = $this->danh_muc->index($this->v, true, 2);
+        $list = $this->danh_muc->index($this->v, true, 10);
         $this->v['list'] = $list;
         return view('Admin.danhmuc.index', $this->v);
     }

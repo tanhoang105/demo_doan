@@ -18,7 +18,9 @@ class GiangVien extends Model
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
                 ->join('users', $this->table . '.id_user', 'users.id')
-                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', 'users.*')
+                ->join('vai_tro', 'vai_tro.id', '=', 'users.vai_tro_id')
+                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', $this->table . '.sdt as sdt_giang_vien', $this->table . '.email as email_giang_vien', $this->table . '.dia_chi as dia_chi_giang_vien', 'users.*', 'vai_tro.*')
+                ->where('vai_tro.ten_vai_tro', 'like', '%' . 'giảng viên' . '%')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -31,9 +33,10 @@ class GiangVien extends Model
 
                 ->where($this->table . '.delete_at', '=', 1)
                 ->join('users', $this->table . '.id_user', 'users.id')
-                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', 'users.*')
+                ->join('vai_tro', 'vai_tro.id', '=', 'users.vai_tro_id')
+                ->select($this->table . '.*', $this->table . '.id as id_giang_vien', $this->table . '.sdt as sdt_giang_vien', $this->table . '.email as email_giang_vien', $this->table . '.dia_chi as dia_chi_giang_vien', 'users.*', 'vai_tro.*')
+                ->where('vai_tro.ten_vai_tro', 'like', '%' . 'giảng viên' . '%')
                 ->orderByDesc($this->table . '.id');
-
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
@@ -49,10 +52,9 @@ class GiangVien extends Model
         if (!empty($id)) {
             $query = DB::table($this->table)
 
-                    ->where('id' , '=' , $id)
-                    ->first();
+                ->where('id', '=', $id)
+                ->first();
             return $query;
-
         }
     }
 
@@ -70,7 +72,7 @@ class GiangVien extends Model
     }
 
 
-   
+
     // hàm xóa bản ghi theo id 
     public function remove($id)
     {
@@ -87,7 +89,7 @@ class GiangVien extends Model
 
 
 
-   
+
 
     // hàm update bản ghi 
     public function saveupdate($params)

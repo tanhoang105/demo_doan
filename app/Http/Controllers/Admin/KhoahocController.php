@@ -28,7 +28,7 @@ class KhoahocController extends Controller
     public function index(Request $request)
     {
         $this->v['params'] = $request->all();
-        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 2);
+        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 10);
         $this->v['list'] = $khoahoc;
 //        dd($khoahoc);
         return view('admin.khoahoc.index', $this->v);

@@ -189,6 +189,24 @@ class User extends Authenticatable
 
     }
 
+    // check vai trò để có thể insert vào bảng học viên hoặc bảng giảng viên 
+    // public function checkVaiTro($id){
+    //     $query = DB::table($this->table)
+    //     ->where($this->table . '.delete_at', '=', 1)
+    //     ->where($this->table . '.id' , '=' , $id)
+    //     ->join('vai_tro' . $this->table.'ai_tro_id' , '=' , 'vao_tro.id' )
+    //     ->where('vai_tro.ten_vai_tro', 'like', '%' . 'học viên' . '%')
+    //     ->select($this->table . '.*');
+   
+    //     $query = $query->where(function ($q) use ($params) {
+    //         $q->orWhere($this->table . '.name   ', 'like', '%' . $params['keyword'] . '%');
+    //         $q->orWhere($this->table . '.dia_chi   ', 'like', '%' . $params['keyword'] . '%');
+    //         $q->orWhere($this->table . '.email   ', 'like', '%' . $params['keyword'] . '%');
+
+    //     });
+    
+    // }
+
 
 
 }

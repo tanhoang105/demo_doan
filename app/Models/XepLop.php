@@ -22,9 +22,9 @@ class XepLop extends Model
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
                 ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
-                ->join('users', $this->table . '.id_user', '=', 'users.id')
+                // ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -39,7 +39,7 @@ class XepLop extends Model
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
                 ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
-                ->join('users', $this->table . '.id_user', '=', 'users.id')
+                // ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)

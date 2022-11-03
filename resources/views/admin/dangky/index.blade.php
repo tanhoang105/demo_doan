@@ -1,10 +1,9 @@
 @extends('Admin.templates.layout')
 @section('content')
-    <div class="row p-3">
+    {{-- <div class="row p-3">
         <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_BE_Admin_Add_Vai_Tro') }}">Thêm</a></button>
-    </div>
-    {{-- hiển thị massage đc gắn ở session::flash('error') --}}
+                href="{{ route('route_BE_Admin_Add_Ca_Hoc') }} ">Thêm</a></button>
+    </div> --}}
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
@@ -31,26 +30,34 @@
         <thead>
             <tr>
                 <th scope="col">STT</th>
-                <th scope="col">Tên Vai Tro </th>
-                <th scope="col">Mô Tả </th>
-                <th scope="col">Sửa</th>
-                <th scope="col">Xóa </th>
+                <th scope="col">Ngày đăng ký</th>
+                <th scope="col">Người đăng ký</th>
+                <th scope="col">Lớp học đăng ký</th>
+                <th scope="col">Khóa học đăng ký</th>
+                <th scope="col">Học phí</th>
+                <th scope="col">Thanh toán</th>
+               
+                <th scope="col">Sửa </th>
             </tr>
         </thead>
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
                     <th scope="row"> {{ $loop->iteration }}</th>
-                    <td> {{ $item->ten_vai_tro }}</td>
+                    <td> {{ $item->ngay_dang_ky }}</td>
+                    <td> {{ $item->ten_hoc_vien }}</td>
+                    <td> {{ $item->ten_lop }}</td>
+                    <td> {{ $item->ten_khoa_hoc }}</td>
+                    <td> {{ $item->gia_khoa_hoc }}</td>
+                    <td> <button class="btn btn-primary">Xuất hóa đơn</button></td>
+                  
 
-                    <td> {!! $item->mo_ta !!}</td>
                     <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}"> Sửa
+                                href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
                     <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Vai_Tro', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
                                 Xóa</a></button></td>
-
                 </tr>
             @endforeach
 

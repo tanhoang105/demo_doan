@@ -123,6 +123,32 @@
                   </a>
 
               </li>
+
+
+              <li class="nav-item">
+                <a href=" {{route('route_BE_Admin_List_Dang_Ky')}} " class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                      
+                        Đăng ký
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
+
+              <li class="nav-item">
+                <a href=" {{route('route_BE_Admin_List_Giang_Vien')}} " class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                     Giảng viên
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
+
+
               <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Xep_Lop') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
