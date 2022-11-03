@@ -26,10 +26,15 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {
-        $data = DB::table('giang_vien')->select('giang_vien.*')
-            ->skip(0)->take(3)
-            ->get();
+//        $data = DB::table('giang_vien')->select('giang_vien.*')
+//            ->skip(0)->take(3)
+//            ->get();
 //         dd($data);
+
+        $query = DB::table('lop')
+            ->join('khoa_hoc', 'lop' . '.id_khoa_hoc', '=', 'khoa_hoc.id')
+            ->select('khoa_hoc.*');
+
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 6);
         $this->v['khoahoc'] = $khoahoc;

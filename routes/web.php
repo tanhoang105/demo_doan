@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\VaiTroController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,7 @@ Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'ind
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
-Route::post('/dang-ky',[\App\Http\Controllers\Client\DangKyController::class,'postDangKy'])->name('client_post_dang_ky');
+Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 // Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
 
@@ -61,10 +62,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
     });
-    // khóa học
-
     // giảng viên
-
     Route::prefix('/giang-vien')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [GiangVienController::class, 'index'])->name('List_Giang_Vien'); // hiển thị danh sách
         Route::match(['get', 'post'], '/add-khoa-hoc',   [GiangVienController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
@@ -72,7 +70,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/giang-vien-edit/{id}', [GiangVienController::class, 'edit'])->name('Edit_Giang_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
     });
-    
+
 
     // học viên
 
@@ -175,3 +173,11 @@ Route::prefix('/admin')->group(function () {
 
 // client đăng ký hoặc đăng nhập tài khoản
 Route::match(['post', 'get'], '/login', [\App\Http\Controllers\Auth\AuthController::class, 'store'])->name('route_FE_Client_Login');
+// auth
+Route::prefix('/auth')->name('auth.')->group(function () {
+    Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('loginForm');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/getdangki', [AuthController::class, 'getdangki'])->name('getdangki');
+    Route::post('/store', [AuthController::class, 'store'])->name('store');
+});
+Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');

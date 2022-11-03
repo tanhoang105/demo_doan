@@ -22,33 +22,29 @@
         </div>
         <!-- End: navigation  -->
         <div class="header_sign">
-            <a href="{{ route('client_dang_nhap') }}" class="more-link"> Đăng Nhập  </a>
-        </div>
-        <!-- End: Sign in -->
-        <!-- End: navigation  -->
-        <div class="header_sign">
-
-            {{-- @if (Auth::user()) --}}
             <nav id="navigation">
                 <ul>
-                  <li><a href="#" style="color: red" aria-haspopup="true"></a>
+                  <li><a href="#" style="color: red" aria-haspopup="true"><i class="fas fa-user">@if (Auth::user())
+                    {{Auth::user()->name}}
+                  @endif</i></a>
                     <ul class="dropdown" aria-label="submenu">
                       <li><a href="#"></a></li>
-                      <li> <a href="" class="dropdown-item">Sign out</a></li>
+                      <li> <a href="{{route('logout')}}" class="dropdown-item">Sign out</a></li>
                       <li> <a href="" class="dropdown-item">Lịch sử đăng ký </a></li>
                       <li>
-                        {{-- @if (Auth::user()->id_role!=2)
-                        <a href="{{route('admin.user.index')}}" class="dropdown-item">Admin</a>
-                        @endif --}}
                       </li>
                     </ul>
                   </li>
                 </ul>
               </nav>
-              {{-- @else
-              <a href="{{route('login')}}" class="more-link"> Sign in  </a>
-              @endif --}}
+           
         </div>
+        @if (Auth::user())
+        @if (Auth::user()->trang_thai == 1)
+        <a class="btn btn-success" href="{{route('route_BE_Admin_Khoa_Hoc')}}">Admin</a>
+        @else
+        @endif
+        @endif
         <!-- End: Sign in -->
     </div>
     <!--/ container -->

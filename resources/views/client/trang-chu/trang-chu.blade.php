@@ -326,11 +326,12 @@
             @foreach ($lop as $kay => $item)
                 <tr>
                     <th scope="row">{{ $item->ten_lop}}</th>
-                    <td>1</td>
+                    <td>{{ $item->ten_khoa_hoc }}</td>
                     <td>{{ $item->ngay_bat_dau }}</td>
                     <td>@mdo</td>
                     <td>
-                        <button class="btn btn-primary">Đăng Ký</button>
+                        <button class="btn btn-primary" style="letter-spacing: 0px;text-transform: none;
+">Đăng Ký</button>
                     </td>
                 </tr>
             @endforeach
