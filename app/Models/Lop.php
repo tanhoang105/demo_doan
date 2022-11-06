@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Lop extends Model
 {
@@ -27,12 +28,14 @@ class Lop extends Model
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*')
                 ->orderByDesc($this->table . '.id');
 
+
+            // hiển thị những lớp đã có giảng viên
             if (!empty($params['checkgv']) && $params['checkgv'] ==  1 ) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.id_giang_vien');
                 });
             }
-
+            // hiển thị những lớp chưa có giảng viên 
             if (!empty($params['checkgv']) && $params['checkgv'] ==  2 ) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhereNotNull($this->table . '.id_giang_vien');
@@ -133,20 +136,35 @@ class Lop extends Model
 
 
     // hàm xóa bản ghi theo id
-    public function remove($id)
+    public function remove($id = null , $id_khoahoc = null)
     {
-        if (!empty($id)) {
+        if ($id != null) {
 
 
             $query = DB::table($this->table)->where('id', '=', $id);
+           
             // dd($query);
             $data = [
                 'delete_at' => 0
             ];
             $query = $query->update($data);
 
-            return $query;
+            // return $query;
+        }elseif($id == null && $id_khoahoc != null ) {
+            $query = DB::table($this->table)->where('id_khoa_hoc', '=', $id_khoahoc);
+           
+            // dd($query);
+            $data = [
+                'delete_at' => 0
+            ];
+            $query = $query->update($data);
+
+            // return $query;
+        }else{
+            Session::flash('error' , 'Lỗi xóa bản ghi');
+            return back();
         }
+        return $query;
     }
 
 
@@ -169,5 +187,34 @@ class Lop extends Model
             ->where('lop.id_giang_vien','<>','null')
             ->get();
         return $lop;
+    }
+
+
+    public function remoAll($params= null , $id_khoahoc = null){
+        // dd($params['id']['id']);
+
+        if($params != null){
+
+            $data = [
+                'delete_at' => 0
+            ];
+            $query = DB::table($this->table) 
+                    ->whereIn('id', $params['cols']['id']);
+            // dd($query);
+            $query = $query->update($data);
+           
+        }elseif ($params == null && $id_khoahoc != null){
+            $data = [
+                'delete_at' => 0
+            ];
+            $query = DB::table($this->table) 
+                    ->whereIn('id_khoa_hoc', $id_khoahoc['cols']['id']);
+            // dd($query);
+            $query = $query->update($data);
+        }else{
+            Session::flash('error' , 'Lỗi xóa ');
+            return back();
+        }
+
     }
 }

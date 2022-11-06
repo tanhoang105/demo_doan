@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KhuyenmaiRequest;
-use App\Models\KhuyenMai;
+use App\Models\ChoPhep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
-class KhuyenMaiController extends Controller
+class PhanQuyenController extends Controller
 {
-    protected $v;
-    protected $khuyenmai;
+
+    protected $v, $quyen;
 
     public function __construct()
     {
         $this->v = [];
-        $this->khuyenmai = new KhuyenMai();
+        $this->quyen = new ChoPhep();
     }
     /**
      * Display a listing of the resource.
@@ -25,10 +25,9 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $this->v['params']  = $request->all();
-        $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
-        return view('admin.khuyenmai.index', $this->v);
+        $this->v['params'] = $request->all();
+        $this->v['list'] = $this->quyen->index($this->v['params'], true, 10);
+        return view('admin.quyen.index', $this->v);
     }
 
     /**
@@ -47,36 +46,31 @@ class KhuyenMaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(KhuyenmaiRequest $request)
+    public function store(Request $request)
     {
-        //
-        $this->v['params'] = $request->all();
-        if ($request->isMethod("POST")) {
+        if ($request->isMethod('POST')) {
             $params = [];
-            // dd($request->post());
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
                     $item = null;
                 }
-
                 if (is_string($item)) {
                     $item = trim($item);
                 }
-
                 return $item;
             }, $request->post());
             unset($params['cols']['_token']);
-            // dd($params);
-            $res = $this->khuyenmai->create($params);
+            $res = $this->quyen->create($params);
             if ($res > 0) {
-                Session::flash('success', "Thêm thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
+                Session::flash('success', "Thêm thành công ");
+                return redirect()->route('route_BE_Admin_List_Quyen');
             } else {
-                Session::flash('error', "Thêm không thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
+                Session::flash('success', "Thêm không thành công ");
+                return redirect()->route('route_BE_Admin_List_Quyen');
             }
         }
-        return view('admin.khuyenmai.add', $this->v);
+
+        return view('admin.quyen.add');
     }
 
     /**
@@ -98,15 +92,13 @@ class KhuyenMaiController extends Controller
      */
     public function edit($id, Request $request)
     {
-        //
-
         if ($id) {
             $request->session()->put('id', $id);
-            $res = $this->khuyenmai->show($id);
-            if($res){
-                $this->v['khuyenmai']  = $res;
+            $res = $this->quyen->show($id);
+            if ($res) {
+                $this->v['res'] = $res;
+                return view('admin.quyen.update', $this->v);
             }
-            return view('admin.khuyenmai.update' ,$this->v);
         }
     }
 
@@ -117,30 +109,27 @@ class KhuyenMaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(KhuyenmaiRequest $request)
+    public function update(Request $request)
     {
-        if (session('id')) {
-            $id = session('id');
+        if ($request->isMethod('POST')) {
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
                     $item = null;
                 }
-
                 if (is_string($item)) {
                     $item = trim($item);
                 }
                 return $item;
             }, $request->post());
             unset($params['cols']['_token']);
-            $params['cols']['id'] = $id;
-            $res = $this->khuyenmai->saveupdate($params);
+            $res = $this->quyen->save($params);
             if ($res > 0) {
-                Session::flash('success', "Cập nhập thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
+                Session::flash('success', "Cập nhập thành công ");
+                return back();
             } else {
-                Session::flash('error', "Cập nhập không thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
+                Session::flash('success', "Cập nhập không thành công ");
+                return back();
             }
         }
     }
@@ -154,37 +143,14 @@ class KhuyenMaiController extends Controller
     public function destroy($id)
     {
         if ($id) {
-            $res = $this->khuyenmai->remove($id);
+            $res = $this->quyen->remove($id);
             if ($res > 0) {
                 Session::flash('success', 'Xóa thành công');
                 return back();
             } else {
-                Session::flash('success', 'Xóa thành công');
+                Session::flash('error', 'Xóa không thành công');
                 return back();
             }
-        }
-    }
-
-    public function destroyAll(Request $request){
-        // dd($request->all);
-        // $request  =  $request->all();
-        if($request->isMethod('POST')){
-            $params = [];
-            $params['cols'] = array_map(function($item){
-                return $item;
-            } , $request->all());
-            unset($params['_token']);
-            $res = $this->khuyenmai->remoAll($params);
-            // dd($res);
-
-            if($res > 0){
-                Session::flash('success , "Xóa thành công');
-                return back();
-            }else {
-                Session::flash('error , "Xóa thành công');
-                return back();
-            }
-          
         }
     }
 }

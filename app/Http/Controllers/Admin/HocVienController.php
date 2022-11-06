@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\HocVien;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HocVienController extends Controller
 {
 
-    protected $v, $hocvien ;
+    protected $v, $hocvien , $user ;
     public function __construct()
     {
         $this->v  = [];
         $this->hocvien = new HocVien();
+        $this->user = new User();
     }
     /**
      * Display a listing of the resource.
@@ -90,7 +93,51 @@ class HocVienController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    // id học viên xóa
     {
-        //
+        // xóa học viên trong bảng học viên thì xóa luôn trong bảng user
+        if($id){
+            
+            $res = $this->hocvien->remove($id);
+          
+            // dd($id_user);
+            // xóa học viên xóa => users
+            if($res > 0){
+                $this->user->remove($id);
+                Session::flash('success' , 'Xóa thành công ');
+                return back();
+            }else {
+                Session::flash('error' , 'Xóa không thành công ');
+                return back();
+            }
+        }
     }
+
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->hocvien->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                // khi xóa thành công những học viên này thì cần xóa những user có id tương ứng với user_id học viên
+                $this->user->remoAll($params);
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
+        }
+    }
+
+   
 }

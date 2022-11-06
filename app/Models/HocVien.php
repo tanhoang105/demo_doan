@@ -74,7 +74,7 @@ class HocVien extends Model
     public function remove($id)
     {
         if (!empty($id)) {
-            $query = DB::table($this->table)->where('id', '=', $id);
+            $query = DB::table($this->table)->where('user_id', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
@@ -109,6 +109,19 @@ class HocVien extends Model
         $res=DB::table('hoc_vien')
             ->insertGetId($data);
         return $res;
+    }
+
+    public function remoAll($params){
+        // dd($params['id']['id']);
+        $data = [
+            'delete_at' => 0
+        ];
+        $query = DB::table($this->table) 
+                ->whereIn('user_id', $params['cols']['id']);
+        // dd($query);
+        $query = $query->update($data);
+        return $query;
+
     }
 
 }

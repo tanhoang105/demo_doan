@@ -1,8 +1,9 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_BE_Admin_Add_Vai_Tro') }}">Thêm</a></button>
+        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Vai_Tro') }}">
+            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+        </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
@@ -27,38 +28,47 @@
             </button>
         </div>
     @endif
+    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Vai_Tro') }}" enctype="multipart/form-data">
+        @csrf
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th> <input id="check_all" type="checkbox" /></th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Vai Tro </th>
                 <th scope="col">Mô Tả </th>
                 <th scope="col">Sửa</th>
-                <th scope="col">Xóa </th>
+                <th scope="col">
+                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+
+                  </th>
             </tr>
         </thead>
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
+                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten_vai_tro }}</td>
 
                     <td> {!! $item->mo_ta !!}</td>
                     <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}"> Sửa
+                                href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa
                             </a></button></td>
                     <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
                                 href="{{ route('route_BE_Admin_Xoa_Vai_Tro', ['id' => $item->id]) }}">
-                                Xóa</a></button></td>
+                                <i class="fas fa-trash-alt"></i>    Xóa</a></button></td>
 
                 </tr>
             @endforeach
 
         </tbody>
     </table>
+</form>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('extParams')->links() }}
+            {{ $list->appends('params')->links() }}
         </div>
     </div>
 @endsection
