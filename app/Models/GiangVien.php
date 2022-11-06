@@ -78,7 +78,7 @@ class GiangVien extends Model
     {
         if (!empty($id)) {
 
-            $query = DB::table($this->table)->where('id', '=', $id);
+            $query = DB::table($this->table)->where('id_user', '=', $id);
             $data = [
                 'delete_at' => 0
             ];
@@ -103,5 +103,18 @@ class GiangVien extends Model
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
+    }
+
+    public function remoAll($params){
+        // dd($params['id']['id']);
+        $data = [
+            'delete_at' => 0
+        ];
+        $query = DB::table($this->table) 
+                ->whereIn('id_user', $params['cols']['id']);
+        // dd($query);
+        $query = $query->update($data);
+        return $query;
+
     }
 }

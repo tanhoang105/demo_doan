@@ -7,6 +7,7 @@ use App\Models\DangKy;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DangKyController extends Controller
 {
@@ -94,6 +95,29 @@ class DangKyController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+    }
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->dangky->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
+        }
     }
 }

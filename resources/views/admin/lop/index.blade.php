@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a href="{{ route('route_BE_Admin_Add_Lop') }}">
-            <button class='btn btn-success'>Thêm</button>
+            <button class='btn btn-success'>  <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -20,59 +20,69 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <table class="table table-bordered">
+    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lop') }}" enctype="multipart/form-data">
+        @csrf
 
-        <thead>
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Khóa học </th>
-                <th scope="col">Tên Lớp </th>
-                <th scope="col">Số lượng học viên </th>
-                <th scope="col">Ngày bắt đầu </th>
-                <th scope="col">Ngày kết thúc </th>
-                <th scope="col">Giảng viên </th>
-                <th scope="col">Sửa</th>
-                <th scope="col">Xóa </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list as $key => $item)
+        <table class="table table-bordered">
+
+            <thead>
                 <tr>
-                    <th scope="row">{{ $loop->iteration }}</th>
-                    <td> {{ $item->ten_khoa_hoc }}</td>
-                    <td> {{ $item->ten_lop }}</td>
-                  
-                    <td> {{ $item->so_luong }}</td>
-                    <td> {{ $item->ngay_bat_dau }}</td>
-                    <td> {{ $item->ngay_ket_thuc }}</td>
-                    <td>
-                        @foreach ($giangvien as $gv)
-                                {{-- {{$gv->ten_giang_vien}} --}}
-                            @if ($gv->id_user == $item->id_giang_vien)
-                                {{ $gv->ten_giang_vien }}
-                            {{-- @else 
-                                <button class="btn success"><a href="">Thêm giảng viên</a></button>     --}}
-                            @endif
-                        @endforeach
-                    </td>
-                    <td> <button class="btn btn-warning">
-                            <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}"> Sửa
-                            </a>
-                        </button>
-                    </td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
-                                Xóa</a></button></td>
-
+                    <th scope="col">
+                        <input id="check_all" type="checkbox" />
+                        {{-- <button style="margin-bottom: 10px" type="submit" class="btn" style=""><i class="fas fa-trash-alt"></i></button> --}}
+                    </th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Khóa học </th>
+                    <th scope="col">Tên Lớp </th>
+                    <th scope="col">Số lượng học viên </th>
+                    <th scope="col">Ngày bắt đầu </th>
+                    <th scope="col">Ngày kết thúc </th>
+                    <th scope="col">Giảng viên </th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">Xóa </th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($list as $key => $item)
+                    <tr>
+                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id_lop }}" /></td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td> {{ $item->ten_khoa_hoc }}</td>
+                        <td> {{ $item->ten_lop }}</td>
 
-        </tbody>
+                        <td> {{ $item->so_luong }}</td>
+                        <td> {{ $item->ngay_bat_dau }}</td>
+                        <td> {{ $item->ngay_ket_thuc }}</td>
+                        <td>
+                            @foreach ($giangvien as $gv)
+                                {{-- {{$gv->ten_giang_vien}} --}}
+                                @if ($gv->id_user == $item->id_giang_vien)
+                                    {{ $gv->ten_giang_vien }}
+                                    {{-- @else 
+                                <button class="btn success"><a href="">Thêm giảng viên</a></button>     --}}
+                                @endif
+                            @endforeach
+                        </td>
+                        <td> <button class="btn btn-warning">
+                                <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
+                                    <i class="fas fa-edit "></i>Sửa</a>
+                            </button>
+                        </td>
+                        <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
+                                    href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
+                                    <i class="fas fa-trash-alt"></i>    Xóa</a>
+                                </button></td>
 
-    </table>
+                    </tr>
+                @endforeach
+
+            </tbody>
+
+        </table>
+    </form>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('extParams')->links() }}
+            {{ $list->appends('params')->links() }}
             <div class="d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
                 <button style="margin-right : 55px" class="btn btn-light"><a
                         href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 1]) }} ">
@@ -81,9 +91,9 @@
                         href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 2]) }}">
                         Lớp có giảng viên</a></button>
                 <button style="margin-right : 55px" class="btn btn-light"><a
-                            href=" {{ route('route_BE_Admin_List_Lop') }}">
-                            Tất cả lớp học</a></button>
-                        
+                        href=" {{ route('route_BE_Admin_List_Lop') }}">
+                        Tất cả lớp học</a></button>
+
             </div>
 
         </div>

@@ -34,7 +34,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     {{-- CKEditor --}}
     <link rel="stylesheet" href="{{ asset('plugins/ckeditor/ckeditor.js') }}">
-  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -136,6 +137,7 @@
     </script>
 </body>
 <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+
 {{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>    --}}
 <script>
     CKEDITOR.replace('ckeditor');
@@ -144,5 +146,37 @@
     CKEDITOR.replace('content');
     CKEDITOR.replace('content2');
     CKEDITOR.replace('ckeditor1');
+</script>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        /* Check/bỏ chek hết tất cả các records */
+        $(document).on('change','#check_all', function(ev){
+            $('.checkitem').prop('checked', this.checked).trigger('change');
+        });
+        /* Check/bỏ chek từng records */
+        $(document).on('change','.checkitem', function(ev){
+            var _dem = 0;
+            var _checked = 1;
+            /* Duyệt tất cả các checkitem */
+            $('.checkitem').each(function(){
+                if($(this).is(':checked')){
+                    _dem ++;
+                }else{
+                    _checked = 0;
+                }
+            });
+            $('#check_all').prop('checked', _checked);
+            if(_dem > 0){
+                // Hiện nút xóa chọn
+                $('button[name=submmit]').show();
+            }else{
+                // Ẩn nút xóa chọn
+                $('button[name=submmit]').hide();
+            }
+        });
+    });
 </script>
 </html>
