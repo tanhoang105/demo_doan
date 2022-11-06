@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DanhMucRequest;
 use App\Models\DanhMuc;
+use App\Models\KhoaHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -13,12 +14,13 @@ class DanhMucKhoaHoc extends Controller
 {
 
     protected $v;
-    protected $danh_muc;
+    protected $danh_muc , $khoahoc;
 
     public function __construct()
     {
         $this->v = [];
         $this->danh_muc = new DanhMuc();
+        $this->khoahoc = new KhoaHoc();
     }
     /**
      * Display a listing of the resource.
@@ -148,7 +150,7 @@ class DanhMucKhoaHoc extends Controller
         $res  = $this->danh_muc->saveupdate($params);
         if ($res > 0) {
             Session::flash('success', 'Cập nhập thành công');
-            return redirect()->route('route_BE_Admin_Danh_Muc_Khoa_Hoc');
+            return redirect()->route('route_Admin_BE_Danh_Muc_Khoa_Hoc');
         } else {
             Session::flash('error', 'Cập nhập không thành công');
             return back();
@@ -165,6 +167,8 @@ class DanhMucKhoaHoc extends Controller
     {
         $res = $this->danh_muc->remove($id);
         if ($res > 0) {
+            // xóa danh mục thì cx cần xóa những khóa hoc liên quan
+            $this->khoahoc->remove(null , $id);
             Session::flash('success', "Xóa thành công");
             return back();
         } else {
@@ -179,5 +183,30 @@ class DanhMucKhoaHoc extends Controller
     {
         $filename =  time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('imageDanhMuc', $filename,  'public');
+    }
+
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['cols']['_token']);
+            $res = $this->danh_muc->remoAll($params);
+           
+
+            if($res > 0){
+                $this->khoahoc->remoAll(null ,$params);
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
+        }
     }
 }

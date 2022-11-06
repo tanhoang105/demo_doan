@@ -96,4 +96,18 @@ class VaiTro extends Model
     {
         return $this->belongsToMany(ChoPhep::class , 'vai_tro_cho_phep');
     }
+
+
+    public function remoAll($params){
+        // dd($params['id']['id']);
+        $data = [
+            'delete_at' => 0
+        ];
+        $query = DB::table($this->table) 
+                ->whereIn('id', $params['cols']['id']);
+        // dd($query);
+        $query = $query->update($data);
+        return $query;
+
+    }
 }

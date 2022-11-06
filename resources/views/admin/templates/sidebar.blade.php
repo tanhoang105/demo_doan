@@ -4,13 +4,15 @@
   <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          @if(isset($objUser))
+          @if (isset($objUser))
               <div class="image">
-                  <img style="border-radius: 100px;width: 50px; height: 50px;%" src= "{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh)}}" class="img-circle elevation-2" alt="User Image">
+                  <img style="border-radius: 100px;width: 50px; height: 50px;%"
+                      src="{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh) }}"
+                      class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
 
-                        <a href="#" class="d-block" >{{$objUser->name}}</a>
+                  <a href="#" class="d-block">{{ $objUser->name }}</a>
               </div>
           @endif
       </div>
@@ -56,7 +58,7 @@
                   <a href= " {{route('route_BE_Admin_List_Quyen')}} " class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
-                          Quyền  tài khoản
+                          Quyền tài khoản
                           <i class="fas fa-angle-left right"></i>
                           <span class="badge badge-info right">6</span>
                       </p>
@@ -126,27 +128,37 @@
 
 
               <li class="nav-item">
-                <a href=" {{route('route_BE_Admin_List_Dang_Ky')}} " class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
-                      
-                        Đăng ký
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
 
-            </li>
+                          Đăng ký
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
               <li class="nav-item">
-                <a href=" {{route('route_BE_Admin_List_Giang_Vien')}} " class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
-                     Giảng viên
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href=" {{ route('route_BE_Admin_List_Hoc_Vien') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
 
-            </li>
+                          Học viên
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              <li class="nav-item">
+                  <a href=" {{ route('route_BE_Admin_List_Giang_Vien') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
+                          Giảng viên
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
 
 
               <li class="nav-item">
@@ -160,7 +172,7 @@
 
               </li>
               <li class="nav-item">
-                  <a href="{{ route('route_BE_Admin_Danh_Muc_Khoa_Hoc') }}" class="nav-link">
+                  <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                       <p>
                           Danh mục khóa học

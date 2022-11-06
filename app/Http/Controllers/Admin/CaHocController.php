@@ -69,7 +69,7 @@ class CaHocController extends Controller
             $res = $this->cahoc->create($params);
             if ($res > 0) {
                 // thêm thành công
-                Session::flash('seccuss', 'Thêm thành công');
+                Session::flash('success', 'Thêm thành công');
                 return redirect()->route('route_BE_Admin_Ca_Hoc');
             } else {
                 Session::flash('error', 'Thêm không thành công');
@@ -164,6 +164,29 @@ class CaHocController extends Controller
                 Session::flash('error', "Xóa không thành công");
                 return back();
             }
+        }
+    }
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->cahoc->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
         }
     }
 }

@@ -99,4 +99,17 @@ class KhuyenMai extends Model
             ->update($data);
         return $query;
     }
+
+    public function remoAll($params){
+        // dd($params['id']['id']);
+        $data = [
+            'delete_at' => 0
+        ];
+        $query = DB::table($this->table) 
+                ->whereIn('id', $params['cols']['id']);
+        // dd($query);
+        $query = $query->update($data);
+        return $query;
+
+    }
 }
