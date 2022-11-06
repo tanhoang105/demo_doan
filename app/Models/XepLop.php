@@ -24,7 +24,8 @@ class XepLop extends Model
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
+                ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*','khoa_hoc.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -75,7 +76,7 @@ class XepLop extends Model
     }
 
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id)
     {
         if (!empty($id)) {
@@ -91,7 +92,7 @@ class XepLop extends Model
 
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
 
     {

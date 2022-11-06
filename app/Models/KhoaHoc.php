@@ -83,7 +83,7 @@ class KhoaHoc extends Model
     }
 
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id)
     {
         if (!empty($id)) {
@@ -98,7 +98,7 @@ class KhoaHoc extends Model
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
 
     {

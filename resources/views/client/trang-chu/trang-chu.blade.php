@@ -117,17 +117,19 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <!-- category 1 -->
                 <div class="workflow_item">
-                    <i class="pe-7s-search"></i>
+                        <i class="pe-7s-search"></i>
                     <h4> Tìm khóa học của bạn </h4>
                     <p>Lorem ipsum dolor sit amet can be sed diam nonumy eirmod keeps an
                         the satriction of whole life that enter.</p>
                 </div>
             </div>
             <!--/ col-lg-4 col-md-6 col-sm-12  -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-12" id="my-menu">
                 <!-- category 1 -->
                 <div class="workflow_item">
-                    <i class="pe-7s-date"></i>
+                    <a href="#khaigiang">
+                        <i class="pe-7s-date"></i>
+                    </a>
                     <h4>Đặt lịch </h4>
                     <p>Lorem ipsum dolor sit amet can be sed diam nonumy eirmod keeps an
                         the satriction of whole life that enter.</p>
@@ -293,8 +295,8 @@
             @endforeach
         </div>
         <!-- /. row -->
-        <div class="text-center">
-            <a href="{{ route('client_khoa_hoc') }}" class="more-link"> Xem tất cả </a>
+        <div class="text-center" data-spy="scroll" data-target="#my-menu" data-offset="0">
+            <a href="{{ route('client_khoa_hoc') }}" class="more-link text-white" id="khaigiang"> Xem tất cả </a>
         </div>
     </div>
     <!-- /. container -->
@@ -305,39 +307,75 @@
 <!-- Start: Featured Calendar Section
 ==================================================-->
 <section class="feat-course-section">
-    <div class="container">
+    <div class="container" >
         <!-- Start: Heading -->
         <div class="base-header">
             <h3> Lịch Khai Giảng </h3>
         </div>
         <!-- End: Heading -->
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                <tr class="">
-                    <th scope="col">Tên Lớp</th>
-                    <th scope="col">Khóa Học</th>
-                    <th scope="col">Ngày</th>
-                    <th scope="col">Thời Gian</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-            @foreach ($lop as $kay => $item)
-                <tr>
-                    <th scope="row">{{ $item->ten_lop}}</th>
-                    <td>{{ $item->ten_khoa_hoc }}</td>
-                    <td>{{ $item->ngay_bat_dau }}</td>
-                    <td>@mdo</td>
-                    <td>
-                        <button class="btn btn-primary" style="letter-spacing: 0px;text-transform: none;
-">Đăng Ký</button>
-                    </td>
-                </tr>
-            @endforeach
-                </tbody>
-            </table>
+
+{{--            <table class="table table-striped">--}}
+{{--                <thead>--}}
+{{--                <tr class="">--}}
+{{--                    <th scope="col">Tên Lớp</th>--}}
+{{--                    <th scope="col">Khóa Học</th>--}}
+{{--                    <th scope="col">Ngày</th>--}}
+{{--                    <th scope="col">Thời Gian</th>--}}
+{{--                    <th scope="col"></th>--}}
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                <tbody>--}}
+{{--            @foreach ($khaigiang as $value)--}}
+{{--                <tr>--}}
+{{--                    <td>{{ $value->ten_lop}}</td>--}}
+{{--                    <td>{{ $value->ten_khoa_hoc }}</td>--}}
+{{--                    <td>{{ $value->ngay_bat_dau }}</td>--}}
+{{--                    <td>{{ $value->thoi_gian }}</td>--}}
+{{--                    <td>--}}
+{{--                        <button class="btn btn-primary" style="letter-spacing: 0px;text-transform: none;--}}
+{{--">Đăng Ký</button>--}}
+{{--                    </td>--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
+{{--                </tbody>--}}
+{{--            </table>--}}
+            <div class="row bg-muted" style="text-align: center;background: #DEDEDE">
+                <div class="col-lg-2 pt-3">
+                    <h4>Tên Lớp</h4>
                 </div>
+                <div class="col-lg-4 pt-3">
+                    <h4>Khóa Học</h4>
+                </div>
+                <div class="col-lg-2 pt-3">
+                    <h4>Ngày</h4>
+                </div>
+                <div class="col-lg-2 pt-3">
+                    <h4>Thời Gian</h4>
+                </div>
+                <div class="col-lg-2 pt-3"></div>
+            </div>
+
+            @foreach ($khaigiang as $value)
+            <div class="row text-dark align-content-center" style="text-align: center;height: 80px;border-top: 1px solid #DEDEDE">
+                <div class="col-lg-2 pt-3">
+                    <label> {{ $value->ten_lop}} </label>
+                </div>
+                <div class="col-lg-4 pt-3">
+                    <label> {{ $value->ten_khoa_hoc }} </label>
+                </div>
+                <div class="col-lg-2 pt-3">
+                    <label> {{ $value->ngay_bat_dau }} </label>
+                </div>
+                <div class="col-lg-2 pt-3">
+                    <label> {{ $value->thoi_gian }} </label>
+                </div>
+                <div class="col-lg-2 pt-2">
+                    <a href="#">
+                        <button class="text-white" style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">ĐĂNG KÝ</button>
+                    </a>
+                </div>
+            </div>
+           @endforeach
 
             </div>
             <!-- /. container -->

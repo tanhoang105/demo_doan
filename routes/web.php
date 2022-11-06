@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\VaiTroController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
@@ -41,6 +42,8 @@ Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienC
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+
 // Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
 
 Route::prefix('/admin')->group(function () {
@@ -54,7 +57,7 @@ Route::prefix('/admin')->group(function () {
     // khóa học
 
 
-    // đăng ký 
+    // đăng ký
     Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
         // Route::match(['get', 'post'], '/add-khoa-hoc',   [DangKyController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
@@ -168,6 +171,16 @@ Route::prefix('/admin')->group(function () {
         Route::get('/edit/{id}', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'edit'])->name('Edit_Tai_Khoan');
         Route::post('/update', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'update'])->name('Update_Tai_Khoan');
         Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
+    });
+
+    // banner
+
+    Route::prefix('/banner')->name('route_BE_Admin_')->group(function () {
+        Route::get('/list', [\App\Http\Controllers\Admin\BannerController::class, 'index'])->name('Banner');
+        Route::get('/xoa/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'destroy'])->name('Xoa_Banner');
+        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'edit'])->name('Edit_Banner');
+        Route::post('/update', [\App\Http\Controllers\Admin\BannerController::class, 'update'])->name('Update_Banner');
+        Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\BannerController::class, 'store'])->name('Add_Banner');
     });
 });
 
