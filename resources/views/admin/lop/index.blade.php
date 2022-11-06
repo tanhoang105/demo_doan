@@ -27,6 +27,7 @@
 
             <thead>
                 <tr>
+
                     <th scope="col">
                         <input id="check_all" type="checkbox" />
                         {{-- <button style="margin-bottom: 10px" type="submit" class="btn" style=""><i class="fas fa-trash-alt"></i></button> --}}
@@ -91,6 +92,7 @@
                         href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 2]) }}">
                         Lớp có giảng viên</a></button>
                 <button style="margin-right : 55px" class="btn btn-light"><a
+
                         href=" {{ route('route_BE_Admin_List_Lop') }}">
                         Tất cả lớp học</a></button>
 

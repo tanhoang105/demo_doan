@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HocVienController;
 use App\Http\Controllers\Admin\KhoahocController;
 use App\Http\Controllers\Admin\KhuyenMaiController;
 use App\Http\Controllers\Admin\LopController;
+use App\Http\Controllers\Admin\PhanQuyenController;
 use App\Http\Controllers\Admin\XepLopController;
 use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
@@ -76,6 +77,14 @@ Route::prefix('/admin')->group(function () {
         Route::get('/giang-vien-delete/{id}', [GiangVienController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/giang-vien-edit/{id}', [GiangVienController::class, 'edit'])->name('Edit_Giang_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
+    });
+
+    Route::prefix('/phan-quyen')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [PhanQuyenController::class, 'index'])->name('List_Quyen'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-quyen',   [PhanQuyenController::class, 'store'])->name('Add_Quyen'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/quyen-delete/{id}', [PhanQuyenController::class, 'destroy'])->name('Xoa_Quyen');
+        Route::get('/quyen-edit/{id}', [PhanQuyenController::class, 'edit'])->name('Edit_Quyen'); // hiển thị chi tiết bản ghi
+        Route::post('/quyen-update', [PhanQuyenController::class, 'update'])->name('Update_Quyen');
     });
 
 
