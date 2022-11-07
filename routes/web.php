@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PhongHocController;
 use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
@@ -38,11 +39,16 @@ Route::get('/coures', [\App\Http\Controllers\Client\KhoaHocController::class, 'i
 Route::get('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'index'])->name('client_lien_he');
 Route::get('/giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'index'])->name('client_giang_vien');
 Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::class, 'index'])->name('client_gioi_thieu');
+Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
-// Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
+
+Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+
+
 
 Route::prefix('/admin')->group(function () {
 
@@ -201,8 +207,17 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\TaiKhoanController::class, 'store'])->name('Add_Tai_Khoan');
         Route::post('xoa-all', [TaiKhoanController::class, 'destroyAll'])->name('Xoa_All_Tai_Khoan');
     });
-});
 
+    // banner
+
+    Route::prefix('/banner')->name('route_BE_Admin_')->group(function () {
+        Route::get('/list', [\App\Http\Controllers\Admin\BannerController::class, 'index'])->name('Banner');
+        Route::get('/xoa/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'destroy'])->name('Xoa_Banner');
+        Route::get('/edit/{id}', [\App\Http\Controllers\Admin\BannerController::class, 'edit'])->name('Edit_Banner');
+        Route::post('/update', [\App\Http\Controllers\Admin\BannerController::class, 'update'])->name('Update_Banner');
+        Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\BannerController::class, 'store'])->name('Add_Banner');
+    });
+});
 
 // client đăng ký hoặc đăng nhập tài khoản
 Route::match(['post', 'get'], '/login', [\App\Http\Controllers\Auth\AuthController::class, 'store'])->name('route_FE_Client_Login');

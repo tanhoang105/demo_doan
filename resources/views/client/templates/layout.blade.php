@@ -15,7 +15,7 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
 <!-- Mirrored from santhemes.com/tidytheme/aducat/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Jul 2022 06:00:22 GMT -->
 <head>
     <!-- TITLE OF SITE -->
-    <title>Aducat - eLearning Education HTML5 Responsive Template</title>
+    <title>Aducat @yield('title')</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,6 +81,9 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
         ul li ul li {
         clear: both;
         width: 100%;
+        }
+        {
+            position: relative;
         }
     </style>
 </head>

@@ -82,9 +82,9 @@ class KhoaHoc extends Model
         return $query;
     }
 
-
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id = null, $id_danhmuc = null)
+
     {
         $data = [
             'delete_at' => 0
@@ -100,7 +100,7 @@ class KhoaHoc extends Model
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
 
     {
