@@ -6,19 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\KhoahocRequest;
 use App\Models\DanhMuc;
 use App\Models\KhoaHoc;
+use App\Models\Lop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class KhoahocController extends Controller
 {
     protected $v;
-    protected $khoahoc;
+    protected $khoahoc , $lop;
 
     public function __construct()
     {
         $this->v = [];
         $this->khoahoc  = new KhoaHoc();
         $this->danhmuc = new DanhMuc();
+        $this->lop = new Lop();
     }
     /**
      * Display a listing of the resource.
@@ -183,7 +185,10 @@ class KhoahocController extends Controller
         if ($id) {
 
             $res  = $this->khoahoc->remove($id);
+            // dd($res);
             if ($res > 0) {
+                // khi xóa khoa học đi thì cần xóa những lớp học của khóa học đó
+                $this->lop->remove(null , $id);
                 Session::flash('success', 'Xóa thành công');
                 return back();
             } else {
@@ -197,5 +202,29 @@ class KhoahocController extends Controller
     {
         $filename =  time() . '_' . $file->getClientOriginalName();
         return $file->storeAs('imageKhoaHoc', $filename,  'public');
+    }
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->khoahoc->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                $this->lop->remoAll(null ,$params);
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
+        }
     }
 }

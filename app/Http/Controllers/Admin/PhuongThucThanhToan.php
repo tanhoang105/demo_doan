@@ -162,4 +162,27 @@ class PhuongThucThanhToan extends Controller
             }
         }
     }
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->phuong_thuc_thanh_toan->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
+        }
+    }
 }

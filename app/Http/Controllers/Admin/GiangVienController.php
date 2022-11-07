@@ -99,17 +99,42 @@ class GiangVienController extends Controller
 
             $res = $this->giangvien->remove($id);
            // khi xóa tài khoản ở bảng giáo viên thì cần xóa luôn ở bảng user
-           $id_user = $this->giangvien->show($id)->id_user;
+            
         //    dd($id_user , 123);
 
             if($res){
                 Session::flash('success' ,"Xóa thành công");
-                $this->user->remove($id_user);  
+                $this->user->remove($id);
                 return back();
             }else {
                 Session::flash('error' ,"Xóa không thành công");
                 return back();
             }
+        }
+    }
+
+    public function destroyAll(Request $request){
+        // dd($request->all);
+        // $request  =  $request->all();
+        if($request->isMethod('POST')){
+            $params = [];
+            $params['cols'] = array_map(function($item){
+                return $item;
+            } , $request->all());
+            unset($params['_token']);
+            $res = $this->giangvien->remoAll($params);
+            // dd($res);
+
+            if($res > 0){
+                // khi xóa thành công những giảng viên này thì cần xóa những user có id tương ứng 
+                $this->user->remoAll($params);
+                Session::flash('success , "Xóa thành công');
+                return back();
+            }else {
+                Session::flash('error , "Xóa thành công');
+                return back();
+            }
+          
         }
     }
 }

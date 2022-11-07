@@ -84,17 +84,19 @@ class KhoaHoc extends Model
 
 
     // hàm xóa bản ghi theo id 
-    public function remove($id)
+    public function remove($id = null, $id_danhmuc = null)
     {
+        $data = [
+            'delete_at' => 0
+        ];
         if (!empty($id)) {
 
             $query = DB::table($this->table)->where('id', '=', $id);
-            $data = [
-                'delete_at' => 0
-            ];
-            $query = $query->update($data);
-            return $query;
+        } elseif ($id == null && $id_danhmuc != null) {
+            $query = DB::table($this->table)->where('id_danh_muc', '=', $id_danhmuc);
         }
+        $query = $query->update($data);
+        return $query;
     }
 
 
@@ -112,12 +114,31 @@ class KhoaHoc extends Model
             ->update($data);
         return $query;
     }
+
     public function scopeSearch($query)
     {
         if ($key = request()->search) {
             $query = $query->where('ten_khoa_hoc', 'like', '%' . $key . '%');
         }
         // dd($query);
+
+
+    public function remoAll($params = null, $id_danhmuc = null)
+    {
+        // dd($params['id']['id']);
+        $data = [
+            'delete_at' => 0
+        ];
+        if ($params != null) {
+
+            $query = DB::table($this->table)
+                ->whereIn('id', $params['cols']['id']);
+        } elseif ($params ==  null && $id_danhmuc != null) {
+            $query = DB::table($this->table)
+                ->whereIn('id_danh_muc', $id_danhmuc['cols']['id']);
+        }
+        $query = $query->update($data);
+
         return $query;
     }
 }

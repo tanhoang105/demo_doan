@@ -1,8 +1,11 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <button class="btn btn-primary"><a style="color: red"
-                href="{{ route('route_BE_Admin_Add_Ca_Hoc') }} ">Thêm</a></button>
+        <a style="color: red" href="{{ route('route_BE_Admin_Add_Ca_Hoc') }} ">
+            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+
+        </a>
+
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -26,38 +29,48 @@
             </button>
         </div>
     @endif
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Ca học</th>
-                <th scope="col">Thời gian</th>
-                <th scope="col">Sửa</th>
-                <th scope="col">Xóa </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list as $key => $item)
+
+    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Ca_Hoc') }}" enctype="multipart/form-data">
+        @csrf
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <th scope="row"> {{ $loop->iteration }}</th>
-                    <td> {{ $item->ca_hoc }}</td>
-                    <td> {{ $item->thoi_gian }}</td>
+                    <th> <input id="check_all" type="checkbox" /></th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Ca học</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">
+                      <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
-                    <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}"> Sửa
-                            </a></button></td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
-                                Xóa</a></button></td>
-
+                    </th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($list as $key => $item)
+                    <tr>
+                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <th scope="row"> {{ $loop->iteration }}</th>
+                        <td> {{ $item->ca_hoc }}</td>
+                        <td> {{ $item->thoi_gian }}</td>
 
-        </tbody>
-    </table>
+                        <td> <button class="btn btn-warning"><a
+                                    href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa
+                                </a></button></td>
+                        <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
+                                    href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
+
+                    </tr>
+                @endforeach
+
+            </tbody>
+        </table>
+    </form>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('extParams')->links() }}
+            {{ $list->appends('params')->links() }}
         </div>
     </div>
 @endsection
