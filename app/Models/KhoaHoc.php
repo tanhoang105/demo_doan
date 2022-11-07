@@ -115,6 +115,14 @@ class KhoaHoc extends Model
         return $query;
     }
 
+    public function scopeSearch($query)
+    {
+        if ($key = request()->search) {
+            $query = $query->where('ten_khoa_hoc', 'like', '%' . $key . '%');
+        }
+        // dd($query);
+
+
     public function remoAll($params = null, $id_danhmuc = null)
     {
         // dd($params['id']['id']);
@@ -130,6 +138,7 @@ class KhoaHoc extends Model
                 ->whereIn('id_danh_muc', $id_danhmuc['cols']['id']);
         }
         $query = $query->update($data);
+
         return $query;
     }
 }
