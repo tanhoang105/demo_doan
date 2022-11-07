@@ -9,11 +9,8 @@
             <ul>
                 <li><a href="{{route('home')}}">Trang Chủ</a></li>
                 <li><a href="{{route('client_giang_vien')}}">Giảng Viên</a></li>
-                <li class="has-sub"><a href="{{route('client_khoa_hoc')}}"> Khóa Học</a>
-                    <ul>
-                        <li><a href="">Danh Mục Khóa Học</a> </li>
-                        <li><a href="{{route('client_khoa_hoc')}}">Tất Cả Khóa Học</a> </li>
-                    </ul>
+                <li class=""><a href="{{route('client_khoa_hoc')}}"> Khóa Học</a>
+                   
                 </li>
                 <li><a href="{{route('client_dang_ky')}}">Đăng Ký</a></li>
                 <li><a href="{{route('client_lien_he')}}">Liên Hệ</a></li>
@@ -28,7 +25,7 @@
                     {{Auth::user()->name}}
                   @endif</i></a>
                     <ul class="dropdown" aria-label="submenu">
-                      <li><a href="#"></a></li>
+                      <li><a href="#">Thông tin chi tiết</a></li>
                       <li> <a href="{{route('logout')}}" class="dropdown-item">Sign out</a></li>
                       <li> <a href="" class="dropdown-item">Lịch sử đăng ký </a></li>
                       <li>

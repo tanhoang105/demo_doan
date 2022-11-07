@@ -34,8 +34,30 @@ class LopRequest extends FormRequest
                             // 'mo_ta' => 'required | min:20 |',
                             'gia' => 'required | integer | max:10000000',
                             'so_luong' => 'required | integer | max:40',
-                            'ngay_bat_dau' => 'required | after:now',
-                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            // 'ngay_bat_dau' => 'required',
+                            'ngay_bat_dau' => [
+                                function ($attribute, $value, $fali) {
+                                    if ($value == null) {
+                                        return $fali('ngày bắt đầu không được để trống');
+                                    } elseif ($value = date(now())) {
+                                        return $fali('ngày bắt đầu không được nhỏ hơn ngày hôm nay');
+                                    }
+                                    
+                                }
+                            ],
+                            'ngay_ket_thuc' => [
+                                function ($attribute, $value, $fali) {
+                                    // dd($value);
+                                    if ($value == null) {
+                                        return $fali('ngày kết thúc không được để trống');
+                                    } elseif ($value < date(now())) {
+                                        return $fali('ngày kết thúc không được nhỏ hơn ngày hôm nay');
+                                    } elseif ($value < date('ngay_bat_dau')) {
+                                        return $fali('ngày kết thúc không được nhỏ hơn ngày ngày bắt đầu');
+                                    }
+                                }
+                            ],
+                            // 'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
                         ];
                         break;
                         // nếu là method chỉnh sửa bản ghi
@@ -46,7 +68,7 @@ class LopRequest extends FormRequest
                             'gia' => 'required | integer | max:10000000',
                             'so_luong' => 'required | integer | max:40',
                             // 'ngay_bat_dau' => 'required | after:now',
-                            // 'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
                         ];
                         break;
                     default:

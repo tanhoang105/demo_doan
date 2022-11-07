@@ -19,14 +19,14 @@ class GiangVienController extends Controller
         // dd($data);
         return view('client.giang-vien.giang-vien', compact('giang_vien'));
     }
-    public function chiTietGiangVien($id){
+    public function chiTietGiangVien($id)
+    {
         $giang_vien = GiangVien::find($id);
-        $khoa_hoc = Lop::join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
-        ->where('lop.id_giang_vien','=',$id)
-        ->select('khoa_hoc.*')
-        ->get();
-        // dd($khoa_hoc);
-        // dd($giang_vien);
-        return view('client.giang-vien.chi-tiet-giang-vien',compact('giang_vien','khoa_hoc'));
+        $khoa_hoc = Lop::join('khoa_hoc', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
+            ->where('lop.id_giang_vien', '=', $id)
+            ->select('khoa_hoc.*')
+            ->get();
+
+        return view('client.giang-vien.chi-tiet-giang-vien', compact('giang_vien', 'khoa_hoc'));
     }
 }

@@ -11,7 +11,7 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Instructor Details</h3>
+                    <h3>THÔNG TIN GIẢNG VIÊN</h3>
                     <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Instructor Details </h4>
                 </div>
             </div>
@@ -53,21 +53,21 @@
                             <div class="teacher_achieve_list">
                                 <i class="fal fa-user-friends"></i>
                                 <h3> 56,890 </h3>
-                                <span> Students </span>
+                                <span> Học viên </span>
                             </div>
                             <div class="teacher_achieve_list">
                                 <i class="fal fa-star"></i>
                                 <h3> 5.0 </h3>
-                                <span> Rating </span>
+                                <span> Đánh giá </span>
                             </div>
                             <div class="teacher_achieve_list">
                                 <i class="fal fa-book-open"></i>
-                                <h3> 80 </h3>
-                                <span> Courses </span>
+                                <h3> {{count($khoa_hoc)}} </h3>
+                                <span> Khóa học </span>
                             </div>
                         </div>
                         <div class="teacher_about">
-                            <h3> About Me</h3>
+                            <h3> Giới thiệu</h3>
                             <p>{{$giang_vien->mo_ta}}</p>
                         </div>
                     </div>
@@ -79,12 +79,12 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="course-tab" data-bs-toggle="tab"
                                 data-bs-target="#course" type="button" role="tab" aria-controls="course"
-                                aria-selected="true">Course List </button>
+                                aria-selected="true">Danh sách khóa học </button>
                         </li>
                         <!-- end: ourse-tab -->
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
-                                type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
+                                type="button" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</button>
                         </li>
                         <!-- end: reviews-tab -->
                     </ul>

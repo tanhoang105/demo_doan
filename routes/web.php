@@ -44,10 +44,11 @@ Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocContr
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
+
 Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
 
-// Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'index'])->name('client_dang_ky_khoa_hoc');
+
 
 Route::prefix('/admin')->group(function () {
 
