@@ -112,4 +112,12 @@ class KhoaHoc extends Model
             ->update($data);
         return $query;
     }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->search) {
+            $query = $query->where('ten_khoa_hoc', 'like', '%' . $key . '%');
+        }
+        // dd($query);
+        return $query;
+    }
 }

@@ -20,11 +20,11 @@
     </header>
     <!--/. header -->
     <!--/
-        ==================================================-->
+            ==================================================-->
 
 
     <!-- Start : Blog Page Content
-        ==================================================-->
+            ==================================================-->
     <div class="single_course">
         <div class="container">
             <div class="row">
@@ -32,14 +32,11 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="sing_course_wrap">
                         <div class="sin_course_img">
-                            <img class="img-responsive"
-                                src="{{ asset('client/images/blog3.jpg')}}"
-                                alt="">
+                            <img class="img-responsive" src="{{ asset('client/images/blog3.jpg') }}" alt="">
                         </div>
                         <h4>{{ $detail->ten_khoa_hoc }}</h4>
                         <div class="course_meta">
-                            <img
-                                src="{{ asset('client/images/author2.png')}}">
+                            <img src="{{ asset('client/images/author2.png') }}">
                             <p>Nelson Mandela</p>
                             <span class="sin_cour_stu"> <i class="fal fa-graduation-cap"></i> 20,153 Students </span>
                             <span class="sin_cour_rat">
@@ -161,15 +158,17 @@
                                                     <td>
                                                         @foreach ($lop as $gv)
                                                             @if ($item->id_giang_vien == $gv->id)
-                                                                {{ $gv->ten_giang_vien }}
+                                                                <a style="color: blue"
+                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $item->id_giang_vien]) }}">{{ $gv->ten_giang_vien }}</a>
                                                             @endif
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <form action="{{route('client_dang_ky')}}">
-                                                            <input name="id_khoa_hoc" value="{{$detail->id}}" hidden>
-                                                            <input name="id_lop" value="{{$item->id}}" hidden>
-                                                            <input name="gia_khoa_hoc" value="{{$detail->gia_khoa_hoc}}" hidden>
+                                                        <form action="{{ route('client_dang_ky') }}">
+                                                            <input name="id_khoa_hoc" value="{{ $detail->id }}" hidden>
+                                                            <input name="id_lop" value="{{ $item->id }}" hidden>
+                                                            <input name="gia_khoa_hoc"
+                                                                value="{{ $detail->gia_khoa_hoc }}" hidden>
                                                             <button style="width: 100px" class="btn btn-primary">Đăng
                                                                 kí</button>
                                                         </form>
@@ -292,30 +291,36 @@
                 <div class="col-lg-4 col-sm-12 single_curs_right">
                     <!-- Widget Course Details -->
                     <aside class="widget-course-details">
-                        <h2> Price <span>{{ number_format($detail->gia_khoa_hoc) }}</span></h2>
+                        <h2> Giá tiền <span>{{ number_format($detail->gia_khoa_hoc) }}</span></h2>
                         <div class="course-detail-list">
-                            <span> <i class="far fa-user"></i>Instructor </span>
-                            <span> Nelson Mandela </span>
+                            <span> <i class="far fa-user"></i>Tên khóa học </span>
+                            <span> {{$detail->ten_khoa_hoc}} </span>
                         </div>
-                        <div class="course-detail-list">
+                        {{-- <div class="course-detail-list">
                             <span> <i class="far fa-clock"></i>Duration </span>
                             <span> 07 hr 20 mins </span>
-                        </div>
-                        <div class="course-detail-list">
+                        </div> --}}
+                        {{-- <div class="course-detail-list">
                             <span> <i class="far fa-journal-whills"></i>Lectures </span>
                             <span> 32 </span>
                         </div>
                         <div class="course-detail-list">
                             <span> <i class="far fa-layer-group"></i>Level </span>
                             <span> Advance </span>
+                        </div> --}}
+                        <div class="course-detail-list">
+                            <span> <i class="far fa-globe"></i>Trạng thái </span>
+                            <span> @if ($detail->id_danh_muc == 1)
+                                Đang hoạt động
+                                @else
+                                Không hoạt động
+                            @endif </span>
                         </div>
                         <div class="course-detail-list">
-                            <span> <i class="far fa-globe"></i>Language </span>
-                            <span> English </span>
-                        </div>
-                        <div class="course-detail-list">
-                            <span> <i class="far fa-book-spells"></i>Certification </span>
-                            <span> Yes </span>
+                            <span> <i class="far fa-book-spells"></i>Danh mục khóa học </span>
+                            @foreach ($danhmuc as $value )
+                            <span>{{$value->ten_danh_muc}}</span>
+                            @endforeach
                         </div>
                         <a href="#" class="more-link"> Buy Now</a>
                     </aside>
@@ -323,21 +328,28 @@
 
                     <!-- Related Courses -->
                     <aside class="widget-rel-course">
-                        <h3>Related Courses </h3>
-                        <div class="rel-course-box">
-                            <a href="single-blog.html">Components are clearly alined with those
-                                particular assignment</a>
-                            <span> Development </span>
+                        <h3>Khóa học liên quan </h3>
+                        <div class="row">
+                        @foreach ($khoahoclienquan as $value )
+                        {{-- <div class="rel-course-box">
+                            <a href="#"><img src="{{asset('client/images/courses2.jpg')}}" width="200px" alt=""></a>  
+                            <span><a href="">{{$value->ten_khoa_hoc}}</a></span> 
+                            <span></span>
+                        </div> --}}
+                        <div style="display: flex" class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="feat_course_item">
+                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                <div class="feat_cour_price">
+                                    <span class="feat_cour_tag">Giá tiền {{$value->gia_khoa_hoc}}</span>
+                                    {{-- <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span> --}}
+                                </div>
+                                <div class="feat_cour_rating">
+                                    <h4 class="feat_cour_tit">{{$value->ten_khoa_hoc}}</h4>
+                                    <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}"> <i class="arrow_right"></i> </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="rel-course-box">
-                            <a href="single-blog.html">Components are clearly alined with those
-                                particular assignment</a>
-                            <span> Development </span>
-                        </div>
-                        <div class="rel-course-box">
-                            <a href="single-blog.html">Components are clearly alined with those
-                                particular assignment</a>
-                            <span> Development </span>
+                        @endforeach
                         </div>
                     </aside>
                     <!-- Related Courses /- -->
@@ -348,5 +360,5 @@
         <!-- Container /- -->
     </div>
     <!-- End : Blog Page Content
-        ==================================================-->
+            ==================================================-->
 @endsection
