@@ -103,8 +103,9 @@ class BannerController extends Controller
      */
     public function edit($id , Request $request)
     {
+//        dd($id);
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
-        if (!empty($id)) {
+        if ($id) {
             $this->v['params'] = $request->all();
 
             $request->session()->put('id', $id);

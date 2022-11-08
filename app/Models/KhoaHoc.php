@@ -123,7 +123,6 @@ class KhoaHoc extends Model
         // dd($query);
     }
 
-
     public function remoAll($params = null, $id_danhmuc = null)
     {
         // dd($params['id']['id']);
@@ -143,3 +142,4 @@ class KhoaHoc extends Model
         return $query;
     }
 }
+

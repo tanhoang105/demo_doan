@@ -33,7 +33,7 @@ Primary use: Computer Repair Services, Digital Repair Shop
 [===== Single Page ===== ]
 
 13. Blog Page / .blog_container
-  
+
 14. Sigle Blog Page / .single_blog_container
 
 15. About page / .about_page
@@ -2233,7 +2233,7 @@ footer ul li {
 }
 
 /*----------------------------------------------------
-  16.  Blog Page 
+  16.  Blog Page
 ------------------------------------------------------*/
 
 /* Blog Wrap */
@@ -2566,7 +2566,7 @@ footer ul li {
 
 
 /*----------------------------------------------------
-  17.  Single Blog Page 
+  17.  Single Blog Page
 ------------------------------------------------------*/
 
 /* marked */
@@ -3741,7 +3741,7 @@ footer ul li {
 
 
 /*----------------------------------------------------
-    Teacher Page 
+    Teacher Page
 ------------------------------------------------------*/
 .teacher-section {
   background: #F8F7F3;
@@ -3883,7 +3883,7 @@ footer ul li {
 }
 
 /*----------------------------------------------------
-    Single Teacher Page 
+    Single Teacher Page
 ------------------------------------------------------*/
 
 .single-teacher-section {
@@ -4025,7 +4025,7 @@ footer ul li {
 }
 
 /*----------------------------------------------------
-    Course Category Page 
+    Course Category Page
 ------------------------------------------------------*/
 /*  Category Filter */
 
@@ -4509,4 +4509,10 @@ aside.widget-event-quote {
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+.text-lg {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }

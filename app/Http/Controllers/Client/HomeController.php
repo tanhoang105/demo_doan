@@ -26,6 +26,7 @@ class HomeController extends Controller
     }
     public function index(Request $request)
     {
+
         $this->v['params'] = $request->all();
 
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 6);
