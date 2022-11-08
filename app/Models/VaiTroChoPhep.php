@@ -103,4 +103,15 @@ class VaiTroChoPhep extends Model
         return $query;
 
     }
+
+
+    public function list(){
+        $query  = DB::table($this->table)
+        ->where('delete_at', '=', 1)
+        ->select($this->table . '.*')
+        ->orderByDesc($this->table . '.id');
+
+
+        return $list = $query->paginate(10);
+    }
 }

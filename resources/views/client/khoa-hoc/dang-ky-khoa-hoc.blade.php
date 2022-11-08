@@ -213,7 +213,7 @@
 
                     <div class="col-12 p-3">
                         <label class="text-lg text-danger" >Học phí:</label>
-                        <h3>500</h3>
+                        <h3>VND</h3>
                     </div>
                 </div>
 
