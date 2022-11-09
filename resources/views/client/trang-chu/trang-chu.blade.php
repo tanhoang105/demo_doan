@@ -270,7 +270,7 @@
                     <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
 {{--                     <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image">--}}
                     <div class="feat_cour_price">
-                        <span class="feat_cour_tag"> UI/UX Design </span>
+                        <span class="feat_cour_tag"> {{ $value->ten_danh_muc }} </span>
                         <span class="feat_cour_p"> {{ $value->gia_khoa_hoc }} VND </span>
                     </div>
                     <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>

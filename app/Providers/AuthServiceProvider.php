@@ -36,7 +36,6 @@ class AuthServiceProvider extends ServiceProvider
 //                dd($v);
                 Gate::define($chophep->ten , function ($user) use ($chophep){
 //
-
                     return $user->HasVaiTro($chophep);
                 });
             }

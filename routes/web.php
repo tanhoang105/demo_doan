@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CaHocController;
+use App\Http\Controllers\Admin\CapQuyenController;
 use App\Http\Controllers\Admin\DangKyController;
 use App\Http\Controllers\Admin\DanhMucKhoaHoc;
 use App\Http\Controllers\Admin\GiangVienController;
@@ -47,6 +48,8 @@ Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, '
 
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
+Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
 
 
 
@@ -84,6 +87,8 @@ Route::prefix('/admin')->group(function () {
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
     });
 
+
+    // phần này là hiển thị ra những quyền mà tài khoản có thể đc phân (table - chophep)
     Route::prefix('/phan-quyen')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [PhanQuyenController::class, 'index'])->name('List_Quyen'); // hiển thị danh sách
         Route::match(['get', 'post'], '/add-quyen',   [PhanQuyenController::class, 'store'])->name('Add_Quyen'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
@@ -92,6 +97,16 @@ Route::prefix('/admin')->group(function () {
         Route::post('/quyen-update', [PhanQuyenController::class, 'update'])->name('Update_Quyen');
     });
 
+    // phần này là hiển thị ra tất cả tài khoản và quyền của tài khỏa đó (table - vaitrochophep)
+
+    Route::prefix('/cap-quyen')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [CapQuyenController::class, 'index'])->name('List_Cap_Quyen'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-cap-quyen',   [CapQuyenController::class, 'store'])->name('Add_Cap_Quyen'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/cap-quyen-delete/{id}', [CapQuyenController::class, 'destroy'])->name('Xoa_Cap_Quyen');
+        Route::get('/cap-quyen-edit/{id}', [CapQuyenController::class, 'edit'])->name('Edit_Cap_Quyen'); // hiển thị chi tiết bản ghi
+        Route::post('/cap-quyen-update', [CapQuyenController::class, 'update'])->name('Update_Cap_Quyen');
+        Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'update'])->name('Xoa_All_Cap_Quyen');
+    });
 
     // học viên
 
@@ -121,7 +136,7 @@ Route::prefix('/admin')->group(function () {
 
 
     // danh muc khoa hoc
-    Route::prefix('danh-muc')->name('route_Admin_BE_')->group(function(){
+    Route::prefix('danh-muc')->name('route_Admin_BE_')->group(function () {
 
         Route::get('/', [DanhMucKhoaHoc::class, 'index'])->name('Danh_Muc_Khoa_Hoc'); // hiển thị danh sách
         Route::match(['get', 'post'], '/danh-muc-add', [DanhMucKhoaHoc::class, 'store'])->name('Add_Danh_Muc'); // hiển thị danh sách
@@ -143,7 +158,7 @@ Route::prefix('/admin')->group(function () {
 
     // vai tro
 
-    Route::prefix('/vai-tro')->name('route_BE_Admin_')->group(function(){
+    Route::prefix('/vai-tro')->name('route_BE_Admin_')->group(function () {
 
         Route::get('/', [VaiTroController::class, 'index'])->name('Vai_Tro');
         Route::get('vai-tro-edit/{id}', [VaiTroController::class, 'edit'])->name('Edit_Vai_Tro');
