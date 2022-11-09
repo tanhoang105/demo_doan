@@ -48,6 +48,8 @@ Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, '
 
 Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
+Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
 
 
 
