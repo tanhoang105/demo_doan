@@ -107,7 +107,6 @@ class BannerController extends Controller
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
         if ($id) {
             $this->v['params'] = $request->all();
-
             $request->session()->put('id', $id);
             $banner = $this->banner->show($id);
             $this->v['banner'] = $banner;

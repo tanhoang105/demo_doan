@@ -121,7 +121,9 @@ class KhoaHoc extends Model
             $query = $query->where('ten_khoa_hoc', 'like', '%' . $key . '%');
         }
         // dd($query);
+
     }
+
 
     public function remoAll($params = null, $id_danhmuc = null)
     {
