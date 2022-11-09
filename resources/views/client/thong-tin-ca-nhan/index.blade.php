@@ -24,26 +24,26 @@
                                 <div class="row">
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="name" id="fname" type="text"
+                                        <input class="signup-field" name="name" value="{{Auth::user()->name}}" id="fname" type="text"
                                                placeholder="Họ & Tên">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="email" id="remail" type="text"
+                                        <input class="signup-field" name="email" value="{{Auth::user()->email}}" id="remail" type="text"
                                                placeholder="Email">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="password" id="password" type="text"
+                                        <input class="signup-field" value="{{Auth::user()->password}}" name="password" id="password" type="text"
                                                placeholder="">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="sdt" id="cpassword" type="text"
+                                        <input class="signup-field" name="sdt"value="0{{Auth::user()->sdt}}" id="cpassword" type="text"
                                                placeholder="Điện thoại">
                                     </div>
 
                                     <div class="col-lg-12 col-sm-12">
-                                        <input class="signup-field" name="dia_chi" id="address" type="text"
+                                        <input value="{{Auth::user()->dia_chi}}" class="signup-field" name="dia_chi" id="address" type="text"
                                                placeholder="Địa chỉ">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
