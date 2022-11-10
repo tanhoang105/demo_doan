@@ -28,7 +28,7 @@
                         @endforeach
 
                     </select>
-                  
+
                     @error('id_lop')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -37,7 +37,7 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Học phí</label>
                     <input class="form-control" type="text" name="gia" id="">
-                  
+
                     @error('id_lop')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -51,13 +51,13 @@
                         @endforeach
 
                     </select>
-                  
+
                     @error('id_lop')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
 
-               
+
 
             </div>
 
