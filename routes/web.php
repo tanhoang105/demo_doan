@@ -81,7 +81,7 @@ Route::prefix('/admin')->group(function () {
     // đăng ký
     Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
-        // Route::match(['get', 'post'], '/add-khoa-hoc',   [DangKyController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::match(['get', 'post'], '/add-dang-ky',   [DangKyController::class, 'store'])->name('Add_Dang_Ky'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/dang-ky-delete/{id}', [DangKyController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');

@@ -156,10 +156,10 @@
                                                     <td> {{ $item->ngay_bat_dau }}</td>
                                                     <td> {{ $item->ngay_ket_thuc }}</td>
                                                     <td>
-                                                        @foreach ($lop as $gv)
-                                                            @if ($item->id_giang_vien == $gv->id)
+                                                        @foreach ($giang_vien as $gv)
+                                                            @if ($gv->id == $item->id_giang_vien)
                                                                 <a style="color: blue"
-                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $item->id_giang_vien]) }}">{{ $gv->ten_giang_vien }}</a>
+                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $gv->id]) }}">{{ $gv->ten_giang_vien }}</a>
                                                             @endif
                                                         @endforeach
                                                     </td>
