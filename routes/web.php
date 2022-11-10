@@ -55,8 +55,6 @@ Route::post('vnp_payment/{id}',[\App\Http\Controllers\Client\ThanhToanController
 Route::get('lich-su-dang-ky/{id}',[\App\Http\Controllers\Client\DangKyController::class,'lichsuDangKy'])->name('client_lich_su_dang_ky');
 Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
 Route::get('vnp-return',[\App\Http\Controllers\Client\ThanhToanController::class,'resultPay'])->name('result_pay');
-Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
-Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
