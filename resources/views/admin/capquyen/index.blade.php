@@ -55,10 +55,8 @@
                             {{ $item->role->ten_vai_tro }}
                         </td>
                         <td>
-
-                            @foreach ($item->role->permissions as $i)
-                                {{ $i->ten  . ''}}
-                            @endforeach
+                            <button class="btn btn-primary"><a style="color: #fff"
+                                    href="{{ route('route_BE_Admin_Detail_Cap_Quyen' , ['id' => $item->id]) }}">Xem</a></button>
                         </td>
                         <td> <button class="btn btn-warning"><a
                                     href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}">
