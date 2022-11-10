@@ -20,16 +20,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
-            <td>sit</td>
-            <td>sit</td>
-            <td>sit</td>
-        </tr>
+      @foreach ($lichhoc as $value )
+      <tr>
+        <td>{{$value->id}}</td>
+        <td>{{$value->ngay_dang_ky}}</td>
+        <td>{{$value->ten_phong}}</td>
+        <td>{{$value->ten_khoa_hoc}}</td>
+        <td>{{$value->ten_lop}}</td>
+        <td>{{$value->ten_giang_vien}}</td>
+        <td>{{$value->ca_hoc}}</td>
+        <td>{{$value->thoi_gian}}</td>
+    </tr>
+      @endforeach
 
         </tbody>
     </table>
