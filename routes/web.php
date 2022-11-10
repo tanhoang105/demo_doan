@@ -21,7 +21,7 @@ use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
-use LDAP\ResultEntry;
+//use LDAP\ResultEntry;
 use Symfony\Component\Routing\RouterInterface;
 
 /*
@@ -43,6 +43,7 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 Route::get('complete-dangky/{code}',[\App\Http\Controllers\Client\DangKyController::class,'completeDangKy'])->name('client_complete_dang_ky');
@@ -54,6 +55,14 @@ Route::post('vnp_payment/{id}',[\App\Http\Controllers\Client\ThanhToanController
 Route::get('lich-su-dang-ky/{id}',[\App\Http\Controllers\Client\DangKyController::class,'lichsuDangKy'])->name('client_lich_su_dang_ky');
 Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
 Route::get('vnp-return',[\App\Http\Controllers\Client\ThanhToanController::class,'resultPay'])->name('result_pay');
+Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
+Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
+
+// Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
+Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
+
 
 
 Route::prefix('/admin')->group(function () {

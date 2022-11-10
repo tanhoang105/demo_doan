@@ -25,7 +25,7 @@
                     {{Auth::user()->name}}
                   @endif</i></a>
                     <ul class="dropdown" aria-label="submenu">
-                      <li><a href="#">Thông tin chi tiết</a></li>
+                      <li><a href="{{route('client_thong_tin_ca_nhan')}}">Thông tin chi tiết</a></li>
                       <li> <a href="{{route('logout')}}" class="dropdown-item">Sign out</a></li>
                       <li> <a href="{{route('client_lich_su_dang_ky',[$objUser->id])}}" class="dropdown-item">Lịch sử đăng ký </a></li>
                       <li>
