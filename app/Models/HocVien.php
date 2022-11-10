@@ -98,9 +98,10 @@ class HocVien extends Model
     }
 
     // đăng ký khóa học
-    public function getHocVien($id_user){
+    public function getHocVien($user_id){
         $query=DB::table('hoc_vien')
-            ->find($id_user);
+            ->where('hoc_vien.user_id','=',$user_id)
+            ->first();
         return $query;
     }
     public function saveNew($params){
@@ -116,7 +117,7 @@ class HocVien extends Model
         $data = [
             'delete_at' => 0
         ];
-        $query = DB::table($this->table) 
+        $query = DB::table($this->table)
                 ->whereIn('user_id', $params['cols']['id']);
         // dd($query);
         $query = $query->update($data);
