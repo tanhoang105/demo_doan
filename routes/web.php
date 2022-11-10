@@ -43,12 +43,17 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
-Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
-
+Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
+Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
+Route::get('complete-dangky/{code}',[\App\Http\Controllers\Client\DangKyController::class,'completeDangKy'])->name('client_complete_dang_ky');
 Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
-
+Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
+Route::get('payment',[\App\Http\Controllers\Client\ThanhToanController::class,'payment'])->name('getPayment');
+Route::post('vnp_payment/{id}',[\App\Http\Controllers\Client\ThanhToanController::class,'vnpPayment'])->name('payment');
+Route::get('lich-su-dang-ky/{id}',[\App\Http\Controllers\Client\DangKyController::class,'lichsuDangKy'])->name('client_lich_su_dang_ky');
+Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
+Route::get('vnp-return',[\App\Http\Controllers\Client\ThanhToanController::class,'resultPay'])->name('result_pay');
 
 
 Route::prefix('/admin')->group(function () {

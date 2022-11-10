@@ -2,7 +2,7 @@
 @section('content')
     <header class="single-header">
         <!-- Start: Header Content -->
-    {{-- <div class="container">
+     <div class="container">
         <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
             <div class="col-sm-12">
                 <!-- Headline Goes Here -->
@@ -11,7 +11,7 @@
             </div>
         </div>
         <!-- End: .row -->
-    </div> --}}
+    </div>
     <!-- End: Header Content -->
     </header>
     <section class="account-section">
@@ -184,36 +184,40 @@
                     </button>
                 </div>
             @endif
-
+{{--            {{dd($loadDangKy)}}--}}
             <div class="row">
                 <div class="col-3 border rounded">
                     <div class="col-12 p-3">
                         <h3>Thông tin đăng ký</h3>
                     </div>
                     <div class="col-12 pt-2" >
-                        <label class="text-lg" style="padding-left: 13px;">Tên khóa học:</label>
-                        <span style="font-size: 18px"></span>
+                        <label class="text-lg" style="padding-left: 13px;">Tên khóa học: </label>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Tên lớp học:</label>
-                        <span style="font-size: 18px"></span>
+                        <label class="text-lg" style="padding-left: 13px;">Tên lớp học: </label>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ca học:</label>
-                        <span style="font-size: 18px"></span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->id_ca_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
-                        <span style="font-size: 18px"></span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->id_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ngày khai giảng:</label>
-                        <span style="font-size: 18px"></span>
+                        <span style="font-size: 18px;color: red"> {{$loadDangKy->ngay_bat_dau}}</span>
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label class="text-lg" style="padding-left: 13px;">Số lượng:</label>
+                        <span style="font-size: 18px;color: red"> {{$loadDangKy->so_luong}}</span>
                     </div>
 
                     <div class="col-12 p-3">
                         <label class="text-lg text-danger" >Học phí:</label>
-                        <h3>VND</h3>
+                        <h3>{{$loadDangKy->gia_khoa_hoc}} VND</h3>
                     </div>
                 </div>
 
@@ -222,46 +226,67 @@
                         <h3>Thông tin cá nhân</h3>
                     </div>
                     <form method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
-                            <div class="col-6 p-3">
-                                <label class="text-lg">Họ Tên</label>
-                                <input class="form-control" name="email" type="text" placeholder="Họ Tên">
+                            <input type="text" name="user_id" id="" value="{{Auth::user()->id??""}}" hidden>
+                            <input type="text" name="lop_id" id="" value="{{isset($loadDangKy->id) ? ($loadDangKy->id): "" }}" hidden>
+                            <input type="text" name="gia_khoa_hoc" id="" value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
+                            <div class="col-md-6 col-sm-12">
+                                <label class="signup-field">Họ Tên</label>
+                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control" name="name" type="text" placeholder="Họ Tên">
                                 @error('name')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-6 p-3">
-                                <label class="text-lg">Email</label>
-                                <input class="form-control" name="email" type="text" placeholder="Email">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="signup-field">Email</label>
+                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->email??''}}" class="form-control" name="email" type="text" placeholder="Email">
                                 @error('email')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-6 p-3">
-                                <label class="text-lg">Số điện thoại</label>
-                                <input class="form-control" name="sdt" type="text" placeholder="Số điện thoại">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="signup-field">Số điện thoại</label>
+                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->sdt??''}}" name="sdt" type="text" placeholder="Số điện thoại">
                                 @error('sdt')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-6 p-3">
-                                <label class="text-lg">Địa chỉ</label>
-                                <input class="form-control" name="dia_chi" type="text" placeholder="Địa chỉ">
+                            <div class="col-md-6 col-sm-12">
+                                <label class="signup-field">Địa chỉ</label>
+                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->dia_chi??''}}" name="dia_chi" type="text" placeholder="Địa chỉ">
                                 @error('dia_chi')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-12 p-3">
-                                <label class="text-lg">Hình thức thanh toán</label>
-
+                            <div class="col-md-6 col-sm-12">
+                                <label class="signup-field">Chọn phương thức thanh toán</label>
+                                @foreach($payment_method as $method)
+                                    <div>
+                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}" hidden>
+                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
+                                    </div>
+                                @endforeach
+                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">
+                                    @csrf
+                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>
+                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>
+                                    <div class="form-group">
+                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
+                                    </div>
+                                </form>
                             </div>
 
+{{--                            <div class="col-12 p-3">--}}
+{{--                                <label class="text-lg">Hình thức thanh toán</label>--}}
+
+{{--                            </div>--}}
+
                             <div class="col-6 p-3">
-                                <button class="btn btn-primary" type="submit" >Đăng Ký</button>
+                                <button class="btn btn-primary" type="submit" >Xác nhận</button>
                             </div>
 
                         </div>
@@ -276,33 +301,42 @@
 @endsection
 @section('js')
     <script>
-        $(document).ready(function() {
-            $(document).on('change', '#id_khoahoc', function (event) {
-                const url = $(this).data('url')
-                const data = $(this).val();
-                console.log(url, data);
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    data: {
-                        id_khoahoc: data
-                    },
-                    success: function (res) {
-                        console.log(res)
-                        let htmls="<option>--Chọn Lớp--</option>"
-                        let ten_lop=Object.values(res.lop);
-                        console.log(res.lop);
-                        ten_lop.forEach(function (item) {
-                            console.log(item)
-                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`
-                        })
-                        $('#id_gia').val(res.gia_khoa_hoc)
-                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
-                        $('#id_lop').html(htmls)
-                    }
-                })
+        $(document).ready(function () {
+            $(document).on('click','.btn-thanh-toan',function (e) {
+                const
             })
         })
     </script>
 @endsection
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $(document).on('change', '#id_khoahoc', function (event) {--}}
+{{--                const url = $(this).data('url')--}}
+{{--                const data = $(this).val();--}}
+{{--                console.log(url, data);--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: url,--}}
+{{--                    data: {--}}
+{{--                        id_khoahoc: data--}}
+{{--                    },--}}
+{{--                    success: function (res) {--}}
+{{--                        console.log(res)--}}
+{{--                        let htmls="<option>--Chọn Lớp--</option>"--}}
+{{--                        let ten_lop=Object.values(res.lop);--}}
+{{--                        console.log(res.lop);--}}
+{{--                        ten_lop.forEach(function (item) {--}}
+{{--                            console.log(item)--}}
+{{--                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`--}}
+{{--                        })--}}
+{{--                        $('#id_gia').val(res.gia_khoa_hoc)--}}
+{{--                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)--}}
+{{--                        $('#id_lop').html(htmls)--}}
+{{--                    }--}}
+{{--                })--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
+{{--@endsection--}}
 
