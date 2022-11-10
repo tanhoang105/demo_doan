@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LichHocController extends Controller
 {
-     public function index() {
+    public function index() {
         $lichhoc = XepLop::join('lop','xep_lop.id_lop','=','lop.id')
         ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
         ->join('giang_vien','giang_vien.id','=','lop.id_giang_vien')

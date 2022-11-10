@@ -156,10 +156,10 @@
                                                     <td> {{ $item->ngay_bat_dau }}</td>
                                                     <td> {{ $item->ngay_ket_thuc }}</td>
                                                     <td>
-                                                        @foreach ($lop as $gv)
-                                                            @if ($item->id_giang_vien == $gv->id)
+                                                        @foreach ($giang_vien as $gv)
+                                                            @if ($gv->id == $item->id_giang_vien)
                                                                 <a style="color: blue"
-                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $item->id_giang_vien]) }}">{{ $gv->ten_giang_vien }}</a>
+                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $gv->id]) }}">{{ $gv->ten_giang_vien }}</a>
                                                             @endif
                                                         @endforeach
                                                     </td>
@@ -169,8 +169,8 @@
                                                             <input name="id_lop" value="{{ $item->id }}" hidden>
                                                             <input name="gia_khoa_hoc"
                                                                 value="{{ $detail->gia_khoa_hoc }}" hidden>
-                                                            <button style="width: 100px" class="btn btn-primary">Đăng
-                                                                kí</button>
+                                                            <a href="{{route('client_dang_ky',['id'=> $item->id])}}" style="width: 100px" class="btn btn-primary">Đăng
+                                                                kí</a>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -332,8 +332,8 @@
                         <div class="row">
                         @foreach ($khoahoclienquan as $value )
                         {{-- <div class="rel-course-box">
-                            <a href="#"><img src="{{asset('client/images/courses2.jpg')}}" width="200px" alt=""></a>  
-                            <span><a href="">{{$value->ten_khoa_hoc}}</a></span> 
+                            <a href="#"><img src="{{asset('client/images/courses2.jpg')}}" width="200px" alt=""></a>
+                            <span><a href="">{{$value->ten_khoa_hoc}}</a></span>
                             <span></span>
                         </div> --}}
                         <div style="display: flex" class="col-lg-6 col-md-6 col-sm-12">

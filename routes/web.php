@@ -21,7 +21,7 @@ use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
-use LDAP\ResultEntry;
+//use LDAP\ResultEntry;
 use Symfony\Component\Routing\RouterInterface;
 
 /*
@@ -43,8 +43,18 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-Route::get('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
-Route::post('/dang-ky', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
+
+Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
+Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
+Route::get('complete-dangky/{code}',[\App\Http\Controllers\Client\DangKyController::class,'completeDangKy'])->name('client_complete_dang_ky');
+// Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
+Route::get('payment',[\App\Http\Controllers\Client\ThanhToanController::class,'payment'])->name('getPayment');
+Route::post('vnp_payment/{id}',[\App\Http\Controllers\Client\ThanhToanController::class,'vnpPayment'])->name('payment');
+Route::get('lich-su-dang-ky/{id}',[\App\Http\Controllers\Client\DangKyController::class,'lichsuDangKy'])->name('client_lich_su_dang_ky');
+Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
+Route::get('vnp-return',[\App\Http\Controllers\Client\ThanhToanController::class,'resultPay'])->name('result_pay');
 
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
@@ -71,7 +81,7 @@ Route::prefix('/admin')->group(function () {
     // đăng ký
     Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
-        // Route::match(['get', 'post'], '/add-khoa-hoc',   [DangKyController::class, 'store'])->name('Add_Giang_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::match(['get', 'post'], '/add-dang-ky',   [DangKyController::class, 'store'])->name('Add_Dang_Ky'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/dang-ky-delete/{id}', [DangKyController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
@@ -104,8 +114,9 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add-cap-quyen',   [CapQuyenController::class, 'store'])->name('Add_Cap_Quyen'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/cap-quyen-delete/{id}', [CapQuyenController::class, 'destroy'])->name('Xoa_Cap_Quyen');
         Route::get('/cap-quyen-edit/{id}', [CapQuyenController::class, 'edit'])->name('Edit_Cap_Quyen'); // hiển thị chi tiết bản ghi
-        Route::post('/cap-quyen-update', [CapQuyenController::class, 'update'])->name('Update_Cap_Quyen');
-        Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'update'])->name('Xoa_All_Cap_Quyen');
+        Route::post('/update', [CapQuyenController::class, 'update'])->name('Update_Cap_Quyen');
+        Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'destroyAll'])->name('Xoa_All_Cap_Quyen');
+        Route::get('/cap-quyen-detail/{id}', [CapQuyenController::class, 'detail'])->name('Detail_Cap_Quyen');
     });
 
     // học viên

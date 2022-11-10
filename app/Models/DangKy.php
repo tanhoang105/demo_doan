@@ -73,7 +73,7 @@ class DangKy extends Model
         return $query;
     }
 
-    // hàm xóa bản ghi theo id 
+    // hàm xóa bản ghi theo id
     public function remove($id)
     {
         if (!empty($id)) {
@@ -87,7 +87,7 @@ class DangKy extends Model
     }
 
 
-    // hàm update bản ghi 
+    // hàm update bản ghi
     public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
@@ -105,11 +105,46 @@ class DangKy extends Model
         $data = [
             'delete_at' => 0
         ];
-        $query = DB::table($this->table) 
+        $query = DB::table($this->table)
                 ->whereIn('id', $params['cols']['id']);
         // dd($query);
         $query = $query->update($data);
         return $query;
 
+    }
+
+    //hiển thị chi tiết đăng ký
+    // đăng ký client
+    public function listDangky($id){
+        $query=DB::table('lop')
+            ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc')
+            ->where('lop.id','=',$id);
+        $list=$query->first();
+        return $list;
+    }
+    public function completeDangKy($code){
+        $query=DB::table('dang_ky')
+            ->join('users','users.id','=','dang_ky.id_user')
+            ->join('lop','lop.id','=','dang_ky.id_lop')
+            ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->where('dang_ky.id',$code)
+            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','email','dia_chi','ten_lop','ten_khoa_hoc')
+            ->first();
+        return $query;
+    }
+
+    // lịch sử đăng ký
+    public function lichsu($id){
+        $query=DB::table('dang_ky')
+            ->join('users','users.id','=','dang_ky.id_user')
+            ->join('hoc_vien','hoc_vien.user_id','=','users.id')
+            ->join('lop','lop.id','=','dang_ky.id_lop')
+            ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->where('id_user',$id)
+            ->select('dang_ky.*','users.name','users.email','lop.ten_lop','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','users.dia_chi','users.sdt')
+            ->get();
+        $list=$query;
+        return $list;
     }
 }
