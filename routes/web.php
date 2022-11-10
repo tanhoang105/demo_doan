@@ -47,7 +47,7 @@ Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienC
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 Route::get('complete-dangky/{code}',[\App\Http\Controllers\Client\DangKyController::class,'completeDangKy'])->name('client_complete_dang_ky');
-Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+// Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
 Route::get('IPN',[\App\Http\Controllers\Client\ThanhToanController::class,'IPN'])->name('complete_pay');
 Route::get('payment',[\App\Http\Controllers\Client\ThanhToanController::class,'payment'])->name('getPayment');
