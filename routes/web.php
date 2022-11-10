@@ -114,8 +114,9 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add-cap-quyen',   [CapQuyenController::class, 'store'])->name('Add_Cap_Quyen'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/cap-quyen-delete/{id}', [CapQuyenController::class, 'destroy'])->name('Xoa_Cap_Quyen');
         Route::get('/cap-quyen-edit/{id}', [CapQuyenController::class, 'edit'])->name('Edit_Cap_Quyen'); // hiển thị chi tiết bản ghi
-        Route::post('/cap-quyen-update', [CapQuyenController::class, 'update'])->name('Update_Cap_Quyen');
-        Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'update'])->name('Xoa_All_Cap_Quyen');
+        Route::post('/update', [CapQuyenController::class, 'update'])->name('Update_Cap_Quyen');
+        Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'destroyAll'])->name('Xoa_All_Cap_Quyen');
+        Route::get('/cap-quyen-detail/{id}', [CapQuyenController::class, 'detail'])->name('Detail_Cap_Quyen');
     });
 
     // học viên
