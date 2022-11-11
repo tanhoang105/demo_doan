@@ -299,44 +299,44 @@
         </div>
     </section>
 @endsection
-@section('js')
-    <script>
-        $(document).ready(function () {
-            $(document).on('click','.btn-thanh-toan',function (e) {
-                const
-            })
-        })
-    </script>
-@endsection
-@section('js')
-    <script>
-        $(document).ready(function() {
-            $(document).on('change', '#id_khoahoc', function (event) {
-                const url = $(this).data('url')
-                const data = $(this).val();
-                console.log(url, data);
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    data: {
-                        id_khoahoc: data
-                    },
-                    success: function (res) {
-                        console.log(res)
-                        let htmls="<option>--Chọn Lớp--</option>"
-                        let ten_lop=Object.values(res.lop);
-                        console.log(res.lop);
-                        ten_lop.forEach(function (item) {
-                            console.log(item)
-                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`
-                        })
-                        $('#id_gia').val(res.gia_khoa_hoc)
-                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
-                        $('#id_lop').html(htmls)
-                    }
-                })
-            })
-        })
-    </script>
-@endsection
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $(document).on('click','.btn-thanh-toan',function (e) {--}}
+{{--                const--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
+{{--@endsection--}}
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $(document).on('change', '#id_khoahoc', function (event) {--}}
+{{--                const url = $(this).data('url')--}}
+{{--                const data = $(this).val();--}}
+{{--                console.log(url, data);--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: url,--}}
+{{--                    data: {--}}
+{{--                        id_khoahoc: data--}}
+{{--                    },--}}
+{{--                    success: function (res) {--}}
+{{--                        console.log(res)--}}
+{{--                        let htmls="<option>--Chọn Lớp--</option>"--}}
+{{--                        let ten_lop=Object.values(res.lop);--}}
+{{--                        console.log(res.lop);--}}
+{{--                        ten_lop.forEach(function (item) {--}}
+{{--                            console.log(item)--}}
+{{--                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`--}}
+{{--                        })--}}
+{{--                        $('#id_gia').val(res.gia_khoa_hoc)--}}
+{{--                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)--}}
+{{--                        $('#id_lop').html(htmls)--}}
+{{--                    }--}}
+{{--                })--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
+{{--@endsection--}}
 

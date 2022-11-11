@@ -19,44 +19,65 @@
         <div class="row">
             @csrf
             <div class="col-6">
-
+                <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="" hidden>
+                <div class="mb-3">
+                    <label for="" class="form-label">Tên </label>
+                    <input class="form-control" value="" name="name" id="name" type="text" placeholder="Tên">
+                    @error('name')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Email </label>
+                    <input class="form-control" value="" name="email" id="email" type="text" placeholder="Email">
+                    @error('email')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Sđt </label>
+                    <input class="form-control" value="" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
+                    @error('sdt')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Địa chỉ </label>
+                    <input class="form-control" value="" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
+                    @error('dia_chi')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Khóa học </label>
+                    <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}">
+                        <option>-- Chọn khóa học --</option>--}}
+                            @foreach ($listKhoaHoc as $item)
+                                <option  value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
+                            @endforeach
+                    </select>
+                    @error('id_khoa_hoc')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
-                    <select class="form-control" name="id_lop" id="">
-                        @foreach ($lop as $item)
-                            <option value="{{ $item->id }}"> {{ $item->ten_lop }} </option>
-                        @endforeach
-
+                    <select class="form-control" name="id_lop" id="id_lop">
+                        <option>--Chọn Lớp--</option>--}}
                     </select>
-
                     @error('id_lop')
-                        <span style="color: red"> {{ $message }} </span>
+                    <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Học phí</label>
-                    <input class="form-control" type="text" name="gia" id="">
+                    <input class="form-control" name="" id="id_gia" type="text" value="" disabled>
 
-                    @error('id_lop')
+                    @error('id_gia')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-                <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Hình thức thanh toán </label>
-                    <select class="form-control" name="id_lop" id="">
-                        @foreach ($listthanhtoan as $item)
-                            <option value="{{ $item->id }}"> {{ $item->ten }} </option>
-                        @endforeach
-
-                    </select>
-
-                    @error('id_lop')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
-
 
 
             </div>
@@ -65,4 +86,37 @@
         <button type="submit" class="btn btn-primary">Thêm</button>
 
     </form>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#id_khoa_hoc', function (event) {
+                console.log(1)
+                const url = $(this).data('url')
+                const data = $(this).val();
+                console.log(url, data);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        id_khoa_hoc: data
+                    },
+                    success: function (res) {
+                        console.log(res)
+                        let htmls="<option>--Chọn Lớp--</option>"
+                        let ten_lop=Object.values(res.lop);
+                        console.log(res.lop);
+                        ten_lop.forEach(function (item) {
+                            console.log(item)
+                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`
+                        })
+                        $('#id_gia').val(res.gia_khoa_hoc)
+                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
+                        $('#id_lop').html(htmls)
+                    }
+                })
+            })
+        })
+    </script>
 @endsection
