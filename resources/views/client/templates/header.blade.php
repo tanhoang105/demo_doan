@@ -1,4 +1,53 @@
 
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
 <div class="navigation navigation_two">
     <div class="container">
         <div class="logo">
@@ -18,31 +67,29 @@
         </div>
         <!-- End: navigation  -->
         <div class="header_sign">
-            <nav id="navigation">
-                <ul>
-                  <li><a href="#" style="color: red" aria-haspopup="true"><i class="fas fa-user">
-                              @if (Auth::user())
-                    {{Auth::user()->name}}
-                  @endif</i></a>
-                    <ul class="dropdown" aria-label="submenu">
-                      <li><a href="{{route('client_lich_hoc')}}">Lịch học</a></li>
-                      <li><a href="{{route('client_thong_tin_ca_nhan')}}">Thông tin chi tiết</a></li>
-                      <li> <a href="{{route('logout')}}" class="dropdown-item">Sign out</a></li>
-                      {{-- <li> <a href="{{route('client_lich_su_dang_ky',[$objUser->id])}}" class="dropdown-item">Lịch sử đăng ký </a></li> --}}
-                      <li>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
 
+            @if (Auth::user())
+                <nav id="navigation">
+                    <ul>
+                        <li><a href="#" style="color: red;width: 200px" aria-haspopup="true"> {{$objUser->name}}</a>
+                            <ul class="dropdown" aria-label="submenu">
+                                <li><a href="{{route('client_lich_hoc')}}">Lịch học</a></li>
+                                <li><a href="{{route('client_thong_tin_ca_nhan')}}">Thông tin chi tiết</a></li>
+                                <li> <a href="{{route('client_lich_su_dang_ky',[$objUser->id])}}" class="dropdown-item">Lịch sử đăng ký </a></li>
+                                <li> <a href="" class="dropdown-item">Đăng xuất</a></li>
+                                <li>
+                                    @if (Auth::user())
+                                        <a href="{{route('route_BE_Admin_Khoa_Hoc')}}" class="dropdown-item">Admin</a>
+                                    @endif
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            @else
+                <a href="" class="more-link"> Sign in  </a>
+            @endif
         </div>
-        @if (Auth::user())
-        @if (Auth::user()->trang_thai == 1)
-        <a class="btn btn-success" href="{{route('route_BE_Admin_Khoa_Hoc')}}">Admin</a>
-        @else
-        @endif
-        @endif
         <!-- End: Sign in -->
     </div>
     <!--/ container -->
