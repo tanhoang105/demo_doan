@@ -1,6 +1,6 @@
 @php
     $objUser = \Illuminate\Support\Facades\Auth::user();
-
+    
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -117,19 +117,19 @@
 
 
     <script>
-        $(function(){
+        $(function() {
             function readURL(input, selector) {
                 if (input.files && input.files[0]) {
                     let reader = new FileReader();
 
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         $(selector).attr('src', e.target.result);
                     };
 
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            $("#hinhanh").change(function () {
+            $("#hinhanh").change(function() {
                 readURL(this, '#anh');
             });
 
@@ -149,34 +149,78 @@
 </script>
 
 
+
+{{-- tan xóa nhiều bản ghi  --}}
+=======
 @yield('js')
+
 <script type="text/javascript">
-    $(function(){
+    $(function() {
         /* Check/bỏ chek hết tất cả các records */
-        $(document).on('change','#check_all', function(ev){
+        $(document).on('change', '#check_all', function(ev) {
             $('.checkitem').prop('checked', this.checked).trigger('change');
         });
         /* Check/bỏ chek từng records */
-        $(document).on('change','.checkitem', function(ev){
+        $(document).on('change', '.checkitem', function(ev) {
             var _dem = 0;
             var _checked = 1;
             /* Duyệt tất cả các checkitem */
-            $('.checkitem').each(function(){
-                if($(this).is(':checked')){
-                    _dem ++;
-                }else{
+            $('.checkitem').each(function() {
+                if ($(this).is(':checked')) {
+                    _dem++;
+                } else {
                     _checked = 0;
                 }
             });
             $('#check_all').prop('checked', _checked);
-            if(_dem > 0){
+            if (_dem > 0) {
                 // Hiện nút xóa chọn
                 $('button[name=submmit]').show();
-            }else{
+            } else {
                 // Ẩn nút xóa chọn
                 $('button[name=submmit]').hide();
             }
         });
     });
 </script>
+
+{{-- search  --}}
+
+<script type="text/javascript">
+    $('#keyword').keyup(function() {
+        // e.preventDefault();
+        var query = $(this).val();
+    //   alert(query)
+        // alert(query);
+        if (query != '') {
+            var _token  =  $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{url('http://127.0.0.1:8000/admin/lop-hop/autocomplete-ajax')}}",
+                method: "POST",
+                data: {
+                    query:query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#search_ajax').fadeIn();
+                    $('#search_ajax').html(data);
+                }
+            });
+
+        } else {
+            $('#search_ajax').fadeOut();
+
+        }
+
+    });
+
+    $(document).on('click', '.ajax', function() {
+        // e.preventDefault();
+        $('#keyword').val($(this).text());
+        $('#search_ajax').fadeOut();
+
+
+    })
+</script>
+
 </html>

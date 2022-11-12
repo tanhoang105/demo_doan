@@ -29,6 +29,8 @@ class KhoahocController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem khóa học') );
+
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 10);
         $this->v['list'] = $khoahoc;
@@ -53,6 +55,8 @@ class KhoahocController extends Controller
      */
     public function store(KhoahocRequest $request)
     {
+        $this->authorize(mb_strtoupper('thêm khóa học') );
+
         $this->v['params'] = $request->all();
 
         $danhmuc = $this->danhmuc->index($this->v['params'], false, null);
@@ -98,6 +102,8 @@ class KhoahocController extends Controller
      */
     public function show($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('xem khóa học') );
+
         // lấy ra 1 bản ghi theo id
         if (!empty($id)) {
             $khoahoc = $this->khoahoc->show($id);
@@ -116,6 +122,9 @@ class KhoahocController extends Controller
      */
     public function edit($id, Request $request)
     {
+
+        $this->authorize(mb_strtoupper('edit khóa học') );
+
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
         if (!empty($id)) {
         $this->v['params'] = $request->all();
@@ -142,6 +151,8 @@ class KhoahocController extends Controller
      */
     public function update(KhoahocRequest $request)
     {
+        $this->authorize(mb_strtoupper('update khóa học') );
+
         // sau khi chỉnh sửa xong thì update vào cơ sở dữ liệu
         // cần thực hiện validate
         $id  = session('id');
@@ -181,6 +192,8 @@ class KhoahocController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa khóa học') );
+
         // xóa bản ghi theo id - xóa mềm
         if ($id) {
 
@@ -207,6 +220,8 @@ class KhoahocController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa khóa học') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

@@ -25,6 +25,9 @@ class HocVienController extends Controller
      */
     public function index(Request $request )
     {
+
+        $this->authorize(mb_strtoupper('xem học viên') );
+
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->hocvien->index($this->v['params'] , true , 10);
         // dd($this->v['list']);
@@ -95,6 +98,8 @@ class HocVienController extends Controller
     public function destroy($id)
     // id học viên xóa
     {
+        $this->authorize(mb_strtoupper('xóa học viên') );
+
         // xóa học viên trong bảng học viên thì xóa luôn trong bảng user
         if($id){
             
@@ -117,6 +122,8 @@ class HocVienController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa học viên') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

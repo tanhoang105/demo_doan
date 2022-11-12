@@ -31,7 +31,7 @@ class CapQuyenController extends Controller
     public function index()
     {
         // hiển thị ra những tài khoản -> vai trò  -> quyền 
-        $vaitro = User::all();
+        $vaitro = VaiTro::all();
         // dd($vaitro);
         // $list = ($vaitro[0]->role)->permissions;
         // dd($res);
@@ -97,8 +97,10 @@ class CapQuyenController extends Controller
      */
     public function update(Request $request)
     {
+        // $this->authorize(mb_strtoupper('update cấp quyền') );
+
         // dd($request->all());
-        $id_vaitro = session('id_vai_tro');
+        $id_vaitro = session('id_vaitro');
 
         // dd($id_vaitro);
         $params = [];
@@ -117,8 +119,11 @@ class CapQuyenController extends Controller
         $this->v['quyen'] = $quyen;
         // dd($params['cols']['cho_phep']);
         $quyenTheoVaiTro->detach();
-        for ($i = 1; $i <= count($params['cols']['cho_phep']); $i++) {
-            $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $i]);
+        // dd($params['cols']['cho_phep']);
+        for ($i = 0; $i < count($params['cols']['cho_phep']); $i++) {
+        // foreach ($params['cols']['cho_phep']  as $value) {
+            // $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $value->cho]);
+            $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $params['cols']['cho_phep'][$i]  ]);
         }
 
         return back();
@@ -138,17 +143,11 @@ class CapQuyenController extends Controller
 
     public function detail($id, Request $request)
     {
-
-        // xem những quyền mà vai trò có thể làm được 
-        $user = User::find($id);
-        $this->v['user'] = $user;
-
-        // lấy vai trò theo tài khoản
-        $vaitro = $user->role;
-        $id_vaitro = $vaitro->id;
-        $request->session()->put('id_vai_tro', $id_vaitro);
-        $this->v['vaitro']  = $vaitro;
-
+        session()->put('id_vaitro' ,$id);
+        // $this->authorize(mb_strtoupper('xem cấp quyền') );
+        
+        $vaitro = VaiTro::find($id);
+        $this->v['vaitro'] = $vaitro;
         $quyencuavaitro = $vaitro->permissions;
 
 

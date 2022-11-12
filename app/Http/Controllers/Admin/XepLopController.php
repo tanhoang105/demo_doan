@@ -39,6 +39,8 @@ class XepLopController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem xếp lớp') );
+
         $this->v['params'] = $request->all();
 
 
@@ -67,6 +69,8 @@ class XepLopController extends Controller
     // sau khi nhập dữ liệu thêm và submit form 
     public function store(XeplopRequest $request)
     {
+        $this->authorize(mb_strtoupper('thêm xếp lớp') );
+
         //
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
@@ -123,6 +127,8 @@ class XepLopController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit xếp lớp') );
+
         if (!empty($id)) {
             $request->session()->put('id', $id);
 
@@ -150,6 +156,8 @@ class XepLopController extends Controller
      */
     public function update(XeplopRequest $request)
     {
+        $this->authorize(mb_strtoupper('update xếp lớp') );
+
         if (session('id')) {
             $id  =  session('id');
 
@@ -188,6 +196,8 @@ class XepLopController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa xếp lớp') );
+
         if (!empty($id)) {
 
             $query =  $this->xep_lop->remove($id);
@@ -205,6 +215,8 @@ class XepLopController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa xếp lớp') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

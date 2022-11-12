@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TaiKhoanController extends Controller
 {
@@ -33,6 +34,9 @@ class TaiKhoanController extends Controller
 
     public function index(Request $request)
     {
+
+        $this->authorize(mb_strtoupper('xem tài khoản') );
+
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
         $this->v['list'] = $this->taikhoan->index($this->v['params'], true, 10);
@@ -59,10 +63,11 @@ class TaiKhoanController extends Controller
      */
     public function store(Request $request)
     {
-        //        dd(123);
-        //        dd($this->authorize());
-        $permission = $request->route()->getActionMethod();
-        $this->authorize($permission);
+        // dd(Auth::user()->id);
+        // $vaitro = User::find(Auth::user()->id)->role;
+        // dd($vaitro->permissions);
+
+        $this->authorize(mb_strtoupper('thêm tài khoản') );
 
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
         //        dd($this->v['vaitro']);
@@ -144,6 +149,8 @@ class TaiKhoanController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit tài khoản') );
+
         $permission = $request->route()->getActionMethod();
         $this->authorize($permission);
         if ($id) {
@@ -171,6 +178,8 @@ class TaiKhoanController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize(mb_strtoupper('update tài khoản') );
+
         if (session('id')) {
             $id = session('id');
             $params = [];
@@ -217,6 +226,8 @@ class TaiKhoanController extends Controller
     public function destroy($id)
     {
         //
+        $this->authorize(mb_strtoupper('xóa tài khoản') );
+
         if ($id) {
             $res = $this->taikhoan->remove($id);
             // tìm học viên tương ứng 
@@ -244,6 +255,8 @@ class TaiKhoanController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa tài khoản') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

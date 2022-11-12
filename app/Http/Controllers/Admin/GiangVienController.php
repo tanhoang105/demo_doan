@@ -26,6 +26,8 @@ class GiangVienController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem giảng viên') );
+
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->giangvien->index($this->v['params'] , true , 5);
         // dd($this->v['list']);
@@ -95,6 +97,9 @@ class GiangVienController extends Controller
      */
     public function destroy($id)
     {
+
+        $this->authorize(mb_strtoupper('xóa giảng viên') );
+
         if($id){
 
             $res = $this->giangvien->remove($id);
@@ -116,6 +121,8 @@ class GiangVienController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa giảng viên') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){
