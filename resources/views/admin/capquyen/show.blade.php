@@ -155,7 +155,7 @@
                         <div class="col-12 p-2">Modul</div>
                         @foreach ($quyen as $item)
                             @if ($item->trang_thai == $i)
-                                <div class="col-3">
+                                <div class="col-2">
 
                                     <input <?php foreach ($q as $key => $value) {
                                         if ($value->ten == $item->ten) {
