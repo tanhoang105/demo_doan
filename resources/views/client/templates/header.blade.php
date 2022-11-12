@@ -87,7 +87,7 @@
                     </ul>
                 </nav>
             @else
-                <a href="" class="more-link"> Sign in  </a>
+                <a href="{{route('logout')}}" class="more-link"> Sign in  </a>
             @endif
         </div>
         <!-- End: Sign in -->

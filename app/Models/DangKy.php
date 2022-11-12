@@ -112,7 +112,15 @@ class DangKy extends Model
         return $query;
 
     }
-
+    //
+    public function listLopofKhoaHoc($id_khoa_hoc){
+        $query=DB::table('lop')
+            ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc')
+            ->where('lop.id_khoa_hoc','=',$id_khoa_hoc);
+        $list=$query->get();
+        return $list;
+    }
     //hiển thị chi tiết đăng ký
     // đăng ký client
     public function listDangky($id){
