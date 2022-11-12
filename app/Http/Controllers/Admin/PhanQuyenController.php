@@ -50,7 +50,7 @@ class PhanQuyenController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->authorize(mb_strtoupper('thêm phân quyền'));
+        $this->authorize(mb_strtoupper('thêm phân quyền'));
 
         if ($request->isMethod('POST')) {
             $params = [];

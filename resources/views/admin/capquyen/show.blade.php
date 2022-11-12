@@ -152,7 +152,7 @@
 
                     @for ($i = 2; $i <= 17; $i++)
                     <div class="row">
-                        <div class="col-12 p-2">Modul</div>
+                        {{-- <div class="col-12 p-2">Modul</div> --}}
                         @foreach ($quyen as $item)
                             @if ($item->trang_thai == $i)
                                 <div class="col-2">

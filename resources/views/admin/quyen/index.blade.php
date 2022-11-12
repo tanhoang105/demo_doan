@@ -31,6 +31,7 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Quyền</th>
+                <th scope="col">Nhóm Quyền</th>
 
                 <th scope="col">Sửa</th>
                 <th scope="col">Xóa </th>
@@ -41,6 +42,7 @@
                 <tr>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten }}</td>
+                    <td> {{ $item->trang_thai }}</td>
                     <td> <button class="btn btn-warning"><a
                                 href="{{ route('route_BE_Admin_Edit_Quyen', ['id' => $item->id]) }}"> Sửa
                             </a></button></td>
