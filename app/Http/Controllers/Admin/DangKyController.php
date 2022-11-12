@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\DangKy;
+use App\Models\HocVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
 use App\Models\PhuongThucThanhToan;
+use App\Models\ThanhToan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 
 class DangKyController extends Controller
 {
@@ -54,20 +62,99 @@ class DangKyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function listDangKy(Request $request){
+        $objDangKy=new DangKy();
+        $listLop=$objDangKy->listLopofKhoaHoc($request->id_khoa_hoc);
+        $objKhoaHoc=new KhoaHoc();
+        $gia_khoa_hoc=$objKhoaHoc->show($request->id_khoa_hoc);
+
+        return response()->json(['success'=>true ,'lop'=>$listLop , 'gia_khoa_hoc'=>$gia_khoa_hoc->gia_khoa_hoc] );
+    }
+
     public function store(Request $request)
     {
+
         $this->authorize(mb_strtoupper('thêm đăng ký') );
 
         $lop = $this->lop->index(null, false, null);
         $this->v['lop'] =  $lop;
 
-        $this->v['listthanhtoan'] = $this->phuongthucthanhtoan->index(null ,  false , null);
-        // dd($this->v['listthanhtoan']);
-        if ($request->isMethod('POST')) {
+//        dd($request->all());
+                $objDangKy = new DangKy();
+            if ($request->isMethod('post')) {
+                $loadDangKy = $objDangKy->listDangky($request->id_lop);
+                if ($loadDangKy->so_luong > 0) {
+                $objHocvien = new HocVien();
+                $objDangKy = new DangKy();
+                $params = $request->post();
+                $params['cols'] = array_map(function ($item) {
+                    if ($item == '')
+                        $item = null;
+                    if (is_string($item))
+                        $item = trim($item); // lọc trước khi gửi đi
+                    return $item;
+                },
+                    $request->post());
+                unset($params['cols']['_token']);
+                // dd($params['cols']);
+                //kiểm tra nếu chưa có tài khoản
+                $password = Str::random(8);
+                $dataUser = $params;
+//                dd($dataUser, $params['cols']);
+                $dataUser['cols']['password'] = Hash::make($password);
+                unset($dataUser['cols']['id_khoa_hoc']);
+                unset($dataUser['cols']['id_lop']);
+                unset($dataUser['cols']['gia_khoa_hoc']);
+//                dd($password,$params['cols']['password']);
+                $modelTest = new User();
+                $res = $modelTest->saveNew($dataUser);
+                // thêm học viên
+                if ($res > 0) {
+                    $dataHocVien = $params;
+                    unset($dataHocVien['cols']['name']);
+                    $dataHocVien['cols']['ten_hoc_vien'] = $request->name;
+                    $dataHocVien['cols']['user_id'] = $res;
+                    unset($dataHocVien['cols']['id_khoa_hoc']);
+                    unset($dataHocVien['cols']['id_lop']);
+                    unset($dataHocVien['cols']['gia_khoa_hoc']);
+                    $saveNewHocVien = $objHocvien->saveNew($dataHocVien);
+                    $objThanhToan=new ThanhToan();
+                    $inserThanhToan=$objThanhToan->saveNew([
+
+                        'id_phuong_thuc_thanh_toan'=>1,
+                        'ngay_thanh_toan'=>date('Y-m-d'),
+                        'gia'=>$request->gia_khoa_hoc,
+                    ]);
+                    if ($saveNewHocVien > 0 && $inserThanhToan>0) {
+
+                        $data = [
+                            'ngay_dang_ky' => date('Y-m-d'),
+                            'id_lop' => $request->id_lop,
+                            'id_user' => $res,
+                            'gia' => $request->gia_khoa_hoc,
+                            'id_thanh_toan'=>$inserThanhToan,
+                        ];
+                        $objDangKy->saveNew($data);
+                        Session::flash('success', 'Đăng ký Khóa học thành công');
+
+                        // dd($params['cols']['email']);
+                        Mail::to($params['cols']['email'])->send(new SendMail([
+                            'password'=>$password,
+                            'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
+                    }
+                } else {
+                    Session::flash('error', 'Lỗi đăng ký');
+                }
+            }
+//            $this->v['listthanhtoan'] = $this->phuongthucthanhtoan->index(null, false, null);
+
+
+
         }
+                $objKhoaHoc = new KhoaHoc();
+                $listKhoaHoc = $objKhoaHoc->index(null, false, null);
 
-
-        return view('admin.dangky.add', $this->v);
+        return view('admin.dangky.add', $this->v, compact('listKhoaHoc'));
     }
 
     /**

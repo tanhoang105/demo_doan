@@ -28,6 +28,7 @@ class DangKyController extends Controller
         $loadDangKy=$objDangKy->listDangky($id);
         $payment_method = DB::table('phuong_thuc_thanh_toan')
             ->get();
+
         return view('client.khoa-hoc.dang-ky-khoa-hoc',compact('loadDangKy','payment_method'));
     }
     public function postDangKy(Request $request ,$id){

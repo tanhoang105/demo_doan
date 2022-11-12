@@ -92,7 +92,9 @@
                     </ul>
                 </nav>
             @else
+
                 <a href=" {{ route('auth.loginForm') }} " class="more-link"> Đăng nhập </a>
+
             @endif
         </div>
         <!-- End: Sign in -->

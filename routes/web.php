@@ -61,7 +61,8 @@ Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinControlle
 Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
 Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
 
-
+// hiển thị khóa theo lớp
+Route::get('listLop',[DangKyController::class,'listDangKy'])->name('admin_dang_ky');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', function () {
