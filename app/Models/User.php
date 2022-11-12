@@ -233,4 +233,15 @@ class User extends Authenticatable
     }
 
 
+    // kiểm tra tài khoản này có quyền này hay không 
+    public function hasAnyRole($role){
+        
+        return null !== $this->role()->whereIn('ten_vai_tro' , $role)->first();
+    }
+
+    public function hasRole($role){
+        
+        return null !== $this->role()->where('ten_vai_tro' , $role)->first();
+    }
+
 }

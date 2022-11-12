@@ -16,7 +16,7 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Quyen') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Quyen') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">

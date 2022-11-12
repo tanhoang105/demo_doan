@@ -26,6 +26,8 @@ class PhongHocController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem phòng học') );
+
         $this->v['params'] = $request->all();
         $list = $this->phonghoc->index($this->v['params'], true, 10);
         $this->v['list'] = $list;
@@ -51,6 +53,8 @@ class PhongHocController extends Controller
     public function store(PhonghocRequest $request)
     {
         //
+        $this->authorize(mb_strtoupper('thêm phòng học') );
+
         if ($request->isMethod('POST')) {
             $params = [];
             $params['cols']  = array_map(function ($item) {
@@ -102,6 +106,8 @@ class PhongHocController extends Controller
     public function edit($id , Request $request)
     {
         //
+        $this->authorize(mb_strtoupper('edit phòng học') );
+
         if($id){
             $request->session()->put('id' , $id);
             $phonghoc =  $this->phonghoc->show($id);
@@ -119,6 +125,9 @@ class PhongHocController extends Controller
      */
     public function update(PhonghocRequest $request)
     {
+
+        $this->authorize(mb_strtoupper('update phòng học') );
+
         $id = session('id');
         $params = [];
         $params['cols'] = array_map(function($item){
@@ -152,6 +161,8 @@ class PhongHocController extends Controller
     public function destroy($id)
     {
         //
+        $this->authorize(mb_strtoupper('xóa phòng học') );
+
         if ($id) {
 
             $res = $this->phonghoc->remove($id);
@@ -176,6 +187,8 @@ class PhongHocController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa phòng học') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

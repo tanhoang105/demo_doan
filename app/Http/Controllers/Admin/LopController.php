@@ -15,7 +15,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc  ,$cahoc , $giangvien;
+    protected $khoahoc, $cahoc, $giangvien;
 
     public function __construct()
     {
@@ -33,8 +33,12 @@ class LopController extends Controller
      */
     public function index(Request $request)
     {
+
+        $this->authorize(mb_strtoupper('xem lớp học') );
+
         $this->v['params'] =  $request->all();
-        $list = $this->lophoc->listGiangVien($this->v['params'], true, 10 , true);
+        unset($this->v['params']['_token']);
+        $list = $this->lophoc->listGiangVien($this->v['params'], true, 10, true);
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien'][2]);   
         $this->v['list'] = $list;
@@ -61,6 +65,7 @@ class LopController extends Controller
     public function store(LopRequest $request)
     {
         //
+        $this->authorize(mb_strtoupper('thêm lớp học') );
 
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
@@ -102,14 +107,16 @@ class LopController extends Controller
      */
     public function show($id_xep_lop)
     {
-        if(isset($id_xep_lop)){
+        $this->authorize(mb_strtoupper('xem lớp học') );
+
+        if (isset($id_xep_lop)) {
             // dd(12);
-            
+
             $res =  $this->lophoc->show($id_xep_lop);
-            if($res){
+            if ($res) {
                 $this->v['item'] = $res;
-                $this->v['giangvien'] = $this->giangvien->index(null , false , null);
-                $this->v['cahoc'] = $this->cahoc->index(null , false , null);
+                $this->v['giangvien'] = $this->giangvien->index(null, false, null);
+                $this->v['cahoc'] = $this->cahoc->index(null, false, null);
                 // dd($this->v['cahoc']);
                 return view('admin.xeplop.detail', $this->v);
             }
@@ -124,7 +131,8 @@ class LopController extends Controller
      */
     public function edit($id, Request $request)
     {
-        //
+        $this->authorize(mb_strtoupper('edit lớp học') );
+        
         if ($id) {
             $request->session()->put('id', $id);
             $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
@@ -148,6 +156,8 @@ class LopController extends Controller
      */
     public function update(LopRequest $request)
     {
+        $this->authorize(mb_strtoupper('update lớp học') );
+
 
         if (session('id')) {
             $id = session('id');
@@ -186,6 +196,8 @@ class LopController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa lớp học') );
+
         if ($id) {
             $res = $this->lophoc->remove($id);
             if ($res > 0) {
@@ -207,26 +219,50 @@ class LopController extends Controller
         return $file->storeAs('imgLopHoc', $filename, 'public');
     }
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
+
+        $this->authorize(mb_strtoupper('xóa lớp học') );
+
         // dd($request->all);
         // $request  =  $request->all();
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->lophoc->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
+        }
+    }
+
+    public function autocomplete(Request $request)
+    {
+
+        $data = $request->all();
+
+        if ($data['query']) {
+            $lop = Lop::where('delete_at', '=', 1)
+                ->where('ten_lop', 'LIKE', '%'  . $data['query'] . '%')->get();
+            $output = '<ul class="dropdown-menu" style= "display: block;position: absolute;width: 100%; padding-left: 5px;" >';
+            foreach ($lop as $value) {
+                $output  .= '<li class="ajax" style="cursor: pointer;"> ' . $value->ten_lop .  '</li>';
+            }
+
+            $output .= '</ul>';
+
+            echo $output;
+
+        
         }
     }
 }

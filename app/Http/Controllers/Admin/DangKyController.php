@@ -29,6 +29,8 @@ class DangKyController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem đăng ký') );
+
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->dangky->index($this->v['params'], true, 10);
 
@@ -54,6 +56,8 @@ class DangKyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize(mb_strtoupper('thêm đăng ký') );
+
         $lop = $this->lop->index(null, false, null);
         $this->v['lop'] =  $lop;
 
@@ -114,6 +118,8 @@ class DangKyController extends Controller
     {
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa đăng ký') );
+
         if ($request->isMethod('POST')) {
             $params = [];
             $params['cols'] = array_map(function ($item) {

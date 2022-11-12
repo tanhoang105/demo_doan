@@ -25,6 +25,9 @@ class VaiTroController extends Controller
      */
     public function index(Request $request)
     {
+
+        $this->authorize(mb_strtoupper('xem vai tro') );
+
         $this->v['params'] = $request->all();
         $list = $this->vaitro->index($this->v['params'], true, 10);
         $this->v['list'] = $list;
@@ -50,6 +53,7 @@ class VaiTroController extends Controller
     public function store(VaitroRequest $request)
     {
         // thực hiện code thêm ở đây
+        $this->authorize(mb_strtoupper('thêm vai trò') );
 
         if ($request->isMethod('POST')) {
             $params = [];
@@ -102,6 +106,8 @@ class VaiTroController extends Controller
     public function edit($id, Request $request)
     {
         //
+        $this->authorize(mb_strtoupper('edit vai trò') );
+
         if ($id) {
             // nếu có id bản ghi chỉnh sửa
             $request->session()->put('id', $id);
@@ -124,6 +130,9 @@ class VaiTroController extends Controller
     public function update(VaitroRequest $request)
     {
         //
+
+        $this->authorize(mb_strtoupper('update vai trò') );
+
         $id = session('id');
         $params  = [];
         $params['cols'] = array_map(function ($item) {
@@ -161,6 +170,8 @@ class VaiTroController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xoa vai trò') );
+
 
         if ($id) {
             // nếu có id của bản ghi xoas
@@ -185,6 +196,8 @@ class VaiTroController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xoa vai trò') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){
