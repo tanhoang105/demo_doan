@@ -25,7 +25,7 @@ class CaHocController extends Controller
      */
     public function index(Request $request)
     {
-
+        $this->authorize(mb_strtoupper('xem ca học') );
         $this->v['params'] = $request->all();
         $this->v['list']  = $this->cahoc->index($this->v['params'], true, 5);
 
@@ -50,6 +50,8 @@ class CaHocController extends Controller
      */
     public function store(CaHocRequest $request)
     {
+        $this->authorize(mb_strtoupper('thêm ca học') );
+
         //
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
@@ -99,6 +101,7 @@ class CaHocController extends Controller
     public function edit($id, Request $request)
     {
         //
+        $this->authorize(mb_strtoupper('edit ca học') );
 
         if ($id) {
             $request->session()->put('id', $id);
@@ -118,6 +121,8 @@ class CaHocController extends Controller
     public function update(CaHocRequest $request)
     {
         //
+        $this->authorize(mb_strtoupper('update ca học') );
+
         if (session('id')) {
             $id  = session('id');
             $params = [];
@@ -155,6 +160,8 @@ class CaHocController extends Controller
     public function destroy($id)
     {
         //
+        $this->authorize(mb_strtoupper('xóa ca học') );
+
         if ($id) {
             $res = $this->cahoc->remove($id);
             if ($res > 0) {
@@ -170,6 +177,8 @@ class CaHocController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa ca học') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

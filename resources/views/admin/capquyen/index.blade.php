@@ -36,7 +36,7 @@
                 <tr>
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col">Tên tài khoản </th>
+                   
                     <th scope="col">Vai trò </th>
                     <th scope="col">Quyền </th>
                     <th scope="col">Sửa</th>
@@ -50,9 +50,9 @@
                     <tr>
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
-                        <td> {{ $item->name }}</td>
+                       
                         <td>
-                            {{ $item->role->ten_vai_tro }}
+                            {{ $item->ten_vai_tro }}
                         </td>
                         <td>
                             <button class="btn btn-primary"><a style="color: #fff"

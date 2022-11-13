@@ -16,7 +16,7 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Quyen') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Quyen') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
@@ -33,18 +33,18 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mô tả</label>
-                    <input value="{{ old('mo_ta') ?? request()->mo_ta ?? $res->mo_ta }}" type="text"
-                        name="mo_ta" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Nhóm</label>
+                    <input value="{{ old('trang_thai') ?? request()->trang_thai ?? $res->trang_thai }}" type="number"
+                        name="trang_thai" class="form-control" id="" aria-describedby="emailHelp">
                         {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('mo_ta')
+                    @error('trang_thai')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
             </div>
             
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Cập nhập</button>
           
     </form>
 

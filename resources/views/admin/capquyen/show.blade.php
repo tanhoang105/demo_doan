@@ -28,32 +28,153 @@
             </button>
         </div>
     @endif
-    <div class="col-6 p-5" >
+    <div class="col-12 p-5">
 
         <div class="mb-3">
-            <label for="" class="form-label">Tên tài khoản : </label>
-            <span>{{ $user->name }}</span>
+            {{-- <label for="" class="form-label">Tên tài khoản : </label>
+            <span>{{ $user->name }}</span> --}}
 
-            <label style="margin-left: 20px" for="" class="form-label">   Vai trò: </label>
-            <span>{{ $vaitro->ten_vai_tro }}</span>
+            <label style="" for="" class="form-label"> Vai trò: </label>
+            <span style="font-weight:800 ; font-size:20px">{{ $vaitro->ten_vai_tro }}</span>
             <div>
                 <label for="" class="form-label">Quyền</label>
+                <input id="check_all" type="checkbox" />
                 <form action="{{ route('route_BE_Admin_Update_Cap_Quyen') }} " method="post" enctype="multipart/form-data">
                     @csrf
-                    <div>
+                    {{-- <div class="row">
+                        <div class="col-12 p-2">Modul phân quyền</div>
                         @foreach ($quyen as $item)
-                            
-                                <div>
+                            @if ($item->trang_thai == 2)
+                                <div class="col-3">
+
                                     <input <?php foreach ($q as $key => $value) {
-                                        if($value->ten == $item->ten){
+                                        if ($value->ten == $item->ten) {
                                             echo 'checked';
                                         }
-                                    }  ?>  type="checkbox" name="cho_phep[]" id="" value=" {{ $item->id }} ">
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
                                     {{ $item->ten }}
                                 </div>
-                         
+                            @endif
                         @endforeach
                     </div><br>
+
+                    <div class="row">
+                        <div class="col-12 p-2">Modul tài khoản</div>
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == 3)
+                                <div class="col-3">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-12 p-2">Modul tài khoản</div>
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == 4)
+                                <div class="col-3">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-12 p-2">Modul tài khoản</div>
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == 5)
+                                <div class="col-3">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br>
+
+                    <div class="row">
+                        <div class="col-12 p-2">Modul tài khoản</div>
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == 6)
+                                <div class="col-3">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br>
+
+
+                    <div class="row">
+                        <div class="col-12 p-2">Modul tài khoản</div>
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == 7)
+                                <div class="col-3">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br> --}}
+
+                    @for ($i = 2; $i <= 17; $i++)
+                    <div class="row">
+                        {{-- <div class="col-12 p-2">Modul</div> --}}
+                        @foreach ($quyen as $item)
+                            @if ($item->trang_thai == $i)
+                                <div class="col-2">
+
+                                    <input <?php foreach ($q as $key => $value) {
+                                        if ($value->ten == $item->ten) {
+                                            echo 'checked';
+                                        }
+                                    } ?> type="checkbox" class="checkitem" name="cho_phep[]"
+                                        id="" value=" {{ $item->id }} ">
+                                    {{ $item->ten }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div><br>
+                    @endfor
+
+
+
+
+
+
                     <button class="btn btn-primary" type="submit">Cấp quyền</button>
                 </form>
             </div>

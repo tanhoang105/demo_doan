@@ -33,11 +33,11 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mô tả</label>
-                    <input value="{{ old('mo_ta') ?? request()->mo_ta }}" type="text"
-                        name="mo_ta" class="form-control" id="" aria-describedby="emailHelp">
+                    <label for="" class="form-label">Nhóm</label>
+                    <input value="{{ old('trang_thai') ?? request()->trang_thai }}" type="number"
+                        name="trang_thai" class="form-control" id="" aria-describedby="emailHelp">
                         {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('mo_ta')
+                    @error('trang_thai')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>

@@ -55,6 +55,8 @@ class DanhMucKhoaHoc extends Controller
      // hàm thêm mới bản ghi
     public function store(DanhMucRequest $request)
     {
+        $this->authorize(mb_strtoupper('thêm danh mục khóa học') );
+
         $this->v['exParam'] = $request->all();
         if ($request->isMethod('POST')) {
 
@@ -108,6 +110,8 @@ class DanhMucKhoaHoc extends Controller
      */
     public function edit($id , Request $request)
     {
+        $this->authorize(mb_strtoupper('edit danh mục khóa học') );
+
         if(!empty($id)){
             $request->session()->put('id', $id);
             $result = $this->danh_muc->show($id);
@@ -129,6 +133,8 @@ class DanhMucKhoaHoc extends Controller
      */
     public function update(DanhMucRequest $request)
     {
+        $this->authorize(mb_strtoupper('update danh mục khóa học') );
+
         $id  = session('id');
         $params = [];
         $params['cols'] = array_map(function ($item) {
@@ -165,6 +171,8 @@ class DanhMucKhoaHoc extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa danh mục khóa học') );
+
         $res = $this->danh_muc->remove($id);
         if ($res > 0) {
             // xóa danh mục thì cx cần xóa những khóa hoc liên quan
@@ -189,6 +197,8 @@ class DanhMucKhoaHoc extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa danh mục khóa học') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

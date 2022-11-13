@@ -151,6 +151,8 @@ class PhuongThucThanhToan extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa phương thức thanh toán') );
+ 
         if ($id) {
             $res = $this->phuong_thuc_thanh_toan->remove($id);
             if ($res > 0) {
@@ -166,6 +168,8 @@ class PhuongThucThanhToan extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa phương thức thanh toán') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

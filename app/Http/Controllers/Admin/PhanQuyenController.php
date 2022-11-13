@@ -25,6 +25,8 @@ class PhanQuyenController extends Controller
      */
     public function index(Request $request)
     {
+        // $this->authorize(mb_strtoupper('xem phân quyền'));
+
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->quyen->index($this->v['params'], true, 10);
         return view('admin.quyen.index', $this->v);
@@ -48,6 +50,8 @@ class PhanQuyenController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize(mb_strtoupper('thêm phân quyền'));
+
         if ($request->isMethod('POST')) {
             $params = [];
             $params['cols'] = array_map(function ($item) {
@@ -63,7 +67,8 @@ class PhanQuyenController extends Controller
             $res = $this->quyen->create($params);
             if ($res > 0) {
                 Session::flash('success', "Thêm thành công ");
-                return redirect()->route('route_BE_Admin_List_Quyen');
+                // return redirect()->route('route_BE_Admin_List_Quyen');
+                return back();
             } else {
                 Session::flash('success', "Thêm không thành công ");
                 return redirect()->route('route_BE_Admin_List_Quyen');
@@ -92,6 +97,8 @@ class PhanQuyenController extends Controller
      */
     public function edit($id, Request $request)
     {
+        // $this->authorize(mb_strtoupper('edit phân quyền'));
+
         if ($id) {
             $request->session()->put('id', $id);
             $res = $this->quyen->show($id);
@@ -111,6 +118,9 @@ class PhanQuyenController extends Controller
      */
     public function update(Request $request)
     {
+
+        // $this->authorize(mb_strtoupper('update phân quyền'));
+
         if ($request->isMethod('POST')) {
             $params = [];
             $params['cols'] = array_map(function ($item) {
@@ -123,13 +133,14 @@ class PhanQuyenController extends Controller
                 return $item;
             }, $request->post());
             unset($params['cols']['_token']);
-            $res = $this->quyen->save($params);
+            $params['cols']['id'] = session('id');
+            $res = $this->quyen->saveupdate($params);
             if ($res > 0) {
                 Session::flash('success', "Cập nhập thành công ");
-                return back();
+                return redirect()->route('route_BE_Admin_List_Quyen');
             } else {
                 Session::flash('success', "Cập nhập không thành công ");
-                return back();
+                return redirect()->route('route_BE_Admin_List_Quyen');
             }
         }
     }
@@ -142,6 +153,8 @@ class PhanQuyenController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa phân quyền'));
+
         if ($id) {
             $res = $this->quyen->remove($id);
             if ($res > 0) {
