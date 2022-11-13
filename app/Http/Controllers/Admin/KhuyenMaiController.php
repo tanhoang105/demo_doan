@@ -25,7 +25,8 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $this->authorize(mb_strtoupper('xem khuyến mại') );
+        
         $this->v['params']  = $request->all();
         $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
         return view('admin.khuyenmai.index', $this->v);
@@ -49,7 +50,8 @@ class KhuyenMaiController extends Controller
      */
     public function store(KhuyenmaiRequest $request)
     {
-        //
+        $this->authorize(mb_strtoupper('thêm khuyến mại') );
+        
         $this->v['params'] = $request->all();
         if ($request->isMethod("POST")) {
             $params = [];
@@ -99,6 +101,7 @@ class KhuyenMaiController extends Controller
     public function edit($id, Request $request)
     {
         //
+        $this->authorize(mb_strtoupper('edit khuyến mại') );
 
         if ($id) {
             $request->session()->put('id', $id);
@@ -119,6 +122,8 @@ class KhuyenMaiController extends Controller
      */
     public function update(KhuyenmaiRequest $request)
     {
+        $this->authorize(mb_strtoupper('update khuyến mại') );
+
         if (session('id')) {
             $id = session('id');
             $params = [];
@@ -153,6 +158,8 @@ class KhuyenMaiController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+
         if ($id) {
             $res = $this->khuyenmai->remove($id);
             if ($res > 0) {
@@ -168,6 +175,8 @@ class KhuyenMaiController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
+        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+
         if($request->isMethod('POST')){
             $params = [];
             $params['cols'] = array_map(function($item){

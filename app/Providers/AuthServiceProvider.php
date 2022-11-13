@@ -30,11 +30,8 @@ class AuthServiceProvider extends ServiceProvider
         if(! $this->app->runningInConsole()){
 
             foreach (ChoPhep::all() as $chophep){
-//                echo '<pre>';
-//                echo $chophep;
-//                $v['cols'] = $chophep->ten;
-//                dd($v);
-                Gate::define($chophep->ten , function ($user) use ($chophep){
+//             
+                Gate::define(mb_strtoupper($chophep->ten) , function ($user) use ($chophep){
 //
                     return $user->HasVaiTro($chophep);
                 });

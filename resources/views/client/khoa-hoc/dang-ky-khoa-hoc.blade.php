@@ -266,18 +266,18 @@
                                 <label class="signup-field">Chọn phương thức thanh toán</label>
                                 @foreach($payment_method as $method)
                                     <div>
-                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}" hidden>
+                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}">
                                         <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
                                     </div>
                                 @endforeach
-                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">
-                                    @csrf
-                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>
-                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>
-                                    <div class="form-group">
-                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
-                                    </div>
-                                </form>
+{{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>--}}
+{{--                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
                             </div>
 
 {{--                            <div class="col-12 p-3">--}}
@@ -299,44 +299,44 @@
         </div>
     </section>
 @endsection
-@section('js')
-    <script>
-        $(document).ready(function () {
-            $(document).on('click','.btn-thanh-toan',function (e) {
-                const
-            })
-        })
-    </script>
-@endsection
-@section('js')
-    <script>
-        $(document).ready(function() {
-            $(document).on('change', '#id_khoahoc', function (event) {
-                const url = $(this).data('url')
-                const data = $(this).val();
-                console.log(url, data);
-                $.ajax({
-                    type: 'GET',
-                    url: url,
-                    data: {
-                        id_khoahoc: data
-                    },
-                    success: function (res) {
-                        console.log(res)
-                        let htmls="<option>--Chọn Lớp--</option>"
-                        let ten_lop=Object.values(res.lop);
-                        console.log(res.lop);
-                        ten_lop.forEach(function (item) {
-                            console.log(item)
-                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`
-                        })
-                        $('#id_gia').val(res.gia_khoa_hoc)
-                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
-                        $('#id_lop').html(htmls)
-                    }
-                })
-            })
-        })
-    </script>
-@endsection
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        $(document).ready(function () {--}}
+{{--            $(document).on('click','.btn-thanh-toan',function (e) {--}}
+{{--                const--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
+{{--@endsection--}}
+{{--@section('js')--}}
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $(document).on('change', '#id_khoahoc', function (event) {--}}
+{{--                const url = $(this).data('url')--}}
+{{--                const data = $(this).val();--}}
+{{--                console.log(url, data);--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: url,--}}
+{{--                    data: {--}}
+{{--                        id_khoahoc: data--}}
+{{--                    },--}}
+{{--                    success: function (res) {--}}
+{{--                        console.log(res)--}}
+{{--                        let htmls="<option>--Chọn Lớp--</option>"--}}
+{{--                        let ten_lop=Object.values(res.lop);--}}
+{{--                        console.log(res.lop);--}}
+{{--                        ten_lop.forEach(function (item) {--}}
+{{--                            console.log(item)--}}
+{{--                            htmls+=` <option  value="${ item.id }">${ item.ten_lop }</option>`--}}
+{{--                        })--}}
+{{--                        $('#id_gia').val(res.gia_khoa_hoc)--}}
+{{--                        $('#gia_khoa_hoc').val(res.gia_khoa_hoc)--}}
+{{--                        $('#id_lop').html(htmls)--}}
+{{--                    }--}}
+{{--                })--}}
+{{--            })--}}
+{{--        })--}}
+{{--    </script>--}}
+{{--@endsection--}}
 

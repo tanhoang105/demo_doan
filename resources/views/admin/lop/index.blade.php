@@ -1,4 +1,9 @@
 @extends('Admin.templates.layout')
+
+@section('form-search')
+    {{route('route_BE_Admin_List_Lop')}}
+@endsection
+
 @section('content')
     <div class="row p-3">
         <a href="{{ route('route_BE_Admin_Add_Lop') }}">

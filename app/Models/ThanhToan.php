@@ -34,4 +34,24 @@ class ThanhToan extends Model
             ->insertGetId($params);
         return $res;
     }
+    // lấy thông tin đơn hàng
+    public function loadOne($id){
+        $result = DB::table('thanh_toan')
+            ->join('dang_ky','dang_ky.id_thanh_toan','=','thanh_toan.id')
+            ->where('dang_ky.id', $id)
+            ->select('thanh_toan.*')
+            ->get();
+        return $result;
+    }
+
+    // cập nhập trạng thái đơn hàng
+    public function updatePaid($id){
+        $query = DB::table('thanh_toan')
+            ->join('dang_ky','dang_ky.id_thanh_toan','=','thanh_toan.id')
+            ->where('dang_ky.id', $id)
+            ->update([
+                'thanh_toan.trang_thai' => 2,
+            ]);
+        return $query;
+    }
 }

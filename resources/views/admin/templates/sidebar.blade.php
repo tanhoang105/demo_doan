@@ -8,7 +8,7 @@
               <div class="image">
                   <img style="border-radius: 100px;width: 50px; height: 50px;%"
                       src="{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh) }}"
-                      class="img-circle elevation-2" alt="User Image">
+                       >
               </div>
               <div class="info">
 
@@ -35,16 +35,8 @@
               data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-              <li class="nav-item menu-open">
-                  <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">
-                      <i class="nav-icon fas fa-tachometer-alt"></i>
-                      <p>
-                          Lớp Học
-                          <i class="right fas fa-angle-left"></i>
-                      </p>
-                  </a>
+              @hasRoles(['admin'])
 
-              </li>
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_Tai_Khoan') }}" class="nav-link ">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -60,18 +52,22 @@
                       <p>
                           Quyền tài khoản
                           <i class="fas fa-angle-left right"></i>
-                          
+
                       </p>
                   </a>
+              </li>
+
+              <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Cap_Quyen') }} " class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>
                       <p>
                           Cấp quyền tài khoản
                           <i class="fas fa-angle-left right"></i>
-                          
+
                       </p>
                   </a>
-                  {{-- <ul class="nav nav-treeview">
+              </li>
+              {{-- <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="pages/layout/top-nav.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -121,29 +117,11 @@
                         </a>
                     </li>
                 </ul> --}}
-              </li>
-
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-tree"></i>
-                      <p>
-                          Thanh Toán
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-
-              </li>
 
 
-              <li class="nav-item">
-                <a href=" {{route('route_BE_Admin_List_Dang_Ky')}} " class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
 
-                          Đăng ký
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
+
+
 
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Hoc_Vien') }} " class="nav-link">
@@ -169,48 +147,8 @@
               </li>
 
 
-              <li class="nav-item">
-                  <a href="{{ route('route_BE_Admin_Xep_Lop') }}" class="nav-link">
-                      <i class="nav-icon fas fa-edit"></i>
-                      <p>
-                          Xếp Lớp
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
 
-              </li>
-              <li class="nav-item">
-                  <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}" class="nav-link">
-                      <i class="nav-icon fas fa-edit"></i>
-                      <p>
-                          Danh mục khóa học
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
 
-              </li>
-
-              <li class="nav-item">
-                  <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}" class="nav-link">
-                      <i class="nav-icon fas fa-edit"></i>
-                      <p>
-                          Khóa học
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-
-              </li>
-
-              <li class="nav-item">
-                  <a href="{{ route('route_BE_Admin_Phong_Hoc') }}" class="nav-link">
-                      <i class="nav-icon fas fa-edit"></i>
-                      <p>
-                          Phòng Học
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-
-              </li>
 
               <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Vai_Tro') }}" class="nav-link">
@@ -235,6 +173,79 @@
               </li>
 
               <li class="nav-item">
+                  <a href="{{ route('route_BE_Admin_Banner') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Banner
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+              @endhasRoles
+              {{-- end admin --}}
+
+
+              {{-- tác vụ của đào tạo  --}}
+              @hasRoles(['admin' , 'đào tạo'])
+              <li class="nav-item">
+                  <a href="{{ route('route_BE_Admin_Xep_Lop') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Xếp Lớp
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              <li class="nav-item">
+                  <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                          Lớp Học
+                          <i class="right fas fa-angle-left"></i>
+                      </p>
+                  </a>
+
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Danh mục khóa học
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+
+
+
+              <li class="nav-item">
+                  <a href="{{ route('route_BE_Admin_Phong_Hoc') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Phòng Học
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              <li class="nav-item">
+                  <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Khóa học
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Ca_Hoc') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                       <p>
@@ -245,6 +256,24 @@
 
               </li>
 
+              <li class="nav-item">
+                  <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
+
+                          Đăng ký
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              @endhasRoles
+              {{-- end tác vụ đào tạo --}}
+
+
+              {{-- tác vụ của kế toán --}}
+              @hasRoles(['admin' , 'kế toán'])
               <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
@@ -257,17 +286,17 @@
               </li>
 
               <li class="nav-item">
-                  <a href="{{ route('route_BE_Admin_Banner') }}" class="nav-link">
-                      <i class="nav-icon fas fa-edit"></i>
+                  <a href="#" class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
                       <p>
-                          Banner
+                          Thanh Toán
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
 
               </li>
 
-
+              @endhasRoles
           </ul>
       </nav>
       <!-- /.sidebar-menu -->
