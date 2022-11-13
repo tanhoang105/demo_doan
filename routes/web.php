@@ -59,7 +59,23 @@ Route::get('vnp-return',[\App\Http\Controllers\Client\ThanhToanController::class
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
 Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
+Route::get('/form_doi_lop/{id}', [\App\Http\Controllers\Client\LopController::class, 'form_doi_lop'])->name('form_doi_lop');
+Route::post('/doi_lop', [\App\Http\Controllers\Client\LopController::class, 'doi_lop'])->name('doi_lop');
+//lich_hoc 
 Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
+//doi khoa_hoc
+Route::get('/khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'khoa_hoc'])->name('khoa_hoc_dang_ki');
+Route::get('/get_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_khoa_hoc'])->name('get_khoa_hoc');
+Route::get('/get_lop/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_lop'])->name('get_lop');
+Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
+// tk ghi no
+Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
+
+
+
+
+
+
 
 
 

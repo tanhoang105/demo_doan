@@ -115,7 +115,7 @@ class AuthController extends Controller
         // Tạo token mới
         $request->session()->regenerateToken();
         // Quay về màn login
-        return redirect()->route('auth.loginForm');
+        return redirect()->route('home');
     }
     /**
      * Display the specified resource.
