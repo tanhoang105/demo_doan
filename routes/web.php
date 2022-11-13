@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
@@ -124,6 +125,17 @@ Route::prefix('/admin')->group(function () {
         Route::get('/giang-vien-delete/{id}', [GiangVienController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/giang-vien-edit/{id}', [GiangVienController::class, 'edit'])->name('Edit_Giang_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
+    });
+
+
+    // thanh toán
+    Route::prefix('/thanh-toan')->name('route_BE_Admin_')->group(function () {
+        Route::post('xoa-all', [ThanhToanController::class, 'destroyAll'])->name('Xoa_All_Thanh_Toan');
+        Route::get('/', [ThanhToanController::class, 'index'])->name('List_Thanh_Toan'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-thanh-toan',   [ThanhToanController::class, 'store'])->name('Add_Thanh_Toan'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/delete/{id}', [ThanhToanController::class, 'destroy'])->name('Xoa_Thanh_Toan');
+        Route::get('/edit/{id}', [ThanhToanController::class, 'edit'])->name('Edit_Thanh_Toan'); // hiển thị chi tiết bản ghi
+        Route::post('/update', [ThanhToanController::class, 'update'])->name('Update_Thanh_Toan');
     });
 
 
