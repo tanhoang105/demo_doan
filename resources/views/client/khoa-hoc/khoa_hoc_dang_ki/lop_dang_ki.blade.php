@@ -1,6 +1,6 @@
 @extends('client.profile.layout')
 @section('title')
-    - Lớp
+    Danh sách lớp
 @endsection
 @section('content')
 <div>
@@ -18,7 +18,7 @@
                         <div class="feat_course_item">
                             <div class="feat_cour_price">
                                 <h3> {{ $value->ten_lop }}</h3>
-                                <span class="feat_cour_tag"> {{ $value->so_luong }}/40 </span>
+                                <span class="feat_cour_tag"> {{40- $value->so_luong }}/40 </span>
                             </div>
                             <div class="pb-4">
                                 <div class="">
@@ -46,13 +46,13 @@
                             </div>
                                     <div class="feat_cour_rating">
                                       {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
-                                      <form action="{{route('form_doi_lop',$value->lop_id)}}" method="GET">
+                                      <form action="{{route('doi_khoa_hoc')}}" method="POST">
                                         @csrf
-                                        {{-- <input type="date" name="ngaybatdau_lopcu" value="{{$value->ngay_bat_dau}}" id=""> --}}
-                                        <input type="text" value="{{$value->khoa_hoc_id}}" name="khoahoc_id" hidden id="">
-                                        <input type="text" name="xeplop_id" value="{{$value->id}}" hidden id="">
+                                        <input type="text" value="{{$value->id}}" name="lopmoi_id" hidden id="">
+                                        <input type="text" value="{{$lopcu_id}}" name="lopcu_id" hidden id="">
+                                        <input type="text" name="xeplop_id" value="{{$xeplop_id}}" hidden id="">
                                         @if ($value->ngay_bat_dau >= date('Y-m-d'))
-                                        <button class="btn btn-primary">Đổi lớp</button>
+                                        <button onclick="return confirm('Bạn có chắc muốn đổi khóa học! ')" class="btn btn-primary">Chọn lớp</button>
                                         @endif
                                       </form>
                                 </div>
