@@ -266,18 +266,18 @@
                                 <label class="signup-field">Chọn phương thức thanh toán</label>
                                 @foreach($payment_method as $method)
                                     <div>
-                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}" hidden>
+                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}">
                                         <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
                                     </div>
                                 @endforeach
-                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">
-                                    @csrf
-                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>
-                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>
-                                    <div class="form-group">
-                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
-                                    </div>
-                                </form>
+{{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>--}}
+{{--                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
                             </div>
 
 {{--                            <div class="col-12 p-3">--}}
