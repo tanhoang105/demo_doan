@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\DangKy;
 use App\Models\Payment;
 use App\Models\ThanhToan;
 use Illuminate\Http\Request;
@@ -129,12 +130,12 @@ class ThanhToanController extends Controller
         $vnpTranId = $inputData['vnp_TransactionNo']; //Mã giao dịch tại VNPAY
         $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
         $vnp_Amount = $inputData['vnp_Amount'] / 100; // Số tiền thanh toán VNPAY phản hồi
-        $paid = 0; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo
+        $trnag_thai = 1; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo
 //        URL thanh toán.
 //        dd($paid);
-        $orderId = $inputData['vnp_TxnRef'];
+        $id = $inputData['vnp_TxnRef'];
 //        echo "<pre>";
-//        print_r($orderId);
+//        print_r($id);
 //        echo "</pre>";
 //        die();
         try {
@@ -144,26 +145,28 @@ class ThanhToanController extends Controller
                 //Lấy thông tin đơn hàng lưu trong Database và kiểm tra trạng thái của đơn hàng, mã đơn hàng là: $orderId
                 //Việc kiểm tra trạng thái của đơn hàng giúp hệ thống không xử lý trùng lặp, xử lý nhiều lần một giao dịch
                 //Giả sử: $order = mysqli_fetch_assoc($result);
-                $result=$this->obj->loadOne($orderId);
+                $result=$this->obj->loadOne($id);
+//                dd($result);
                 $order = [];
                 foreach ($result as $or) {
                     $order[] = $or;
                 }
                 if ($order != NULL) {
-                    if ($order[0]->total_pr == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền
+                    if ($order[0]->gia == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền
 //                    kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
                     {
-                        if ($order[0]->paid == 0) {
+                        if ($order[0]->trang_thai == 1) {
                             if ($inputData['vnp_ResponseCode'] == '00' || $inputData['vnp_TransactionStatus'] == '00') {
-                                $paid = 1; // Trạng thái thanh toán thành công
+                                $trang_thai = 2; // Trạng thái thanh toán thành công
                             } else {
-                                $paid = 0; // Trạng thái thanh toán thất bại / lỗi
+                                $trnag_thai = 1; // Trạng thái thanh toán thất bại / lỗi
                             }
                             //Trả kết quả về cho VNPAY: Website/APP TMĐT ghi nhận yêu cầu thành công
                             $returnData['RspCode'] = '00';
                             $returnData['Message'] = 'Confirm Success';
                             //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
-                            $query=$this->obj->updatePaid($orderId);
+                            $query=$this->obj->updatePaid($id);
+                            return view('client.thanh-toan.thanh-toan-thanh-cong');
                         } else {
                             $returnData['RspCode'] = '02';
                             $returnData['Message'] = 'Order already confirmed';
@@ -189,7 +192,6 @@ class ThanhToanController extends Controller
     }
 
     public function resultPay(Request $request){
-
         $vnp_SecureHash = $_GET['vnp_SecureHash'];
         $inputData = array();
         foreach ($_GET as $key => $value) {
@@ -215,7 +217,7 @@ class ThanhToanController extends Controller
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
 //                echo "GD Thanh cong";
-                return view('client.complete-pay');
+                return view('client.thanh-toan.thanh-toan-thanh-cong');
             }
             else {
                 echo "GD Khong thanh cong";
