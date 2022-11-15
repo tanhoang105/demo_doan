@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ThanhToanController;
+use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
@@ -116,6 +117,18 @@ Route::prefix('/admin')->group(function () {
         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
         Route::post('xoa-all', [DangKyController::class, 'destroyAll'])->name('Xoa_All_Dang_Ky');
+    });
+
+
+    
+    // đăng ký
+    Route::prefix('/thu-hoc')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [ThuHocController::class, 'index'])->name('List_Thu_Hoc'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-thu-hoc',   [ThuHocController::class, 'store'])->name('Add_Thu_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/delete/{id}', [ThuHocController::class, 'destroy'])->name('Xoa_Thu_Hoc');
+        Route::get('/edit/{id}', [ThuHocController::class, 'edit'])->name('Edit_Thu_Hoc'); // hiển thị chi tiết bản ghi
+        Route::post('/update', [ThuHocController::class, 'update'])->name('Update_Thu_Hoc');
+        Route::post('xoa-all', [ThuHocController::class, 'destroyAll'])->name('Xoa_All_Thu_Hoc');
     });
     // giảng viên
     Route::prefix('/giang-vien')->name('route_BE_Admin_')->group(function () {
