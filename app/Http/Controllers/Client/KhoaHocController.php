@@ -44,10 +44,12 @@ class KhoaHocController extends Controller
         // dd($lop);
         $khoahoclienquan = KhoaHoc::select('khoa_hoc.*', 'danh_muc.ten_danh_muc')->where('khoa_hoc.id_danh_muc', '=', $detail->id_danh_muc)
             ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
+            ->whereNotIn('khoa_hoc.id' , [$id])
             ->skip(0)->take(4)->get();
         return view('client.khoa-hoc.chi-tiet-khoa-hoc', compact('detail', 'giang_vien', 'lop', 'danhmuc', 'khoahoclienquan'));
     }
     public function khoa_hoc()
+    
     {
         // 
         $khoa_hoc_cu = KhoaHoc::join('lop', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
