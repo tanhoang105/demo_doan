@@ -33,6 +33,7 @@
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc</th>
                     <th scope="col">Mô tả</th>
+                    <th scope="col">Gửi tới học viên</th>
                     <th scope="col">Sửa</th>
                    
                     <th scope="col">
@@ -53,6 +54,7 @@
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
+                        <td> <button class="bt btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_Gui_Ma_KHuyen_Mai' , ['id'=> $item->id])}} ">Gửi</a></button></td>
                         <td> <button class="btn btn-warning"><a
                                     href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa

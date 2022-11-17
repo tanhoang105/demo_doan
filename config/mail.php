@@ -92,9 +92,18 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hoangnhattan2k2@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Trung Tâm IT'),
     ],
+
+    // 'stream' => [
+    //     'ssl' => [
+    //         'allow_self_signed' => true ,
+    //         'verify_peer' => false ,
+    //         'verify_peer-name' => false ,
+
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

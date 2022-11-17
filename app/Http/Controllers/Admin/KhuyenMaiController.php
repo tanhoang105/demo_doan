@@ -4,19 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KhuyenmaiRequest;
+use App\Mail\SendMail;
+use App\Models\HocVien;
 use App\Models\KhuyenMai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class KhuyenMaiController extends Controller
 {
     protected $v;
-    protected $khuyenmai;
+    protected $khuyenmai, $hocvien;
 
     public function __construct()
     {
         $this->v = [];
         $this->khuyenmai = new KhuyenMai();
+        $this->hocvien = new HocVien();
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +29,8 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(mb_strtoupper('xem khuyến mại') );
-        
+        $this->authorize(mb_strtoupper('xem khuyến mại'));
+
         $this->v['params']  = $request->all();
         $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
         return view('admin.khuyenmai.index', $this->v);
@@ -50,8 +54,8 @@ class KhuyenMaiController extends Controller
      */
     public function store(KhuyenmaiRequest $request)
     {
-        $this->authorize(mb_strtoupper('thêm khuyến mại') );
-        
+        $this->authorize(mb_strtoupper('thêm khuyến mại'));
+
         $this->v['params'] = $request->all();
         if ($request->isMethod("POST")) {
             $params = [];
@@ -101,15 +105,15 @@ class KhuyenMaiController extends Controller
     public function edit($id, Request $request)
     {
         //
-        $this->authorize(mb_strtoupper('edit khuyến mại') );
+        $this->authorize(mb_strtoupper('edit khuyến mại'));
 
         if ($id) {
             $request->session()->put('id', $id);
             $res = $this->khuyenmai->show($id);
-            if($res){
+            if ($res) {
                 $this->v['khuyenmai']  = $res;
             }
-            return view('admin.khuyenmai.update' ,$this->v);
+            return view('admin.khuyenmai.update', $this->v);
         }
     }
 
@@ -122,7 +126,7 @@ class KhuyenMaiController extends Controller
      */
     public function update(KhuyenmaiRequest $request)
     {
-        $this->authorize(mb_strtoupper('update khuyến mại') );
+        $this->authorize(mb_strtoupper('update khuyến mại'));
 
         if (session('id')) {
             $id = session('id');
@@ -158,7 +162,7 @@ class KhuyenMaiController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+        $this->authorize(mb_strtoupper('xóa khuyến mại'));
 
         if ($id) {
             $res = $this->khuyenmai->remove($id);
@@ -172,28 +176,42 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+        $this->authorize(mb_strtoupper('xóa khuyến mại'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->khuyenmai->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
+    }
+
+    public function GuiMaKhuyenMai($id)
+    {
+        $makhuyenmai = $this->khuyenmai->show($id);
+        $makhuyenmai =  $makhuyenmai->ma_khuyen_mai;
+        $listHovien = $this->hocvien->index(null, false, null);
+
+        foreach ($listHovien  as $item) {
+
+            Mail::to($item->email)->send(new SendMail(['message' => 'Xin chào bạn vì bạn đang là học viên của trung tâm IT , Trung tâm IT gửi bạn mã khuyến mại' . $makhuyenmai , 'password' => null]));
+        }
+
+        return back();
     }
 }

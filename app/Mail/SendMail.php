@@ -60,7 +60,7 @@ class SendMail extends Mailable
     public function build()
     {
         return $this->subject("Trung Tâm Dạy Học IT ")
-            ->view('sendmail.dangky')
+            ->view('sendmail.makhuyenmai')
             ->with('emails', $this->email);
     }
 }

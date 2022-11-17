@@ -275,6 +275,7 @@ Route::prefix('/admin')->group(function () {
         Route::post('/update', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
         Route::match(['get', 'post'], '/add', [KhuyenMaiController::class, 'store'])->name('Add_Khuyen_Mai');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
+        Route::get('gui-ma-khuyen-mai/{id}', [KhuyenMaiController::class, 'GuiMaKhuyenMai'])->name('Gui_Ma_KHuyen_Mai');
     });
 
 
