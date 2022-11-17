@@ -8,9 +8,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('khoa_hoc_dang_ki')}}">
                     <span data-feather="file"></span>
-                    Hồ sơ
+                    Khóa học
                 </a>
             </li>
             <li class="nav-item">

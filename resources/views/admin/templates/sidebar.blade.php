@@ -220,6 +220,17 @@
 
               </li>
 
+              <li class="nav-item">
+                <a href=" {{route('route_BE_Admin_List_Thu_Hoc')}} " class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                        Thứ Học
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
+
 
 
 
@@ -286,7 +297,7 @@
               </li>
 
               <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href=" {{route('route_BE_Admin_List_Thanh_Toan')}} " class="nav-link">
                       <i class="nav-icon fas fa-tree"></i>
                       <p>
                           Thanh Toán
@@ -295,6 +306,8 @@
                   </a>
 
               </li>
+
+             
 
               @endhasRoles
           </ul>
