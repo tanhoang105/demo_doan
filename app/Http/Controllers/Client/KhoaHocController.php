@@ -9,6 +9,7 @@ use App\Models\KhoaHoc;
 use App\Models\Lop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Symfony\Component\String\length;
 
 class KhoaHocController extends Controller
 {
@@ -42,5 +43,36 @@ class KhoaHocController extends Controller
             ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
             ->skip(0)->take(4)->get();
         return view('client.khoa-hoc.chi-tiet-khoa-hoc', compact('detail', 'giang_vien', 'lop', 'danhmuc', 'khoahoclienquan'));
+    }
+    public function locKhoaHoc(Request $request){
+//        dd($request->all());
+        $filter=[];
+        $sort=[];
+        $query = DB::table('khoa_hoc')
+            ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
+
+            ->select('danh_muc.*','khoa_hoc.*')
+            ->where('khoa_hoc.delete_at', '=', 1);
+
+        if (!empty($request->search)){
+            $filter[]=['ten_khoa_hoc','like','%'. $request->search .'%'];
+        }
+        if (!empty($request->filterKh)){
+            if ($request->filterKh=='new'){
+//                $sort[]=['id','desc'];
+                $query=$query->orderBy('khoa_hoc.id','desc');
+            }
+            else{
+//                $sort[]=['gia_khoa_hoc',$request->filterKh];
+                $query=$query->orderBy('gia_khoa_hoc',$request->filterKh);
+            }
+
+        }
+        if (!empty($filter)){
+            $query=$query->where($filter);
+        }
+        $listKh= $query->get();
+        $renderHtml=view('client.render-kh',compact('listKh'))->render();
+        return response()->json(array('success'=>true,'data'=>$renderHtml));
     }
 }

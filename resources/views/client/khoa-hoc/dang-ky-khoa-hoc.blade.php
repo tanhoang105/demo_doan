@@ -241,10 +241,11 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Email</label>
-                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->email??''}}" class="form-control" name="email" type="text" placeholder="Email">
+                                <input style="margin: 10px;height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" class="form-control" id="email" name="email" type="text" placeholder="Email">
                                 @error('email')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
+                                <div class="text-danger error_email"></div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
@@ -286,7 +287,7 @@
 {{--                            </div>--}}
 
                             <div class="col-6 p-3">
-                                <button class="btn btn-primary" type="submit" >Xác nhận</button>
+                                <button class="btn btn-primary" id="submit" type="submit">Xác nhận</button>
                             </div>
 
                         </div>
@@ -298,6 +299,41 @@
 
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            let checkEmail=false;
+          $('#email').blur(function () {
+            let email=$(this).val();
+            let url=$(this).data('url');
+            $.ajax({
+                type:'GET',
+                url :url,
+                data:{
+                    email:email,
+
+                },
+                success:function (res) {
+                    if(res['status']==200){
+                        checkEmail=true;
+                        $('.error_email').html('')
+                        $('#submit').attr('disabled',false)
+                    }
+                    else {
+                        checkEmail=false;
+                        $('.error_email').html('Email này đã đăng ký tài khoản')
+                        $('#submit').attr('disabled',true)
+                    }
+                }
+
+            })
+
+          })
+
+        })
+    </script>
 @endsection
 {{--@section('js')--}}
 {{--    <script>--}}

@@ -43,6 +43,8 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('check-email',[\App\Http\Controllers\Client\DangKyController::class,'checkEmail'])->name('client_check_email');
+Route::get('/loc-khoa-hoc',[\App\Http\Controllers\Client\KhoaHocController::class,'locKhoaHoc'])->name('loc_khoa_hoc');
 
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
@@ -272,7 +274,7 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-// // route đào tạo 
+// // route đào tạo
 // Route::prefix('/admin')->middleware(['role:đào tạo'])->group(function () {
 //     Route::get('/', function () {
 //         return view('admin.trangchu');
