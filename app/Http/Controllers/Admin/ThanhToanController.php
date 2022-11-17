@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PhuongThucThanhToan;
 use App\Models\ThanhToan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use PDF;
 class ThanhToanController extends Controller
 {
 
@@ -23,6 +24,8 @@ class ThanhToanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
     public function index(Request $request)
     {
         $this->v['params'] = $request->all();
@@ -171,5 +174,17 @@ class ThanhToanController extends Controller
             }
           
         }
+    }
+
+    public function inHoaDon($id){
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTMl($this->print_order_convert($id));
+        return $pdf->stream();
+    }
+
+
+    public function print_order_convert($id){
+        $hoaDon = $this->thanhtoan->inhoahon($id);
+        return $hoaDon;
     }
 }

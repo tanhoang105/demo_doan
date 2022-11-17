@@ -20,8 +20,8 @@ class ThanhToan extends Model
     {
         if ($pagination) {
             $query  = DB::table($this->table)
-                ->where($this->table .'.delete_at', '=', 1)
-                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=' , 'phuong_thuc_thanh_toan.id')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=', 'phuong_thuc_thanh_toan.id')
                 ->select('phuong_thuc_thanh_toan.*', $this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -32,8 +32,8 @@ class ThanhToan extends Model
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
-                ->where( $this->table . '.delete_at', '=', 1)
-                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=' , 'phuong_thuc_thanh_toan.id')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=', 'phuong_thuc_thanh_toan.id')
                 ->select('phuong_thuc_thanh_toan.*', $this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -81,8 +81,9 @@ class ThanhToan extends Model
     }
 
     // hàm xóa bản ghi theo id
-    public function remove($id){
-        if(!empty($id)) {
+    public function remove($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)->where('id', '=', $id);
             $data = [
                 'delete_at' => 0
@@ -94,7 +95,7 @@ class ThanhToan extends Model
 
 
     // hàm update bản ghi
-    public function saveupdate( $params)
+    public function saveupdate($params)
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
@@ -107,20 +108,21 @@ class ThanhToan extends Model
     }
 
 
-    public function show($id){
-        if(!empty($id)){
+    public function show($id)
+    {
+        if (!empty($id)) {
             $query = DB::table($this->table)
-                    ->where('id' , '=' , $id)
-                    ->first();
+                ->where('id', '=', $id)
+                ->first();
             return $query;
-
         }
     }
 
     // lấy thông tin đơn hàng
-    public function loadOne($id){
+    public function loadOne($id)
+    {
         $result = DB::table('thanh_toan')
-            ->join('dang_ky','dang_ky.id_thanh_toan','=','thanh_toan.id')
+            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', 'thanh_toan.id')
             ->where('dang_ky.id', $id)
             ->select('thanh_toan.*')
             ->get();
@@ -128,9 +130,10 @@ class ThanhToan extends Model
     }
 
     // cập nhập trạng thái đơn hàng
-    public function updatePaid($id){
+    public function updatePaid($id)
+    {
         $query = DB::table('thanh_toan')
-            ->join('dang_ky','dang_ky.id_thanh_toan','=','thanh_toan.id')
+            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', 'thanh_toan.id')
             ->where('dang_ky.id', $id)
             ->update([
                 'thanh_toan.trang_thai' => 2,
@@ -138,4 +141,13 @@ class ThanhToan extends Model
         return $query;
     }
 
+    public function inhoahon($id)
+    {
+        $query = DB::table($this->table)
+            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', $this->table . '.id')
+            ->select('dang_ky.*', $this->table . '.*')
+            ->where($this->table.'.id' , '=' , $id  );
+
+        return $query->get();
+    }
 }
