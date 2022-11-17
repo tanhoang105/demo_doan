@@ -166,6 +166,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/delete/{id}', [ThanhToanController::class, 'destroy'])->name('Xoa_Thanh_Toan');
         Route::get('/edit/{id}', [ThanhToanController::class, 'edit'])->name('Edit_Thanh_Toan'); // hiển thị chi tiết bản ghi
         Route::post('/update', [ThanhToanController::class, 'update'])->name('Update_Thanh_Toan');
+        Route::get('/in-hoa-don/{id}', [ThanhToanController::class, 'inHoaDon'])->name('In_Hoa_Don');
     });
 
 

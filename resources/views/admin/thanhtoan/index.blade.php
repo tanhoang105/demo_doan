@@ -42,6 +42,7 @@
                     <th scope="col">Phương thức thanh toán </th>
                     <th scope="col">Ngày thanh toán</th>
                     <th scope="col">Tiền thanh toán</th>
+                    <th scope="col">In hóa đơn</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -64,7 +65,8 @@
                         </td>
                         <td> {{ $item->ngay_thanh_toan }}</td>
                         <td> {{ $item->gia }}</td>
-                        <td> <button class="btn btn-warning"><a
+                        <td><button class="btn btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_In_Hoa_Don', ['id' => $item->id] )}} ">In</a></button></td>
+                        <td><button class="btn btn-warning"><a
                                     href="{{ route('route_BE_Admin_Edit_Thanh_Toan', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa
                                 </a></button></td>
