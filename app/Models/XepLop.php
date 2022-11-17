@@ -20,12 +20,12 @@ class XepLop extends Model
             // nếu phần trang
             $query = DB::table($this->table)
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
-                ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
+                // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
                 ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*','khoa_hoc.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*','khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -38,11 +38,11 @@ class XepLop extends Model
             // nếu không phần trang
             $query = DB::table($this->table)
                 ->join('lop', $this->table . '.id_lop', '=', 'lop.id')
-                ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
+                // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
                 ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'ca_hoc.*', 'phong_hoc.*')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             $list = $query->get();

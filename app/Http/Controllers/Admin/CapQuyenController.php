@@ -121,8 +121,7 @@ class CapQuyenController extends Controller
         $quyenTheoVaiTro->detach();
         // dd($params['cols']['cho_phep']);
         for ($i = 0; $i < count($params['cols']['cho_phep']); $i++) {
-        // foreach ($params['cols']['cho_phep']  as $value) {
-            // $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $value->cho]);
+       
             $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $params['cols']['cho_phep'][$i]  ]);
         }
 
@@ -159,8 +158,7 @@ class CapQuyenController extends Controller
         // hiển thị những record có trong bản cho phép
         $quyen = $this->chophep->index(null, false, null);
         $this->v['quyen'] = $quyen;
-        // dd($quyen);
-        // $this->v['tk'] = $tk;
+       
 
         return view('admin.capquyen.show', $this->v);
     }

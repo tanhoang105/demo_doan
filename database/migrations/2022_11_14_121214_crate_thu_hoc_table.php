@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('thu_hoc', function (Blueprint $table) {
             $table->id();
-            $table->integer('ma_thu');
-            $table->integer('ten_thu');
-            $table->integer('mo_ta');
+            $table->text('ma_thu');
+            $table->string('ten_thu');
+            $table->text('mo_ta');
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();

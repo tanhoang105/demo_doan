@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('ca_thu', function (Blueprint $table) {
             $table->id();
             $table->integer('ca_id');
-            $table->integer('thu_hoc_id');
+            $table->text('thu_hoc_id');
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();
