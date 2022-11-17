@@ -149,8 +149,9 @@ class DangKy extends Model
             ->join('hoc_vien','hoc_vien.user_id','=','users.id')
             ->join('lop','lop.id','=','dang_ky.id_lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->join('thanh_toan','thanh_toan.id','=','dang_ky.id_thanh_toan')
             ->where('id_user',$id)
-            ->select('dang_ky.*','users.name','users.email','lop.ten_lop','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','users.dia_chi','users.sdt')
+            ->select('dang_ky.*','users.name','users.email','lop.ten_lop','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','users.dia_chi','users.sdt','thanh_toan.trang_thai as trang_thai_thanh_toan')
             ->get();
         $list=$query;
         return $list;

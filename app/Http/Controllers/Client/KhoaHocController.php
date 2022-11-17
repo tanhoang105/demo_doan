@@ -13,6 +13,7 @@ use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use function Symfony\Component\String\length;
 
 class KhoaHocController extends Controller
 {
@@ -48,10 +49,40 @@ class KhoaHocController extends Controller
             ->skip(0)->take(4)->get();
         return view('client.khoa-hoc.chi-tiet-khoa-hoc', compact('detail', 'giang_vien', 'lop', 'danhmuc', 'khoahoclienquan'));
     }
-    public function khoa_hoc()
-    
+    public function locKhoaHoc(Request $request)
     {
-        // 
+//        dd($request->all());
+        $filter = [];
+        $sort = [];
+        $query = DB::table('khoa_hoc')
+            ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
+            ->select('danh_muc.*', 'khoa_hoc.*')
+            ->where('khoa_hoc.delete_at', '=', 1);
+
+        if (!empty($request->search)) {
+            $filter[] = ['ten_khoa_hoc', 'like', '%' . $request->search . '%'];
+        }
+        if (!empty($request->filterKh)) {
+            if ($request->filterKh == 'new') {
+//                $sort[]=['id','desc'];
+                $query = $query->orderBy('khoa_hoc.id', 'desc');
+            } else {
+//                $sort[]=['gia_khoa_hoc',$request->filterKh];
+                $query = $query->orderBy('gia_khoa_hoc', $request->filterKh);
+            }
+
+        }
+        if (!empty($filter)) {
+            $query = $query->where($filter);
+        }
+        $listKh = $query->get();
+        $renderHtml = view('client.render-kh', compact('listKh'))->render();
+        return response()->json(array('success' => true, 'data' => $renderHtml));
+    }
+    public function khoa_hoc()
+
+    {
+        //
         $khoa_hoc_cu = KhoaHoc::join('lop', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
             ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
             ->join('danh_muc', 'danh_muc.id', '=', 'khoa_hoc.id_danh_muc')
@@ -66,7 +97,7 @@ class KhoaHocController extends Controller
         // dd($request->all());
         $lopcu_id = $request->lopcu_id;
         $xeplop_id = $request->xeplop_id;
-        // 
+        //
         $list = KhoaHoc::join('danh_muc', 'danh_muc.id', '=', 'khoa_hoc.id_danh_muc')
             ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
             ->get();
@@ -105,7 +136,7 @@ class KhoaHocController extends Controller
         // ghi no
         $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
         $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
-        // 
+        //
         $kk = GhiNo::where('user_id', '=', Auth::user()->id)->first()->get();
 
         $tien = $khoahoc_moi->gia_khoa_hoc - $khoahoc_cu->gia_khoa_hoc;
@@ -119,13 +150,13 @@ class KhoaHocController extends Controller
             } elseif ($tien < 0) {
                 $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                     ->update(['tien_no' => $value->tien_no + $tien]);
-                    // 
+                    //
                 $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
-                    ->update(['trang_thai' => 1]); //trung tam  no           
+                    ->update(['trang_thai' => 1]); //trung tam  no
             } else {
                 $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                     ->update(['tien_no' => $value->tien_no + $tien]);
-                    // 
+                    //
                 $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                     ->update(['trang_thai' => 0]); //het no
             }
