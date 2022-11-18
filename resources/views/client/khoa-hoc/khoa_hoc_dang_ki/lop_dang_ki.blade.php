@@ -3,13 +3,14 @@
     Danh sách lớp
 @endsection
 @section('content')
-<div>
-    @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-    @endif
-</div>
+    <div>
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+    </div>
+    <h2>Các lớp học</h2> <br>
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -18,7 +19,7 @@
                         <div class="feat_course_item">
                             <div class="feat_cour_price">
                                 <h3> {{ $value->ten_lop }}</h3>
-                                <span class="feat_cour_tag"> {{40- $value->so_luong }}/40 </span>
+                                <span class="feat_cour_tag"> {{ 40 - $value->so_luong }}/40 </span>
                             </div>
                             <div class="pb-4">
                                 <div class="">
@@ -36,26 +37,29 @@
                                 <div class="">
                                     <span>Trang thái: </span>
                                     @if ($value->ngay_bat_dau >= date('Y-m-d'))
-                                    <span class="p-1"> <i class="fa-solid fa-alarm-clock"></i> Chưa học
-                                    </span>
+                                        <span class="p-1"> <i class="fa-solid fa-alarm-clock"></i> Chưa học
+                                        </span>
                                     @else
-                                    <a>đã học</a>
+                                        <a>đã học</a>
                                     @endif
-                                  
+
                                 </div>
                             </div>
-                                    <div class="feat_cour_rating">
-                                      {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
-                                      <form action="{{route('doi_khoa_hoc')}}" method="POST">
-                                        @csrf
-                                        <input type="text" value="{{$value->id}}" name="lopmoi_id" hidden id="">
-                                        <input type="text" value="{{$lopcu_id}}" name="lopcu_id" hidden id="">
-                                        <input type="text" name="xeplop_id" value="{{$xeplop_id}}" hidden id="">
-                                        @if ($value->ngay_bat_dau >= date('Y-m-d'))
-                                        <button onclick="return confirm('Bạn có chắc muốn đổi khóa học! ')" class="btn btn-primary">Chọn lớp</button>
-                                        @endif
-                                      </form>
-                                </div>
+                            <div class="feat_cour_rating">
+                                {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
+                                <form action="{{ route('doi_khoa_hoc') }}" method="POST">
+                                    @csrf
+                                    <input type="text" value="{{ $value->id }}" name="lopmoi_id" hidden
+                                        id="">
+                                    <input type="text" value="{{ $lopcu_id }}" name="lopcu_id" hidden id="">
+                                    <input type="text" name="dangky_id" value="{{ $dangky_id }}" hidden
+                                        id="">
+                                    @if ($value->ngay_bat_dau >= date('Y-m-d'))
+                                        <button onclick="return confirm('Bạn có chắc muốn đổi khóa học! ')"
+                                            class="btn btn-primary">Chọn lớp</button>
+                                    @endif
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach

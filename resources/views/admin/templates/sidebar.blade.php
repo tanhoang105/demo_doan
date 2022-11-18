@@ -145,9 +145,16 @@
                   </a>
 
               </li>
+              <li class="nav-item">
+                <a href=" {{ route('route_BE_Admin_danh_sach_doi_lop') }} " class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                        Yêu cầu đổi lớp
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
 
-
-
+            </li>
 
 
               <li class="nav-item">

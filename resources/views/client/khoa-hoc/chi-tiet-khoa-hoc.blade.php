@@ -55,13 +55,14 @@
                                 <li class="nav-item">
                                     <button class="nav-link active" id="pills-discription-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-discription" role="tab" aria-controls="pills-discription"
-                                        aria-selected="true" type="button">Mô tả</button>
+                                        aria-selected="true" type="button">Các lớp học</button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-instructors-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-instructors" role="tab" aria-controls="pills-instructors"
-                                        aria-selected="false" type="button">Các lớp học</button>
+                                        aria-selected="false" type="button"> Mô tả</button>
                                 </li>
+                              
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-curriculum-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
@@ -77,10 +78,55 @@
                             <div class="tab-content course_tab_cont" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-discription"
                                     aria-labelledby="pills-discription-tab" role="tabpanel">
-                                    <span> Mô tả : </span>
-                                    <p>
-                                        {{ $detail->mo_ta }}
-                                    </p>
+                                    <span> Các lớp học để học viên đăng kí : </span>
+                                    {{-- <div class="course_instractor">
+                                    </div> --}}
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Tên Lớp </th>
+                                                <th scope="col">Giá </th>
+                                                <th scope="col">Số lượng học viên </th>
+                                                <th scope="col">Ngày bắt đầu </th>
+                                                <th scope="col">Ngày kết thúc </th>
+                                                <th scope="col">Giảng viên </th>
+                                                <th> Hành động </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($lop as $key => $item)
+                                                <tr>
+                                                    <th scope="row">{{ $item->id }}</th>
+                                                    <td> {{ $item->ten_lop }}</td>
+                                                    <td> {{ $item->gia }}</td>
+                                                    <td> {{ $item->so_luong }}</td>
+                                                    <td> {{ $item->ngay_bat_dau }}</td>
+                                                    <td> {{ $item->ngay_ket_thuc }}</td>
+                                                    <td>
+                                                        @foreach ($giang_vien as $gv)
+                                                            @if ($gv->id == $item->id_giang_vien)
+                                                                <a style="color: blue"
+                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $gv->id]) }}">{{ $gv->ten_giang_vien }}</a>
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('client_dang_ky') }}">
+                                                            <input name="id_khoa_hoc" value="{{ $detail->id }}" hidden>
+                                                            <input name="id_lop" value="{{ $item->id }}" hidden>
+                                                            <input name="gia_khoa_hoc"
+                                                                value="{{ $detail->gia_khoa_hoc }}" hidden>
+                                                            <a href="{{route('client_dang_ky',['id'=> $item->id])}}" style="width: 100px" class="btn btn-primary">Đăng
+                                                                kí</a>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+
+                                    </table>
                                     <div class="share_course">
                                         <span> Chia sẻ khóa học : </span>
                                         <a href="#" class="fab fa-facebook-f"></a>
@@ -129,56 +175,11 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-instructors" aria-labelledby="pills-instructors-tab"
                                     role="tabpanel">
-                                    <span> Các lớp học để học viên đăng kí : </span>
-                                    {{-- <div class="course_instractor">
-                                    </div> --}}
-                                    <table class="table table-bordered">
-
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">STT</th>
-                                                <th scope="col">Tên Lớp </th>
-                                                <th scope="col">Giá </th>
-                                                <th scope="col">Số lượng học viên </th>
-                                                <th scope="col">Ngày bắt đầu </th>
-                                                <th scope="col">Ngày kết thúc </th>
-                                                <th scope="col">Giảng viên </th>
-                                                <th> Hành động </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($lop as $key => $item)
-                                                <tr>
-                                                    <th scope="row">{{ $item->id }}</th>
-                                                    <td> {{ $item->ten_lop }}</td>
-                                                    <td> {{ $item->gia }}</td>
-                                                    <td> {{ $item->so_luong }}</td>
-                                                    <td> {{ $item->ngay_bat_dau }}</td>
-                                                    <td> {{ $item->ngay_ket_thuc }}</td>
-                                                    <td>
-                                                        @foreach ($giang_vien as $gv)
-                                                            @if ($gv->id == $item->id_giang_vien)
-                                                                <a style="color: blue"
-                                                                    href="{{ route('client_chi_tiet_giang_vien',['id' => $gv->id]) }}">{{ $gv->ten_giang_vien }}</a>
-                                                            @endif
-                                                        @endforeach
-                                                    </td>
-                                                    <td>
-                                                        <form action="{{ route('client_dang_ky') }}">
-                                                            <input name="id_khoa_hoc" value="{{ $detail->id }}" hidden>
-                                                            <input name="id_lop" value="{{ $item->id }}" hidden>
-                                                            <input name="gia_khoa_hoc"
-                                                                value="{{ $detail->gia_khoa_hoc }}" hidden>
-                                                            <a href="{{route('client_dang_ky',['id'=> $item->id])}}" style="width: 100px" class="btn btn-primary">Đăng
-                                                                kí</a>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-
-                                    </table>
+                                    <span> Mô tả : </span>
+                                    <p>
+                                        {{ $detail->mo_ta }}
+                                    </p>
+                                   
                                 </div>
                                 <div class="tab-pane fade" id="pills-reviews" aria-labelledby="pills-reviews-tab"
                                     role="tabpanel">
@@ -291,7 +292,7 @@
                 <div class="col-lg-4 col-sm-12 single_curs_right">
                     <!-- Widget Course Details -->
                     <aside class="widget-course-details">
-                        <h2> Giá tiền <span>{{ number_format($detail->gia_khoa_hoc) }}</span></h2>
+                        <h2> Giá tiền <span>{{ number_format($detail->gia_khoa_hoc)}}VND</span></h2>
                         <div class="course-detail-list">
                             <span> <i class="far fa-user"></i>Tên khóa học </span>
                             <span> {{$detail->ten_khoa_hoc}} </span>
@@ -321,8 +322,8 @@
                             @foreach ($danhmuc as $value )
                             <span>{{$value->ten_danh_muc}}</span>
                             @endforeach
-                        </div>
-                        <a href="#" class="more-link"> Buy Now</a>
+                        </div> 
+                        {{-- <a href="#" class="more-link"> Buy Now</a> --}}
                     </aside>
                     <!-- Widget Course Details /- -->
 
@@ -340,11 +341,11 @@
                             <div class="feat_course_item">
                                 <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
                                 <div class="feat_cour_price">
-                                    <span class="feat_cour_tag">Giá tiền {{$value->gia_khoa_hoc}}</span>
+                                    <span class="feat_cour_tag">Giá tiền {{number_format($value->gia_khoa_hoc)}}VND</span>
                                     {{-- <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span> --}}
                                 </div>
                                 <div class="feat_cour_rating">
-                                    <h4 class="feat_cour_tit">{{$value->ten_khoa_hoc}}</h4>
+                                    <h4 class="feat_cour_tit"><a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}">{{$value->ten_khoa_hoc}}</a></h4>
                                     <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}"> <i class="arrow_right"></i> </a>
                                 </div>
                             </div>
