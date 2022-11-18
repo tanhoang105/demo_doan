@@ -15,7 +15,7 @@ class HocVienController extends Controller
         $params = $request->all();
         $list = $objHocVien->index($params, false, '');
 //        dd($list);
-        return new HocVienCollection($list);
-//        return response()->json($list);
+        // return new HocVienCollection($list);
+       return response()->json($list);
     }
 }

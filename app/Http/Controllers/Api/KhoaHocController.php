@@ -14,8 +14,8 @@ class KhoaHocController extends Controller
         $objKhoaHoc=new KhoaHoc();
         $pramas=$request->all();
         $list=$objKhoaHoc->index($pramas , false ,'');
-        return new KhoaHocCollection($list);
-//        dd($list);
-//        return response()->json($list);
+//         return new KhoaHocCollection($list);
+// //        dd($list);
+       return response()->json($list);
     }
 }
