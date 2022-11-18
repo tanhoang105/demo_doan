@@ -16,7 +16,9 @@ use App\Http\Controllers\Admin\PhuongThucThanhToan;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CaThuController;
 use App\Http\Controllers\Admin\ThanhToanController;
+use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Requests\XeplopRequest;
@@ -45,6 +47,8 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
+Route::get('check-email',[\App\Http\Controllers\Client\DangKyController::class,'checkEmail'])->name('client_check_email');
+Route::get('/loc-khoa-hoc',[\App\Http\Controllers\Client\KhoaHocController::class,'locKhoaHoc'])->name('loc_khoa_hoc');
 
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
@@ -119,6 +123,21 @@ Route::prefix('/admin')->group(function () {
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
         Route::post('xoa-all', [DangKyController::class, 'destroyAll'])->name('Xoa_All_Dang_Ky');
     });
+
+
+
+    // thứ học 
+    Route::prefix('/thu-hoc')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [ThuHocController::class, 'index'])->name('List_Thu_Hoc'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/add-thu-hoc',   [ThuHocController::class, 'store'])->name('Add_Thu_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/delete/{id}', [ThuHocController::class, 'destroy'])->name('Xoa_Thu_Hoc');
+        Route::get('/edit/{id}', [ThuHocController::class, 'edit'])->name('Edit_Thu_Hoc'); // hiển thị chi tiết bản ghi
+        Route::post('/update', [ThuHocController::class, 'update'])->name('Update_Thu_Hoc');
+        Route::post('xoa-all', [ThuHocController::class, 'destroyAll'])->name('Xoa_All_Thu_Hoc');
+    });
+
+
+
     // giảng viên
     Route::prefix('/giang-vien')->name('route_BE_Admin_')->group(function () {
         Route::post('xoa-all', [GiangVienController::class, 'destroyAll'])->name('Xoa_All_Giang_Vien');
@@ -130,6 +149,17 @@ Route::prefix('/admin')->group(function () {
     });
 
 
+    Route::prefix('/ca-thu')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [CaThuController::class, 'index'])->name('List_Ca_Thu');
+        Route::post('xoa-all', [CaThuController::class, 'destroyAll'])->name('Xoa_All_Ca_Thu');
+        Route::match(['get', 'post'], '/add',   [CaThuController::class, 'store'])->name('Add_Ca_Thu'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/delete/{id}', [CaThuController::class, 'destroy'])->name('Xoa_Ca_Thu');
+        Route::get('/edit/{id}', [CaThuController::class, 'edit'])->name('Edit_Ca_Thu'); // hiển thị chi tiết bản ghi
+        Route::post('/update', [CaThuController::class, 'update'])->name('Update_Ca_Thu');
+        Route::get('/show', [CaThuController::class, 'show'])->name('Show_Ca_Thu');
+    });
+
+
     // thanh toán
     Route::prefix('/thanh-toan')->name('route_BE_Admin_')->group(function () {
         Route::post('xoa-all', [ThanhToanController::class, 'destroyAll'])->name('Xoa_All_Thanh_Toan');
@@ -138,6 +168,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/delete/{id}', [ThanhToanController::class, 'destroy'])->name('Xoa_Thanh_Toan');
         Route::get('/edit/{id}', [ThanhToanController::class, 'edit'])->name('Edit_Thanh_Toan'); // hiển thị chi tiết bản ghi
         Route::post('/update', [ThanhToanController::class, 'update'])->name('Update_Thanh_Toan');
+        Route::get('/in-hoa-don/{id}', [ThanhToanController::class, 'inHoaDon'])->name('In_Hoa_Don');
     });
 
 
@@ -302,7 +333,7 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
-// // route đào tạo 
+// // route đào tạo
 // Route::prefix('/admin')->middleware(['role:đào tạo'])->group(function () {
 //     Route::get('/', function () {
 //         return view('admin.trangchu');

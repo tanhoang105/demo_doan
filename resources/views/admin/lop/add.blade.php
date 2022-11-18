@@ -31,13 +31,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ca học</label>
-                    <select class="form-control" name="id_ca_hoc" id="">
-                        @foreach ($cahoc as $item)
-                            <option value="{{ $item->id }}">{{ $item->ca_hoc }}</option>
+                    <label for="chuyenBay" class="form-label">Lịch học</label>
+                    <select class="form-control" name="ca_thu_id" id="">
+                        @foreach ($cathu as $item)
+                            <option value="{{ $item->id }}">{{ $item->ca_id }}</option>
                         @endforeach
                     </select>
-                    @error('ten_khoa_hoc')
+                    @error('ca_thu_id')  
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
@@ -68,13 +68,7 @@
             </div>
 
             <div class="col-6">
-                <div class="mb-3">
-                    <label for="" class="form-label">Giá </label>
-                    <input class="form-control" type="number" name="gia" id="">
-                    @error('gia')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
+                
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số ghế </label>

@@ -207,6 +207,17 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Lịch học 
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
+
+              <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">
                       <i class="nav-icon fas fa-tachometer-alt"></i>
                       <p>
@@ -226,6 +237,17 @@
                   </a>
 
               </li>
+
+              <li class="nav-item">
+                <a href=" {{route('route_BE_Admin_List_Thu_Hoc')}} " class="nav-link">
+                    <i class="nav-icon fas fa-tree"></i>
+                    <p>
+                        Thứ Học
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
 
 
 
@@ -302,6 +324,8 @@
                   </a>
 
               </li>
+
+             
 
               @endhasRoles
           </ul>

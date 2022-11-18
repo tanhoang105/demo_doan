@@ -366,9 +366,9 @@
                 <div class="col-lg-2 pt-3">
                     <label> {{ $value->ngay_bat_dau }} </label>
                 </div>
-                <div class="col-lg-2 pt-3">
+                {{-- <div class="col-lg-2 pt-3">
                     <label> {{ $value->thoi_gian }} </label>
-                </div>
+                </div> --}}
                 <div class="col-lg-2 pt-2">
                     <a href="#">
                         <button class="text-white" style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">ĐĂNG KÝ</button>

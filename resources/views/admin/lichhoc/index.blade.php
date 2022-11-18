@@ -1,10 +1,10 @@
 @extends('Admin.templates.layout')
 @section('form-search')
-    {{ route('route_BE_Admin_List_Thanh_Toan') }}
+    {{ route('route_BE_Admin_List_Ca_Thu') }}
 @endsection
 @section('content')
     <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Thanh_Toan') }}">
+        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Ca_Thu') }}">
             <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
 
         </a>
@@ -31,18 +31,16 @@
             </button>
         </div>
     @endif
-    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Thanh_Toan') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Ca_Thu') }}" enctype="multipart/form-data">
 
         @csrf
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th> <input id="check_all" type="checkbox" /></th>
+                    <th> <i class="fa-solid fa-circle-play"></i> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col">Phương thức thanh toán </th>
-                    <th scope="col">Ngày thanh toán</th>
-                    <th scope="col">Tiền thanh toán</th>
-                    <th scope="col">In hóa đơn</th>
+                    <th scope="col">Ca</th>
+                    <th scope="col">Thứ</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -54,24 +52,51 @@
                     <tr>
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
+
                         <td>
-                            @foreach ($phuongthucthanhtoan as $value)
-                                @if ($value->id == $item->id_phuong_thuc_thanh_toan)
-                                    {{ $value->ten }}
+                            @foreach ($cahoc as $ca)
+                                @if ($ca->id == $item->ca_id)
+                                    {{ $ca->ca_hoc }}
                                 @endif
                             @endforeach
 
+                        </td>
+
+
+                        <td>
+                            <?php
+                            
+                            for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
+                                $str = explode(',', $item->thu_hoc_id);
+                            }
+                            
+                        
+                            
+                            for ($i = 0; $i < count($str); $i++) {
+                                  foreach ($thu as $key => $value) {
+                                        if($str[$i] == $value->id){
+                                             echo   '<li>' . $value->ten_thu . '</li><br>'  ;
+                                        }
+                                  }
+                            }
+                            
+                            ?>
+
 
                         </td>
-                        <td> {{ $item->ngay_thanh_toan }}</td>
-                        <td> {{ $item->gia }}</td>
-                        <td><button class="btn btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_In_Hoa_Don', ['id' => $item->id] )}} ">In</a></button></td>
-                        <td><button class="btn btn-warning"><a
-                                    href="{{ route('route_BE_Admin_Edit_Thanh_Toan', ['id' => $item->id]) }}">
+
+
+
+
+
+                        <td> <button class="btn btn-warning"><a
+                                    href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa
                                 </a></button></td>
+
+                                
                         <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                    href="{{ route('route_BE_Admin_Xoa_Thanh_Toan', ['id' => $item->id]) }}">
+                                    href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
 
                     </tr>

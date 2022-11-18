@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LopRequest;
 use App\Models\CaHoc;
+use App\Models\CaThu;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
+use App\Models\ThuHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +17,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc, $cahoc, $giangvien;
+    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu;
 
     public function __construct()
     {
@@ -24,6 +26,8 @@ class LopController extends Controller
         $this->giangvien  = new  GiangVien();
         $this->khoahoc = new KhoaHoc();
         $this->cahoc = new CaHoc();
+        $this->cathu = new CaThu();
+        $this->thu = new ThuHoc();
     }
     /**
      * 
@@ -34,7 +38,7 @@ class LopController extends Controller
     public function index(Request $request)
     {
 
-        $this->authorize(mb_strtoupper('xem lớp học') );
+        $this->authorize(mb_strtoupper('xem lớp học'));
 
         $this->v['params'] =  $request->all();
         unset($this->v['params']['_token']);
@@ -42,6 +46,11 @@ class LopController extends Controller
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien'][2]);   
         $this->v['list'] = $list;
+
+
+        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        $this->v['thu'] = $this->thu->index(null, false, null);
+        $this->v['listcathu'] = $this->cathu->index(null, false, null);
 
         return view('admin.lop.index', $this->v);
     }
@@ -65,11 +74,11 @@ class LopController extends Controller
     public function store(LopRequest $request)
     {
         //
-        $this->authorize(mb_strtoupper('thêm lớp học') );
+        $this->authorize(mb_strtoupper('thêm lớp học'));
 
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
-        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        $this->v['cathu'] = $this->cathu->index(null, false, null);
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
             $params = [];
@@ -107,7 +116,7 @@ class LopController extends Controller
      */
     public function show($id_xep_lop)
     {
-        $this->authorize(mb_strtoupper('xem lớp học') );
+        $this->authorize(mb_strtoupper('xem lớp học'));
 
         if (isset($id_xep_lop)) {
             // dd(12);
@@ -131,8 +140,8 @@ class LopController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('edit lớp học') );
-        
+        $this->authorize(mb_strtoupper('edit lớp học'));
+
         if ($id) {
             $request->session()->put('id', $id);
             $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
@@ -156,7 +165,7 @@ class LopController extends Controller
      */
     public function update(LopRequest $request)
     {
-        $this->authorize(mb_strtoupper('update lớp học') );
+        $this->authorize(mb_strtoupper('update lớp học'));
 
 
         if (session('id')) {
@@ -196,7 +205,7 @@ class LopController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa lớp học') );
+        $this->authorize(mb_strtoupper('xóa lớp học'));
 
         if ($id) {
             $res = $this->lophoc->remove($id);
@@ -222,7 +231,7 @@ class LopController extends Controller
     public function destroyAll(Request $request)
     {
 
-        $this->authorize(mb_strtoupper('xóa lớp học') );
+        $this->authorize(mb_strtoupper('xóa lớp học'));
 
         // dd($request->all);
         // $request  =  $request->all();
@@ -261,8 +270,6 @@ class LopController extends Controller
             $output .= '</ul>';
 
             echo $output;
-
-        
         }
     }
 }

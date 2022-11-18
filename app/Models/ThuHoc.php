@@ -6,39 +6,36 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class ThanhToan extends Model
+class ThuHoc extends Model
 {
     use HasFactory;
-    protected $table = "thanh_toan";
+    protected $table = "thu_hoc";
+    protected $guarded = [];
 
-    public function PhuongThucThanhToan()
-    {
-        return $this->belongsTo(ThanhToan::class);
-    }
+
+
 
     public function index($params, $pagination = true, $perpage)
     {
         if ($pagination) {
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
-                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=', 'phuong_thuc_thanh_toan.id')
-                ->select('phuong_thuc_thanh_toan.*', $this->table . '.*')
+                ->select($this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.id_phuong_thuc_thanh_toan', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_thu', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
-                ->join('phuong_thuc_thanh_toan', $this->table . '.id_phuong_thuc_thanh_toan', '=', 'phuong_thuc_thanh_toan.id')
-                ->select('phuong_thuc_thanh_toan.*', $this->table . '.*')
+                ->select($this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.id_phuong_thuc_thanh_toan', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_thu', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();
@@ -59,13 +56,7 @@ class ThanhToan extends Model
         return $query;
     }
 
-    public function saveNew($params)
-    {
-        // dd($data);
-        $res = DB::table('thanh_toan')
-            ->insertGetId($params);
-        return $res;
-    }
+   
 
 
 
@@ -74,6 +65,7 @@ class ThanhToan extends Model
         $data  = array_merge($params['cols'], [
             // 'created_at' => date('Y-m-d H:i:s'),
             'delete_at' => 1,
+            
         ]);
 
         $query = DB::table($this->table)->insertGetId($data);
@@ -108,6 +100,7 @@ class ThanhToan extends Model
     }
 
 
+    //EDIT
     public function show($id)
     {
         if (!empty($id)) {
@@ -118,36 +111,6 @@ class ThanhToan extends Model
         }
     }
 
-    // lấy thông tin đơn hàng
-    public function loadOne($id)
-    {
-        $result = DB::table('thanh_toan')
-            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', 'thanh_toan.id')
-            ->where('dang_ky.id', $id)
-            ->select('thanh_toan.*')
-            ->get();
-        return $result;
-    }
-
-    // cập nhập trạng thái đơn hàng
-    public function updatePaid($id)
-    {
-        $query = DB::table('thanh_toan')
-            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', 'thanh_toan.id')
-            ->where('dang_ky.id', $id)
-            ->update([
-                'thanh_toan.trang_thai' => 2,
-            ]);
-        return $query;
-    }
-
-    public function inhoahon($id)
-    {
-        $query = DB::table($this->table)
-            ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', $this->table . '.id')
-            ->select('dang_ky.*', $this->table . '.*')
-            ->where($this->table.'.id' , '=' , $id  );
-
-        return $query->get();
-    }
+    
+   
 }

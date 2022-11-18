@@ -36,6 +36,7 @@
         }
     </style>
     <br>
+{{--    {{dd($list)}}--}}
     <center>
         <table class="styled-table">
             <thead>
@@ -64,14 +65,18 @@
                     <td>{{$item->dia_chi}}</td>
                     <td>{{$item->sdt}}</td>
                     <td>
-                        <form action="{{route('payment',[$item->id])}}" method="post">
-                            @csrf
-                            <input type="text" name="gia_khoa_hoc" value="{{$item->gia_khoa_hoc}}" hidden>
-                            <input type="text" name="id" value="{{$item->id}}" hidden>
-                            <div class="form-group">
-                                <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
-                            </div>
-                        </form>
+                       @if($item->trang_thai_thanh_toan == 1)
+                            <form action="{{route('payment',[$item->id])}}" method="post">
+                                @csrf
+                                <input type="text" name="gia_khoa_hoc" value="{{$item->gia_khoa_hoc}}" hidden>
+                                <input type="text" name="id" value="{{$item->id}}" hidden>
+                                <div class="form-group">
+                                    <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
+                                </div>
+                            </form>
+                        @else
+                            <center><span class="btn btn-success">Đã Thanh Toán</span></center>
+                        @endif
                     </td>
                     <td>
                         @if ($item->trang_thai==1)

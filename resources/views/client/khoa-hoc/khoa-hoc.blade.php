@@ -120,10 +120,10 @@
                                     <!-- input-group -->
                                     <form action="" class="">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Tìm kiếm" name="search"
+                                            <input class="form-control" placeholder="Tìm kiếm" id="search" name="search"
                                                 type="text">
                                             <span class="input-group-btn">
-                                                <button type="submit"><i class="pe-7s-search"></i></button>
+                                                <button data-url="{{route('loc_khoa_hoc')}}" id="btn-submit" type="submit"><i class="pe-7s-search"></i></button>
                                             </span>
                                         </div>
                                     </form>
@@ -134,11 +134,11 @@
                             <!-- End: Search -->
                             <div class="cat_selectbox">
                                 <div class="select-box">
-                                    <select class="form-select" aria-label="select">
-                                        <option selected="">Xem nhiều nhất</option>
-                                        <option value="1">Lập trình Java</option>
-                                        <option value="2">Thiết Kế</option>
-                                        <option value="3"> Tiếng Anh </option>
+                                    <select data-url="{{route('loc_khoa_hoc')}}" class="form-select" name="filterKh" id="filterKh" aria-label="select">
+                                        <option value="">Mặc định</option>
+                                        <option value="asc">Giá tăng dần</option>
+                                        <option value="desc">Giá giảm dần</option>
+                                        <option value="new">Sản phẩm mới</option>
                                     </select>
                                 </div>
                             </div>
@@ -177,6 +177,7 @@
                                                     viên</i></span>
                                         </div>
                                         <div class="feat_cour_rating">
+
                                             <span class="feat_cour_rat">
                                                 4.6
                                                 <i class="fa fa-star"></i>
@@ -186,12 +187,13 @@
                                                 <i class="fa fa-star"></i>
                                                 (3,539)
                                             </span>
-                                            <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
-                                                    class="arrow_right"></i> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                                               <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
+                                                       class="arrow_right"></i> </a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               @endforeach
+                           </div>
                         @else
                             <?php
                             $loc_danhmuc = DB::table('khoa_hoc')
@@ -255,4 +257,51 @@
                 ==================================================-->
 
 
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $(document).on('change','#filterKh',function (e) {
+                let filter=$(this).val();
+                let url = $(this).data('url');
+                let search =$('#search').val();
+
+                $.ajax({
+                    type:'GET',
+                    url:url,
+                    data:{
+                        filterKh:filter,
+                        search:search,
+                    },
+                    success:function (res) {
+                        if (res['success']){
+                            $('#course-container').html(res['data'])
+                        }
+
+                    }
+                })
+            })
+            $(document).on('click','#btn-submit',function (e) {
+                e.preventDefault();
+                let search=$('#search').val();
+                let url = $(this).data('url');
+                let filter =$('#filterKh').val();
+
+                $.ajax({
+                    type:'GET',
+                    url:url,
+                    data:{
+                        filterKh:filter,
+                        search:search,
+                    },
+                    success:function (res) {
+                        if (res['success']){
+                            $('#course-container').html(res['data'])
+                        }
+
+                    }
+                })
+            })
+        })
+    </script>
 @endsection
