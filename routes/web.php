@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\CaThuController;
 use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
@@ -71,23 +72,24 @@ Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 
 //doi khoa_hoc
 Route::get('/khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'khoa_hoc'])->name('khoa_hoc_dang_ki');
 Route::get('/get_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_khoa_hoc'])->name('get_khoa_hoc');
-Route::get('/get_lop/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_lop'])->name('get_lop');
+Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
-
-
-
-
-
-
-
 // hiển thị khóa theo lớp
 Route::get('listLop', [DangKyController::class, 'listDangKy'])->name('admin_dang_ky');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', function () {
         return view('admin.trangchu');
+    });
+    Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
+        Route::get('/list', [DoiLopKhoaController::class, 'index'])->name('danh_sach_doi_lop');
+        // Route::get('/xoa/{id}', [DoiLopKhoaController::class, 'destroy'])->name('Xoa_Ca_Hoc');
+        // Route::get('/edit/{id}', [DoiLopKhoaController::class, 'edit'])->name('Edit_Ca_Hoc');
+        Route::put('/updateStatus/{doilop}', [DoiLopKhoaController::class, 'updateStatus'])->name('updateStatus_doilop');
+        Route::match(['get', 'post'], '/add', [DoiLopKhoaController::class, 'store'])->name('Add_Ca_Hoc');
+        Route::post('xoa-all', [DoiLopKhoaController::class, 'destroyAll'])->name('Xoa_All_Ca_Hoc');
     });
 
     Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {

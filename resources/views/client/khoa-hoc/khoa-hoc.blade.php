@@ -25,8 +25,8 @@
 
 
 
-    <!-- Start: Featured Courses Section
-        ==================================================-->
+            <!-- Start: Featured Courses Section
+                ==================================================-->
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
@@ -150,21 +150,34 @@
                         <!--  End: Search Filter -->
 
                         @if (!$id_danhmuc)
-                           <div class="row flex-wrap justify-content-evenly" id="course-container">
-                               @foreach ($list as $value)
-                                   <div class="col-lg-6 col-md-6 col-sm-12">
-                                       <div class="feat_course_item">
-                                           <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
-                                           <div class="feat_cour_price">
-                                               <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                               <span class="feat_cour_p">{{ $value->gia_khoa_hoc }}</span>
-                                           </div>
-                                           <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
-                                           <div class="feat_cour_lesson">
-                                               <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 20 lessons </span>
-                                               <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 237 Students </span>
-                                           </div>
-                                           <div class="feat_cour_rating">
+                            @foreach ($list as $value)
+                                {{-- {{count($value->ten_lop)}} --}}
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="feat_course_item">
+                                        <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                        <div class="feat_cour_price">
+                                            <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
+                                            <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }} VND</span>
+                                        </div>
+                                        <h4 class="feat_cour_tit"><a
+                                                href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">{{ $value->ten_khoa_hoc }}</a>
+                                        </h4>
+                                        <div class="feat_cour_lesson">
+                                            <span
+                                                hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
+                                            <span hidden>{{ $total = 0 }}</span>
+                                            @foreach ($sl_lop as $data)
+                                                <span hidden>{{ $lg_sv = 40 - $data->so_luong }}</span>
+                                                <span hidden>{{ $total = $total + $lg_sv }}</span>
+                                            @endforeach
+
+                                            <span class="feat_cour_less"> <i class="pe-7s-note2"></i>{{ count($sl_lop) }}
+                                                Lớp học</span>
+                                            <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }} Học
+                                                    viên</i></span>
+                                        </div>
+                                        <div class="feat_cour_rating">
+
                                             <span class="feat_cour_rat">
                                                 4.6
                                                 <i class="fa fa-star"></i>
@@ -195,7 +208,7 @@
                                         <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                            <span class="feat_cour_p">{{ $value->gia_khoa_hoc }}</span>
+                                            <span class="feat_cour_p">{{number_format($value->gia_khoa_hoc)}} VND</span>
                                         </div>
                                         <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
                                         <div class="feat_cour_lesson">
@@ -241,7 +254,7 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-        ==================================================-->
+                ==================================================-->
 
 
 @endsection

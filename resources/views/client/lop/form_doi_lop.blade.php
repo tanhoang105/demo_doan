@@ -9,12 +9,12 @@
 <div class="form-group">
     <label for="exampleInputEmail1">Lớp học cũ</label>
     <input type="text" value="{{$lop_cu->ten_lop}}" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-    <input type="text" name="id_lopcu" value="{{$lop_cu->id}}" hidden id="">
-    <input type="text" name="id_xeplop" hidden value="{{$xep_lop->id}}" id="">
+    <input type="text" name="id_lop_cu" value="{{$lop_cu->id}}" hidden id="">
+    {{-- <input type="text" name="id_xeplop" hidden value="{{$xep_lop->id}}" id=""> --}}
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Lớp học mới</label>
-    <select class="form-control form-control-sm" name="id_lopmoi" id="">
+    <select class="form-control form-control-sm" name="id_lop_moi" id="">
         <option value="">----- Chọn lớp mới muốn đổi ------</option>
         @foreach ($lop_moi as $value )
         <option value="{{$value->id}}">{{$value->ten_lop}}</option>
@@ -26,6 +26,8 @@
     <textarea name="ly_do" placeholder="Lý do muốn đổi lớp"  cols="190" rows="5">
     </textarea>
   </div>
-  <button type="submit" onclick="return confirm('Bạn có chắc muốn đổi lóp ')" class="btn btn-success">Submit</button>
+  <input type="text" name="status" id="" value="0" hidden>
+  <input type="text" name="id_user" id="" value="{{Auth::user()->id}}" hidden>
+  <button type="submit" onclick="return confirm('Bạn có chắc muốn đổi lóp ')" class="btn btn-success">Gửi yêu cầu </button>
 </form>
-@endsection
+@endsection 

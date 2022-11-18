@@ -77,7 +77,7 @@
                                 {{ $objUser->name }}</a>
                             <ul class="dropdown" aria-label="submenu">
                                 <li><a href="{{route('client_lich_hoc')}}">Lịch học</a></li>
-                                <li><a href="{{route('tk_ghi_no')}}">Tài khoản ghi nợ</a></li>
+                                <li><a href="{{route('tk_ghi_no')}}">Số dư tài khoản</a></li>
                                 <li><a href="{{route('client_thong_tin_ca_nhan')}}">Thông tin chi tiết</a></li>
                                 <li> <a href="{{route('client_lich_su_dang_ky',[$objUser->id])}}" class="dropdown-item">Lịch sử đăng ký </a></li>
                                 <li> <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a></li>

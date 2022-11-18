@@ -3,13 +3,13 @@
     - Lớp
 @endsection
 @section('content')
-<div>
-    @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
-    @endif
-</div>
+    <div>
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+    </div>
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -36,26 +36,28 @@
                                 <div class="">
                                     <span>Trang thái: </span>
                                     @if ($value->ngay_bat_dau >= date('Y-m-d'))
-                                    <span class="p-1"> <i class="fa-solid fa-alarm-clock"></i> Chưa học
-                                    </span>
+                                        <span class="p-1"> <i class="fa-solid fa-alarm-clock"></i> Chưa học
+                                        </span>
                                     @else
-                                    <a>đã học</a>
+                                        <a>đã học</a>
                                     @endif
-                                  
+
                                 </div>
                             </div>
-                                    <div class="feat_cour_rating">
-                                      {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
-                                      <form action="{{route('form_doi_lop',$value->lop_id)}}" method="GET">
-                                        @csrf
-                                        {{-- <input type="date" name="ngaybatdau_lopcu" value="{{$value->ngay_bat_dau}}" id=""> --}}
-                                        <input type="text" value="{{$value->khoa_hoc_id}}" name="khoahoc_id" hidden id="">
-                                        <input type="text" name="xeplop_id" value="{{$value->id}}" hidden id="">
-                                        @if ($value->ngay_bat_dau >= date('Y-m-d'))
+                            <div class="feat_cour_rating">
+                                {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
+                                <form action="{{ route('form_doi_lop', $value->lop_id) }}" method="GET">
+                                    @csrf
+                                    {{-- <input type="date" name="ngaybatdau_lopcu" value="{{$value->ngay_bat_dau}}" id=""> --}}
+                                    <input type="text" value="{{ $value->khoa_hoc_id }}" name="khoahoc_id" hidden
+                                        id="">
+                                    <input type="text" name="xeplop_id" value="{{ $value->id }}" hidden
+                                        id="">
+                                    @if ($value->ngay_bat_dau >= date('Y-m-d'))
                                         <button class="btn btn-primary">Đổi lớp</button>
-                                        @endif
-                                      </form>
-                                </div>
+                                    @endif
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach

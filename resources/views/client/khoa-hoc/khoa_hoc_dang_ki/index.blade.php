@@ -10,6 +10,7 @@
         </div>
     @endif
 </div>
+<h2>Các Khóa học đã đăng kí </h2> <br>
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -22,7 +23,7 @@
                             <div class="feat_cour_price">
                                 <h3> {{ $value->ten_khoa_hoc }}</h3>
                                 <span>Giá tiền: </span>
-                                <span class="feat_cour_tag"> {{ $value->gia_khoa_hoc }}</span>
+                                <span class="feat_cour_tag"> {{ number_format($value->gia_khoa_hoc) }} VND</span>
                             </div>
                             <div class="pb-4">
                                 <div class="">
@@ -43,8 +44,9 @@
                                       {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
                                       <form action="{{route('get_khoa_hoc')}}" method="GET">
                                         @csrf
-                                        <input type="text" value="{{$value->lop_id}}" name="lopcu_id"  id="">
-                                        <input type="text" name="xeplop_id" value="{{$value->xep_lop_id}}"  id="">
+                                        <input type="text" name="khoahoc_id" hidden id="" value="{{$value->id}}">
+                                        <input hidden type="text" value="{{$value->lop_id}}" name="lopcu_id"  id="">
+                                        <input hidden type="text" name="dangky_id" value="{{$value->dang_ky_id}}"  id="">
                                         <button class="btn btn-primary">Đổi khóa học</button>
                                       </form>
                                 </div>
