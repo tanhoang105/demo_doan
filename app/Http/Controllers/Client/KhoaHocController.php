@@ -38,6 +38,7 @@ class KhoaHocController extends Controller
     }
     public function chiTietKhoaHoc($id)
     {
+        
         $giang_vien = GiangVien::all();
         $detail = KhoaHoc::find($id);
         $danhmuc = DanhMuc::select('danh_muc.*')->where('danh_muc.id', '=', $detail->id_danh_muc)->get();
