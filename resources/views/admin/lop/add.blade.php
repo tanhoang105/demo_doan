@@ -35,7 +35,30 @@
                     <select class="form-control" name="ca_thu_id" id="">
                         <option value="">Chọn lịch học</option>
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}">{{ 'Ca ' . $item->ca_id }} - {{ 'Thứ ' . $item->thu_hoc_id }}</option>
+                            <option value="{{ $item->id }}">{{ 'Ca ' . $item->ca_id }}  : 
+                                <?php
+                                
+                                for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
+                                    $str = explode(',', $item->thu_hoc_id);
+                                }
+                                
+                                for ($i = 0; $i < count($str); $i++) {
+                                    foreach ($thu as $key => $value) {
+                                        if($i == 0){
+
+                                            if ($str[$i] == $value->id) {
+                                                echo '' . $value->ten_thu . ' -- ';
+                                            }
+                                        }else{
+                                            if ($str[$i] == $value->id) {
+                                                echo '' . $value->ten_thu . '';
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                ?>
+                            </option>
                         @endforeach
                     </select>
                     @error('ca_thu_id')
@@ -101,8 +124,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button"
-        class="btn btn-danger">Hủy</button></a>
+        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button" class="btn btn-danger">Hủy</button></a>
 
     </form>
 @endsection

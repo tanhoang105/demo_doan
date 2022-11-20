@@ -105,7 +105,7 @@ class LopController extends Controller
     public function detail($id, Request $request)
     {
         $lop = $this->lophoc->show($id);
-        $request->session()->put('id' ,  $lop->id );
+        $request->session()->put('id',  $lop->id);
         function createDatesTable($period, $start)
         {
             // tìm lớp  theo id
@@ -131,7 +131,7 @@ class LopController extends Controller
             // dd($arrayMaThu);
 
             $calendarStr = '';
-         
+
             foreach ($period as $key => $date_row) {
 
                 if ($start % 7 == 0) {
@@ -139,9 +139,9 @@ class LopController extends Controller
                 }
                 $css = '';
                 $tenca = '';
-                $th_start= null; 
-                $th_end= null; 
-               
+                $th_start = null;
+                $th_end = null;
+
                 $dayofweek = date('w', strtotime($date_row->format('Y-m-d')));
 
                 // dd($dayofweek);
@@ -151,7 +151,7 @@ class LopController extends Controller
                     // so sánh mã chuyển đổi của ngày với cột mã thứ trong bảng thứ học
 
                     if ($dayofweek  ==  $arrayMaThu[$i]->ma_thu) {
-                      
+
                         // $flag[] = $date_row->format('Y-m-d');
                         $css =  'style="color: red;     padding-top: 19px;"';
                         $tenca = $ca->ca_hoc;
@@ -234,7 +234,7 @@ class LopController extends Controller
         $endTime = strtotime(date($lop->ngay_ket_thuc));
         // $endTime = strtotime('+30 day', time());
         $this->v['lich'] = createCalendarBetweenTwoDates($startTime, $endTime);
-        return view('admin.lop.detail' , $this->v);
+        return view('admin.lop.detail', $this->v);
     }
 
     /**
@@ -394,6 +394,7 @@ class LopController extends Controller
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
         $this->v['cathu'] = $this->cathu->index(null, false, null);
+        // dd($this->v['cathu']);
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
             $params = [];
