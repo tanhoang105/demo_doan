@@ -133,11 +133,12 @@ class LopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LopRequest $request)
+    public function update(Request $request)
     {
+        
         $this->authorize(mb_strtoupper('update lớp học'));
 
-
+        // dd(123);
         if (session('id')) {
             $id = session('id');
             // dd($id);
@@ -147,7 +148,7 @@ class LopController extends Controller
                     $item  = null;
                 }
                 if (is_string($item)) {
-                    $item = $item;
+                    $item = trim($item);
                 }
 
                 return $item;
@@ -157,7 +158,7 @@ class LopController extends Controller
 
             // dd($params);
             $res = $this->lophoc->saveupdate($params);
-            if ($res > 0) {
+            if ($res) {
                 Session::flash('success', "Cập nhập thành công");
                 return redirect()->route('route_BE_Admin_List_Lop');
             } else {

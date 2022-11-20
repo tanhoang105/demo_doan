@@ -176,6 +176,7 @@ class Lop extends Model
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
+        
         return $query;
     }
 

@@ -51,9 +51,9 @@
                     <select class="form-control" name="id_user" id="">
                         @foreach ($listGiangVien as $item)
                             @if ($res->id_user == $item->id)
-                                <option selected value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                                <option selected value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @else
-                                <option  value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                                <option  value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @endif
                         @endforeach
                     </select>

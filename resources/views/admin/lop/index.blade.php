@@ -45,7 +45,10 @@
                     <th scope="col">Ngày kết thúc </th>
                     <th scope="col">Giảng viên </th>
                     <th scope="col">Sửa</th>
-                    <th scope="col">Xóa </th>
+                    <th scope="col">
+                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
