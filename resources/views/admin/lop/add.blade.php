@@ -33,11 +33,36 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lịch học</label>
                     <select class="form-control" name="ca_thu_id" id="">
+                        <option value="">Chọn lịch học</option>
+
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}">{{ $item->ca_id }}</option>
+                            <option value="{{ $item->id }}"><?php
+                            foreach ($cahoc as $ca) {
+                                if ($ca->id == $item->ca_id) {
+                                    echo $ca->ca_hoc . ' ( ' . $ca->thoi_gian_bat_dau . ' -- ' . $ca->thoi_gian_ket_thuc . ')' . ' : ';
+                                }
+                            }
+                            
+                            for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
+                                $str = explode(',', $item->thu_hoc_id);
+                            }
+                            
+                            for ($i = 0; $i < count($str); $i++) {
+                                foreach ($thu as $key => $value) {
+                                    if ($str[$i] == $value->id) {
+                                        if ($i == 0) {
+                                            echo $value->ten_thu;
+                                        } else {
+                                            echo ' -- ' . $value->ten_thu;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            ?></option>
                         @endforeach
                     </select>
-                    @error('ca_thu_id')  
+                    @error('ca_thu_id')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
@@ -68,7 +93,7 @@
             </div>
 
             <div class="col-6">
-                
+
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số ghế </label>
@@ -82,8 +107,8 @@
                     <label for="" class="form-label">Ngày bắt đầu</label>
                     <input class="form-control" type="date" name="ngay_bat_dau" id="">
                     @error('ngay_bat_dau')
-                    <span style="color: red"> {{ $message }} </span>
-                @enderror
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
 
@@ -91,8 +116,8 @@
                     <label for="" class="form-label">Ngày kết thúc</label>
                     <input class="form-control" type="date" name="ngay_ket_thuc" id="">
                     @error('ngay_ket_thuc')
-                    <span style="color: red"> {{ $message }} </span>
-                @enderror
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
 

@@ -29,8 +29,8 @@ class CaThu extends Model
         } else {
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
-                ->select($this->table . '.*')
-                ->orderByDesc($this->table . '.id');
+                ->select($this->table . '.*');
+               
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_thu', 'like', '%' . $params['keyword']  . '%');

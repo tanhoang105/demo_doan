@@ -251,6 +251,9 @@ class LopController extends Controller
     {
         //
         $this->authorize(mb_strtoupper('thêm lớp học'));
+        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        $this->v['thu'] = $this->thu->index(null, false, null);
+        // $this->v['list'] = $this->cathu->index($this->v['params'], true, 10);
 
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
