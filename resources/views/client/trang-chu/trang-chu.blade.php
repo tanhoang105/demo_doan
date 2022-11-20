@@ -1,6 +1,6 @@
 @extends('Client.templates.layout')
 @section('title')
-    Home
+    Trang chur
 @endsection
 @section('content')
         <!-- Start: Hero Section
