@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a style="color: red" href="{{ route('route_BE_Admin_Add_Xep_Lop') }} ">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
 
         </a>
     </div>
@@ -57,16 +57,21 @@
                     <td> {{ $item->ngay_dang_ky }}</td>
                     {{-- <td> {{ $item->ca_hoc }}</td> --}}
                     <td> {{ $item->ten_phong }}</td>
-                    <td> <button class="btn btn-success"><a
-                                href=" {{ route('route_BE_Admin_Detail_Xep_Lop', ['id_xep_lop' => $item->id_lop]) }} ">Chi
-                                tiết</a></button></td>
-                    <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Xep_Lop', ['id' => $item->id_xep_lop]) }}">
-                                <i class="fas fa-edit "></i> Sửa
-                            </a></button></td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Xep_Lop', ['id' => $item->id_xep_lop]) }}">
-                                <i class="fas fa-trash-alt"></i>    Xóa</a></button></td>
+                    <td>
+                        <a href=" {{ route('route_BE_Admin_Detail_Xep_Lop', ['id_xep_lop' => $item->id_lop]) }} ">
+                            <button class="btn btn-primary">
+                            Chi tiết</button></a>
+                    </td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Edit_Xep_Lop', ['id' => $item->id_xep_lop]) }}">
+                            <button class="btn btn-success">
+                            <i class="fas fa-edit "></i> Sửa</button></a>
+                    </td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Xoa_Xep_Lop', ['id' => $item->id_xep_lop]) }}">
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                    </td>
 
                 </tr>
             @endforeach

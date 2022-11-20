@@ -34,32 +34,8 @@
                     <label for="chuyenBay" class="form-label">Lịch học</label>
                     <select class="form-control" name="ca_thu_id" id="">
                         <option value="">Chọn lịch học</option>
-
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}"><?php
-                            foreach ($cahoc as $ca) {
-                                if ($ca->id == $item->ca_id) {
-                                    echo $ca->ca_hoc . ' ( ' . $ca->thoi_gian_bat_dau . ' -- ' . $ca->thoi_gian_ket_thuc . ')' . ' : ';
-                                }
-                            }
-                            
-                            for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
-                                $str = explode(',', $item->thu_hoc_id);
-                            }
-                            
-                            for ($i = 0; $i < count($str); $i++) {
-                                foreach ($thu as $key => $value) {
-                                    if ($str[$i] == $value->id) {
-                                        if ($i == 0) {
-                                            echo $value->ten_thu;
-                                        } else {
-                                            echo ' -- ' . $value->ten_thu;
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            ?></option>
+                            <option value="{{ $item->id }}">{{ 'Ca ' . $item->ca_id }} - {{ 'Thứ ' . $item->thu_hoc_id }}</option>
                         @endforeach
                     </select>
                     @error('ca_thu_id')
@@ -125,6 +101,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button"
+        class="btn btn-danger">Hủy</button></a>
 
     </form>
 @endsection

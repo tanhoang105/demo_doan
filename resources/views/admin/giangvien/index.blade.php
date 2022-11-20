@@ -1,8 +1,8 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Giang_Vien') }}">
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     @if (Session::has('error'))
@@ -52,13 +52,16 @@
                         <td>
                             {{ $item->sdt_giang_vien }}
                         </td>
-                        <td> <button class="btn btn-warning"><a
-                                    href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
-                                    <i class="fas fa-edit "></i>   Sửa
-                                </a></button></td>
-                        <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                    href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
-                                    <i class="fas fa-trash-alt"></i>   Xóa</a></button></td>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
+                                <button class="btn btn-success">
+                                <i class="fas fa-edit "></i> Sửa</button></a>
+                        </td>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
+                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>   Xóa</button></a>
+                        </td>
 
                     </tr>
                 @endforeach

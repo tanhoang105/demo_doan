@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mã thứ</label>
-                    <input value="{{ old('ma_thu') ?? request()->ma_thu }}" type="number"
+                    <input value="{{ old('ma_thu') ?? request()->ma_thu }}" type="text"
                         name="ma_thu" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('ma_thu')
@@ -30,7 +30,7 @@
                     @enderror
                 </div>
 
-               
+
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Tên thứ</label>
@@ -40,19 +40,22 @@
                     @enderror
                 </div>
 
+            </div>
+
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô tả</label>
-                    <input class="form-control" type="text" name="mo_ta" id="">
+                    <textarea class="form-control" name="mo_ta" style="height: 125px;"></textarea>
                     @error('mo_ta')
-                        <span style="color: red"> {{ $message }} </span>
+                    <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
 
-
             </div>
-
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('route_BE_Admin_List_Thu_Hoc') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+
 
     </form>
 @endsection

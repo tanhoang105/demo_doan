@@ -1,6 +1,6 @@
 @extends('client.templates.layout')
 @section('title')
-    - About
+    - Đăng Ký
 @endsection
 @section('content')
     <!-- header -->
@@ -10,8 +10,8 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Signup Form</h3>
-                    <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Signup </h4>
+                    <h3>Đăng ký</h3>
+                    <h4><a href="index-2.html"> Trang chủ </a> <span> &vert; </span> Đăng ký </h4>
                 </div>
             </div>
             <!-- End: .row -->
@@ -33,57 +33,50 @@
                     <div class="reg_wrap">
                         <!-- Start: Image -->
                         <div class="reg_img">
-                            <img src="images/hero-men.png" alt="">
+                            <img src="{{ asset('client/images/hero-men.png')  }}" alt="">
                         </div>
 
                         <!-- Start:  Signup  Form  -->
                         <div class="registration-form">
-                            <h2> New User Signup! </h2>
+                            <h2> Đăng ký tài khoản mới! </h2>
                             <form method="post" enctype="multipart/form-data" action="{{route('auth.store')}}">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="name" id="fname" type="text"
-                                            placeholder="Full Name">
+                                               placeholder="Họ tên">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="email" id="remail" type="text"
-                                            placeholder="Email address">
+                                        <input class="signup-field" name="email" id="remail" type="email"
+                                               placeholder="Email">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" name="password" id="password" type="text"
-                                            placeholder="Password">
+                                        <input class="signup-field" name="password" id="password" type="password"
+                                               placeholder="Mật khẩu">
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="sdt" id="cpassword" type="text"
-                                            placeholder="number phone">
+                                               placeholder="Điện thoại">
                                     </div>
 
                                     <div class="col-lg-12 col-sm-12">
                                         <input class="signup-field" name="dia_chi" id="address" type="text"
-                                            placeholder="Address">
+                                               placeholder="Địa chỉ">
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="signup-field" value="5" name="trang_thai" id="city" type="text">
+                                        <input class="signup-field" value="5" name="trang_thai" id="city" type="hidden">
                                     </div>
                                     <div hidden class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="hinh_anh" id="zip" type="file">
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="term-and-condition">
-                                            <input type="checkbox" id="term">
-                                            <label for="term">I agree to <a href="#">term &amp; condition</a> and
-                                                <a href="#">privacy policy</a></label>
-                                        </div>
+                                    <div class="submit-area">
+                                        <button class="submit more-link"> Đăng Ký Tài Khoản </button>
+                                        <a href="{{route('auth.loginForm')}}" class="submit more-link"> Đăng Nhâp </a>
+                                        <div id="lmsg" class="message"></div>
                                     </div>
-                                    {{-- <div class="col-sm-12 submit-area">
-                                        <a href="#" class="submit more-link"> Sign Up </a>
-                                        <div id="msg" class="message"></div>
-                                    </div> --}}
-                                    <button class="btn btn-success">Sign Up</button>
                                 </div>
                             </form>
                         </div>

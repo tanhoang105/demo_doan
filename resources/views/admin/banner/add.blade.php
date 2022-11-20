@@ -24,7 +24,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Anhr Banner</label>
                     <input value="{{ old('anh_banner') ?? request()->anh_banner }}" type="file"
-                           name="anh_banner" class="form-control" id="" aria-describedby="emailHelp">
+                           name="anh_banner" class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
                     @error('anh_banner')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror

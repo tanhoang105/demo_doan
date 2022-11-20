@@ -30,7 +30,75 @@
                                 @endif
                             @endforeach
 
+    {{-- <h2>Lịch học</h2>
+    <div class="calendar">
+        <div class="row align-content-center bg-dedede" style="height: 50px;">
+            <span class="font-weight-bold">Lịch học</span>
+        </div>
 
+        <div class="row align-content-center bg-cfcece font-weight-bold" style="height: 50px;">
+            <div class="col">
+                <label>STT</label>
+            </div>
+            <div class="col">
+                <label>Ngày</label>
+            </div>
+            <div class="col">
+                <label>Phòng</label>
+            </div>
+            <div class="col">
+                <label>Tên khóa học</label>
+            </div>
+            <div class="col">
+                <label>Lớp</label>
+            </div>
+            <div class="col">
+                <label>Giảng viên</label>
+            </div>
+            <div class="col">
+                <label>Ca</label>
+            </div>
+            <div class="col">
+                <label>Thời gian</label>
+            </div>
+            <div class="col">
+                <label>Mô tả</label>
+            </div>
+        </div>
+
+        @foreach ($lichhoc as $value )
+            <div class="row align-content-center bg-dedede" style="height: 50px; border-top: 1px solid #CFCECE">
+                <div class="col">
+                    <span> {{ $loop->iteration }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ngay_dang_ky }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ten_phong }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ten_khoa_hoc }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ten_lop }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ten_giang_vien }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->ca_hoc }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->thoi_gian }} </span>
+                </div>
+                <div class="col">
+                    <span> {{ $value->mo_ta }} </span>
+                </div>
+            </div>
+        @endforeach --}}
+
+    </div>
                         </td>
                         <td>{{ $value->ngay_hoc }}</td>
                         <td>
@@ -88,4 +156,5 @@
             </tbody>
         </table>
     </div>
+
 @endsection

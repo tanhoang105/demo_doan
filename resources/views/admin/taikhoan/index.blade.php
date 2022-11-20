@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Tai_Khoan') }}">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     @if (Session::has('error'))
@@ -65,13 +65,16 @@
                             src=" {{ Storage::URL($item->hinh_anh) }} " alt="">
                     </td>
 
-                    <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
-                                <i class="fas fa-edit "></i> Sửa
-                            </a></button></td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Tai_Khoan', ['id' => $item->id]) }}">
-                                <i class="fas fa-trash-alt"></i>     Xóa</a></button></td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
+                            <button class="btn btn-success">
+                            <i class="fas fa-edit "></i> Sửa</button></a>
+                    </td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Xoa_Tai_Khoan', ['id' => $item->id]) }}">
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>  Xóa</button></a>
+                    </td>
 
                 </tr>
             @endforeach
