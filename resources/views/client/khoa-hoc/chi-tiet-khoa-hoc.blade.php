@@ -105,7 +105,7 @@
                                                     <td> {{ $item->ngay_ket_thuc }}</td>
                                                     <td>
                                                         @foreach ($giang_vien as $gv)
-                                                            @if ($gv->id == $item->id_giang_vien)
+                                                            @if ($gv->id_user == $item->id_giang_vien)
                                                                 <a style="color: blue"
                                                                     href="{{ route('client_chi_tiet_giang_vien',['id' => $gv->id]) }}">{{ $gv->ten_giang_vien }}</a>
                                                             @endif
