@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->integer('id_khoa_hoc');
             $table->string('ten_lop');
-       
             $table->integer('so_luong')->nullable(); //số lượng học viên lớp
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');

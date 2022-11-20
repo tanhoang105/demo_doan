@@ -8,9 +8,14 @@ use App\Models\CaHoc;
 use App\Models\CaThu;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
+use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class LopController extends Controller
@@ -71,42 +76,7 @@ class LopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LopRequest $request)
-    {
-        //
-        $this->authorize(mb_strtoupper('thêm lớp học'));
 
-        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
-        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
-        $this->v['cathu'] = $this->cathu->index(null, false, null);
-        if ($request->isMethod('POST')) {
-            // thêm sản phẩm
-            $params = [];
-            $params['cols'] = array_map(function ($item) {
-                if ($item == '') {
-                    $item = null;
-                }
-
-                if (is_string($item)) {
-                    $item = trim($item);
-                }
-                return $item;
-            }, $request->post());
-
-            unset($params['cols']['_token']);
-            $res = $this->lophoc->create($params);
-            if ($res > 0) {
-                // thêm thành công
-                Session::flash('seccuss', 'Thêm thành công');
-                return redirect()->route('route_BE_Admin_List_Lop');
-            } else {
-                Session::flash('error', 'Thêm không thành công');
-                return redirect()->route('route_BE_Admin_List_Lop');
-            }
-        }
-
-        return view('admin.lop.add', $this->v);
-    }
 
     /**
      * Display the specified resource.
@@ -271,5 +241,191 @@ class LopController extends Controller
 
             echo $output;
         }
+    }
+
+
+
+
+
+    public function store(Request $request)
+    {
+        //
+        $this->authorize(mb_strtoupper('thêm lớp học'));
+
+        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
+        $this->v['cathu'] = $this->cathu->index(null, false, null);
+        if ($request->isMethod('POST')) {
+            // thêm sản phẩm
+            $params = [];
+            $params['cols'] = array_map(function ($item) {
+                if ($item == '') {
+                    $item = null;
+                }
+
+                if (is_string($item)) {
+                    $item = trim($item);
+                }
+                return $item;
+            }, $request->post());
+
+            unset($params['cols']['_token']);
+            $res = $this->lophoc->create($params);
+
+            if ($res > 0) {
+                $request->session()->put('idLopCurrent', $res);
+                // thêm thành công
+                // khi thêm thành công thì đồng nghĩa isnsert thời gian học vào bảng lịch học để 
+                $lopCurrent =  $this->lophoc->show($res);
+                // dd($lopCurrent);
+
+
+
+                $startTime = strtotime(date($lopCurrent->ngay_bat_dau));
+                $endTime = strtotime(date($lopCurrent->ngay_ket_thuc));
+                $this->createCalendarBetweenTwoDates($startTime, $endTime);
+
+
+
+                Session::flash('seccuss', 'Thêm thành công');
+                return redirect()->route('route_BE_Admin_List_Lop');
+            } else {
+                Session::flash('error', 'Thêm không thành công');
+                return redirect()->route('route_BE_Admin_List_Lop');
+            }
+        }
+
+        return view('admin.lop.add', $this->v);
+    }
+
+
+
+    function createDatesTable($period, $start)
+    {
+        // tìm lớp  theo id
+        // dd(session('idLopCurrent'));
+        $lop = Lop::find(session('idLopCurrent'));
+        // dd(session('idLopCurrent'));
+        // dd(($lop->ca_thu_id));
+        // tìm record ở bảng ca thứ dựa vào id của nó trong bảng lớp (ca_thu_id)
+        $thu = CaThu::find($lop->ca_thu_id);
+        $ca =  CaHoc::find($thu->ca_id);
+        // dd($thu->thu_hoc_id);
+        $arrayThuCuaLop = explode(',', $thu->thu_hoc_id);
+        // dd($arrayThuCuaLop);
+        $arrayid = [];
+        for ($i = 0; $i < count($arrayThuCuaLop); $i++) {
+            $arrayid[] = (int)$arrayThuCuaLop[$i];
+        }
+        // dd($arrayid);
+        // lấy mảng mã thứ theo id 
+        $arrayMaThu =  DB::table('thu_hoc')->select('thu_hoc.ma_thu')->whereIn('id', $arrayid)->get();
+        // dd($arrayMaThu);
+
+        $calendarStr = '';
+        $flag = [];
+        foreach ($period as $key => $date_row) {
+
+            if ($start % 7 == 0) {
+                $calendarStr .= '</tr><tr>';
+            }
+            $css = '';
+            $tenca = '';
+            // $calendarStr .= '<td class="date" ' . $css . ' >' . $date_row->format('d') . '</td>';
+            // $calendarStr .= '<td class="date">' .  . '</td>';
+
+
+            // $date = "2022-11-18";
+            // dd($date_row->format('Y-m-d'));
+            $dayofweek = date('w', strtotime($date_row->format('Y-m-d')));
+
+            // dd($dayofweek);
+
+            for ($i = 0; $i < count($arrayMaThu); $i++) {
+                // dd($arrayMaThu[$i]->ma_thu);
+                // so sánh mã chuyển đổi của ngày với cột mã thứ trong bảng thứ học
+                if ($dayofweek  ==  $arrayMaThu[$i]->ma_thu) {
+                    // dd(123);
+                    $lichHoc = new LichHoc();
+                    $params['cols'] = [
+                        'ma_thu' => (int) $dayofweek,
+                        'ca_id' => $ca->id,
+                        'ngay_hoc' => $date_row->format('Y-m-d'),
+                        'lop_id' => $lop->id
+                    ];
+                    // dd($params);
+                    $lichHoc->create($params);
+                    // $flag[] = $date_row->format('Y-m-d');
+                    $css =  'style="color: red;     padding-top: 19px;"';
+                    $tenca = $ca->ca_hoc;
+
+                    // $calendarStr .= '<td style="background: red;" class="date">'  . 1 .  '</td>';
+
+
+
+                }
+            }
+
+            $calendarStr .= '<td class="date" ' . $css . ' >' . $date_row->format('d') . "<br>" . '<span>' . $tenca . '</span>' .  '</td>';
+
+
+            $start++;
+        }
+        // dd($flag);
+
+        if ($start % 7 == 0) {
+            $calendarStr .= '</tr>';
+        } else {
+            for ($i = 0; $i <= 6; $i++) {
+                if ($start % 7 != 0)
+                    $calendarStr .= '<td class="empty_dates"></td>';
+                else
+                    break;
+                $start++;
+            }
+            $calendarStr .= '</tr>';
+        }
+
+        // return $calendarStr;
+        return 1;
+    }
+
+    function createCalendarBetweenTwoDates($startTime, $endTime)
+    {
+
+        $calendarStr = '';
+        $weekDays = array(
+            'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+        );
+
+        $calendarStr .= '<table class="table" >';
+
+        $calendarStr .= '<tr><th class="week-days">' . implode('</th><th class="week-days">', $weekDays) . '</th></tr>';
+
+
+        $period = new DatePeriod(
+            new DateTime(date('Y-m-d', $startTime)),
+            new DateInterval('P1D'),
+            new DateTime(date('Y-m-d', $endTime))
+        );
+
+        $currentDay = array_search(date('D', $startTime), $weekDays);
+        $start = 0;
+
+        $calendarStr .= '<tr>';
+        for ($i = $start; $i < $currentDay; $i++) {
+            $calendarStr .= '<td class="empty date"></td>';
+            $start++;
+        }
+
+        if ($currentDay < 6) {
+            $calendarStr .= $this->createDatesTable($period, $start);
+        } else {
+            $calendarStr .= $this->createDatesTable($period, $start);
+        }
+        // dd($calendarStr);
+        $calendarStr .= '</table>';
+
+        return $calendarStr;
     }
 }

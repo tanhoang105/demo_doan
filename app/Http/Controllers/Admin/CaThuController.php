@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CaHoc;
 use App\Models\CaThu;
+use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
 use DateInterval;
@@ -152,8 +153,18 @@ class CaThuController extends Controller
                 for ($i = 0; $i < count($arrayMaThu); $i++) {
                     // dd($arrayMaThu[$i]->ma_thu);
                     // so sánh mã chuyển đổi của ngày với cột mã thứ trong bảng thứ học
+                   
                     if (  $dayofweek  ==  $arrayMaThu[$i]->ma_thu) {
-                       
+                    //  dd($lop->id);
+                        $lichHoc = new LichHoc();
+                        $params['cols'] = [
+                            'ma_thu' => (int) $dayofweek,
+                            'ca_id' => $ca->id,
+                            'ngay_hoc' => $date_row->format('Y-m-d'),
+                            'lop_id' => $lop->id
+                        ];
+                        // dd($params);
+                        $lichHoc->create($params);
                         // $flag[] = $date_row->format('Y-m-d');
                         $css =  'style="color: red;     padding-top: 19px;"';
                         $tenca = $ca->ca_hoc;
@@ -230,8 +241,8 @@ class CaThuController extends Controller
         // $startTime = strtotime('+25 day', time());
         // $d = DateTime::createFromFormat(date('2022-11-17'),  '22-09-2008 00:00:00');
         // $d = $d->getTimestamp();
-        $startTime = strtotime('+0 day', strtotime(date('2022-11-18')));
-        $endTime = strtotime('+30 day', strtotime(date('2022-11-18')));
+        $startTime =  strtotime(date('2022-11-18'));
+        $endTime = strtotime(date('2022-12-17'));
         // $endTime = strtotime('+30 day', time());
         $this->v['lich'] = createCalendarBetweenTwoDates($startTime, $endTime);
         // echo createCalendarBetweenTwoDates($startTime, $endTime);
