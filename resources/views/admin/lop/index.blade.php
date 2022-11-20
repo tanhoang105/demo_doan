@@ -43,6 +43,7 @@
                     <th scope="col">Số lượng học viên </th>
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc </th>
+                    <th scope="col">Chi tiết lịch học</th>
                     <th scope="col">Giảng viên </th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
@@ -62,6 +63,7 @@
                         <td> {{ $item->so_luong }}</td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
+                        <td><button class="bt btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_Detail_Lop' , ['id'=>$item->id_lop])}} ">Chi tiết</a></button></td>
                         <td>
                             @foreach ($giangvien as $gv)
                                 {{-- {{$gv->ten_giang_vien}} --}}

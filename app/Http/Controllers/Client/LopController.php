@@ -31,7 +31,7 @@ class LopController extends Controller
         ->where('dang_ky.id_user', '=', Auth::user()->id)
         ->select('Dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_hoc.ca_hoc', 'ca_hoc.thoi_gian', 'lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
         ->get();
-        // dd($list);
+       
         $list_lop_moi = XepLop::join('lop', 'xep_lop.id_lop', '=', 'lop.id')
             ->where('lop.so_luong', '<', 40)
             ->select('xep_lop.*', 'lop.*')

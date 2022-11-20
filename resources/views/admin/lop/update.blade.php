@@ -52,7 +52,7 @@
                       
                         @foreach ($giangvien as $item)
                             @if ($item->id == $lop->id_giang_vien)
-                                <option selected value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                                <option selected value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @else
                                 <option value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @endif
