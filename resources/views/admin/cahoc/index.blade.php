@@ -38,7 +38,8 @@
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
                     <th scope="col">Ca học</th>
-                    <th scope="col">Thời gian</th>
+                    <th scope="col">Thời gian bắt đầu</th>
+                    <th scope="col">Thời gian kết thúc</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
                       <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -52,7 +53,8 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ca_hoc }}</td>
-                        <td> {{ $item->thoi_gian }}</td>
+                        <td> {{ $item->thoi_gian_bat_dau }}</td>
+                        <td> {{ $item->thoi_gian_ket_thuc }}</td>
 
                         <td> <button class="btn btn-warning"><a
                                     href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">

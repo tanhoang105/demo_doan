@@ -77,7 +77,8 @@
                         <td>
                             @foreach ($ca_hoc as $item)
                                 @if ($item->id == $value->ca_id)
-                                    {{ $item->thoi_gian }}
+                                    {{ $item->thoi_gian_bat_dau  }} -
+                                    {{ $item->thoi_gian_ket_thuc  }}
                                 @endif
                             @endforeach
                         </td>

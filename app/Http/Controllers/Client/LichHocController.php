@@ -33,6 +33,7 @@ class LichHocController extends Controller
     public function index()
     {
         $idUser = Auth::user()->id;
+        // dd($idUser);
         $listThuHoc = $this->thuhoc->index(null, false, null);
         $this->v['thuhoc'] = $listThuHoc;
         $this->v['phonghoc'] = $this->phonghoc->index(null, false, null);
