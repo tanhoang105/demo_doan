@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
 
     </div>
@@ -25,7 +25,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                
+
                   <th> <input id="check_all" type="checkbox" /></th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên học viên </th>
@@ -52,13 +52,16 @@
                         {{ $item->sdt }}
                     </td>
 
-                    <td><button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Hoc_Vien', ['id' => $item->id]) }}">
-                                <i class="fas fa-edit "></i> Sửa
-                            </a></button></td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Hoc_Vien', ['id' => $item->user_id]) }}">
-                                <i class="fas fa-trash-alt"></i>     Xóa</a></button></td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Edit_Hoc_Vien', ['id' => $item->id]) }}">
+                            <button class="btn btn-success">
+                            <i class="fas fa-edit "></i> Sửa</button></a>
+                    </td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Xoa_Hoc_Vien', ['id' => $item->user_id]) }}">
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                    </td>
 
                 </tr>
             @endforeach

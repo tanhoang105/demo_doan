@@ -267,13 +267,17 @@
             @foreach ($khoahoc as $value)
               <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="feat_course_item">
-                    <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
+                    <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}">
+                        <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
+                    </a>
 {{--                     <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image">--}}
                     <div class="feat_cour_price">
                         <span class="feat_cour_tag"> {{ $value->ten_danh_muc }} </span>
-                        <span class="feat_cour_p"> {{ $value->gia_khoa_hoc }} VND </span>
+                        <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc) }} VNĐ </span>
                     </div>
-                    <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
+                    <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}">
+                        <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
+                    </a>
                     <div class="feat_cour_lesson">
                         <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 24 lessons </span>
                         <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 259 Students </span>
@@ -314,31 +318,6 @@
         </div>
         <!-- End: Heading -->
 
-{{--            <table class="table table-striped">--}}
-{{--                <thead>--}}
-{{--                <tr class="">--}}
-{{--                    <th scope="col">Tên Lớp</th>--}}
-{{--                    <th scope="col">Khóa Học</th>--}}
-{{--                    <th scope="col">Ngày</th>--}}
-{{--                    <th scope="col">Thời Gian</th>--}}
-{{--                    <th scope="col"></th>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--                <tbody>--}}
-{{--            @foreach ($khaigiang as $value)--}}
-{{--                <tr>--}}
-{{--                    <td>{{ $value->ten_lop}}</td>--}}
-{{--                    <td>{{ $value->ten_khoa_hoc }}</td>--}}
-{{--                    <td>{{ $value->ngay_bat_dau }}</td>--}}
-{{--                    <td>{{ $value->thoi_gian }}</td>--}}
-{{--                    <td>--}}
-{{--                        <button class="btn btn-primary" style="letter-spacing: 0px;text-transform: none;--}}
-{{--">Đăng Ký</button>--}}
-{{--                    </td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-{{--                </tbody>--}}
-{{--            </table>--}}
             <div class="row bg-muted" style="text-align: center;background: #DEDEDE">
                 <div class="col-lg-2 pt-3">
                     <h4>Tên Lớp</h4>
@@ -365,6 +344,9 @@
                 </div>
                 <div class="col-lg-2 pt-3">
                     <label> {{ $value->ngay_bat_dau }} </label>
+                </div>
+                <div class="col-lg-2 pt-3">
+                    <label>  </label>
                 </div>
                 {{-- <div class="col-lg-2 pt-3">
                     <label> {{ $value->thoi_gian }} </label>

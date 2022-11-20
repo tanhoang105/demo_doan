@@ -1,10 +1,17 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height: 800px;">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height: 600px;">
+
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href=" {{ route('home') }}">
+                <a class="nav-link active" href=" {{ route('home') }} ">
                     <span data-feather="home"></span>
                     Trang chủ <span class="sr-only"></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=" {{ route('client_thong_tin_ca_nhan') }} ">
+                    <span data-feather="user"></span>
+                    Hồ sơ
                 </a>
             </li>
             <li class="nav-item">
@@ -15,7 +22,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=" {{ route('client_lich_hoc') }} ">
-                    <span data-feather="shopping-cart"></span>
+                    <span data-feather="calendar"></span>
                     Lịch học
                 </a>
             </li>
@@ -27,7 +34,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <span data-feather="bar-chart-2"></span>
+                    <span data-feather="plus"></span>
                     Dịch vụ
                 </a>
             </li>
