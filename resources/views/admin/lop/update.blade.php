@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên Lớp</label>
+                    <label for="" class="form-label">Tên Lớp </label>
                     <input value="{{ old('ten_lop') ?? (request()->ten_lop ?? $lop->ten_lop) }}" type="text"
                         name="ten_lop" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -49,12 +49,12 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Giảng Viên</label>
                     <select class="form-control" name="id_giang_vien" id="">
-                        <option value="">Chọn giảng viên</option>
+                      
                         @foreach ($giangvien as $item)
                             @if ($item->id == $lop->id_giang_vien)
-                                <option selected value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                                <option selected value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @else
-                                <option value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                                <option value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -65,13 +65,7 @@
             </div>
 
             <div class="col-6">
-                <div class="mb-3">
-                    <label for="" class="form-label">Giá </label>
-                    <input value="{{ $lop->gia }}" class="form-control" type="text" name="gia" id="">
-                    @error('gia')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
+               
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số ghế </label>

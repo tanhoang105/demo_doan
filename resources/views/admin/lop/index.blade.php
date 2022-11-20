@@ -7,7 +7,7 @@
 @section('content')
     <div class="row p-3">
         <a href="{{ route('route_BE_Admin_Add_Lop') }}">
-            <button class='btn btn-success'>  <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'>  <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -43,9 +43,13 @@
                     <th scope="col">Số lượng học viên </th>
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc </th>
+                    <th scope="col">Chi tiết lịch học</th>
                     <th scope="col">Giảng viên </th>
                     <th scope="col">Sửa</th>
-                    <th scope="col">Xóa </th>
+                    <th scope="col">
+                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -59,25 +63,27 @@
                         <td> {{ $item->so_luong }}</td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
+                        <td><button class="bt btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_Detail_Lop' , ['id'=>$item->id_lop])}} ">Chi tiết</a></button></td>
                         <td>
                             @foreach ($giangvien as $gv)
                                 {{-- {{$gv->ten_giang_vien}} --}}
                                 @if ($gv->id_user == $item->id_giang_vien)
                                     {{ $gv->ten_giang_vien }}
-                                    {{-- @else 
+                                    {{-- @else
                                 <button class="btn success"><a href="">Thêm giảng viên</a></button>     --}}
                                 @endif
                             @endforeach
                         </td>
-                        <td> <button class="btn btn-warning">
-                                <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
-                                    <i class="fas fa-edit "></i>Sửa</a>
-                            </button>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
+                                <button class="btn btn-success">
+                                <i class="fas fa-edit "></i>Sửa</button></a>
                         </td>
-                        <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                    href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
-                                    <i class="fas fa-trash-alt"></i>    Xóa</a>
-                                </button></td>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
+                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                        </td>
 
                     </tr>
                 @endforeach

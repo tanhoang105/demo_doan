@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
 
         </a>
     </div>
@@ -34,10 +34,10 @@
                     <th scope="col">Ngày kết thúc</th>
                     <th scope="col">Mô tả</th>
                     <th scope="col">Sửa</th>
-                   
+
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
-  
+
                       </th>
 
                 </tr>
@@ -53,13 +53,16 @@
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
-                        <td> <button class="btn btn-warning"><a
-                                    href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa
-                                </a></button></td>
-                        <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                    href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
-                                    <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
+                                <button class="btn btn-success">
+                                <i class="fas fa-edit "></i> Sửa</button></a>
+                        </td>
+                        <td>
+                            <a href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
+                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                        </td>
 
                     </tr>
                 @endforeach

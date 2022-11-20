@@ -27,8 +27,7 @@
                 <th scope="col">STT</th>
 
                 <th scope="col">Tên Lớp </th>
-                <th scope="col">Ca học </th>
-                <th scope="col">Giá </th>
+                {{-- <th scope="col">Ca học </th> --}}
                 <th scope="col">Số lượng học viên </th>
                 <th scope="col">Ngày bắt đầu </th>
                 <th scope="col">Ngày kết thúc </th>
@@ -42,15 +41,15 @@
                 <th scope="row">1</th>
                 <td> {{ $item->ten_lop }}</td>
 
-                <td>
+                {{-- <td>
                     @foreach ($cahoc as $ca)
                         @if ($ca->id == $item->id_ca_hoc)
                             {{ $ca->ca_hoc }}
                         @endif
                     @endforeach
-                </td>
+                </td> --}}
                 {{-- <td> {{ $item->id_ca_hoc }}</td> --}}
-                <td> {{ $item->gia }}</td>
+             
                 <td> {{ $item->so_luong }}</td>
                 <td> {{ $item->ngay_bat_dau }}</td>
                 <td> {{ $item->ngay_ket_thuc }}</td>

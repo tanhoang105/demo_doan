@@ -2,7 +2,7 @@
 @section('content')
     <div class="row p-3">
         <a style="color: red"href=" {{ route('route_BE_Admin_Add_Phuong_Thuc_Thanh_Toan') }}">
-            <button class='btn btn-success'> <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     @if (Session::has('error'))
@@ -50,13 +50,16 @@
                     <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten }}</td>
-                    <td> <button class="btn btn-warning"><a
-                                href="{{ route('route_BE_Admin_Edit_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
-                                <i class="fas fa-edit "></i> Sửa
-                            </a></button></td>
-                    <td> <button class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
-                                <i class="fas fa-trash-alt"></i>     Xóa</a></button></td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Edit_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
+                            <button class="btn btn-success">
+                            <i class="fas fa-edit "></i> Sửa</button></a>
+                    </td>
+                    <td>
+                        <a href="{{ route('route_BE_Admin_Xoa_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
+                            <button class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                    </td>
 
                 </tr>
             @endforeach

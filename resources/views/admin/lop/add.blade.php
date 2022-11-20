@@ -33,11 +33,12 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lịch học</label>
                     <select class="form-control" name="ca_thu_id" id="">
+                        <option value="">Chọn lịch học</option>
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}">{{ $item->ca_id }}</option>
+                            <option value="{{ $item->id }}">{{ 'Ca ' . $item->ca_id }} - {{ 'Thứ ' . $item->thu_hoc_id }}</option>
                         @endforeach
                     </select>
-                    @error('ca_thu_id')  
+                    @error('ca_thu_id')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
@@ -68,7 +69,7 @@
             </div>
 
             <div class="col-6">
-                
+
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số ghế </label>
@@ -82,8 +83,8 @@
                     <label for="" class="form-label">Ngày bắt đầu</label>
                     <input class="form-control" type="date" name="ngay_bat_dau" id="">
                     @error('ngay_bat_dau')
-                    <span style="color: red"> {{ $message }} </span>
-                @enderror
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
 
@@ -91,8 +92,8 @@
                     <label for="" class="form-label">Ngày kết thúc</label>
                     <input class="form-control" type="date" name="ngay_ket_thuc" id="">
                     @error('ngay_ket_thuc')
-                    <span style="color: red"> {{ $message }} </span>
-                @enderror
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
 
@@ -100,6 +101,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button"
+        class="btn btn-danger">Hủy</button></a>
 
     </form>
 @endsection

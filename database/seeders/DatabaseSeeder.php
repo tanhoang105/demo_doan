@@ -43,9 +43,8 @@ class DatabaseSeeder extends Seeder
                 'ten_lop'=>'123ph'.$i,
                 'id_giang_vien'=>$i,
                 'id_khoa_hoc'=>$i,
-                'id_ca_hoc'=>$i,
+                'ca_thu_id'=>$i,
                 'so_luong'=>'40',
-                'gia'=>'100.000',
                 'ngay_bat_dau'=>'2022-10-18',
                 'ngay_ket_thuc'=>'2022-10-18',
                 'created_at'=>date('Y-m-d H:i:s'),
@@ -53,7 +52,8 @@ class DatabaseSeeder extends Seeder
             ];
             $ca_hoc[]=[
                 'ca_hoc'=>'Ca '.$i,
-                'thoi_gian'=>date('H:i:s'),
+                'thoi_gian_bat_dau'=>date('H:i:s'),
+                'thoi_gian_ket_thuc'=>date('H:i:s'),
                 'mo_ta'=>'Mô tả',
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s')
@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
             $xep_lop[]=[
                 'ngay_dang_ky'=>'2022-10-18',
                 'id_lop'=>$i,
-                'id_user'=>$i,
+           
                 
                 'id_phong_hoc'=>$i,
                 'created_at'=>date('Y-m-d H:i:s'),

@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="{{asset('client/images/favicon.png')}}">
 
-    <title>@yield('title')</title>
+    <title>Aducat - @yield('title')</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
@@ -17,16 +18,26 @@
 
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
+    <link href="{{ asset('custom/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-{{--    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">--}}
+
+<nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 justify-content-between">
+
+    {{--        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">--}}
+    <div class="logo">
+        <a href="{{route('home')}}"><img class="img-responsive p-3" src="{{asset('client/images/logo-white.png')}}" alt="logo-white" style="width: 150px;">
+        </a>
+    </div>
+
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">!</a>
+            <a class="nav-link" href="#">
+                <img class="border rounded-circle" src="{{ asset('client/images/teacher1.jpg') }}" style="width: 30px">
+            </a>
         </li>
+
     </ul>
 </nav>
 
@@ -35,6 +46,7 @@
         @include('client.profile.sidebar')
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
             @yield('content')
         </main>
     </div>

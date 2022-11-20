@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CaHoc;
 use App\Models\CaThu;
+use App\Models\LichHoc;
+use App\Models\Lop;
 use App\Models\ThuHoc;
 use DateInterval;
 use DatePeriod;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CaThuController extends Controller
@@ -104,15 +107,81 @@ class CaThuController extends Controller
     {
         function createDatesTable($period, $start)
         {
+            // tìm lớp  theo id
+            $lop = Lop::find(1);
+           
+          
+            // dd(($lop->ca_thu_id));
+            // tìm record ở bảng ca thứ dựa vào id của nó trong bảng lớp (ca_thu_id)
+            $thu = CaThu::find($lop->ca_thu_id);
+           
+
+            
+            $ca =  CaHoc::find($thu->ca_id);
+          
+            // dd($thu->thu_hoc_id);
+            $arrayThuCuaLop = explode(',', $thu->thu_hoc_id);
+            // dd($arrayThuCuaLop);
+            $arrayid = [];
+            for ($i=0; $i < count($arrayThuCuaLop); $i++) { 
+                    $arrayid[] = (int)$arrayThuCuaLop[$i];
+            }  
+            // dd($arrayid);
+            // lấy mảng mã thứ theo id 
+            $arrayMaThu =  DB::table('thu_hoc')->select('thu_hoc.ma_thu')->whereIn('id', $arrayid )->get();
+            // dd($arrayMaThu);
+
             $calendarStr = '';
+            $flag = [];
             foreach ($period as $key => $date_row) {
+                
                 if ($start % 7 == 0) {
                     $calendarStr .= '</tr><tr>';
                 }
+                $css = '';
+                $tenca = '';
+                // $calendarStr .= '<td class="date" ' . $css . ' >' . $date_row->format('d') . '</td>';
+                // $calendarStr .= '<td class="date">' .  . '</td>';
 
-                $calendarStr .= '<td class="date">' . $date_row->format('d') . '</td>';
+                  
+                // $date = "2022-11-18";
+                // dd($date_row->format('Y-m-d'));
+                $dayofweek = date('w', strtotime($date_row->format('Y-m-d')));
+
+                // dd($dayofweek);
+               
+                for ($i = 0; $i < count($arrayMaThu); $i++) {
+                    // dd($arrayMaThu[$i]->ma_thu);
+                    // so sánh mã chuyển đổi của ngày với cột mã thứ trong bảng thứ học
+                   
+                    if (  $dayofweek  ==  $arrayMaThu[$i]->ma_thu) {
+                    //  dd($lop->id);
+                        $lichHoc = new LichHoc();
+                        $params['cols'] = [
+                            'ma_thu' => (int) $dayofweek,
+                            'ca_id' => $ca->id,
+                            'ngay_hoc' => $date_row->format('Y-m-d'),
+                            'lop_id' => $lop->id
+                        ];
+                        // dd($params);
+                        $lichHoc->create($params);
+                        // $flag[] = $date_row->format('Y-m-d');
+                        $css =  'style="color: red;     padding-top: 19px;"';
+                        $tenca = $ca->ca_hoc;
+
+                        // $calendarStr .= '<td style="background: red;" class="date">'  . 1 .  '</td>';
+                      
+
+
+                    }
+                }
+
+                $calendarStr .= '<td class="date" ' . $css . ' >' . $date_row->format('d') . "<br>" . '<span>' . $tenca . '</span>' .  '</td>';
+
+
                 $start++;
             }
+            // dd($flag);
 
             if ($start % 7 == 0) {
                 $calendarStr .= '</tr>';
@@ -163,7 +232,7 @@ class CaThuController extends Controller
             } else {
                 $calendarStr .= createDatesTable($period, $start);
             }
-
+            // dd($calendarStr);
             $calendarStr .= '</table>';
 
             return $calendarStr;
@@ -172,8 +241,8 @@ class CaThuController extends Controller
         // $startTime = strtotime('+25 day', time());
         // $d = DateTime::createFromFormat(date('2022-11-17'),  '22-09-2008 00:00:00');
         // $d = $d->getTimestamp();
-        $startTime = strtotime('+0 day', strtotime(date('2022-11-17')));
-        $endTime = strtotime('+30 day', strtotime(date('2022-11-17')));
+        $startTime =  strtotime(date('2022-11-18'));
+        $endTime = strtotime(date('2022-12-17'));
         // $endTime = strtotime('+30 day', time());
         $this->v['lich'] = createCalendarBetweenTwoDates($startTime, $endTime);
         // echo createCalendarBetweenTwoDates($startTime, $endTime);
@@ -195,10 +264,10 @@ class CaThuController extends Controller
             $this->v['res'] = $this->cathu->show($id);
             $this->v['thuhoc'] = $this->thu->index(null, false, null);
             $this->v['lichhoc'] = $this->cathu->show($id);
-          
+
             $arrayThuTheoCa = explode(',', $this->v['lichhoc']->thu_hoc_id);
             $this->v['arrayThuTheoCa'] = $arrayThuTheoCa;
-           
+
             return view('admin.lichhoc.update', $this->v);
         }
     }
@@ -215,7 +284,7 @@ class CaThuController extends Controller
         $id = session('id');
         $params = [];
         $params['cols'] = array_map(function ($item) {
-            if($item == ''){
+            if ($item == '') {
                 $item = null;
             }
             if (is_string($item)) {
@@ -225,18 +294,17 @@ class CaThuController extends Controller
         }, $request->all());
 
         unset($params['cols']['_token']);
-        $params['cols']['id']=  $id;
+        $params['cols']['id'] =  $id;
         // dd($params);
         // $this->v['lichhoc'] = $this->cathu->show($id);
-          
+
         // $arrayThuTheoCa = [ $this->v['lichhoc']->thu_hoc_id ];
         // // dd($arrayThuTheoCa)
         // $arrayThuTheoCa->detach();
         $res = $this->cathu->saveupdate($params);
-        if($res){
-            Session::flash('success' , "Cập nhập thành công");
-
-        }else {
+        if ($res) {
+            Session::flash('success', "Cập nhập thành công");
+        } else {
             Session::flash('error', "Cập nhập không thành công");
         }
 

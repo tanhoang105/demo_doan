@@ -54,7 +54,6 @@ Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::cla
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
 Route::get('complete-dangky/{code}', [\App\Http\Controllers\Client\DangKyController::class, 'completeDangKy'])->name('client_complete_dang_ky');
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
 Route::get('IPN', [\App\Http\Controllers\Client\ThanhToanController::class, 'IPN'])->name('complete_pay');
 Route::get('payment', [\App\Http\Controllers\Client\ThanhToanController::class, 'payment'])->name('getPayment');
 Route::post('vnp_payment/{id}', [\App\Http\Controllers\Client\ThanhToanController::class, 'vnpPayment'])->name('payment');
@@ -64,10 +63,13 @@ Route::get('vnp-return', [\App\Http\Controllers\Client\ThanhToanController::clas
 
 // Route::get('/chi-tiet-giang-vien', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\Client\ThongTinController::class, 'index'])->name('client_thong_tin_ca_nhan');
+Route::get('/doi-mat-khau', [\App\Http\Controllers\Client\ThongTinController::class, 'change_password'])->name('client_doi_mat_khau');
+Route::post('/doi-mat-khau', [\App\Http\Controllers\Client\ThongTinController::class, 'update_password'])->name('client_update_doi_mat_khau');
+Route::post('/thong-tin-ca-nhan-update', [\App\Http\Controllers\Client\ThongTinController::class, 'update'])->name('client_thong_tin_ca_nhan_update');
 Route::get('/lop', [\App\Http\Controllers\Client\LopController::class, 'index'])->name('client_lop');
 Route::get('/form_doi_lop/{id}', [\App\Http\Controllers\Client\LopController::class, 'form_doi_lop'])->name('form_doi_lop');
 Route::post('/doi_lop', [\App\Http\Controllers\Client\LopController::class, 'doi_lop'])->name('doi_lop');
-//lich_hoc 
+//lich_hoc
 Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 'index'])->name('client_lich_hoc');
 //doi khoa_hoc
 Route::get('/khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'khoa_hoc'])->name('khoa_hoc_dang_ki');
@@ -126,7 +128,7 @@ Route::prefix('/admin')->group(function () {
 
 
 
-    // thứ học 
+    // thứ học
     Route::prefix('/thu-hoc')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [ThuHocController::class, 'index'])->name('List_Thu_Hoc'); // hiển thị danh sách
         Route::match(['get', 'post'], '/add-thu-hoc',   [ThuHocController::class, 'store'])->name('Add_Thu_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
@@ -258,6 +260,7 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
 
         Route::get('/list', [LopController::class, 'index'])->name('List_Lop');
+        Route::get('/detail/{id}', [LopController::class, 'detail'])->name('Detail_Lop');
         Route::get('/xoa/{id}', [LopController::class, 'destroy'])->name('Xoa_Lop');
         Route::get('/edit/{id}', [LopController::class, 'edit'])->name('Edit_Lop');
         Route::post('/update', [LopController::class, 'update'])->name('Update_Lop');
