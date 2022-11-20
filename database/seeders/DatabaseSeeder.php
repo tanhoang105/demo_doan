@@ -96,7 +96,7 @@ class DatabaseSeeder extends Seeder
             $xep_lop[]=[
                 'ngay_dang_ky'=>'2022-10-18',
                 'id_lop'=>$i,
-                'id_user'=>$i,
+           
                 
                 'id_phong_hoc'=>$i,
                 'created_at'=>date('Y-m-d H:i:s'),

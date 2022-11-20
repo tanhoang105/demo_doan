@@ -258,6 +258,7 @@ Route::prefix('/admin')->group(function () {
     Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
 
         Route::get('/list', [LopController::class, 'index'])->name('List_Lop');
+        Route::get('/detail/{id}', [LopController::class, 'detail'])->name('Detail_Lop');
         Route::get('/xoa/{id}', [LopController::class, 'destroy'])->name('Xoa_Lop');
         Route::get('/edit/{id}', [LopController::class, 'edit'])->name('Edit_Lop');
         Route::post('/update', [LopController::class, 'update'])->name('Update_Lop');
