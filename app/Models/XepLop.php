@@ -41,7 +41,7 @@ class XepLop extends Model
                 // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
-                ->join('giang_vien', 'giang_vien.id', '=',     $this->table . '.id_user')
+                ->join('giang_vien', 'giang_vien.id', '=',  'lop.id_giang_vien')
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');

@@ -83,7 +83,7 @@
                                 <li> <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a></li>
                                 <li>
                                     @if (Auth::user())
-                                        <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}"
+                                        <a href="/admin"
                                             class="dropdown-item">Admin</a>
                                     @endif
                                 </li>

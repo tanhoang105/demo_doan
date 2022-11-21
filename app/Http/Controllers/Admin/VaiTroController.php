@@ -24,9 +24,9 @@ class VaiTroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
 
-        $this->authorize(mb_strtoupper('xem vai tro') );
+        $this->authorize(mb_strtoupper('xem vai trò'));
 
         $this->v['params'] = $request->all();
         $list = $this->vaitro->index($this->v['params'], true, 10);
@@ -170,7 +170,7 @@ class VaiTroController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xoa vai trò') );
+        $this->authorize(mb_strtoupper('xóa vai trò') );
 
 
         if ($id) {
@@ -196,7 +196,7 @@ class VaiTroController extends Controller
     public function destroyAll(Request $request){
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xoa vai trò') );
+        $this->authorize(mb_strtoupper('xóa vai trò') );
 
         if($request->isMethod('POST')){
             $params = [];

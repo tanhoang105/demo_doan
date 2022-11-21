@@ -1,6 +1,6 @@
 @extends('Client.templates.layout')
 @section('title')
-    - Course Details
+    - Chi tiết khóa học
 @endsection
 @section('content')
     <!-- header -->
@@ -10,8 +10,8 @@
             <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
-                    <h3>Single Course</h3>
-                    <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Courses </h4>
+                    <h3>Chi tiết khóa học</h3>
+                    <h4><a href="/"> Trang chủ </a> <span> &vert; </span> Khóa học </h4>
                 </div>
             </div>
             <!-- End: .row -->
@@ -32,7 +32,7 @@
                 <div class="col-lg-8 col-sm-12">
                     <div class="sing_course_wrap">
                         <div class="sin_course_img">
-                            <img class="img-responsive" src="{{ asset('client/images/blog3.jpg') }}" alt="">
+                            <img class="img-responsive" src="{{ Storage::url($detail->hinh_anh) }}" alt="" style="width: 730px;height: 405px;border-radius: 15px;">
                         </div>
                         <h4>{{ $detail->ten_khoa_hoc }}</h4>
                         <div class="course_meta">
@@ -62,7 +62,7 @@
                                         data-bs-target="#pills-instructors" role="tab" aria-controls="pills-instructors"
                                         aria-selected="false" type="button"> Mô tả</button>
                                 </li>
-                              
+
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-curriculum-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
@@ -179,7 +179,7 @@
                                     <p>
                                         {{ $detail->mo_ta }}
                                     </p>
-                                   
+
                                 </div>
                                 <div class="tab-pane fade" id="pills-reviews" aria-labelledby="pills-reviews-tab"
                                     role="tabpanel">
@@ -322,7 +322,7 @@
                             @foreach ($danhmuc as $value )
                             <span>{{$value->ten_danh_muc}}</span>
                             @endforeach
-                        </div> 
+                        </div>
                         {{-- <a href="#" class="more-link"> Buy Now</a> --}}
                     </aside>
                     <!-- Widget Course Details /- -->
@@ -339,7 +339,7 @@
                         </div> --}}
                         <div style="display: flex" class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                <img src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="height: 75px;width: 140px;border-radius: 10px;">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag">Giá tiền {{number_format($value->gia_khoa_hoc)}}VND</span>
                                     {{-- <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span> --}}

@@ -6,10 +6,7 @@
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-              <a href="index3.html" class="nav-link">Home</a>
-          </li>
-          <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('home') }}" class="nav-link">Client</a>
+              <a href="{{ route('home') }}" class="nav-link">Home</a>
           </li>
       </ul>
 
@@ -27,7 +24,7 @@
                           <input style="display:block ; position:relative" class="form-control form-control-navbar"
                               name="keyword" id="keyword" type="search" placeholder="Tìm kiếm" aria-label="Search">
                           <div id="search_ajax">
-                         
+
                           </div>
                           <div class="input-group-append">
                               {{-- nút tìm kiếm --}}

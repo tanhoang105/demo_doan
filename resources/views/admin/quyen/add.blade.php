@@ -44,8 +44,9 @@
             </div>
             
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
-          
+        <button type="submit" class="btn btn-success">Thêm</button>
+        
+        <button class="btn btn-info"><a style="color: #fff" href=" {{route('route_BE_Admin_List_Quyen')}} ">Quay lại</a></button>
     </form>
 
 

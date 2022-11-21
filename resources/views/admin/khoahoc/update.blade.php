@@ -44,6 +44,16 @@
                     {{-- @error('ten_khoa_hoc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror --}}
+
+                    <div class="mb-3">
+                        <label for="chuyenBay" class="form-label">Giá Khóa Học</label>
+                        <input value="{{ old('gia_khoa_hoc') ?? request()->gia_khoa_hoc ?? $khoahoc->gia_khoa_hoc }}" type="text" name="gia_khoa_hoc"
+                            class="form-control" id="" aria-describedby="emailHelp">
+                        {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                        @error('gia_khoa_hoc')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô Tả</label>

@@ -39,7 +39,7 @@
         @foreach ($list as $key => $item)
             <tr>
                 <th scope="row"> {{ $loop->iteration }}</th>
-                <td> <img src="{{ Storage::url($item->anh_banner) }}"> </td>
+                <td> <img src="{{ Storage::url($item->anh_banner) }}" style="width: 100px;"> </td>
                 <td>
 {{--                    <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} "><button class="btn btn-success"> Sửa </button></a>--}}
                 </td>
