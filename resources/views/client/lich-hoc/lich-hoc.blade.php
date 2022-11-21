@@ -1,6 +1,6 @@
 @extends('Client.profile.layout')
 @section('title')
-    - Lịch học
+    Lịch học
 @endsection
 @section('content')
     <h2>Lịch học</h2>

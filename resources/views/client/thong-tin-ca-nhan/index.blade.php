@@ -30,7 +30,8 @@
         <div class="row">
             <div class="col-4 box-shadow br-15" style="width: 390px;margin-right: 20px;">
                 <div class="avatar d-flex justify-content-center pt-2">
-                    <img class="rounded-circle box-shadow" src="{{ asset('client/images/teacher1.jpg') }}" style="width: 130px;">
+{{--                    <img class="rounded-circle box-shadow" src="{{ asset('client/images/teacher1.jpg') }}" style="width: 130px;">--}}
+                    <img class="rounded-circle box-shadow" src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width: 130px;">
                 </div>
 
 {{--                <div class="row d-flex justify-content-center pt-3" style="margin-right: 10px;">--}}

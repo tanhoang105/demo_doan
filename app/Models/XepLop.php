@@ -23,7 +23,7 @@ class XepLop extends Model
                 // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
-                ->join('giang_vien', 'giang_vien.id_user', '=',     $this->table . '.id_user')
+                ->join('giang_vien', 'giang_vien.id_user', '=',     'lop.id_giang_Vien')
                 ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*','khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
@@ -111,7 +111,7 @@ class XepLop extends Model
         $data = [
             'delete_at' => 0
         ];
-        $query = DB::table($this->table) 
+        $query = DB::table($this->table)
                 ->whereIn('id', $params['cols']['id']);
         // dd($query);
         $query = $query->update($data);
