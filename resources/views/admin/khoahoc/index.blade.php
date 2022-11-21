@@ -1,4 +1,7 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{route('route_BE_Admin_Khoa_Hoc')}}
+@endsection
 @section('content')
     <div class="row p-3">
 
@@ -32,50 +35,53 @@
     @endif
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Khoa_Hoc') }}" enctype="multipart/form-data">
         @csrf
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th> <input id="check_all" type="checkbox" /></th>
-                <th scope="col">STT</th>
-                <th scope="col">Tên Khóa Học </th>
-                <th scope="col">Tên Danh Mục </th>
-                <th scope="col">Giá khóa học </th>
-                <th scope="col">Ảnh </th>
-                <th scope="col">Mô Tả </th>
-                <th scope="col">Sửa</th>
-                <th scope="col">
-                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
-
-                  </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list as $key => $item)
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
-                    <th scope="row"> {{ $loop->iteration }}</th>
-                    <td> {{ $item->ten_khoa_hoc }}</td>
-                    <td> {{ $item->ten_danh_muc }}</td>
-                    <td> {{ number_format($item->gia_khoa_hoc) }} VNĐ</td>
-                    <td> <img width="150px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
-                    <td> {!! $item->mo_ta !!}</td>
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Chi_Tiet_Khoa_Hoc', ['id' => $item->id]) }}">
-                            <button class="btn btn-success">
-                            <i class="fas fa-edit "></i> Sửa</button></a>
-                    </td>
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Xoa_Khoa_Hoc', ['id' => $item->id]) }}">
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i> Xóa</button>
-                        </a>
-                    </td>
+                    <th> <input id="check_all" type="checkbox" /></th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên Khóa Học </th>
+                    <th scope="col">Tên Danh Mục </th>
+                    <th scope="col">Giá khóa học </th>
+                    <th scope="col">Ảnh </th>
+                    <th scope="col">Mô Tả </th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">
+                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
+                    </th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($list as $key => $item)
+                    <tr>
+                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <th scope="row"> {{ $loop->iteration }}</th>
+                        <td> {{ $item->ten_khoa_hoc }}</td>
+                        <td> {{ $item->ten_danh_muc }}</td>
+                        <td> {{ number_format($item->gia_khoa_hoc) }} VNĐ</td>
+                        <td> <img width="150px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
+                        <td> {!! $item->mo_ta !!}</td>
+                        <td>
+                            <button class="btn btn-success">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Chi_Tiet_Khoa_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Khoa_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa
+                                </a>
+                            </button>
+                        </td>
 
-        </tbody>
-    </table></form>
+                    </tr>
+                @endforeach
+
+            </tbody>
+        </table>
+    </form>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $list->appends('params')->links() }}

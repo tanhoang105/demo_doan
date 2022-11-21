@@ -41,12 +41,23 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror --}}
                 </div>
+
+                <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Giá Khóa Học</label>
+                    <input value="{{ old('gia_khoa_hoc') ?? request()->gia_khoa_hoc }}" type="text" name="gia_khoa_hoc"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('gia_khoa_hoc')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
             </div>
 
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Ảnh</label>
-                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                    <label for="" class="form-label">Ảnh</label><br>
+                    <img width="200px" id="anh" src="" alt=""><br>
+                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')

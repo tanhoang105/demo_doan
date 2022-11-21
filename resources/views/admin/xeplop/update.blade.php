@@ -46,21 +46,7 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Giảng Viên</label>
-                    <select class="form-control" name="id_user" id="">
-                        @foreach ($listGiangVien as $item)
-                            @if ($res->id_user == $item->id)
-                                <option selected value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
-                            @else
-                                <option  value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    @error('id_user')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
+            
             </div>
 
             <div class="col-6">
