@@ -31,7 +31,7 @@
                 <th scope="col">Số lượng học viên </th>
                 <th scope="col">Ngày bắt đầu </th>
                 <th scope="col">Ngày kết thúc </th>
-                <th scope="col">Giảng viên </th>
+                {{-- <th scope="col">Giảng viên </th> --}}
                
             </tr>
         </thead>
@@ -53,13 +53,13 @@
                 <td> {{ $item->so_luong }}</td>
                 <td> {{ $item->ngay_bat_dau }}</td>
                 <td> {{ $item->ngay_ket_thuc }}</td>
-                <td>
+                {{-- <td>
                     @foreach ($giangvien as $gv)
                         @if ($item->id_giang_vien == $gv->id)
                             {{ $gv->ten_giang_vien }}
                         @endif
                     @endforeach
-                </td>
+                </td> --}}
                 {{-- <td> {{ $item->ten_phong }}</td> --}}
 
                 {{-- <td> <button class="btn btn-warning">

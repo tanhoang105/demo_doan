@@ -149,10 +149,9 @@ class TaiKhoanController extends Controller
      */
     public function edit($id, Request $request)
     {
+        // dd(123);
         $this->authorize(mb_strtoupper('edit tài khoản') );
 
-        $permission = $request->route()->getActionMethod();
-        $this->authorize($permission);
         if ($id) {
             $request->session()->put('id', $id);
             $res = $this->taikhoan->show($id);

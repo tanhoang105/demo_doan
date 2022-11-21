@@ -31,8 +31,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Loại khuyến mại</label>
-                    <input value="{{ old('loai_khuyen_mai') ?? request()->loai_khuyen_mai }}" type="text"
-                        name="loai_khuyen_mai" class="form-control" id="" aria-describedby="emailHelp">
+                    <select class="form-control" name="loai_khuyen_mai" id="">
+                        <option value="1">Giảm giá theo phần trăm</option>
+                        <option value="0">Giảm giá theo tiền</option>
+                    </select>
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('loai_khuyen_mai')
                         <span style="color: red"> {{ $message }} </span>
@@ -48,7 +50,7 @@
             </div>
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Giảm giá (%)</label>
+                    <label for="" class="form-label">Giảm giá</label>
                     <input value="{{ old('giam_gia') ?? request()->giam_gia }}" type="text" name="giam_gia"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
