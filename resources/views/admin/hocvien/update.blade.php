@@ -88,8 +88,10 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
-                    <img src= "" alt="">
-                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                    <td>
+                        <img id="anh" style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
+                    </td>
+                    <input  id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')

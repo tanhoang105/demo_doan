@@ -148,6 +148,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/giang-vien-delete/{id}', [GiangVienController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/giang-vien-edit/{id}', [GiangVienController::class, 'edit'])->name('Edit_Giang_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
+        Route::get('/lich-day', [GiangVienController::class, 'lichDay'])->name('Lich_Day_Giang_Vien');
     });
 
 
