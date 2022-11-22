@@ -52,7 +52,7 @@ class GiangVienController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('admin.giangvien.add');
     }
 
     /**
