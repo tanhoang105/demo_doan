@@ -48,18 +48,18 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ma_khuyen_mai }}</td>
-                        <td> {{ $item->loai_khuyen_mai }}</td>
-                        <td> {{ $item->giam_gia . '%' }}</td>
+                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Giảm giá theo phẩn trăm' : "Giảm giá theo giá tiền" }}</td>
+                        <td> {{  $item->loai_khuyen_mai == 1 ? $item->giam_gia . '%' : number_format($item->giam_gia  , 0, '.' ,'.')  }}</td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
+                            <a style="color: #fff" href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
                                 <button class="btn btn-success">
                                 <i class="fas fa-edit "></i> Sửa</button></a>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
+                            <a style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
                                 <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
                                 <i class="fas fa-trash-alt"></i> Xóa</button></a>
                         </td>

@@ -1,5 +1,3 @@
-
-
 @extends('Admin.templates.layout')
 @section('content')
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -25,7 +23,7 @@
             </button>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Giang_Vien') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Hoc_Vien') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
@@ -69,7 +67,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số điện thoại</label>
-                    <input type="text" name="sdt" id="" class="form-control">
+                    <input type="text" name="sdt" id="" class="form-control"></input>
                     @error('sdt')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror

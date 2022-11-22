@@ -19,6 +19,11 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
     <link href="{{ asset('custom/css/style.css') }}" rel="stylesheet">
+
+    <!-- Custom image -->
+{{--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">--}}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">--}}
 </head>
 
 <body>
@@ -34,7 +39,7 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="#">
-                <img class="border rounded-circle" src="{{ asset('client/images/teacher1.jpg') }}" style="width: 30px">
+                <img class="border rounded-circle" src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width: 40px;height: 40px;">
             </a>
         </li>
 

@@ -1,5 +1,3 @@
-
-
 @extends('Admin.templates.layout')
 @section('content')
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -25,14 +23,14 @@
             </button>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Giang_Vien') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Hoc_Vien') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
 
                 <div class="mb-3">
                     <label for="" class="form-label">Tên tài khoản</label>
-                    <input value="{{ old('name') ?? request()->name }}" type="text" name="name" class="form-control"
+                    <input value="{{ old('name') ?? request()->name ?? $res->ten_hoc_vien }}" type="text" name="name" class="form-control"
                         id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('name')
@@ -53,7 +51,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Email</label>
-                    <input value="{{ old('email') ?? request()->email }}" type="email" name="email" class="form-control"
+                    <input value="{{ old('email') ?? request()->email ?? $res->email }}" type="email" name="email" class="form-control"
                         id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('email')
@@ -69,7 +67,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số điện thoại</label>
-                    <input type="text" name="sdt" id="" class="form-control">
+                    <input type="text" name="sdt" id="" class="form-control" value=" {{ $res->sdt}} " >
                     @error('sdt')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -77,7 +75,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Địa chỉ</label>
-                    <input value="{{ old('dia_chi') ?? request()->dia_chi }}" type="text" name="dia_chi"
+                    <input value="{{ old('dia_chi') ?? request()->dia_chi ?? $res->dia_chi      }}" type="text" name="dia_chi"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('dia_chi')
@@ -85,12 +83,15 @@
                     @enderror
                 </div>
 
-                
+
 
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
-                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                    <td>
+                        <img id="anh" style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
+                    </td>
+                    <input  id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
@@ -102,7 +103,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Cập nhập</button>
 
     </form>
 @endsection

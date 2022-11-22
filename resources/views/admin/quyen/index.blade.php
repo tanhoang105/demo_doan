@@ -1,8 +1,11 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <button class="btn btn-primary"><a style="color: red"
-                href=" {{ route('route_BE_Admin_Add_Quyen') }}">Thêm</a></button>
+        <button class="btn btn-primary"><a style="color: #fff" href=" {{ route('route_BE_Admin_Add_Quyen') }}">
+                <i class="fas fa-plus "></i>
+                Thêm</a>
+
+        </button>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -29,28 +32,35 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th> <input id="check_all" type="checkbox" /></th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên Quyền</th>
                 <th scope="col">Nhóm Quyền</th>
 
                 <th scope="col">Sửa</th>
-                <th scope="col">Xóa </th>
+                <th scope="col">
+                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach ($list as $key => $item)
                 <tr>
+                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{ $item->ten }}</td>
                     <td> {{ $item->trang_thai }}</td>
                     <td>
-                        <a href="{{ route('route_BE_Admin_Edit_Quyen', ['id' => $item->id]) }}">
-                            <button class="btn btn-success"> Sửa</button></a>
+                        <button class="btn btn-success">
+                            <a style="color:#fff" href="{{ route('route_BE_Admin_Edit_Quyen', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa</a></button>
                     </td>
                     <td>
-                        <a href="{{ route('route_BE_Admin_Xoa_Quyen', ['id' => $item->id]) }}">
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')"
-                            class="btn btn-danger"> Xóa</button></a>
+                        <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                            <a style="color:#fff" href="{{ route('route_BE_Admin_Xoa_Quyen', ['id' => $item->id]) }}">
+                                <i class="fas fa-trash-alt"></i> Xóa</a>
+                        </button>
                     </td>
 
                 </tr>

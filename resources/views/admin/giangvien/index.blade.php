@@ -8,6 +8,10 @@
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
 
@@ -17,6 +21,10 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
 
@@ -53,14 +61,16 @@
                             {{ $item->sdt_giang_vien }}
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color: #fff" href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i>   Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>   
                         </td>
 
                     </tr>

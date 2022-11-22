@@ -33,7 +33,7 @@ class KhoahocRequest extends FormRequest
                         case 'store':
                                 $rules = [
                                     'ten_khoa_hoc' => 'required | min:3 | max:50 | unique:khoa_hoc,ten_khoa_hoc',
-                                    'mo_ta' => 'min:20S',
+                                  
                                     'hinh_anh' => 'required'
                                 ];
                             break;
@@ -41,7 +41,7 @@ class KhoahocRequest extends FormRequest
                             // nếu là method chỉnh sửa bản ghi
                             case 'update':
                                 $rules = [
-                                    'ten_khoa_hoc' => 'required | min:3 | max:50 | unique:ten_khoa_hoc',
+                                    'ten_khoa_hoc' => 'required | min:3 | max:50 ',
                                     // 'mo_ta' => 'required | min:20 |',
                                     // 'hinh_anh' => 'required'
                                 ];

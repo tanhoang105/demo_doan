@@ -22,9 +22,9 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Anhr Banner</label>
+                    <label for="" class="form-label">Ảnh Banner</label>
                     <input value="{{ old('anh_banner') ?? request()->anh_banner }}" type="file"
-                           name="anh_banner" class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
+                           name="anh_banner" class="form-control" accept=".png, .jpg, .jpeg">
                     @error('anh_banner')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -33,6 +33,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('route_BE_Admin_Banner') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
     </form>
 
 @endsection

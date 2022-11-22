@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
 
             foreach (ChoPhep::all() as $chophep){
 //             
-                Gate::define(mb_strtoupper($chophep->ten) , function ($user) use ($chophep){
+                Gate::define(mb_strtoupper(($chophep->ten)) , function ($user) use ($chophep){
 //
                     return $user->HasVaiTro($chophep);
                 });

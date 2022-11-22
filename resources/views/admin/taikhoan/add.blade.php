@@ -99,7 +99,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
                     <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
-                           class="form-control" id="" aria-describedby="emailHelp">
+                           class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
                     <span style="color: red"> {{ $message }} </span>

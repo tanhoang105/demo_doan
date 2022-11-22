@@ -7,8 +7,7 @@
           @if (isset($objUser))
               <div class="image">
                   <img style="border-radius: 100px;width: 50px; height: 50px;%"
-                      src="{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh) }}"
-                       >
+                      src="{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh) }}">
               </div>
               <div class="info">
 
@@ -146,15 +145,15 @@
 
               </li>
               <li class="nav-item">
-                <a href=" {{ route('route_BE_Admin_danh_sach_doi_lop') }} " class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
-                        Yêu cầu đổi lớp
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href=" {{ route('route_BE_Admin_danh_sach_doi_lop') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
+                          Yêu cầu đổi lớp
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
-            </li>
+              </li>
 
 
               <li class="nav-item">
@@ -207,15 +206,15 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
-                    <i class="nav-icon fas fa-edit"></i>
-                    <p>
-                        Lịch học 
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Lịch học
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
-            </li>
+              </li>
 
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">
@@ -239,15 +238,15 @@
               </li>
 
               <li class="nav-item">
-                <a href=" {{route('route_BE_Admin_List_Thu_Hoc')}} " class="nav-link">
-                    <i class="nav-icon fas fa-tree"></i>
-                    <p>
-                        Thứ Học
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href=" {{ route('route_BE_Admin_List_Thu_Hoc') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
+                          Thứ Học
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
-            </li>
+              </li>
 
 
 
@@ -315,7 +314,7 @@
               </li>
 
               <li class="nav-item">
-                  <a href=" {{route('route_BE_Admin_List_Thanh_Toan')}} " class="nav-link">
+                  <a href=" {{ route('route_BE_Admin_List_Thanh_Toan') }} " class="nav-link">
                       <i class="nav-icon fas fa-tree"></i>
                       <p>
                           Thanh Toán
@@ -325,8 +324,21 @@
 
               </li>
 
-             
 
+
+              @endhasRoles
+
+              @hasRoles(['giảng viên'])
+              <li class="nav-item">
+                  <a href=" {{ route('route_BE_Admin_Lich_Day_Giang_Vien') }} " class="nav-link">
+                      <i class="nav-icon fas fa-tree"></i>
+                      <p>
+                         Lịch dạy
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
               @endhasRoles
           </ul>
       </nav>

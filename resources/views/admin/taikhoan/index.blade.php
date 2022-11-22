@@ -29,59 +29,59 @@
     @endif
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Tai_Khoan') }}" enctype="multipart/form-data">
         @csrf
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th> <input id="check_all" type="checkbox" /></th>
-                <th scope="col">STT</th>
-                <th scope="col">Tên </th>
-                <th scope="col">Email</th>
-                <th scope="col">Vai trò </th>
-                <th scope="col">Avatar </th>
-                <th scope="col">Sửa</th>
-                <th scope="col">
-                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
-
-                  </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list as $key => $item)
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
-                    <th scope="row"> {{ $loop->iteration }}</th>
-                    <td> {{ $item->name }}</td>
-                    <td> {{ $item->email }}</td>
-                    <td>
-                        @foreach ($vaitro as $res)
-                            @if ($res->id == $item->vai_tro_id)
-                                {{ $res->ten_vai_tro }}
-                            @endif
-                        @endforeach
-                    </td>
+                    <th> <input id="check_all" type="checkbox" /></th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên </th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Vai trò </th>
+                    <th scope="col">Avatar </th>
+                    <th scope="col">Sửa</th>
+                    <th scope="col">
+                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
-                    <td>
-                        <img style="border-radius: 100% ; width:100px ; height:100px "
-                            src=" {{ Storage::URL($item->hinh_anh) }} " alt="">
-                    </td>
-
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
-                            <button class="btn btn-success">
-                            <i class="fas fa-edit "></i> Sửa</button></a>
-                    </td>
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Xoa_Tai_Khoan', ['id' => $item->id]) }}">
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i>  Xóa</button></a>
-                    </td>
-
+                    </th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($list as $key => $item)
+                    <tr>
+                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <th scope="row"> {{ $loop->iteration }}</th>
+                        <td> {{ $item->name }}</td>
+                        <td> {{ $item->email }}</td>
+                        <td>
+                            @foreach ($vaitro as $res)
+                                @if ($res->id == $item->vai_tro_id)
+                                    {{ $res->ten_vai_tro }}
+                                @endif
+                            @endforeach
+                        </td>
 
-        </tbody>
-    </table>
-</form>
+                        <td>
+                            <img style="border-radius: 100% ; width:100px ; height:100px "
+                                src=" {{ Storage::URL($item->hinh_anh) }} " alt="">
+                        </td>
+
+                        <td>
+                            <button class="btn btn-success">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa </a></button>
+                        </td>
+                        <td>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Tai_Khoan', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa </a></button>
+                        </td>
+
+                    </tr>
+                @endforeach
+
+            </tbody>
+        </table>
+    </form>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $list->appends('params')->links() }}
