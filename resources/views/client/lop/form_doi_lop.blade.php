@@ -14,7 +14,7 @@
                     <label class="">Lớp học cũ</label>
                     <input type="text" class="form-control" value="{{$lop_cu->ten_lop}}" disabled>
                     <input type="text" name="id_lop_cu" value="{{$lop_cu->id}}" hidden>
-                    <input type="text" name="id_xeplop" value="{{$xep_lop->id}}" hidden>
+                    {{-- <input type="text" name="id_xeplop" value="{{$xep_lop->id}}" hidden> --}}
                 </div>
 
                 <div class="col-lg-12 font-weight-bold pt-2">

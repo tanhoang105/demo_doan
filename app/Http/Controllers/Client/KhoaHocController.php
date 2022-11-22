@@ -38,9 +38,10 @@ class KhoaHocController extends Controller
     }
     public function chiTietKhoaHoc($id)
     {
-        
         $giang_vien = GiangVien::all();
         $detail = KhoaHoc::find($id);
+        $detail->luot_xem = $detail->luot_xem + 1;
+        $detail->save();
         $danhmuc = DanhMuc::select('danh_muc.*')->where('danh_muc.id', '=', $detail->id_danh_muc)->get();
         $lop = Lop::select('lop.*', 'giang_vien.ten_giang_vien')
             ->where('lop.id_khoa_hoc', '=', $id)
@@ -50,13 +51,13 @@ class KhoaHocController extends Controller
         // dd($lop);
         $khoahoclienquan = KhoaHoc::select('khoa_hoc.*', 'danh_muc.ten_danh_muc')->where('khoa_hoc.id_danh_muc', '=', $detail->id_danh_muc)
             ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
-            ->whereNotIn('khoa_hoc.id' , [$id])
+            ->whereNotIn('khoa_hoc.id', [$id])
             ->skip(0)->take(4)->get();
         return view('client.khoa-hoc.chi-tiet-khoa-hoc', compact('detail', 'giang_vien', 'lop', 'danhmuc', 'khoahoclienquan'));
     }
     public function locKhoaHoc(Request $request)
     {
-//        dd($request->all());
+        //        dd($request->all());
         $filter = [];
         $sort = [];
         $query = DB::table('khoa_hoc')
@@ -69,13 +70,12 @@ class KhoaHocController extends Controller
         }
         if (!empty($request->filterKh)) {
             if ($request->filterKh == 'new') {
-//                $sort[]=['id','desc'];
+                //                $sort[]=['id','desc'];
                 $query = $query->orderBy('khoa_hoc.id', 'desc');
             } else {
-//                $sort[]=['gia_khoa_hoc',$request->filterKh];
+                //                $sort[]=['gia_khoa_hoc',$request->filterKh];
                 $query = $query->orderBy('gia_khoa_hoc', $request->filterKh);
             }
-
         }
         if (!empty($filter)) {
             $query = $query->where($filter);
@@ -150,15 +150,77 @@ class KhoaHocController extends Controller
         $data = GhiNo::select('ghi_no.*')->where('ghi_no.user_id', '=', Auth::user()->id)->get();
         // dd($data);
         foreach ($data as $value) {
+            // dd(1);
             if (($value->tien_no + $khoahoc_cu->gia_khoa_hoc) >= $khoahoc_moi->gia_khoa_hoc) {
                 $doi_lop = new DoiLopKhoa();
                 $doi_lop->fill($request->all());
+                // ghi no
+                $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
+                $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
+                // 
+                $kk = GhiNo::where('user_id', '=', Auth::user()->id)->first()->get();
+                // $tien = $khoahoc_cu->gia_khoa_hoc - $khoahoc_moi->gia_khoa_hoc;
+                foreach ($kk as  $value) {
+                    $tien = $khoahoc_cu->gia_khoa_hoc + $value->tien_no - $khoahoc_moi->gia_khoa_hoc;
+                    // dd($tien);
+                    if ($tien >= 0) {
+                        $ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $tien]);
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 1]); //trung tam  no         
+
+                    } elseif ($tien < 0) {
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $tien]);
+                        // 
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 2]); // hoc vien no 
+                    } else {
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $tien]);
+                        // 
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 0]); //het no
+                    }
+                }
+                // 
                 $doi_lop->save();
                 session()->flash('success', 'Bạn đã gửi yêu cầu thay đổi lớp thành công!');
                 return redirect()->route('khoa_hoc_dang_ki');
             } else {
-                session()->flash('error', 'Số dư của bạn không đủ để đăng kí khóa học này!');
-                return redirect()->back();
+                $doi_lop = new DoiLopKhoa();
+                $doi_lop->fill($request->all());
+                // ghi no
+                $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
+                $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
+                // 
+                $kk = GhiNo::where('user_id', '=', Auth::user()->id)->first()->get();
+                $tien = $khoahoc_cu->gia_khoa_hoc - $khoahoc_moi->gia_khoa_hoc;
+                foreach ($kk as  $value) {
+                    if ($tien > 0) {
+                        $ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $value->tien_no + $tien]);
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 1]); //hoc vien no
+
+                    } elseif ($tien < 0) {
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $value->tien_no + $tien]);
+                        // 
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 2]); //trung tam  no           
+                    } else {
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['tien_no' => $value->tien_no + $tien]);
+                        // 
+                        $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
+                            ->update(['trang_thai' => 0]); //het no
+                    }
+                }
+                // 
+                $doi_lop->save();
+                session()->flash('warning', 'Bạn cần thanh toán khoản ghi nợ để admin xác nhận!');
+                return redirect()->route('khoa_hoc_dang_ki');
             }
         }
         // $doi_lop = new DoiLopKhoa();
@@ -177,12 +239,11 @@ class KhoaHocController extends Controller
         //     ->where('id_user', '=', Auth::user()->id)
         //     ->update(['id_lop' => $lop_moi->id]);
 
-        // ghi no
+        // // ghi no
         // $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
         // $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
-        // 
+        // // 
         // $kk = GhiNo::where('user_id', '=', Auth::user()->id)->first()->get();
-
         // $tien = $khoahoc_moi->gia_khoa_hoc - $khoahoc_cu->gia_khoa_hoc;
         // foreach ($kk as  $value) {
         //     if ($tien > 0) {
@@ -194,13 +255,13 @@ class KhoaHocController extends Controller
         //     } elseif ($tien < 0) {
         //         $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
         //             ->update(['tien_no' => $value->tien_no + $tien]);
-        //             // 
+        //         // 
         //         $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
-        //             ->update(['trang_thai' => 1]); //trung tam  no           
+        //             ->update(['trang_thai' => 2]); //trung tam  no           
         //     } else {
         //         $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
         //             ->update(['tien_no' => $value->tien_no + $tien]);
-        //             // 
+        //         // 
         //         $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
         //             ->update(['trang_thai' => 0]); //het no
         //     }

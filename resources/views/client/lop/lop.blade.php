@@ -75,7 +75,7 @@
                     <h4 class="col-lg-8 pt-1">{{ $value->ten_lop }}</h4>
 
                     <div class="col-lg-4 p-2">
-                        @if ($value->ngay_bat_dau >= date('Y-m-d'))
+                        @if ($value->ngay_bat_dau < date(now()))
                         <div class="br-15" style="background: #30e534">
                             <span class="d-flex justify-content-center text-white">Đã học</span>
                         </div>
@@ -106,7 +106,7 @@
                 </div>
 
                 <div class="">
-                    <label class="">Ca hojc: </label>
+                    <label class="">Ca học: </label>
                     <span class="">{{ $value->ca_hoc }}</span>
                 </div>
 
@@ -121,7 +121,7 @@
                                id="">
                         <input type="text" name="xeplop_id" value="{{ $value->id }}" hidden
                                id="">
-                        @if ($value->ngay_bat_dau >= date('Y-m-d'))
+                        @if ($value->ngay_bat_dau >= date(now()))
                     <button class="btn btn-primary">
                         Đổi lớp
                     </button>

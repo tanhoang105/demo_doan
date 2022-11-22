@@ -25,8 +25,8 @@
 
 
 
-            <!-- Start: Featured Courses Section
-                ==================================================-->
+                                    <!-- Start: Featured Courses Section
+                                        ==================================================-->
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
@@ -110,7 +110,6 @@
                     <!-- end: Instructor Widget-->
                 </div>
                 <!-- end: col-sm-12 col-lg-3-->
-
                 <!--  Start: col-sm-12 col-lg-9 -->
                 <div class="col-sm-12 col-lg-9">
                     <div class="row">
@@ -123,18 +122,19 @@
                                             <input class="form-control" placeholder="Tìm kiếm" id="search" name="search"
                                                 type="text">
                                             <span class="input-group-btn">
-                                                <button data-url="{{route('loc_khoa_hoc')}}" id="btn-submit" type="submit"><i class="pe-7s-search"></i></button>
+                                                <button data-url="{{ route('loc_khoa_hoc') }}" id="btn-submit"
+                                                    type="submit"><i class="pe-7s-search"></i></button>
                                             </span>
                                         </div>
                                     </form>
-
                                     <!-- /input-group -->
                                 </div>
                             </div>
                             <!-- End: Search -->
                             <div class="cat_selectbox">
                                 <div class="select-box">
-                                    <select data-url="{{route('loc_khoa_hoc')}}" class="form-select" name="filterKh" id="filterKh" aria-label="select">
+                                    <select data-url="{{ route('loc_khoa_hoc') }}" class="form-select" name="filterKh"
+                                        id="filterKh" aria-label="select">
                                         <option value="">Mặc định</option>
                                         <option value="asc">Giá tăng dần</option>
                                         <option value="desc">Giá giảm dần</option>
@@ -148,7 +148,6 @@
                             </div>
                         </div>
                         <!--  End: Search Filter -->
-
                         @if (!$id_danhmuc)
                             @foreach ($list as $value)
                                 {{-- {{count($value->ten_lop)}} --}}
@@ -171,61 +170,15 @@
                                                 <span hidden>{{ $lg_sv = 40 - $data->so_luong }}</span>
                                                 <span hidden>{{ $total = $total + $lg_sv }}</span>
                                             @endforeach
-
                                             <span class="feat_cour_less"> <i class="pe-7s-note2"></i>{{ count($sl_lop) }}
                                                 Lớp học</span>
                                             <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }} Học
                                                     viên</i></span>
                                         </div>
                                         <div class="feat_cour_rating">
-
                                             <span class="feat_cour_rat">
-                                                4.6
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                (3,539)
-                                            </span>
-                                               <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
-                                                       class="arrow_right"></i> </a>
-                                           </div>
-                                       </div>
-                                   </div>
-                               @endforeach
-                           </div>
-                        @else
-                            <?php
-                            $loc_danhmuc = DB::table('khoa_hoc')
-                                ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
-                                ->where('khoa_hoc.id_danh_muc', '=', $id_danhmuc)
-                                ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
-                                ->get();
-                            ?>
-                            @foreach ($loc_danhmuc as $value)
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <div class="feat_course_item">
-                                        <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
-                                        <div class="feat_cour_price">
-                                            <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                            <span class="feat_cour_p">{{number_format($value->gia_khoa_hoc)}} VND</span>
-                                        </div>
-                                        <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
-                                        <div class="feat_cour_lesson">
-                                            <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 20 lessons </span>
-                                            <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 237 Students
-                                            </span>
-                                        </div>
-                                        <div class="feat_cour_rating">
-                                            <span class="feat_cour_rat">
-                                                4.6
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                (3,539)
+                                                <span>Lượt xem</span>
+                                                ({{ number_format($value->luot_xem) }})
                                             </span>
                                             <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
                                                     class="arrow_right"></i> </a>
@@ -233,11 +186,54 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
-                        <!-- /. col-lg-4 col-md-6 col-sm-12-->
                     </div>
+                @else
+                    <?php
+                    $loc_danhmuc = DB::table('khoa_hoc')
+                        ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
+                        ->where('khoa_hoc.id_danh_muc', '=', $id_danhmuc)
+                        ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
+                        ->get();
+                    ?>
+                    @foreach ($loc_danhmuc as $value)
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="feat_course_item">
+                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                <div class="feat_cour_price">
+                                    <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
+                                    <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }} VND</span>
+                                </div>
+                                <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
+                                <div class="feat_cour_lesson">
+                                    <span
+                                        hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
+                                    <span hidden>{{ $total = 0 }}</span>
+                                    @foreach ($sl_lop as $data)
+                                        <span hidden>{{ $lg_sv = 40 - $data->so_luong }}</span>
+                                        <span hidden>{{ $total = $total + $lg_sv }}</span>
+                                    @endforeach
 
-                    {{-- <nav class="cat-page-navigation">
+                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i>{{ count($sl_lop) }}
+                                        Lớp học</span>
+                                    <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }} Học
+                                            viên</i></span>
+                                </div>
+                                <div class="feat_cour_rating">
+                                    <span class="feat_cour_rat">
+                                        <span>Lượt xem</span>
+                                        ({{ number_format($value->luot_xem) }})
+                                    </span>
+                                    <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
+                                            class="arrow_right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    @endif
+                    <!-- /. col-lg-4 col-md-6 col-sm-12-->
+                </div>
+                {{-- <nav class="cat-page-navigation">
                         <ul class="pagination">
                             <li class="pagination-arrow"><a href="#"><i class="fal fa-angle-double-left"></i></a></li>
                             <li><a href="#">1</a></li>
@@ -247,56 +243,54 @@
                             <li class="pagination-arrow"><a href="#"><i class="fal fa-angle-double-right"></i></a></li>
                         </ul>
                     </nav> --}}
-                    <!-- end:  pagination-->
-                </div>
+                <!-- end:  pagination-->
             </div>
-            <!-- /. row -->
+        </div>
+        <!-- /. row -->
         </div>
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-                ==================================================-->
-
-
+                                        ==================================================-->
 @endsection
 @section('js')
     <script>
-        $(document).ready(function () {
-            $(document).on('change','#filterKh',function (e) {
-                let filter=$(this).val();
+        $(document).ready(function() {
+            $(document).on('change', '#filterKh', function(e) {
+                let filter = $(this).val();
                 let url = $(this).data('url');
-                let search =$('#search').val();
+                let search = $('#search').val();
 
                 $.ajax({
-                    type:'GET',
-                    url:url,
-                    data:{
-                        filterKh:filter,
-                        search:search,
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        filterKh: filter,
+                        search: search,
                     },
-                    success:function (res) {
-                        if (res['success']){
+                    success: function(res) {
+                        if (res['success']) {
                             $('#course-container').html(res['data'])
                         }
 
                     }
                 })
             })
-            $(document).on('click','#btn-submit',function (e) {
+            $(document).on('click', '#btn-submit', function(e) {
                 e.preventDefault();
-                let search=$('#search').val();
+                let search = $('#search').val();
                 let url = $(this).data('url');
-                let filter =$('#filterKh').val();
+                let filter = $('#filterKh').val();
 
                 $.ajax({
-                    type:'GET',
-                    url:url,
-                    data:{
-                        filterKh:filter,
-                        search:search,
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        filterKh: filter,
+                        search: search,
                     },
-                    success:function (res) {
-                        if (res['success']){
+                    success: function(res) {
+                        if (res['success']) {
                             $('#course-container').html(res['data'])
                         }
 

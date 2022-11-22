@@ -76,6 +76,8 @@ Route::get('/khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 
 Route::get('/get_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_khoa_hoc'])->name('get_khoa_hoc');
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
+Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
+
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
 // hiển thị khóa theo lớp

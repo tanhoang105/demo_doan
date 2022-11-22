@@ -27,11 +27,11 @@ class LopController extends Controller
         $list = DangKy::join('lop', 'dang_ky.id_lop', '=', 'lop.id')
         ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
         ->join('giang_vien', 'giang_vien.id', '=', 'lop.id_giang_vien')
-        ->join('ca_hoc', 'ca_hoc.id', '=', 'lop.id_ca_hoc')
+        ->join('ca_thu', 'ca_thu.id', '=', 'lop.ca_thu_id')
         ->where('dang_ky.id_user', '=', Auth::user()->id)
-        ->select('Dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_hoc.ca_hoc', 'ca_hoc.thoi_gian', 'lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
+        ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_thu.ca_id','lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
         ->get();
-       
+    //    dd($list);
         $list_lop_moi = XepLop::join('lop', 'xep_lop.id_lop', '=', 'lop.id')
             ->where('lop.so_luong', '<', 40)
             ->select('xep_lop.*', 'lop.*')

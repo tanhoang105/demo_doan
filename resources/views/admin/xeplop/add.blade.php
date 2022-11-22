@@ -39,12 +39,10 @@
                             <option value="{{$item->id}}">{{ $item->ten_lop }}</option>
                         @endforeach
                     </select>
-                    @error('id_lopc')
+                    @error('id_lop')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-                
             </div>
 
             <div class="col-6">

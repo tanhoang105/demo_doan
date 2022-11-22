@@ -38,8 +38,6 @@
                     <hr>
 
                     <div class="">
-                        {{-- <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a> --}}
-                        <a class="btn btn-primary" href="{{route('form_doi_lop',$value->lop_id)}}">Đổi lớp</a>
                         <form action="{{route('form_doi_khoa',$value->id)}}" method="GET">
                             @csrf
                             <input type="text" value="{{$lopcu_id}}" name="lopcu_id" hidden id="">

@@ -6,10 +6,7 @@
             <strong>{{ Session::get('error') }}</strong>
         </div>
     @endif
-
-
     {{-- hiển thị message đc gắn ở session::flash('success') --}}
-
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
