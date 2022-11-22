@@ -60,8 +60,25 @@
             <ul>
                 <li><a href="{{ route('home') }}">Trang Chủ</a></li>
                 <li><a href="{{ route('client_giang_vien') }}">Giảng Viên</a></li>
-                <li class=""><a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>
-
+                <?php
+                $danhmuc = DB::table('danh_muc')
+                    ->select('danh_muc.*')
+                    ->get();
+                ?>
+                <li>
+                    <a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>
+                    <ul>
+                        @foreach ($danhmuc as $value)
+                            <li>
+                                <form action="{{ route('client_khoa_hoc') }}">
+                                    <input type="text" hidden value="{{ $value->id }}" name="id_danhmuc"
+                                        id="">
+                                    <button
+                                        style="background: transparent;border: 0"><a>{{ $value->ten_danh_muc }}</a></button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li>
                 <li><a href="{{ route('client_lien_he') }}">Liên Hệ</a></li>
                 <li><a href="{{ route('client_gioi_thieu') }}">Giới Thiệu</a></li>
@@ -76,11 +93,12 @@
                         <li><a href="#" style="color: red;width: 200px" aria-haspopup="true">
                                 {{ $objUser->name }}</a>
                             <ul class="dropdown" aria-label="submenu">
-                                <li><a href="{{route('client_lich_hoc')}}">Lịch học</a></li>
-                                <li><a href="{{route('tk_ghi_no')}}">Số dư tài khoản</a></li>
-                                <li><a href="{{route('client_thong_tin_ca_nhan')}}">Thông tin chi tiết</a></li>
-                                <li> <a href="{{route('client_lich_su_dang_ky',[$objUser->id])}}" class="dropdown-item">Lịch sử đăng ký </a></li>
-                                <li> <a href="{{route('logout')}}" class="dropdown-item">Đăng xuất</a></li>
+                                <li><a href="{{ route('client_lich_hoc') }}">Lịch học</a></li>
+                                <li><a href="{{ route('tk_ghi_no') }}">Số dư tài khoản</a></li>
+                                <li><a href="{{ route('client_thong_tin_ca_nhan') }}">Thông tin chi tiết</a></li>
+                                <li> <a href="{{ route('client_lich_su_dang_ky', [$objUser->id]) }}"
+                                        class="dropdown-item">Lịch sử đăng ký </a></li>
+                                <li> <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a></li>
                                 <li>
                                     @if (Auth::user())
                                         <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}"

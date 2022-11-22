@@ -31,18 +31,22 @@ class CaHocRequest extends FormRequest
                 switch ($ActionCurrent) {
                     case 'store':
                         $rules = [
-                            'ca_hoc' => 'required',
+                            'ca_hoc' => 'required | unique:ca_hoc,ca_hoc',
+                            'thoi_gian_bat_dau' => 'required | unique:ca_hoc,thoi_gian_bat_dau',
+                            'thoi_gian_ket_thuc' => 'required | unique:ca_hoc,thoi_gian_ket_thuc',
                         ];
                         break;
                     case 'update':
                         $rules = [
                             'ca_hoc' => 'required',
+                            'thoi_gian_bat_dau' => 'required',
+                            'thoi_gian_ket_thuc' => 'required',
                         ];
                         break;
                     default:
                         break;
                 }
-                break;
+                break;                                        
             default:
                 break;
         }
@@ -53,6 +57,7 @@ class CaHocRequest extends FormRequest
     {
         return [
             'required' => ':attribute bắt buộc phải nhập',
+            'unique' => ':attribute đã tồn tại',
         ];
     }
     // 
@@ -61,6 +66,7 @@ class CaHocRequest extends FormRequest
         return [
 
             'ca_hoc' => 'Ca học',
+            'thoi_gian_bat_dau' => 'thời gian bắt đầu',
         ];
     }
 }

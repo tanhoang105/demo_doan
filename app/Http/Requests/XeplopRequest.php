@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\XepLop;
 use Illuminate\Foundation\Http\FormRequest;
 
 class XeplopRequest extends FormRequest
@@ -28,32 +29,48 @@ class XeplopRequest extends FormRequest
 
         switch ($this->method()) {
             case 'POST':
-                    switch ($ActionCurrent) {
+                switch ($ActionCurrent) {
                         // nếu là method thêm mới bản ghi
-                        case 'store':
-                                $rules = [
-                                    'ngay_dang_ky' => 'required | after:today',
-                                ];
-                            break;
+                    case 'store':
+                        $rules = [
+                            'ngay_dang_ky' => 'required | after:today',
+                            // 'id_lop' => [
+                            //     function ($attribute, $value, $fali) {
+                            //         $data = XepLop::all();
+                            //         // dd(1);
+                            //         foreach ($data as $item) {
+                            //             // dd(2);
+                            //             if ($value == $item->id_lop) {
+                            //                 if ($item->ngay_dang_ky == date('ngay_dang_ky')) {
+                            //                     dd(4);
+                            //                 }
+                            //                 dd(date("ngay_dang_ky"));
+                            //                 dd(3);
+                            //                 return $fali('lớp đã tồn tại!');
+                            //             }
+                            //         }
+                            //     }
+                            // ]
+                        ];
+                        break;
+                        // nếu là method chỉnh sửa bản ghi
+                    case 'update':
+                        $rules = [
+                            'ngay_dang_ky' => 'required | after:today',
+                        ];
+                        break;
 
-                            // nếu là method chỉnh sửa bản ghi
-                            case 'update':
-                                $rules = [
-                                    'ngay_dang_ky' => 'required | after:today',
-                                ];
-                            break;    
-                        
-                        default:
-                            # code...
-                            break;
-                    }
+                    default:
+                        # code...
+                        break;
+                }
                 break;
 
             default:
                 # code...
                 break;
         }
-        return $rules ;
+        return $rules;
     }
 
 
