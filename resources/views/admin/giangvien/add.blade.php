@@ -1,14 +1,15 @@
+
+
 @extends('Admin.templates.layout')
 @section('content')
-    <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">
-            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
-        </a>
-
-    </div>
+    {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
 
@@ -18,60 +19,90 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
-    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Hoc_Vien') }}" enctype="multipart/form-data">
-        @csrf
-    <table class="table table-bordered">
-        <thead>
-            <tr>
+    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Giang_Vien') }}" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @csrf
+            <div class="col-6">
 
-                  <th> <input id="check_all" type="checkbox" /></th>
-                <th scope="col">STT</th>
-                <th scope="col">Tên học viên </th>
-                <th scope="col">Địa chỉ </th>
-                <th scope="col">Email </th>
-                <th scope="col">Số điện thoại</th>
-                <th scope="col">Sửa</th>
-                <th scope="col">
-                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+                <div class="mb-3">
+                    <label for="" class="form-label">Tên tài khoản</label>
+                    <input value="{{ old('name') ?? request()->name }}" type="text" name="name" class="form-control"
+                        id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('name')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
 
-                  </th>
+                <div class="mb-3">
+                    <label for="" class="form-label">Mật khẩu</label>
+                    <input value="{{ old('password') ?? request()->name }}" type="password" name="password"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('password')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($list as $key => $item)
-                <tr>
-                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->user_id}}" /></td>
-                    <th scope="row"> {{ $loop->iteration }}</th>
-                    <td> {{ $item->ten_hoc_vien }}</td>
-                    <td> {{ $item->dia_chi }}</td>
-                    <td> {{ $item->email }}</td>
-                    <td>
-                        {{ $item->sdt }}
-                    </td>
 
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Edit_Hoc_Vien', ['id' => $item->id]) }}">
-                            <button class="btn btn-success">
-                            <i class="fas fa-edit "></i> Sửa</button></a>
-                    </td>
-                    <td>
-                        <a href="{{ route('route_BE_Admin_Xoa_Hoc_Vien', ['id' => $item->user_id]) }}">
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i> Xóa</button></a>
-                    </td>
+                <div class="mb-3">
+                    <label for="" class="form-label">Email</label>
+                    <input value="{{ old('email') ?? request()->email }}" type="email" name="email" class="form-control"
+                        id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('email')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
 
-                </tr>
-            @endforeach
 
-        </tbody>
-    </table>
-</form>
-    <div class="">
-        <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('params')->links() }}
+            </div>
+
+
+            <div class="col-6">
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Số điện thoại</label>
+                    <input type="text" name="sdt" id="" class="form-control">
+                    @error('sdt')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Địa chỉ</label>
+                    <input value="{{ old('dia_chi') ?? request()->dia_chi }}" type="text" name="dia_chi"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('dia_chi')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                
+
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Avatar</label>
+                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('hinh_anh')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+
+            </div>
+
         </div>
-    </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+
+    </form>
 @endsection

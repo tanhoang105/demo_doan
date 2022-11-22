@@ -194,6 +194,7 @@ class TaiKhoanController extends Controller
             //            dd($id);
             unset($params['cols']['_token']);
             $params['cols']['id'] = $id;
+            $params['cols']['hinh_anh'] = null;
             if ($request->file('hinh_anh')) {
 
                 $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
@@ -205,8 +206,34 @@ class TaiKhoanController extends Controller
                 unset($params['cols']['password']);
             }
             //            dd($params['cols']);
+            $tkCurrent = $this->taikhoan->show($id);
+            // dd($tkCurrent);
+            // $tkCurrent->id
             $res = $this->taikhoan->saveupdate($params);
             if ($res > 0) {
+                // if($)
+                if($tkCurrent->vai_tro_id == 2){
+                    // giảng viên 
+                    GiangVien::where('id_user', $id)->update([
+                       
+                        'ten_giang_vien' => $params['cols']['name'],
+                        'dia_chi' => $params['cols']['dia_chi'],
+                        'email' => $params['cols']['email'],
+                        'sdt' => $params['cols']['sdt'],
+                        'hinh_anh' => $params['cols']['hinh_anh'],
+                    ]);
+                }
+                if($tkCurrent->vai_tro_id == 2){
+                    // giảng viên 
+                    HocVien::where('user_id', $id)->update([
+                        'user_id' => $id,
+                        'ten_hoc_vien' => $params['cols']['name'],
+                        'dia_chi' => $params['cols']['dia_chi'],
+                        'email' => $params['cols']['email'],
+                        'sdt' => $params['cols']['sdt'],
+                        'hinh_anh' => $params['cols']['hinh_anh'],
+                    ]);
+                }
                 Session::flash('success', 'Cập nhập thành công');
                 return redirect()->route('route_BE_Admin_Tai_Khoan');
             } else {
