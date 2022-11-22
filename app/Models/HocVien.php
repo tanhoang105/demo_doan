@@ -51,7 +51,7 @@ class HocVien extends Model
     {
         if (!empty($id)) {
             $query = DB::table($this->table)
-                ->where('id', '=', $id)
+                ->where('user_id', '=', $id)
                 ->first();
             return $query;
         }
@@ -92,7 +92,7 @@ class HocVien extends Model
 
         ]);
         $query =  DB::table($this->table)
-            ->where('id', '=', $params['cols']['id'])
+            ->where('user_id', '=', $params['cols']['id'])
             ->update($data);
         return $query;
     }
