@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\CaHoc;
 use App\Models\DanhMuc;
 use App\Models\KhoaHoc;
@@ -23,6 +24,7 @@ class HomeController extends Controller
         $this->khoahoc  = new KhoaHoc();
         $this->danhmuc = new DanhMuc();
         $this->xeplop = new XepLop();
+        $this->banner = new Banner();
     }
     public function index(Request $request)
     {
@@ -36,6 +38,10 @@ class HomeController extends Controller
         $xeplop = $this->xeplop->index($this->v['params'], true, 6);
         $this->v['khaigiang'] = $xeplop;
 //        dd($xeplop);
+
+        $banner = $this->banner->index(null, false, null);
+        $this->v['banner'] = $banner;
+//        dd($banner);
 
         return view('client.trang-chu.trang-chu', $this->v);
     }

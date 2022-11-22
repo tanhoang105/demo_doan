@@ -66,6 +66,10 @@ class DoimatkhauRequest extends FormRequest
             'required' => ':attribute yêu cầu nhâp dữ liệu',
             'required_with' => ':attribute khac nhau',
 
+//            'old_password.required' => 'Mật khẩu cũ bắt buộc nhập',
+//            'new_password.required' => 'Mật khẩu mới bắt buộc nhập',
+//            'password_confirmation.required' => 'Nhập lại mật khẩu mới bắt buộc nhập',
+//            'password_confirmation.same:new_password' => 'Mật khẩu mới không giống nhau',
         ];
     }
 

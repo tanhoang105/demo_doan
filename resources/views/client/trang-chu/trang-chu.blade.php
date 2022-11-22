@@ -1,11 +1,12 @@
 @extends('Client.templates.layout')
 @section('title')
-    Home
+    - Trang chủ
 @endsection
 @section('content')
         <!-- Start: Hero Section
 ==================================================-->
 <div class="slider_owl">
+    @foreach($banner as $item)
     <div class="hero-section hero_two">
         <div class="container">
             <div class="row">
@@ -26,7 +27,7 @@
                     <div class="hero_img">
                         <img src="{{ asset('client/images/coding.png') }}" alt="" class="coding">
                         <div class="hero_img_ani" id="scene">
-                            <img src="{{ asset('client/images/hero-men2.png') }}" alt="" data-depth="0.10" class="layer">
+                            <img src="{{ Storage::url($item->anh_banner) }}" alt="" data-depth="0.10" class="layer">
                         </div>
                         <div class="hero_stu">
                             <h4> 13k+ Học Viên</h4>
@@ -52,52 +53,7 @@
         </div>
         <!-- /.hero_ellipse_icon-->
     </div>
-    <div class="hero-section hero_two">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="hero_text">
-                        <h2> Học mọi lúc mọi <br />
-                            nơi <br />
-                            Chỉ từ một thiết bị</h2>
-                        <p> Học trực tuyến không phải là điều lớn lao tiếp theo, <br />
-                            nó bây giờ là điều tuyệt vời nhất từ ​​trước đến nay. </p>
-                        <a href="#" class="more-link"> Get Started </a>
-                    </div>
-                    <!-- /.hero_text -->
-                </div>
-                <!-- /.col-md-6 col-sm-12-->
-
-                <div class="col-md-6 col-sm-12">
-                    <div class="hero_img">
-                        <img src="{{ asset('client/images/coding.png') }}" alt="" class="coding">
-                        <div class="hero_img_ani" id="scene4">
-                            <img src="{{ asset('client/images/hero-men3.png') }}" alt="" data-depth="0.10" class="layer">
-                        </div>
-                        <div class="hero_stu">
-                            <h4> 13k+ Học Viên</h4>
-                            <img src="{{ asset('client/images/hero_students.png') }}" alt="">
-                        </div>
-                        <img src="{{ asset('client/images/pencil.png') }}" alt="" class="pencil">
-                        <!-- /.hero_stu-->
-                    </div>
-                </div>
-                <!-- /.col-md-6 col-sm-12-->
-            </div>
-            <!-- /. row -->
-        </div>
-        <!-- /. container -->
-        <div class="hero_ellipse_icon">
-            <img class="ellipse1" src="{{ asset('client/images/ellipse1.png') }}" alt="">
-            <img class="ellipse2" src="{{ asset('client/images/ellipse11.png') }}" alt="">
-            <img class="ellipse3" src="{{ asset('client/images/ellipse3.png') }}" alt="">
-            <img class="ellipse4" src="{{ asset('client/images/ellipse4.png') }}" alt="">
-            <img class="ellipse7" src="{{ asset('client/images/ellipse7.png') }}" alt="">
-            <img class="ellipse8" src="{{ asset('client/images/ellipse10.png') }}" alt="">
-            <img class="ellipse6" src="{{ asset('client/images/ellipse9.png') }}" alt="">
-        </div>
-        <!-- /.hero_ellipse_icon-->
-    </div>
+    @endforeach
 </div>
 <!-- End: Hero Section
 ==================================================-->
@@ -268,9 +224,9 @@
               <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="feat_course_item">
                     <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}">
-                        <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">
+{{--                        <img src="{{ asset('client/images/courses2.jpg') }}" alt="image">--}}
+                        <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image" style="width: 335px;height: 175px;border-radius: 15px;">
                     </a>
-{{--                     <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image">--}}
                     <div class="feat_cour_price">
                         <span class="feat_cour_tag"> {{ $value->ten_danh_muc }} </span>
                         <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc) }} VNĐ </span>

@@ -20,19 +20,51 @@ class ThongTinController extends Controller
 
     public function update(Request $request) {
         $id = Auth::user()->id;
-//        $id  = session('id');
+//        $params = [];
+//        $params['cols'] = array_map(function ($item) {
+//            if ($item == '') {
+//                $item  = null;
+//            }
+//            if (is_string($item)) {
+//                $item = $item;
+//            }
+//            return $item;
+//        }, $request->post());
+//        unset($params['cols']['_token']);
+//        $params['cols']['id'] = $id;
+//        $modelUsers = new User();
+//        $res  = $modelUsers->saveupdate($params);
+//        if ($res > 0) {
+//            Session::flash('success', 'Cập nhập thành công');
+//            return redirect()->route('client_thong_tin_ca_nhan');
+//        } else {
+//            Session::flash('error', 'Cập nhập không thành công');
+//            return back();
+//        }
         $params = [];
         $params['cols'] = array_map(function ($item) {
             if ($item == '') {
-                $item  = null;
+                $item = null;
             }
             if (is_string($item)) {
-                $item = $item;
+                $item = trim($item);
             }
             return $item;
         }, $request->post());
+        //            dd($id);
         unset($params['cols']['_token']);
         $params['cols']['id'] = $id;
+        if ($request->file('hinh_anh')) {
+
+            $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
+        }
+
+        if ($request->input('password')) {
+            $params['cols']['password'] = Hash::make($params['cols']['password']);
+        } else {
+            unset($params['cols']['password']);
+        }
+//        $res = $this->taikhoan->saveupdate($params);
         $modelUsers = new User();
         $res  = $modelUsers->saveupdate($params);
         if ($res > 0) {
@@ -40,8 +72,14 @@ class ThongTinController extends Controller
             return redirect()->route('client_thong_tin_ca_nhan');
         } else {
             Session::flash('error', 'Cập nhập không thành công');
-            return back();
+            return redirect()->route('client_thong_tin_ca_nhan');
         }
+    }
+
+    public  function uploadFile($file)
+    {
+        $filename = time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('imageTaiKhoan', $filename,  'public');
     }
 
     public function change_password() {
