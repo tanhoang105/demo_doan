@@ -27,6 +27,7 @@ class DangKyController extends Controller
     public function loadDangKy($id){
         $objDangKy=new DangKy();
         $loadDangKy=$objDangKy->listDangky($id);
+        // dd($loadDangKy);
         $payment_method = DB::table('phuong_thuc_thanh_toan')
             ->get();
 

@@ -196,7 +196,7 @@
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Tên lớp học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_lop}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ca học:</label>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->id_giang_vien}}</span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ngày khai giảng:</label>
@@ -217,7 +217,7 @@
 
                     <div class="col-12 p-3">
                         <label class="text-lg text-danger" >Học phí:</label>
-                        <h3>{{$loadDangKy->gia_khoa_hoc}} VND</h3>
+                        <h3>{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
                     </div>
                 </div>
 
@@ -270,8 +270,8 @@
                                 {{-- {{dd($paymeny_method)}} --}}
                                 @foreach($payment_method as $method)
                                     <div>
-                                        <input name="ten" type="radio" class="radio_input" id="{{$method->id}}" value="{{$method->id}}" >
-                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
+                                        <input name="ten" type="radio" class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
+                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan mb-3" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
                                     </div>
                                 @endforeach
 {{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
