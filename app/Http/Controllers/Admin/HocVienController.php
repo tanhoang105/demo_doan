@@ -246,4 +246,8 @@ class HocVienController extends Controller
             }
         }
     }
+
+    public function exportExcel(){
+        
+    }
 }

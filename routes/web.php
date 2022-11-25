@@ -219,6 +219,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/hoc-vien-edit/{id}', [HocVienController::class, 'edit'])->name('Edit_Hoc_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/hoc-vien-update', [HocVienController::class, 'update'])->name('Update_Hoc_Vien');
         Route::post('xoa-all', [HocVienController::class, 'destroyAll'])->name('Xoa_All_Hoc_Vien');
+        Route::post('/export', [HocVienController::class, 'exportExcel'])->name('Export_Hoc_Vien');
     });
 
 

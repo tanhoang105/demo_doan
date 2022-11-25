@@ -1,9 +1,17 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Hoc_Vien') }}">
-            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
-        </a>
+        <button class='btn btn-primary m-5'>
+            <a style="color: #fff" href=" {{ route('route_BE_Admin_Add_Hoc_Vien') }}">
+                <i class="fas fa-plus "></i> Thêm
+            </a>
+        </button>
+
+        <button class='btn btn-primary m-5'>
+            <a style="color: #fff" href=" {{ route('route_BE_Admin_Export_Hoc_Vien') }}">
+                <i class="fas fa-plus "></i> Xuất
+            </a>
+        </button>
 
     </div>
     @if (Session::has('error'))
@@ -62,13 +70,15 @@
 
                         <td>
                             <button class="btn btn-success">
-                                <a style="color: #fff" href="{{ route('route_BE_Admin_Edit_Hoc_Vien', ['id' => $item->user_id]) }}">
+                                <a style="color: #fff"
+                                    href="{{ route('route_BE_Admin_Edit_Hoc_Vien', ['id' => $item->user_id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
                             </button>
                         </td>
                         <td>
                             <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Hoc_Vien', ['id' => $item->user_id]) }}">
+                                <a style="color: #fff"
+                                    href="{{ route('route_BE_Admin_Xoa_Hoc_Vien', ['id' => $item->user_id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
 
                             </button>
