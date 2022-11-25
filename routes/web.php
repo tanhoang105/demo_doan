@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CaThuController;
+use App\Http\Controllers\Admin\LichHocController;
 use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
@@ -187,6 +188,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/hoc-vien-edit/{id}', [HocVienController::class, 'edit'])->name('Edit_Hoc_Vien'); // hiển thị chi tiết bản ghi
         Route::post('/hoc-vien-update', [HocVienController::class, 'update'])->name('Update_Hoc_Vien');
         Route::post('xoa-all', [HocVienController::class, 'destroyAll'])->name('Xoa_All_Hoc_Vien');
+        Route::post('/export', [HocVienController::class, 'exportExcel'])->name('Export_Hoc_Vien');
     });
     // xếp lớp
 
@@ -313,94 +315,15 @@ Route::prefix('/auth')->name('auth.')->group(function () {
 });
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-
-
-// // route đào tạo
-// Route::prefix('/admin')->middleware(['role:đào tạo'])->group(function () {
-//     Route::get('/', function () {
-//         return view('admin.trangchu');
-//     });
-//     Route::prefix('/xep-lop')->name('route_BE_Admin_')->group(function () {
-//         Route::get('/', [XepLopController::class, 'index'])->name('Xep_Lop'); // hiển thị danh sách
-//         Route::get('/xoa/{id}', [XepLopController::class, 'destroy'])->name('Xoa_Xep_Lop');
-//         Route::get('/edit/{id}', [XepLopController::class, 'edit'])->name('Edit_Xep_Lop');
-//         Route::get('/detail-lop/{id_xep_lop}', [LopController::class, 'show'])->name('Detail_Xep_Lop');
-//         Route::post('/update', [XepLopController::class, 'update'])->name('Update_Xep_Lop');
-//         Route::match(['get', 'post'], '/add', [XepLopController::class, 'store'])->name('Add_Xep_Lop');
-//         Route::post('xoa-all', [XepLopController::class, 'destroyAll'])->name('Xoa_All_Xep_Lop');
-//     });
-
-
-//     Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
-//         Route::get('/list', [CaHocController::class, 'index'])->name('Ca_Hoc');
-//         Route::get('/xoa/{id}', [CaHocController::class, 'destroy'])->name('Xoa_Ca_Hoc');
-//         Route::get('/edit/{id}', [CaHocController::class, 'edit'])->name('Edit_Ca_Hoc');
-//         Route::post('/update', [CaHocController::class, 'update'])->name('Update_Ca_Hoc');
-//         Route::match(['get', 'post'], '/add', [CaHocController::class, 'store'])->name('Add_Ca_Hoc');
-//         Route::post('xoa-all', [CaHocController::class, 'destroyAll'])->name('Xoa_All_Ca_Hoc');
-//     });
-
-//     Route::prefix('danh-muc')->name('route_Admin_BE_')->group(function () {
-
-//         Route::get('/', [DanhMucKhoaHoc::class, 'index'])->name('Danh_Muc_Khoa_Hoc'); // hiển thị danh sách
-//         Route::match(['get', 'post'], '/danh-muc-add', [DanhMucKhoaHoc::class, 'store'])->name('Add_Danh_Muc'); // hiển thị danh sách
-//         Route::get('/danh-muc-edit/{id}', [DanhMucKhoaHoc::class, 'edit'])->name('Edit_Danh_Muc'); // hiển thị danh sách
-//         Route::post('/danh-muc-update', [DanhMucKhoaHoc::class, 'update'])->name('Update_Danh_Muc'); // hiển thị danh sách
-//         Route::get('/danh-muc-xoa/{id}', [DanhMucKhoaHoc::class, 'destroy'])->name('Xoa_Danh_Muc'); // hiển thị danh sách
-//         Route::post('/xoa-all', [DanhMucKhoaHoc::class, 'destroyAll'])->name('Xoa_All_Danh_Muc');
-//     });
-
-
-//     Route::prefix('/khoa-hoc')->name('route_BE_Admin_')->group(function () {
-
-//         Route::get('/', [KhoahocController::class, 'index'])->name('Khoa_Hoc'); // hiển thị danh sách
-//         Route::match(['get', 'post'], '/add-khoa-hoc',   [KhoahocController::class, 'store'])->name('Add_Khoa_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
-//         Route::get('/khoa-hoc-delete/{id}', [KhoahocController::class, 'destroy'])->name('Xoa_Khoa_Hoc');
-//         Route::get('/khoa-hoc-chi-tiet/{id}', [KhoahocController::class, 'edit'])->name('Chi_Tiet_Khoa_Hoc'); // hiển thị chi tiết bản ghi
-//         Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('Update_Khoa_Hoc');
-//         Route::post('/khoa-hoc-xoa-all', [KhoahocController::class, 'destroyAll'])->name('Xoa_All_Khoa_Hoc');
-//     });
-
-//     Route::prefix('lop-hop')->name('route_BE_Admin_')->group(function () {
-
-//         Route::get('/list', [LopController::class, 'index'])->name('List_Lop');
-//         Route::get('/xoa/{id}', [LopController::class, 'destroy'])->name('Xoa_Lop');
-//         Route::get('/edit/{id}', [LopController::class, 'edit'])->name('Edit_Lop');
-//         Route::post('/update', [LopController::class, 'update'])->name('Update_Lop');
-//         Route::match(['get', 'post'], '/add', [LopController::class, 'store'])->name('Add_Lop');
-//         Route::post('xoa-all', [LopController::class, 'destroyAll'])->name('Xoa_All_Lop');
-//         Route::post('/autocomplete-ajax', [LopController::class, 'autocomplete'])->name('Search_Lop');
-//     });
-
-
-//     Route::get('/phong-hoc', [PhongHocController::class, 'index'])->name('route_BE_Admin_Phong_Hoc');
-//     Route::match(['get', 'post'], '/phong-hoc-add', [PhongHocController::class, 'store'])->name('route_BE_Admin_Add_Phong_Hoc');
-//     Route::get('/phong-hoc-edit/{id}', [PhongHocController::class, 'edit'])->name('route_BE_Admin_Edit_Phong_Hoc');
-//     Route::post('/phong-hoc-update', [PhongHocController::class, 'update'])->name('route_BE_Admin_Update_Phong_Hoc');
-//     Route::get('/phong-hoc-xoa/{id}', [PhongHocController::class, 'destroy'])->name('route_BE_Admin_Xoa_Phong_Hoc');
-//     Route::post('xoa-all', [PhongHocController::class, 'destroyAll'])->name('route_BE_Admin_Xoa_All_Phong_Hoc');
-
-
-//     Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
-//         Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
-//         Route::match(['get', 'post'], '/add-dang-ky',   [DangKyController::class, 'store'])->name('Add_Dang_Ky'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
-//         Route::get('/dang-ky-delete/{id}', [DangKyController::class, 'destroy'])->name('Xoa_Giang_Vien');
-//         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
-//         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
-//         Route::post('xoa-all', [DangKyController::class, 'destroyAll'])->name('Xoa_All_Dang_Ky');
-//     });
+// demo pusher
+// Route::get('welcome' , function(){
+//     return view('welcome');
+// });
+// Route::get('test', function () {
+//     // dd(12);
+// 	event(new App\Events\StatusLiked('Someone'));
+// 	return "Event has been sent!";
 // });
 
 
-// route kế toán
-// Route::prefix('/admin')->middleware(['role:kế toán'])->group(function () {
-//     Route::prefix('/phuong-thuc-thanh-toan')->name('route_BE_Admin_')->group(function () {
-//         Route::get('/list', [PhuongThucThanhToan::class, 'index'])->name('Phuong_Thuc_Thanh_Toan');
-//         Route::get('/xoa/{id}', [PhuongThucThanhToan::class, 'destroy'])->name('Xoa_Phuong_Thuc_Thanh_Toan');
-//         Route::get('/edit/{id}', [PhuongThucThanhToan::class, 'edit'])->name('Edit_Phuong_Thuc_Thanh_Toan');
-//         Route::post('/update', [PhuongThucThanhToan::class, 'update'])->name('Update_Phuong_Thuc_Thanh_Toan');
-//         Route::match(['get', 'post'], '/add', [PhuongThucThanhToan::class, 'store'])->name('Add_Phuong_Thuc_Thanh_Toan');
-//         Route::post('xoa-all', [PhuongThucThanhToan::class, 'destroyAll'])->name('Xoa_All_Phuong_Thuc_Thanh_Toan');
-//     });
-// });
+

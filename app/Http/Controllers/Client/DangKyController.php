@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\ThanhToan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -26,6 +27,7 @@ class DangKyController extends Controller
     public function loadDangKy($id){
         $objDangKy=new DangKy();
         $loadDangKy=$objDangKy->listDangky($id);
+        // dd($loadDangKy);
         $payment_method = DB::table('phuong_thuc_thanh_toan')
             ->get();
 
@@ -41,7 +43,6 @@ class DangKyController extends Controller
         if ($loadDangKy->so_luong > 0) {
             if ($request->isMethod('post')) {
                 $objHocvien = new HocVien();
-                $objDangKy = new DangKy();
                 $params = $request->post();
                 $params['cols'] = array_map(function ($item) {
                     if ($item == '')
@@ -52,9 +53,11 @@ class DangKyController extends Controller
                 },
                     $request->post());
                 unset($params['cols']['_token']);
+                unset($params['cols']['id_khoa_hoc']);
                 // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
-                if (empty($request->id_user)) {
+                if (empty(Auth::user())) {
+                    // dd(123);
                     $password = Str::random(8);
                     $dataUser = $params;
                     $dataUser['cols']['password'] = Hash::make($password);
@@ -97,13 +100,18 @@ class DangKyController extends Controller
                             $soLuongLop = DB::table('lop')
                                 ->where('id', $id)
                                 ->update(['so_luong' => $tinhSoLuong]);
-                            $objDangKy = new DangKy();
+                            // $objDangKy = new DangKy();
+
+
+                            // if()
+
                             $data = [
                                 'ngay_dang_ky' => date('Y-m-d H:i:s'),
                                 'id_lop' => $request->lop_id,
                                 'id_user' => $res,
                                 'gia' => $request->gia_khoa_hoc,
                                 'id_thanh_toan' => $insertThanhToan,
+                                'email' => $request->email,
                             ];
                             $res = $objDangKy->saveNew($data);
                             if ($res == null) {
@@ -123,67 +131,83 @@ class DangKyController extends Controller
                     } else {
                         Session::flash('error', 'Lỗi đăng ký');
                     }
-                } else {
-                    $objHocvien = new HocVien();
-                    $query = $objHocvien->getHocVien($request->user_id);
-                    $objThanhToan = new ThanhToan();
-                    if ($request->ten == 1) {
-                        $dataThanhToan = [
-                            'id_phuong_thuc_thanh_toan' => $request->ten,
-                            'gia' => $request->gia_khoa_hoc,
-                        ];
-                    } else {
-                        $dataThanhToan = [
-                            'id_phuong_thuc_thanh_toan' => $request->ten,
-                            'ngay_thanh_toan' => date('Y-m-d H:i:s'),
-                            'gia' => $request->gia_khoa_hoc,
-                            'mo_ta' => 'quá nhanh',
-                        ];
-                    }
-                    $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
+                }
+                else {
+                    // dd(1);
+                    $query=DB::table('dang_ky')
+                    ->join('users','users.id','=','dang_ky.id_user')
+                    ->join('lop','lop.id','=','dang_ky.id_lop')
+                    ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+                    ->where('lop.id_khoa_hoc',$request->id_khoa_hoc)
+                    // ->andWhere('')
+                    ->first();
+                    if(empty($query)) {
+                        $objHocvien = new HocVien();
+                        $query = $objHocvien->getHocVien($request->user_id);
+                        $objThanhToan = new ThanhToan();
+                        if ($request->ten == 1) {
+                            $dataThanhToan = [
+                                'id_phuong_thuc_thanh_toan' => $request->ten,
+                                'gia' => $request->gia_khoa_hoc,
+                            ];
+                        } else {
+                            $dataThanhToan = [
+                                'id_phuong_thuc_thanh_toan' => $request->ten,
+                                'ngay_thanh_toan' => date('Y-m-d H:i:s'),
+                                'gia' => $request->gia_khoa_hoc,
+                                'mo_ta' => 'quá nhanh',
+                            ];
+                        }
+                        $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
+                    // }
                     // kiểm tra user đăng nhập đã là học viên
 //                    dd($query);
                     if (!empty($query->user_id) > 0) {
-//                        dd(1);
-                        if (!empty($insertThanhToan) > 0) {
-                            $tinhSoLuong = $loadDangKy->so_luong - 1;
-                            $soLuongLop = DB::table('lop')
-                                ->where('id', $id)
-                                ->update(['so_luong' => $tinhSoLuong]);
-                            $objDangKy = new DangKy();
-                            $data = [
-                                'ngay_dang_ky' => date('Y-m-d H:i:s'),
-                                'id_lop' => $request->lop_id,
-                                'id_user' => $request->user_id,
-                                'gia' => $request->gia_khoa_hoc,
-                                'id_thanh_toan' => $insertThanhToan,
-                            ];
-                            $res = $objDangKy->saveNew($data);
-
-
-                        }
-                        if ($res == null) {
-                            redirect()->route('client_dang_ky', ['id' => $request->id]);
-                        } elseif ($res > 0) {
-                            // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
-                            return redirect()->route('client_complete_dang_ky', ['code' => $res]);
-                        } else {
-                            Session::flash('error', 'Lỗi đăng ký khóa học');
-                            redirect()->route('client_dang_ky', ['id' => $request->id]);
-                        }
+                    //    dd(1);
+                       
+                                    if (!empty($insertThanhToan) > 0) {
+                                        $tinhSoLuong = $loadDangKy->so_luong - 1;
+                                        $soLuongLop = DB::table('lop')
+                                            ->where('id', $id)
+                                            ->update(['so_luong' => $tinhSoLuong]);
+            
+                                        $data = [
+                                            'ngay_dang_ky' => date('Y-m-d H:i:s'),
+                                            'id_lop' => $request->lop_id,
+                                            'id_user' => $request->user_id,
+                                            'gia' => $request->gia_khoa_hoc,
+                                            'id_thanh_toan' => $insertThanhToan,
+                                            'email' => $request->email,
+                                        ];
+                                        $res = $objDangKy->saveNew($data);
+                                    }
+                                    if ($res == null) {
+                                        redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                    } elseif ($res > 0) {
+                                        // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
+                                        return redirect()->route('client_complete_dang_ky', ['code' => $res]);
+                                    } else {
+                                        Session::flash('error', 'Lỗi đăng ký khóa học');
+                                        return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                    }
+            
+                               
+                        
 
                     }
                     else {
-//                        dd(2);
+                    //    dd(2);
                         // kiểm tra user đăng nhập không là học viên
                         $params['cols']['ten_hoc_vien'] = $request->name;
                         $dataHocVien = $params;
 //                        dd($dataHocVien);
                         unset($dataHocVien['cols']['lop_id']);
+                        unset($dataHocVien['cols']['ten']);
                         unset($dataHocVien['cols']['name']);
                         unset($dataHocVien['cols']['gia_khoa_hoc']);
 
                         $saveNewHocVien = $objHocvien->saveNew($dataHocVien);
+
                         $objThanhToan = new ThanhToan();
                         if ($request->ten == 1) {
                             $dataThanhToan = [
@@ -200,13 +224,14 @@ class DangKyController extends Controller
                         }
                         $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
                         if ($saveNewHocVien > 0) {
-                            $objDangKy = new DangKy();
+                            // $objDangKy = new DangKy();
                             $data = [
                                 'ngay_dang_ky' => date('Y-m-d H:i:s'),
                                 'id_lop' => $request->lop_id,
                                 'id_user' => $request->user_id,
                                 'gia' => $request->gia_khoa_hoc,
                                 'id_thanh_toan' => $insertThanhToan,
+                                'email' => $request->email,
                             ];
                             $res = $objDangKy->saveNew($data);
                             if ($res == null) {
@@ -222,7 +247,14 @@ class DangKyController extends Controller
                             }
                         }
                     }
+
+                }else {
+                    Session::flash('error', 'Lỗi đăng ký khóa học');
+                    return  redirect()->route('client_dang_ky', ['id' => $request->id]);
                 }
+
+                }
+
             } else {
                 Session::flash('success', 'Lớp đã đầy Không thể đăng ký');
                 redirect()->route('client_dang_ky', ['id' => $request->id]);
@@ -233,6 +265,7 @@ class DangKyController extends Controller
 //            DB::rollBack();
 //            return redirect()->route('dangkyCourse',['id'=>$id]);
 //        }
+
         }
     }
     // đăng ký thành công
@@ -252,15 +285,36 @@ class DangKyController extends Controller
     //hàm checkemail
     public function checkEmail(Request $request){
         $obj=new User();
-        $query=DB::table('users')
-            ->where('email',$request->email)
-            ->first();
-        if (!empty($query)){
-            return response()->json(['message'=>'error','status'=>500]);
+        // dd(Auth::user());
+        if(Auth::user()->id > 0){
+            $emailUser = Auth::user()->email;
+            if($request->email != $emailUser) {
+                $query=DB::table('users')
+                ->where('email',$request->email)
+                ->first();
+
+                if (!empty($query)){
+                    return response()->json(['message'=>'error','status'=>500]);
+                } else{
+                    return response()->json(['message'=>'success','status'=>200]);
+                }
+            }else{
+                return response()->json(['message'=>'success','status'=>200]);
+            }
         }
         else{
-            return response()->json(['message'=>'success','status'=>200]);
+            // dd(1321);
+            $query=DB::table('users')
+            ->where('email',$request->email)
+            ->first();
+            if (!empty($query)){
+                return response()->json(['message'=>'error','status'=>500]);
+            }
+            else{
+                return response()->json(['message'=>'success','status'=>200]);
+            }
         }
+       
     }
 
 }

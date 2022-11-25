@@ -148,6 +148,8 @@
                             </div>
                         </div>
                         <!--  End: Search Filter -->
+
+                    <div class="row" id="course-container"> 
                         @if (!$id_danhmuc)
                             @foreach ($list as $value)
                                 {{-- {{count($value->ten_lop)}} --}}
@@ -185,8 +187,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
+                        @endforeach
+             
                     </div>
+                          </div>
                 @else
                     <?php
                     $loc_danhmuc = DB::table('khoa_hoc')
@@ -269,6 +274,7 @@
                         search: search,
                     },
                     success: function(res) {
+                        console.log(res);
                         if (res['success']) {
                             $('#course-container').html(res['data'])
                         }
@@ -290,6 +296,7 @@
                         search: search,
                     },
                     success: function(res) {
+                        console.log(res);
                         if (res['success']) {
                             $('#course-container').html(res['data'])
                         }

@@ -126,7 +126,8 @@ class DangKy extends Model
     public function listDangky($id){
         $query=DB::table('lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
-            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc')
+            ->join('giang_vien','giang_vien.id_user','=','lop.id_giang_vien')
+            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','ten_giang_vien')
             ->where('lop.id','=',$id);
         $list=$query->first();
         return $list;
@@ -137,7 +138,7 @@ class DangKy extends Model
             ->join('lop','lop.id','=','dang_ky.id_lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
             ->where('dang_ky.id',$code)
-            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','email','dia_chi','ten_lop','ten_khoa_hoc')
+            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','dang_ky.email','dia_chi','ten_lop','ten_khoa_hoc')
             ->first();
         return $query;
     }

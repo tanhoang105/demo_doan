@@ -43,7 +43,7 @@
           </li>
 
           <!-- Messages Dropdown Menu -->
-          <li class="nav-item dropdown">
+          {{-- <li class="nav-item dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#">
                   <i class="far fa-comments"></i>
                   <span class="badge badge-danger navbar-badge">3</span>
@@ -99,7 +99,7 @@
                   <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
               </div>
-          </li>
+          </li> --}}
           <!-- Notifications Dropdown Menu -->
           <li class="nav-item dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#">
@@ -107,26 +107,37 @@
                   <span class="badge badge-warning navbar-badge">15</span>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                  <span class="dropdown-item dropdown-header">15 Notifications</span>
+                  {{-- <span class="dropdown-item dropdown-header">15 Notifications</span> --}}
                   <div class="dropdown-divider"></div>
                   <a href="#" class="dropdown-item">
                       <i class="fas fa-envelope mr-2"></i> 4 new messages
                       <span class="float-right text-muted text-sm">3 mins</span>
                   </a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">
-                      <i class="fas fa-users mr-2"></i> 8 friend requests
-                      <span class="float-right text-muted text-sm">12 hours</span>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">
-                      <i class="fas fa-file mr-2"></i> 3 new reports
-                      <span class="float-right text-muted text-sm">2 days</span>
-                  </a>
-                  <div class="dropdown-divider"></div>
+
                   <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
               </div>
           </li>
+          {{-- pusher --}}
+          {{-- <li class="dropdown dropdown-notifications">
+              <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                  <i data-count="0" class="glyphicon glyphicon-bell notification-icon"></i>
+              </a>
+
+              <div class="dropdown-container">
+                  <div class="dropdown-toolbar">
+                      <div class="dropdown-toolbar-actions">
+                          <a href="#">Mark all as read</a>
+                      </div>
+                      <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
+                  </div>
+                  <ul class="dropdown-menu">
+                  </ul>
+                  <div class="dropdown-footer text-center">
+                      <a href="#">View All</a>
+                  </div>
+              </div>
+          </li> --}}
+          {{-- end --}}
           <li class="nav-item">
               <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                   <i class="fas fa-expand-arrows-alt"></i>
