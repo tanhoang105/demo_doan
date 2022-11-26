@@ -14,9 +14,12 @@
     </div>
     <br>
   <div>
+   <form method="GET" action="{{route('route_BE_Admin_Add_doi_lop')}}">
+    @csrf
     <a style="color: red" href="">
         <button class="btn btn-primary"> <i class="fas fa-plus "></i> Thêm</button>
     </a>
+   </form>
   </div>
   <br>
     <table class="table table-bordered">

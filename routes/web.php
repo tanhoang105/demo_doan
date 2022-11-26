@@ -48,8 +48,8 @@ Route::get('/gioi-thieu', [\App\Http\Controllers\Client\GioiThieuController::cla
 Route::get('/dang-nhap', [\App\Http\Controllers\Auth\AuthController::class, 'index'])->name('client_dang_nhap');
 Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'chiTietKhoaHoc'])->name('client_chi_tiet_khoa_hoc');
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
-Route::get('check-email',[\App\Http\Controllers\Client\DangKyController::class,'checkEmail'])->name('client_check_email');
-Route::get('/loc-khoa-hoc',[\App\Http\Controllers\Client\KhoaHocController::class,'locKhoaHoc'])->name('loc_khoa_hoc');
+Route::get('check-email', [\App\Http\Controllers\Client\DangKyController::class, 'checkEmail'])->name('client_check_email');
+Route::get('/loc-khoa-hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'locKhoaHoc'])->name('loc_khoa_hoc');
 
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
@@ -90,11 +90,10 @@ Route::prefix('/admin')->group(function () {
     });
     Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
         Route::get('/list', [DoiLopKhoaController::class, 'index'])->name('danh_sach_doi_lop');
-        // Route::get('/xoa/{id}', [DoiLopKhoaController::class, 'destroy'])->name('Xoa_Ca_Hoc');
-        // Route::get('/edit/{id}', [DoiLopKhoaController::class, 'edit'])->name('Edit_Ca_Hoc');
+        Route::post('hienthidoilop/{id}', [DoiLopKhoaController::class, 'hienthidoilop'])->name('hienthidoilop');
         Route::put('/updateStatus/{doilop}', [DoiLopKhoaController::class, 'updateStatus'])->name('updateStatus_doilop');
-        Route::match(['get', 'post'], '/add', [DoiLopKhoaController::class, 'store'])->name('Add_Ca_Hoc');
-        Route::post('xoa-all', [DoiLopKhoaController::class, 'destroyAll'])->name('Xoa_All_Ca_Hoc');
+        Route::match(['get', 'post'], '/add-dang-ky', [DoiLopKhoaController::class, 'create'])->name('Add_doi_lop');
+        Route::post('store_doi_khoa', [DoiLopKhoaController::class, 'store'])->name('store_doi_khoa');
     });
 
     Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
@@ -105,10 +104,8 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add', [CaHocController::class, 'store'])->name('Add_Ca_Hoc');
         Route::post('xoa-all', [CaHocController::class, 'destroyAll'])->name('Xoa_All_Ca_Hoc');
     });
-
     // khóa học
     Route::prefix('/khoa-hoc')->name('route_BE_Admin_')->group(function () {
-
         Route::get('/', [KhoahocController::class, 'index'])->name('Khoa_Hoc'); // hiển thị danh sách
         Route::match(['get', 'post'], '/add-khoa-hoc',   [KhoahocController::class, 'store'])->name('Add_Khoa_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/khoa-hoc-delete/{id}', [KhoahocController::class, 'destroy'])->name('Xoa_Khoa_Hoc');
@@ -116,9 +113,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/khoa-hoc-update', [KhoahocController::class, 'update'])->name('Update_Khoa_Hoc');
         Route::post('/khoa-hoc-xoa-all', [KhoahocController::class, 'destroyAll'])->name('Xoa_All_Khoa_Hoc');
     });
-
-
-
     // đăng ký
     Route::prefix('/dang-ky')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [DangKyController::class, 'index'])->name('List_Dang_Ky'); // hiển thị danh sách
@@ -128,9 +122,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
         Route::post('xoa-all', [DangKyController::class, 'destroyAll'])->name('Xoa_All_Dang_Ky');
     });
-
-
-
     // thứ học
     Route::prefix('/thu-hoc')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [ThuHocController::class, 'index'])->name('List_Thu_Hoc'); // hiển thị danh sách
@@ -140,9 +131,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/update', [ThuHocController::class, 'update'])->name('Update_Thu_Hoc');
         Route::post('xoa-all', [ThuHocController::class, 'destroyAll'])->name('Xoa_All_Thu_Hoc');
     });
-
-
-
     // giảng viên
     Route::prefix('/giang-vien')->name('route_BE_Admin_')->group(function () {
         Route::post('xoa-all', [GiangVienController::class, 'destroyAll'])->name('Xoa_All_Giang_Vien');
@@ -153,19 +141,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
         Route::get('/lich-day', [GiangVienController::class, 'lichDay'])->name('Lich_Day_Giang_Vien');
     });
-
-    // giảng viên
-    Route::prefix('/lich-hoc')->name('route_BE_Admin_')->group(function () {
-        Route::get('/', [LichHocController::class, 'index'])->name('List_Lich_Hoc'); // hiển thị danh sách
-        Route::post('xoa-all', [LichHocController::class, 'destroyAll'])->name('Xoa_All_Lich_Hoc');
-        Route::match(['get', 'post'], '/add',   [LichHocController::class, 'store'])->name('Add_Lich_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
-        Route::get('/delete/{id}', [LichHocController::class, 'destroy'])->name('Xoa_Lich_Hoc');
-        Route::get('/edit/{id}', [LichHocController::class, 'edit'])->name('Edit_Lich_Hoc'); // hiển thị chi tiết bản ghi
-        Route::post('/update', [LichHocController::class, 'update'])->name('Update_Lich_Hoc');
-        // Route::get('/lich-day', [GiangVienController::class, 'lichDay'])->name('Lich_Day_Lich_Hoc');
-    });
-
-
     Route::prefix('/ca-thu')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [CaThuController::class, 'index'])->name('List_Ca_Thu');
         Route::post('xoa-all', [CaThuController::class, 'destroyAll'])->name('Xoa_All_Ca_Thu');
@@ -175,8 +150,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/update', [CaThuController::class, 'update'])->name('Update_Ca_Thu');
         Route::get('/show', [CaThuController::class, 'show'])->name('Show_Ca_Thu');
     });
-
-
     // thanh toán
     Route::prefix('/thanh-toan')->name('route_BE_Admin_')->group(function () {
         Route::post('xoa-all', [ThanhToanController::class, 'destroyAll'])->name('Xoa_All_Thanh_Toan');
@@ -187,8 +160,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('/update', [ThanhToanController::class, 'update'])->name('Update_Thanh_Toan');
         Route::get('/in-hoa-don/{id}', [ThanhToanController::class, 'inHoaDon'])->name('In_Hoa_Don');
     });
-
-
     // phần này là hiển thị ra những quyền mà tài khoản có thể đc phân (table - chophep)
     Route::prefix('/phan-quyen')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [PhanQuyenController::class, 'index'])->name('List_Quyen'); // hiển thị danh sách
@@ -209,9 +180,7 @@ Route::prefix('/admin')->group(function () {
         Route::post('/cap-quyen-xoa-all', [CapQuyenController::class, 'destroyAll'])->name('Xoa_All_Cap_Quyen');
         Route::get('/cap-quyen-detail/{id}', [CapQuyenController::class, 'detail'])->name('Detail_Cap_Quyen');
     });
-
     // học viên
-
     Route::prefix('/hoc-vien')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [HocVienController::class, 'index'])->name('List_Hoc_Vien'); // hiển thị danh sách
         Route::match(['get', 'post'], '/add-hoc-vien',   [HocVienController::class, 'store'])->name('Add_Hoc_Vien'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
@@ -221,9 +190,6 @@ Route::prefix('/admin')->group(function () {
         Route::post('xoa-all', [HocVienController::class, 'destroyAll'])->name('Xoa_All_Hoc_Vien');
         Route::post('/export', [HocVienController::class, 'exportExcel'])->name('Export_Hoc_Vien');
     });
-
-
-
     // xếp lớp
 
     Route::prefix('/xep-lop')->name('route_BE_Admin_')->group(function () {

@@ -66,7 +66,7 @@
                     ->get();
                 ?>
                 <li>
-                    <a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>
+                    <a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>  
                     <ul>
                         @foreach ($danhmuc as $value)
                             <li>
