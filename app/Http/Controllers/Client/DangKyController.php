@@ -28,10 +28,12 @@ class DangKyController extends Controller
         $objDangKy=new DangKy();
         $loadDangKy=$objDangKy->listDangky($id);
         // dd($loadDangKy);
+        $ca_thu_id=explode(',',$loadDangKy->thu_hoc_id);
+        $layThu=$objDangKy->layThu($ca_thu_id);
         $payment_method = DB::table('phuong_thuc_thanh_toan')
             ->get();
-
-        return view('client.khoa-hoc.dang-ky-khoa-hoc',compact('loadDangKy','payment_method'));
+        // dd($layThu);
+        return view('client.khoa-hoc.dang-ky-khoa-hoc',compact('loadDangKy','payment_method','layThu'));
     }
     public function postDangKy(Request $request ,$id)
     {
@@ -54,6 +56,8 @@ class DangKyController extends Controller
                     $request->post());
                 unset($params['cols']['_token']);
                 unset($params['cols']['id_khoa_hoc']);
+                unset($params['cols']['ca_id']);
+                unset($params['cols']['thu_hoc_id']);
                 // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
@@ -102,9 +106,6 @@ class DangKyController extends Controller
                                 ->update(['so_luong' => $tinhSoLuong]);
                             // $objDangKy = new DangKy();
 
-
-                            // if()
-
                             $data = [
                                 'ngay_dang_ky' => date('Y-m-d H:i:s'),
                                 'id_lop' => $request->lop_id,
@@ -132,6 +133,7 @@ class DangKyController extends Controller
                         Session::flash('error', 'Lỗi đăng ký');
                     }
                 }
+                // Đã có tài khoản
                 else {
                     // dd(1);
                     $query=DB::table('dang_ky')
@@ -139,9 +141,28 @@ class DangKyController extends Controller
                     ->join('lop','lop.id','=','dang_ky.id_lop')
                     ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
                     ->where('lop.id_khoa_hoc',$request->id_khoa_hoc)
+                    ->where('users.id',Auth::user()->id)
                     // ->andWhere('')
                     ->first();
+                    // dd($query);
                     if(empty($query)) {
+
+                        $user = Auth::user();
+                        // dd($request->all());
+                        $caHoc = DB::table('dang_ky')
+                                ->join('lop','lop.id','=','dang_ky.id_lop')
+                                ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
+                                ->where('dang_ky.id_user',$user->id)
+                                ->select('lop.ca_thu_id','ca_thu.ca_id','ca_thu.thu_hoc_id')
+                                ->get();
+                                
+                        foreach ($caHoc as $item) {
+                            if($request->ca_id == $item->ca_id  && $request->thu_hoc_id == $item->thu_hoc_id ) {
+                                Session::flash('error', 'Ca học đã trùng với khóa học đã đăng ký');
+                                return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                            }
+                        }
+
                         $objHocvien = new HocVien();
                         $query = $objHocvien->getHocVien($request->user_id);
                         $objThanhToan = new ThanhToan();
@@ -165,31 +186,33 @@ class DangKyController extends Controller
                     if (!empty($query->user_id) > 0) {
                     //    dd(1);
                        
-                                    if (!empty($insertThanhToan) > 0) {
-                                        $tinhSoLuong = $loadDangKy->so_luong - 1;
-                                        $soLuongLop = DB::table('lop')
-                                            ->where('id', $id)
-                                            ->update(['so_luong' => $tinhSoLuong]);
-            
-                                        $data = [
-                                            'ngay_dang_ky' => date('Y-m-d H:i:s'),
-                                            'id_lop' => $request->lop_id,
-                                            'id_user' => $request->user_id,
-                                            'gia' => $request->gia_khoa_hoc,
-                                            'id_thanh_toan' => $insertThanhToan,
-                                            'email' => $request->email,
-                                        ];
-                                        $res = $objDangKy->saveNew($data);
-                                    }
-                                    if ($res == null) {
-                                        redirect()->route('client_dang_ky', ['id' => $request->id]);
-                                    } elseif ($res > 0) {
-                                        // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
-                                        return redirect()->route('client_complete_dang_ky', ['code' => $res]);
-                                    } else {
-                                        Session::flash('error', 'Lỗi đăng ký khóa học');
-                                        return redirect()->route('client_dang_ky', ['id' => $request->id]);
-                                    }
+                            
+                                // ->where('user_id',$user->id)
+                                if (!empty($insertThanhToan) > 0) {
+                                    $tinhSoLuong = $loadDangKy->so_luong - 1;
+                                    $soLuongLop = DB::table('lop')
+                                        ->where('id', $id)
+                                        ->update(['so_luong' => $tinhSoLuong]);
+        
+                                    $data = [
+                                        'ngay_dang_ky' => date('Y-m-d H:i:s'),
+                                        'id_lop' => $request->lop_id,
+                                        'id_user' => $request->user_id,
+                                        'gia' => $request->gia_khoa_hoc,
+                                        'id_thanh_toan' => $insertThanhToan,
+                                        'email' => $request->email,
+                                    ];
+                                    $res = $objDangKy->saveNew($data);
+                                }
+                                if ($res == null) {
+                                    redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                } elseif ($res > 0) {
+                                    // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
+                                    return redirect()->route('client_complete_dang_ky', ['code' => $res]);
+                                } else {
+                                    Session::flash('error', 'Lỗi đăng ký khóa học');
+                                    return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                }
             
                                
                         
@@ -249,7 +272,7 @@ class DangKyController extends Controller
                     }
 
                 }else {
-                    Session::flash('error', 'Lỗi đăng ký khóa học');
+                    Session::flash('error', 'Bạn đã đăng ký khóa học này !');
                     return  redirect()->route('client_dang_ky', ['id' => $request->id]);
                 }
 
