@@ -139,7 +139,8 @@ class LichHocController extends Controller
      */
     public function update(Request $request)
     {
-        if(session('id')){
+        // dd($request->all());
+        
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -153,15 +154,16 @@ class LichHocController extends Controller
 
             unset($params['cols']['_token']);
             // dd($params);
-            $params['cols']['id'] = session('id');
+            // $params['cols']['id'] = session('id');
             $res = $this->lich->saveupdate($params);
+            // dd($res);
             if ($res > 0) {
-                Session::flash('success', "Thêm thành công");
+                Session::flash('success', "Update  thành công");
             } else {
-                Session::flash('error', "Thêm không thành công");
+                Session::flash('error', "Update không thành công");
             }
             return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
-        }
+       
     }
 
     /**

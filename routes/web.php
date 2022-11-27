@@ -141,6 +141,20 @@ Route::prefix('/admin')->group(function () {
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
         Route::get('/lich-day', [GiangVienController::class, 'lichDay'])->name('Lich_Day_Giang_Vien');
     });
+    
+    // phần lịch 
+    Route::prefix('/lich-hoc')->name('route_BE_Admin_')->group(function () {
+        Route::get('/', [LichHocController::class, 'index'])->name('List_Lich_Hoc');
+        Route::post('xoa-all', [LichHocController::class, 'destroyAll'])->name('Xoa_All_Lich_Hoc');
+        Route::match(['get', 'post'], '/add',   [LichHocController::class, 'store'])->name('Add_Lich_Hoc'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
+        Route::get('/delete/{id}', [LichHocController::class, 'destroy'])->name('Xoa_Lich_Hoc');
+        Route::get('/edit/{id}', [LichHocController::class, 'edit'])->name('Edit_Lich_Hoc'); // hiển thị chi tiết bản ghi
+        Route::post('/update', [LichHocController::class, 'update'])->name('Update_Lich_Hoc');
+        Route::get('/show', [LichHocController::class, 'show'])->name('');
+    });
+    // tha
+
+
     Route::prefix('/ca-thu')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [CaThuController::class, 'index'])->name('List_Ca_Thu');
         Route::post('xoa-all', [CaThuController::class, 'destroyAll'])->name('Xoa_All_Ca_Thu');

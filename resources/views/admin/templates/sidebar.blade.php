@@ -209,12 +209,23 @@
                   <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                       <p>
-                          Lịch học
+                          Lịch của lớp học
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
 
               </li>
+
+              <li class="nav-item">
+                <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Lịch học của học viên
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
 
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">

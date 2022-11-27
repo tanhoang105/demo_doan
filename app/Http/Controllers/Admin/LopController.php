@@ -11,6 +11,7 @@ use App\Models\KhoaHoc;
 use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
+use App\Models\XepLop;
 use DateInterval;
 use DatePeriod;
 use DateTime;
@@ -450,6 +451,9 @@ class LopController extends Controller
         // tìm record ở bảng ca thứ dựa vào id của nó trong bảng lớp (ca_thu_id)
         $thu = CaThu::find($lop->ca_thu_id);
         $ca =  CaHoc::find($thu->ca_id);
+        // $xepLop = XepLop::where('id_lop' , $lop->id)->first();
+        // dd($xepLop);
+        // $phongHocID = $xepLop->id_phong_hoc;
         // dd($thu->thu_hoc_id);
         $arrayThuCuaLop = explode(',', $thu->thu_hoc_id);
         // dd($arrayThuCuaLop);
@@ -491,7 +495,10 @@ class LopController extends Controller
                         'ma_thu' => (int) $dayofweek,
                         'ca_id' => $ca->id,
                         'ngay_hoc' => $date_row->format('Y-m-d'),
-                        'lop_id' => $lop->id
+                        'lop_id' => $lop->id , 
+                        'giang_vien_id' =>$lop->id_giang_vien,
+                     
+
                     ];
                     // dd($params);
                     $lichHoc->create($params);
