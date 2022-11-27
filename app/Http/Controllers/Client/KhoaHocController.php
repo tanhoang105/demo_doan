@@ -74,9 +74,12 @@ class KhoaHocController extends Controller
         }
         if (!empty($request->filterKh)) {
             if ($request->filterKh == 'new') {
-                //                $sort[]=['id','desc'];
                 $query = $query->orderBy('khoa_hoc.id', 'desc');
-            } else {
+            }
+            elseif($request->filterKh=='view'){
+                $query =$query->orderBy('khoa_hoc.luot_xem','desc');
+            }
+            else {
                 //                $sort[]=['gia_khoa_hoc',$request->filterKh];
                 $query = $query->orderBy('gia_khoa_hoc', $request->filterKh);
             }
