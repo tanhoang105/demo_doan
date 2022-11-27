@@ -65,6 +65,10 @@ class KhoaHocController extends Controller
             ->select('danh_muc.*', 'khoa_hoc.*')
             ->where('khoa_hoc.delete_at', '=', 1);
 
+        if(!empty($request->idDanhMuc)) {
+            $filter[] = ['id_danh_muc',$request->idDanhMuc];
+        }
+
         if (!empty($request->search)) {
             $filter[] = ['ten_khoa_hoc', 'like', '%' . $request->search . '%'];
         }
