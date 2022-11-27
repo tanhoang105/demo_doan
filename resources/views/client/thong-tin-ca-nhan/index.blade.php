@@ -37,7 +37,11 @@
                             <input type="file" name="hinh_anh" id="imageUpload" accept=".png, .jpg, .jpeg" value="{{ Storage::url(Auth::user()->hinh_anh) }}"/>
                             <label for="imageUpload"></label>
                         </div>
+                        @if (Auth::user()->hinh_anh == '')
+                        <img class="rounded-circle box-shadow" src="{{ asset('custom/images/avatar-01.png') }}" style="width: 130px;height: 130px;">
+                        @else
                         <img class="rounded-circle box-shadow" src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width: 130px;height: 130px;">
+                        @endif
                     </div>
 
                 </div>
