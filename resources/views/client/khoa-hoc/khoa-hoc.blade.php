@@ -135,6 +135,7 @@
                                         <option value="asc">Giá tăng dần</option>
                                         <option value="desc">Giá giảm dần</option>
                                         <option value="new">Sản phẩm mới</option>
+                                        <option value="view">Lượt xem nhiều nhất</option>
                                     </select>
                                 </div>
                             </div>
