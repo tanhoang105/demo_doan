@@ -127,18 +127,33 @@ class DangKy extends Model
         $query=DB::table('lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
             ->join('giang_vien','giang_vien.id_user','=','lop.id_giang_vien')
-            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','ten_giang_vien')
+            ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
+            // ->join('ca_thu','ca_thu.thu_hoc_id','=','thu_hoc.id')
+            ->join('ca_hoc','ca_hoc.id','=','ca_thu.ca_id')
+            ->join('thu_hoc','thu_hoc.id','=','ca_thu.thu_hoc_id')
+            ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc','ten_giang_vien','ca_hoc','thoi_gian_bat_dau','thoi_gian_ket_thuc','thu_hoc.ten_thu','ca_thu.thu_hoc_id','ca_thu.ca_id')
             ->where('lop.id','=',$id);
         $list=$query->first();
         return $list;
+    }
+    // lấy thứ
+    public function layThu($thu_hoc_id){
+        $query =DB::table('thu_hoc')
+        ->whereIn('id',$thu_hoc_id)
+        ->get();
+        return $query;
     }
     public function completeDangKy($code){
         $query=DB::table('dang_ky')
             ->join('users','users.id','=','dang_ky.id_user')
             ->join('lop','lop.id','=','dang_ky.id_lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+            ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
+            // ->join('ca_thu','ca_thu.thu_hoc_id','=','thu_hoc.id')
+            ->join('ca_hoc','ca_hoc.id','=','ca_thu.ca_id')
+            ->join('thu_hoc','thu_hoc.id','=','ca_thu.thu_hoc_id')
             ->where('dang_ky.id',$code)
-            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','dang_ky.email','dia_chi','ten_lop','ten_khoa_hoc')
+            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','dang_ky.email','dia_chi','ten_lop','ten_khoa_hoc','ca_hoc','thoi_gian_bat_dau','thoi_gian_ket_thuc','thu_hoc.ten_thu','ca_thu.thu_hoc_id','ca_thu.ca_id')
             ->first();
         return $query;
     }
