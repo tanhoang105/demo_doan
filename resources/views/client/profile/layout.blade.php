@@ -39,7 +39,11 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="#">
+                @if (Auth::user()->hinh_anh == '')
+                <img class="border rounded-circle" src="{{ asset('custom/images/avatar-01.png') }}" style="width: 40px;height: 40px;">
+                @else
                 <img class="border rounded-circle" src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width: 40px;height: 40px;">
+                @endif
             </a>
         </li>
 

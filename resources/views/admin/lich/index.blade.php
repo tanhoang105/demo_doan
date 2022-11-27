@@ -31,51 +31,68 @@
             </button>
         </div>
     @endif
-    <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lich_Hoc') }}" enctype="multipart/form-data">
+    {{-- <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lich_Hoc') }}" enctype="multipart/form-data">
 
-        @csrf
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th> <i class="fa-solid fa-circle-play"></i> <input id="check_all" type="checkbox" /></th>
-                    <th scope="col">STT</th>
-                    <th scope="col">Thứ</th>
-                    <th scope="col">Ngày</th>
-                    <th scope="col">Phòng</th>
-                    <th scope="col">Khóa hoc</th>
-                    <th scope="col">Lớp</th>
-                    <th scope="col">Giảng viên</th>
-                    <th scope="col">Ca</th>
-                    <th scope="col">Thời gian</th>
-                    <th scope="col">Sửa</th>
-                    <th scope="col">
-                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list as $key => $item)
+        @csrf --}}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                {{-- <th> <i class="fa-solid fa-circle-play"></i> <input id="check_all" type="checkbox" /></th> --}}
+                <th scope="col">STT</th>
+                <th scope="col">Thứ</th>
+                <th scope="col">Ngày</th>
+                <th scope="col">Phòng</th>
+                <th scope="col">Khóa hoc</th>
+                <th scope="col">Lớp</th>
+                <th scope="col">Giảng viên</th>
+                <th scope="col">Ca</th>
+
+                <th scope="col">Sửa</th>
+                <th scope="col">
+                    <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($list as $key => $item)
+                <form action="{{ route('route_BE_Admin_Update_Lich_Hoc') }} " method="post">
+                    @csrf
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <input type="hidden" name="id" value=" {{ $item->id }} ">
+                        {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td>
-                            @foreach ($thu as $itemThu)
-                                @if ($item->ma_thu == $itemThu->ma_thu)
-                                    {{ $itemThu->ten_thu }}
-                                @endif
-                            @endforeach
+                            <select name="ma_thu" id="">
+                                @foreach ($thu as $itemThu)
+                                    @if ($item->ma_thu == $itemThu->ma_thu)
+                                        <option selected value=" {{ $itemThu->ma_thu }} ">{{ $itemThu->ten_thu }}
+                                        </option>
+                                    @else
+                                        <option value=" {{ $itemThu->ma_thu }} ">{{ $itemThu->ten_thu }}</option>
+                                    @endif
+                                @endforeach
+
+                            </select>
                         </td>
 
                         <td>
-                            {{ $item->ngay_hoc }}
+
+                            <input name="ngay_hoc" type="text" value=" {{ $item->ngay_hoc }}">
                         </td>
 
                         <td>
-                            @foreach ($phong as $itemPhongHoc)
-                                @if ($item->id_phong_hoc == $itemPhongHoc->id)
-                                    {{ $itemPhongHoc->ten_phong }}
-                                @endif
-                            @endforeach
+                            <select name="phong_id" id="">
+                                @foreach ($phong as $itemPhongHoc)
+                                    @if ($item->phong_id == $itemPhongHoc->id)
+                                        <option selected value="{{ $itemPhongHoc->id }} ">
+                                            {{ $itemPhongHoc->ten_phong }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $itemPhongHoc->id }} "> {{ $itemPhongHoc->ten_phong }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
 
                         <td>
@@ -95,47 +112,61 @@
                         </td>
 
                         <td>
-                            @foreach ($giangvien as $itemGiangVien)
-                                @if ($item->id_giang_vien == $itemGiangVien->id_user)
-                                    {{ $itemGiangVien->ten_giang_vien }}
-                                @endif
-                            @endforeach
+                            <select name="giang_vien_id" id="">
+                                @foreach ($giangvien as $itemGiangVien)
+                                    @if ($item->giang_vien_id == $itemGiangVien->id_user)
+                                        <option selected value="  {{ $itemGiangVien->id_user }} ">
+                                            {{ $itemGiangVien->ten_giang_vien }}</option>
+                                    @else
+                                        <option value="  {{ $itemGiangVien->id_user }} ">
+                                            {{ $itemGiangVien->ten_giang_vien }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
                         </td>
 
                         <td>
-                            @foreach ($ca as $itemCa)
-                                @if ($item->ca_id == $itemCa->id)
-                                    {{ $itemCa->ca_hoc }}
-                                @endif
-                            @endforeach
+                            <select name="ca_id" id="">
+                                @foreach ($ca as $itemCa)
+                                    @if ($item->ca_id == $itemCa->id)
+                                        <option selected value="  {{ $itemCa->id }} ">
+                                            {{ $itemCa->ca_hoc }}
+                                            {{ ' ( ' . $item->thoi_gian_bat_dau . ' - ' . $item->thoi_gian_ket_thuc . ' ) ' }}
+                                        </option>
+                                    @else
+                                        <option value="  {{ $itemCa->id }} ">
+                                            {{ $itemCa->ca_hoc }}
+                                            {{ ' ( ' . $item->thoi_gian_bat_dau . ' - ' . $item->thoi_gian_ket_thuc . ' ) ' }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
 
-                        <td>
-                            {{ $item->thoi_gian_bat_dau . ' - ' . $item->thoi_gian_ket_thuc }}
-                        </td>
 
 
                         <td>
                             <button class="btn btn-success">
-                                <a style="color:#fff" href="{{ route('route_BE_Admin_Edit_Lich_Hoc', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa</a>
-
+                                <i class="fas fa-edit "></i> Sửa
                             </button>
                         </td>
                         <td>
                             <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color:#fff" href="{{ route('route_BE_Admin_Xoa_Lich_Hoc', ['id' => $item->id]) }}">
+                                <a style="color:#fff"
+                                    href="{{ route('route_BE_Admin_Xoa_Lich_Hoc', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
 
                             </button>
                         </td>
 
                     </tr>
-                @endforeach
+                </form>
+            @endforeach
 
-            </tbody>
-        </table>
-    </form>
+        </tbody>
+    </table>
+    {{-- </form> --}}
 
 
     <div class="">

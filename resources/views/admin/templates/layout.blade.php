@@ -18,6 +18,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
+    {{-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
     <link rel="stylesheet"
         href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- iCheck -->
@@ -190,15 +191,15 @@
     $('#keyword').keyup(function() {
         // e.preventDefault();
         var query = $(this).val();
-    //   alert(query)
+        //   alert(query)
         // alert(query);
         if (query != '') {
-            var _token  =  $('input[name="_token"]').val();
+            var _token = $('input[name="_token"]').val();
             $.ajax({
-                url: "{{url('http://127.0.0.1:8000/admin/lop-hop/autocomplete-ajax')}}",
+                url: "{{ url('http://127.0.0.1:8000/admin/lop-hop/autocomplete-ajax') }}",
                 method: "POST",
                 data: {
-                    query:query,
+                    query: query,
                     _token: _token
                 },
                 success: function(data) {
@@ -222,5 +223,8 @@
 
     })
 </script>
+
+
+
 
 </html>

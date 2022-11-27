@@ -111,4 +111,43 @@ class DoiLopKhoaController extends Controller
             return redirect()->back();
         }
     }
+    // them doi_khoa admin
+    public function create()
+    {
+        $list_khoa_hoc = KhoaHoc::join('lop', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
+            ->select('lop.*', 'khoa_hoc.ten_khoa_hoc')
+            ->get();
+        return view('Admin.doi_lop.add', compact('list_khoa_hoc'));
+    }
+    public function hienthidoilop($request)
+    {
+        // dd($request);
+        // dd($request->ma_hoc_vien);
+        $khoahoc = DangKy::where('dang_ky.id_user', '=', $request)
+            ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
+            ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
+            ->join('users', 'users.id', '=', 'dang_ky.id_user')
+            ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'users.name', 'lop.id as id_lop')
+            ->get();
+        // dd($khoahoc);
+        return response()->json($khoahoc);
+    }
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $data = new DoiLopKhoa();
+        $data->fill($request->all());
+        $data->save();
+        // lop cu thay doi so luong
+        $lop_cu = Lop::find($request->id_lop_cu);
+        $lop_cu->so_luong = $lop_cu->so_luong + 1;
+        // lop moi thay doi so luong
+        $lop_moi = Lop::find($request->id_lop_moi);
+        $lop_moi->so_luong = $lop_moi->so_luong - 1;
+        // dang ky thay doi id lop
+        $dang_ky = DangKy::where('id_lop', '=', $lop_cu->id)
+            ->where('id_user', '=', $request->id_user)
+            ->update(['dang_ky.id_lop' => $lop_moi->id]);
+        return redirect()->route('route_BE_Admin_danh_sach_doi_lop');
+    }
 }

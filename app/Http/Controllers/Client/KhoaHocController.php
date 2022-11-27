@@ -109,19 +109,7 @@ class KhoaHocController extends Controller
             ->get();
         return view('client.khoa-hoc.khoa_hoc_dang_ki.khoa_hoc_dang_ki', compact('list', 'dangky_id', 'lopcu_id'));
     }
-    // public function get_lop($id, Request $request)
-    // {
-    //     // dd($request->all());
-    //     $lopcu_id = $request->lopcu_id;
-    //     $dangky_id = $request->dangky_id;
-    //     $list = Lop::where('lop.id_khoa_hoc', '=', $id)
-    //         ->join('giang_vien', 'giang_vien.id', '=', 'lop.id_giang_vien')
-    //         ->join('ca_hoc', 'ca_hoc.id', '=', 'lop.id_ca_hoc')
-    //         ->select('lop.*', 'giang_vien.ten_giang_vien', 'ca_hoc.ca_hoc')
-    //         ->get();
-    //     // dd($list);
-    //     return view('client.khoa-hoc.khoa_hoc_dang_ki.lop_dang_ki', compact('list', 'dangky_id', 'lopcu_id'));
-    // }
+
     public function form_doi_khoa($id, Request $request)
     {
         // dd($id);

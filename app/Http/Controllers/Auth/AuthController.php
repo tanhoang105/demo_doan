@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Message;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+
+use Illuminate\Foundation\Events\Dispatchable ;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use MongoDB\Driver\Session;
 
 class AuthController extends Controller
 {
-    protected $v, $user;
-    public function __construct()
+    use  InteractsWithSockets, SerializesModels;
+    protected $v, $user , $message;
+    public function __construct(Request $request)
     {
         $this->v = [];
         $this->user  = new User();
+        $this->message  = $request->contents;
     }
 
     /**
@@ -63,8 +73,12 @@ class AuthController extends Controller
     {
         return view('auth.dang-nhap');
     }
+
+   
     public function login(Request $request)
     {
+       
+        // end pusher
         $email = $request->email;
         $password = $request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
