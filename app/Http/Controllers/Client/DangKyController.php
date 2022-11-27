@@ -309,7 +309,7 @@ class DangKyController extends Controller
     public function checkEmail(Request $request){
         $obj=new User();
         // dd(Auth::user());
-        if(Auth::user()->id > 0){
+        if(!empty(Auth::user()) && Auth::user()->id > 0){
             $emailUser = Auth::user()->email;
             if($request->email != $emailUser) {
                 $query=DB::table('users')
@@ -326,7 +326,6 @@ class DangKyController extends Controller
             }
         }
         else{
-            // dd(1321);
             $query=DB::table('users')
             ->where('email',$request->email)
             ->first();

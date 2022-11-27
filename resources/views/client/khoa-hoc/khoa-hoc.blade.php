@@ -21,10 +21,6 @@
     </header>
     <!--/. header -->
     <!--/
-
-
-
-
                                     <!-- Start: Featured Courses Section
                                         ==================================================-->
     <section class="course_cat_section">
@@ -148,15 +144,15 @@
                             </div>
                         </div>
                         <!--  End: Search Filter -->
-
+                        <input type="text" name="id_danh_muc" id="id_danh_muc" value="{{isset(request()->id_danhmuc) ? request()->id_danhmuc : ''}}" hidden>
                     <div class="row" id="course-container"> 
                         @if (!$id_danhmuc)
                             @foreach ($list as $value)
                                 {{-- {{count($value->ten_lop)}} --}}
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="feat_course_item">
-{{--                                        <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">--}}
-                                        <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image" style="width: 380px;height: 200px;-radius: 15px;">
+                                       <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                        {{-- <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image" style="width: 300px;height: 200px;-radius: 15px;"> --}}
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
                                             <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc,0,'.','.') }} VND</span>
@@ -187,9 +183,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         @endforeach
-             
+                            
                     </div>
                           </div>
                 @else
@@ -263,36 +258,37 @@
         $(document).ready(function() {
             $(document).on('change', '#filterKh', function(e) {
                 let filter = $(this).val();
+                let idDanhMuc = $('#id_danh_muc').val();
                 let url = $(this).data('url');
                 let search = $('#search').val();
-
                 $.ajax({
                     type: 'GET',
                     url: url,
                     data: {
                         filterKh: filter,
                         search: search,
+                        idDanhMuc: idDanhMuc,
                     },
                     success: function(res) {
                         console.log(res);
                         if (res['success']) {
                             $('#course-container').html(res['data'])
                         }
-
                     }
                 })
             })
             $(document).on('click', '#btn-submit', function(e) {
                 e.preventDefault();
+                let idDanhMuc = $('#id_danh_muc').val();
                 let search = $('#search').val();
                 let url = $(this).data('url');
                 let filter = $('#filterKh').val();
-
                 $.ajax({
                     type: 'GET',
                     url: url,
                     data: {
                         filterKh: filter,
+                        idDanhMuc: idDanhMuc,
                         search: search,
                     },
                     success: function(res) {
@@ -300,7 +296,6 @@
                         if (res['success']) {
                             $('#course-container').html(res['data'])
                         }
-
                     }
                 })
             })
