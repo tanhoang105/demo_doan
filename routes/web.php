@@ -297,7 +297,7 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\BannerController::class, 'store'])->name('Add_Banner');
     });
 
-    Route::get('/thong-ke', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('Thong_Ke');
+    Route::get('/thong-ke', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('route_BE_Admin_Thong_Ke');
 });
 
 

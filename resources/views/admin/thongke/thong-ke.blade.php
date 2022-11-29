@@ -34,7 +34,8 @@
                             <div class="icon">
                                 <i class="ion ion-person"></i>
                             </div>
-                            <a href="{{ route('route_BE_Admin_List_Hoc_Vien') }}" class="small-box-footer">Xem thông tin <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('route_BE_Admin_List_Hoc_Vien') }}" class="small-box-footer">Xem chi tiết 
+                                <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -42,14 +43,14 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                <h3>{{ number_format($doanhthu,0,'.','.') }}<sup style="font-size: 20px">VNĐ</sup></h3>
 
-                                <p>Bounce Rate</p>
+                                <p>Tổng doanh thu</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('route_BE_Admin_List_Thanh_Toan') }}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -64,7 +65,8 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="{{ route('route_BE_Admin_List_Dang_Ky') }}" class="small-box-footer">Xem thông tin <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('route_BE_Admin_List_Dang_Ky') }}" class="small-box-footer">Xem chi tiết 
+                                <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -79,7 +81,8 @@
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}" class="small-box-footer">Xem thông tin <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}" class="small-box-footer">Xem chi tiết 
+                                <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -93,7 +96,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <i class="fas fa-chart-pie mr-1"></i>
+                                    <i class="fas fa-chart-area mr-1"></i>
                                     Thống kê
                                 </h3>
                                 <div class="card-tools">
@@ -102,7 +105,7 @@
                             <div class="card-body">
                                 <div class="tab-content p-0">
                                     <!-- Morris chart - Sales -->
-                                    <div id="myfirstchart" style="height: 350px;"></div>
+                                    <div id="chart_div" style="height: 350px;"></div>
                                 </div>
                             </div><!-- /.card-body -->
                         </div>
@@ -147,7 +150,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Name category', 'Count by category'],
-          <?php echo $chartData ?>
+          <?php echo $donutChart ?>
         ]);
 
         var options = {
@@ -156,6 +159,27 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Day', 'Tổng doanh thu'],
+          <?php echo $areaChart ?>
+        ]);
+
+        var options = {
+          title: 'Doanh thu theo ngày',
+          hAxis: {title: 'Ngày',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>

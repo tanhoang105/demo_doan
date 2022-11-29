@@ -75,9 +75,8 @@
                     <!-- category 1 -->
                     <div class="workflow_item">
                         <i class="pe-7s-search"></i>
-                        <h4> Tìm khóa học của bạn </h4>
-                        <p>Lorem ipsum dolor sit amet can be sed diam nonumy eirmod keeps an
-                            the satriction of whole life that enter.</p>
+                        <h4> Tìm khóa học</h4>
+                        <p></p>
                     </div>
                 </div>
                 <!--/ col-lg-4 col-md-6 col-sm-12  -->
@@ -87,9 +86,8 @@
                         <a href="#khaigiang">
                             <i class="pe-7s-date"></i>
                         </a>
-                        <h4>Đặt lịch </h4>
-                        <p>Lorem ipsum dolor sit amet can be sed diam nonumy eirmod keeps an
-                            the satriction of whole life that enter.</p>
+                        <h4>Lịch khai giảng</h4>
+                        <p></p>
                     </div>
                 </div>
                 <!--/ col-lg-4 col-md-6 col-sm-12  -->
@@ -98,8 +96,7 @@
                     <div class="workflow_item">
                         <i class="pe-7s-medal"></i>
                         <h4> Chứng nhận </h4>
-                        <p>Lorem ipsum dolor sit amet can be sed diam nonumy eirmod keeps an
-                            the satriction of whole life that enter.</p>
+                        <p></p>
                     </div>
                 </div>
                 <!--/ col-lg-4 col-md-6 col-sm-12  -->
@@ -167,7 +164,7 @@
 
     <!-- Start: Popular Categories Section
                             ==================================================-->
-    <section class="category-section">
+    {{-- <section class="category-section">
         <!-- Container -->
         <div class="container">
             <!-- Start: Heading -->
@@ -208,7 +205,7 @@
             <!--/ row - -->
         </div>
         <!--/ Container - -->
-    </section>
+    </section> --}}
     <!--   End: Popular Categories Section
                             ==================================================-->
 
@@ -228,30 +225,23 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="feat_course_item">
                             <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
-                                {{--                        <img src="{{ asset('client/images/courses2.jpg') }}" alt="image"> --}}
                                 <img src="{{ Storage::url($value->hinh_anh) }}" alt="image"
                                     style="width: 335px;height: 175px;border-radius: 15px;">
                             </a>
                             <div class="feat_cour_price">
                                 <span class="feat_cour_tag"> {{ $value->ten_danh_muc }} </span>
-                                <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc) }} VNĐ </span>
+                                <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc,0,'.','.') }} VNĐ </span>
                             </div>
                             <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
                                 <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
                             </a>
                             <div class="feat_cour_lesson">
-                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 24 lessons </span>
-                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 259 Students </span>
+                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 1 Lớp </span>
+                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 1 Học viên </span>
                             </div>
                             <div class="feat_cour_rating">
-                                <span class="feat_cour_rat">
-                                    4.7
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    (4,5609)
+                                <span class="feat_cour_stu">
+                                    <i class="pe-7s-look"></i> 1 Lượt xem </span>
                                 </span>
                                 <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
                                         class="arrow_right"></i>
@@ -300,16 +290,16 @@
             @foreach ($khaigiang as $value)
                 <div class="row text-dark align-content-center"
                     style="text-align: center;height: 80px;border-top: 1px solid #DEDEDE">
-                    <div class="col-lg-2 pt-3">
+                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
                         <label> {{ $value->ten_lop }} </label>
                     </div>
-                    <div class="col-lg-4 pt-3">
+                    <div class="col-lg-4 pt-3 d-flex align-content-center flex-wrap justify-content-center">
                         <label> {{ $value->ten_khoa_hoc }} </label>
                     </div>
-                    <div class="col-lg-2 pt-3">
-                        <label> {{ $value->ngay_bat_dau . ' -- ' . $value->ngay_ket_thuc }} </label>
+                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
+                        <label> {{ $value->ngay_bat_dau . ' - ' . $value->ngay_ket_thuc }} </label>
                     </div>
-                    <div class="col-lg-2 pt-3">
+                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
                         <label>
                             <?php
                             foreach ($array as $item) {
@@ -354,11 +344,11 @@
                     {{-- <div class="col-lg-2 pt-3">
                     <label> {{ $value->thoi_gian }} </label>
                 </div> --}}
-                    <div class="col-lg-2 pt-2">
+                    <div class="col-lg-2 pt-2 d-flex align-content-center flex-wrap justify-content-center">
                         <a href="#">
                             <button class="text-white"
-                                style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">ĐĂNG
-                                KÝ</button>
+                                style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">
+                                ĐĂNG KÝ</button>
                         </a>
                     </div>
                 </div>
@@ -372,7 +362,7 @@
 
     <!-- Start:  Learners Feedback Section
                             ==================================================-->
-    <section class="lfeedback-section">
+    {{-- <section class="lfeedback-section">
         <!-- Container -->
         <div class="container">
             <div class="row">
@@ -419,7 +409,7 @@
             <!--/ row - -->
         </div>
         <!--/ Container - -->
-    </section>
+    </section> --}}
     <!--   End: Learners Feedback Section
                             ==================================================-->
 
@@ -427,7 +417,7 @@
 
     <!-- Start: Newsletter Section
                             ==================================================-->
-    <section class="newsletter-section pb-130">
+    {{-- <section class="newsletter-section pb-130">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
@@ -452,7 +442,7 @@
             <!-- /. row -->
         </div>
         <!-- /. container -->
-    </section>
+    </section> --}}
     <!-- End: Newsletter Section
                             ==================================================-->
 @endsection
