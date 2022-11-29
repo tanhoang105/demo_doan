@@ -10,11 +10,12 @@
                     <h2 class="mb-2 ft-bold">Đơn hàng của bạn đã hoàn thành !</h2>
                     <h4 class="mb-2 ft-bold">Cảm ơn <span class="text-body text-dark">{{$complete->name}}</span> đã cho trung tâm cơ hội được phục vụ !</h4>
                     <br>
-                    {{--                                        {{dd($data)}}--}}
+                    {{--                      {{dd($data)}}--}}
                     <div style="border: 1px solid #CBC8C8;background:#CBC8C8;border-radius: 10px;color:orangered">
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Đơn hàng: <span class="text-body text-dark">{{$complete->id}}#</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Tên khóa học đăng ký: <span class="text-body text-dark">{{$complete->ten_khoa_hoc}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Tên lớp: <span class="text-body text-dark">{{$complete->ten_lop}}</span></p>
+                        <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Thời gian học: <span class="text-body text-dark">{{$complete->ca_hoc . ' - ' .$complete->thoi_gian_bat_dau .' - ' .$complete->thoi_gian_ket_thuc}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Ngày bắt đầu - Ngày kết thúc: <span class="text-body text-dark">{{$complete->ngay_bat_dau}} - {{$complete->ngay_ket_thuc}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Người nhận hàng: <span class="text-body text-dark">{{$complete->name}} - {{$complete->sdt}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Email: <span class="text-body text-dark">{{$complete->email}}</span></p>

@@ -32,7 +32,7 @@
                 <tr>
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col">Tên Khóa Học </th>
+                    <th scope="col"> </th>
                     <th scope="col">Mô Tả </th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
@@ -51,14 +51,17 @@
                         <td> {!! $item->mo_ta !!}</td>
 
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa</button> </a>
+                            <button class="btn btn-success">
+                                <a href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa </a>
+
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
                     </tr>
                 @endforeach

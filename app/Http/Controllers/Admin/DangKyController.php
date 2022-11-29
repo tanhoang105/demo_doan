@@ -67,7 +67,10 @@ class DangKyController extends Controller
         $listLop=$objDangKy->listLopofKhoaHoc($request->id_khoa_hoc);
         $objKhoaHoc=new KhoaHoc();
         $gia_khoa_hoc=$objKhoaHoc->show($request->id_khoa_hoc);
+<<<<<<< HEAD
         // dd($gia_khoa_hoc);
+=======
+>>>>>>> 4c4e60db828f6b720f38e6efa3d96861a2390e93
         return response()->json(['success'=>true ,'lop'=>$listLop , 'gia_khoa_hoc'=>$gia_khoa_hoc->gia_khoa_hoc] );
     }
 

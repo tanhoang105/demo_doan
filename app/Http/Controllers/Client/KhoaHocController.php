@@ -65,14 +65,21 @@ class KhoaHocController extends Controller
             ->select('danh_muc.*', 'khoa_hoc.*')
             ->where('khoa_hoc.delete_at', '=', 1);
 
+        if(!empty($request->idDanhMuc)) {
+            $filter[] = ['id_danh_muc',$request->idDanhMuc];
+        }
+
         if (!empty($request->search)) {
             $filter[] = ['ten_khoa_hoc', 'like', '%' . $request->search . '%'];
         }
         if (!empty($request->filterKh)) {
             if ($request->filterKh == 'new') {
-                //                $sort[]=['id','desc'];
                 $query = $query->orderBy('khoa_hoc.id', 'desc');
-            } else {
+            }
+            elseif($request->filterKh=='view'){
+                $query =$query->orderBy('khoa_hoc.luot_xem','desc');
+            }
+            else {
                 //                $sort[]=['gia_khoa_hoc',$request->filterKh];
                 $query = $query->orderBy('gia_khoa_hoc', $request->filterKh);
             }

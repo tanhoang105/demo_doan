@@ -7,35 +7,35 @@
      <h2>Lịch học</h2>
     <div class="calendar">
         <div class="row align-content-center bg-dedede" style="height: 50px;">
-            <span class="font-weight-bold">Lịch học</span>
+            <span class="font-weight-bold text-dark">Lịch học</span>
         </div>
 
         <div class="row align-content-center bg-cfcece font-weight-bold" style="height: 50px;">
-            <div class="col">
+            <div class="col text-dark">
                 <label>STT</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Thứ</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Ngày</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Phòng</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Tên khóa học</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Lớp</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Giảng viên</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Ca</label>
             </div>
-            <div class="col">
+            <div class="col text-dark">
                 <label>Thời gian</label>
             </div>
 

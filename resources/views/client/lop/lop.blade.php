@@ -1,6 +1,6 @@
 @extends('client.profile.layout')
 @section('title')
-    - Lớp
+    Lớp
 @endsection
 @section('content')
     <div>

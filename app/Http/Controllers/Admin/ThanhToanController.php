@@ -3,21 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\HocVien;
+use App\Models\Lop;
 use App\Models\PhuongThucThanhToan;
 use App\Models\ThanhToan;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use PDF;
+
 class ThanhToanController extends Controller
 {
 
-    protected $v, $thanhtoan, $phuongthucthanhtoan;
+    protected $v, $thanhtoan, $phuongthucthanhtoan , $lop , $hocvien;
     public function __construct()
     {
         $this->v = [];
         $this->thanhtoan = new ThanhToan();
         $this->phuongthucthanhtoan = new PhuongThucThanhToan();
+        $this->lop = new Lop();
+        $this->hocvien = new HocVien();
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +32,7 @@ class ThanhToanController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
+
     public function index(Request $request)
     {
         $this->v['params'] = $request->all();
@@ -108,9 +115,9 @@ class ThanhToanController extends Controller
             $res = $this->thanhtoan->show($id);
             // dd($res);
             if ($res) {
-              
+
                 $this->v['res'] = $res;
-                return view('admin.thanhtoan.update' , $this->v);
+                return view('admin.thanhtoan.update', $this->v);
             } else {
                 Session::flash('error', "Lỗi hiển thị");
                 return back();
@@ -151,39 +158,49 @@ class ThanhToanController extends Controller
     }
 
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa thanh toán') );
+        $this->authorize(mb_strtoupper('xóa thanh toán'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->thanhtoan->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
     }
 
-    public function inHoaDon($id){
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTMl($this->print_order_convert($id));
-        return $pdf->stream();
+    public function inHoaDon($id)
+    {
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTMl($this->print_order_convert($id));
+        // return $pdf->stream();
+        $this->v['list'] =  $this->print_order_convert($id);
+        // dd($this->v['list']);
+        $this->v['lop'] = $this->lop->index(null , false  , null);
+        $this->v['hocvien'] = $this->hocvien->index(null , false  , null);
+        // dd($this->v['list']->id);
+        $pdf = FacadePdf::loadView('admin.pdf',$this->v );
+   
+        return $pdf->download('tuts_notes.pdf');
     }
 
 
-    public function print_order_convert($id){
+    public function print_order_convert($id)
+    {
         $hoaDon = $this->thanhtoan->inhoahon($id);
         return $hoaDon;
     }

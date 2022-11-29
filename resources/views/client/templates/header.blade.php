@@ -66,7 +66,7 @@
                     ->get();
                 ?>
                 <li>
-                    <a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>  
+                    <a href="{{ route('client_khoa_hoc') }}"> Khóa Học</a>
                     <ul>
                         @foreach ($danhmuc as $value)
                             <li>
@@ -90,8 +90,14 @@
             @if (Auth::user())
                 <nav id="navigation">
                     <ul>
-                        <li><a href="#" style="color: red;width: 200px" aria-haspopup="true">
-                                {{ $objUser->name }}</a>
+                        <li><a>
+                            @if (Auth::user()->hinh_anh == '')
+                            <img src="{{ asset('custom/images/avatar-01.png') }}" style="width:40px; height: 40px; border-radius: 30px;">
+                            @else
+                            <img src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width:40px; height: 40px; border-radius: 30px;">
+                            @endif
+                            
+                        </a> 
                             <ul class="dropdown" aria-label="submenu">
                                 <li><a href="{{ route('client_lich_hoc') }}">Lịch học</a></li>
                                 <li><a href="{{ route('tk_ghi_no') }}">Số dư tài khoản</a></li>
@@ -99,12 +105,12 @@
                                 <li> <a href="{{ route('client_lich_su_dang_ky', [$objUser->id]) }}"
                                         class="dropdown-item">Lịch sử đăng ký </a></li>
                                 <li> <a href="{{ route('logout') }}" class="dropdown-item">Đăng xuất</a></li>
-                                <li>
-                                    @if (Auth::user())
-                                        <a href="/admin"
-                                            class="dropdown-item">Admin</a>
-                                    @endif
-                                </li>
+                                {{-- tài khoản đăng nhập khác tài khoản học viên thì có thể vào trang admin      --}}
+                                @if (Auth::user()->vai_tro_id != 4)
+                                    <li>
+                                        <a href="/admin" class="dropdown-item">Admin </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
                     </ul>

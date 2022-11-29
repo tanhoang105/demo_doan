@@ -184,7 +184,7 @@
                     </button>
                 </div>
             @endif
-{{--            {{dd($loadDangKy)}}--}}
+           {{-- {{dd($loadDangKy)}} --}}
             <div class="row">
                 <div class="col-3 border rounded">
                     <div class="col-12 p-3">
@@ -196,15 +196,19 @@
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Tên lớp học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_lop}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ca học:</label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->id_ca_hoc}}</span>
+                        @foreach($layThu as $thu)
+                        <span style="font-size: 18px;color: red">{{$thu->ten_thu}}</span>
+                        @endforeach
+                        {{-- <br> --}}
+                        <div style="margin-left: 12px;font-size: 18px;color: red"> {{$loadDangKy->ca_hoc .' - '. $loadDangKy->thoi_gian_bat_dau . ' - ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->id_giang_vien}}</span>
+                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Ngày khai giảng:</label>
@@ -217,7 +221,11 @@
 
                     <div class="col-12 p-3">
                         <label class="text-lg text-danger" >Học phí:</label>
-                        <h3>{{$loadDangKy->gia_khoa_hoc}} VND</h3>
+                        <h3>{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
+                    </div>
+                    <div>
+                        <input class="form-control"  placeholder="Nhập mã khuyến mại ..."/> 
+                        <button class="btn btn-danger btn-sm mt-1 mb-4">Áp dụng</button>
                     </div>
                 </div>
 
@@ -225,12 +233,19 @@
                     <div class="col-12 p-3">
                         <h3>Thông tin cá nhân</h3>
                     </div>
+                    {{-- {{dd($loadDangKy);}} --}}
                     <form method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
+                            {{-- {{dd($loadDangKy)}}; --}}
+
                             <input type="text" name="user_id" id="" value="{{Auth::user()->id??""}}" hidden>
                             <input type="text" name="lop_id" id="" value="{{isset($loadDangKy->id) ? ($loadDangKy->id): "" }}" hidden>
-                            <input type="text" name="gia_khoa_hoc" id="" value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
+                            <input type="text" name="thu_hoc_id" id="" value="{{isset($loadDangKy->thu_hoc_id) ? ($loadDangKy->thu_hoc_id): "" }}" hidden>
+                            <input type="text" name="ca_id" id="" value="{{isset($loadDangKy->ca_id) ? ($loadDangKy->ca_id): "" }}" hidden>
+                            <input type="text" name="id_khoa_hoc" hidden value="{{isset($loadDangKy->id_khoa_hoc) ? ($loadDangKy->id_khoa_hoc): "" }}">
+                            <input type="text" name="gia_khoa_hoc" id=""  value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
+
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Họ Tên</label>
                                 <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control" name="name" type="text" placeholder="Họ Tên">
@@ -265,10 +280,11 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Chọn phương thức thanh toán</label>
+                                {{-- {{dd($paymeny_method)}} --}}
                                 @foreach($payment_method as $method)
                                     <div>
-                                        <input name="ten" type="radio" id="{{$method->id}}" value="{{$method->id}}">
-                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
+                                        <input name="ten" type="radio" class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
+                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan mb-3" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
                                     </div>
                                 @endforeach
 {{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
@@ -304,6 +320,7 @@
 @section('js')
     <script>
         $(document).ready(function () {
+            $('.radio_input')[0].checked = true;
             let checkEmail=false;
           $('#email').blur(function () {
             let email=$(this).val();
