@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\GhiNo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,17 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         // 3. Lưu $user vào CSDL
         $user->save();
+        $data = User::where('users.email','=',$request->email)
+        ->get();
+
+        // dd($data);
+        foreach($data as $value){
+            $ghino = new GhiNo();
+            $ghino->user_id = $value->id;
+            $ghino->tien_no = 0;
+            $ghino->trang_thai = 0;
+            $ghino->save();
+        }
         session()->flash('success', 'bạn đã đăng kí thành công');
         return redirect()->route('auth.loginForm');
     }

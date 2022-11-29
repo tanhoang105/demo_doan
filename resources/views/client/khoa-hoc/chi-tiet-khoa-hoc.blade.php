@@ -177,7 +177,7 @@
                                     role="tabpanel">
                                     <span> Mô tả : </span>
                                     <p>
-                                        {{ $detail->mo_ta }}
+                                        {!!$detail->mo_ta!!}
                                     </p>
 
                                 </div>
