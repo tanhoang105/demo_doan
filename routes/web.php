@@ -150,7 +150,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/delete/{id}', [LichHocController::class, 'destroy'])->name('Xoa_Lich_Hoc');
         Route::get('/edit/{id}', [LichHocController::class, 'edit'])->name('Edit_Lich_Hoc'); // hiển thị chi tiết bản ghi
         Route::post('/update', [LichHocController::class, 'update'])->name('Update_Lich_Hoc');
-        Route::get('/show', [LichHocController::class, 'show'])->name('');
+        Route::get('/show/{id}', [LichHocController::class, 'show'])->name('Detail_Lich');
     });
     // tha
 
