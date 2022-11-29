@@ -12,6 +12,7 @@ use App\Models\PhongHoc;
 use App\Models\ThuHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Svg\Tag\Rect;
 
 class LichHocController extends Controller
 {
@@ -37,17 +38,13 @@ class LichHocController extends Controller
     }
     public function index(Request $request)
     {
-        $this->v['params'] = $request->all();
-        $this->v['ca'] = $this->ca->index(null, false, null);
-        $this->v['thu'] = $this->thu->index(null, false, null);
-        $this->v['phong'] = $this->phong->index(null, false, null);
-        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
-        $this->v['lop'] = $this->lop->index(null, false, null);
-        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
-        $this->v['list'] = $this->lich->index($this->v['params'], true, 10);
-
-        // dd($this->v['list']);
-        return view('admin.lich.index', $this->v);
+        // hiển thị ra danh sách lớp học 
+        $this->v['params']  = $request->all();
+       
+        unset($this->v['params']['_token']);
+        $this->v['list']  = $this->lop->index($this->v['params'] , true , 10);
+        return view('admin.lich.listlop', $this->v);
+        
     }
 
     /**
@@ -104,9 +101,22 @@ class LichHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id , Request $request)
     {
-        //
+        // hiển thị lịch học của lớp học khi ấn vào lớp học đó 
+        $this->v['params'] = $request->all();
+        $this->v['params']['lop_id'] = $id;
+        // dd($this->v['params']);
+        $this->v['ca'] = $this->ca->index(null, false, null);
+        $this->v['thu'] = $this->thu->index(null, false, null);
+        $this->v['phong'] = $this->phong->index(null, false, null);
+        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['lop'] = $this->lop->index(null, false, null);
+        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
+        $this->v['list'] = $this->lich->index($this->v['params'] , true , 10);
+
+        // dd($this->v['list']);    
+        return view('admin.lich.index', $this->v);
     }
 
     /**
@@ -139,7 +149,8 @@ class LichHocController extends Controller
      */
     public function update(Request $request)
     {
-        if(session('id')){
+        // dd($request->all());
+        
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -153,15 +164,16 @@ class LichHocController extends Controller
 
             unset($params['cols']['_token']);
             // dd($params);
-            $params['cols']['id'] = session('id');
+            // $params['cols']['id'] = session('id');
             $res = $this->lich->saveupdate($params);
+            // dd($res);
             if ($res > 0) {
-                Session::flash('success', "Thêm thành công");
+                Session::flash('success', "Update  thành công");
             } else {
-                Session::flash('error', "Thêm không thành công");
+                Session::flash('error', "Update không thành công");
             }
             return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
-        }
+       
     }
 
     /**

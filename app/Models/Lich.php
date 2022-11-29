@@ -14,33 +14,39 @@ class Lich extends Model
 
     public function index($params, $pagination = true,  $perpage)
     {
-
+        // dd($params);
         // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
             // nếu phần trang
             $query = DB::table($this->table)
-            ->join('lop'  , $this->table . '.lop_id' , '=' , 'lop.id')
-            ->join('xep_lop' , 'xep_lop.id_lop' , '='  , 'lop.id')
-            ->join('thu_hoc' , $this->table . '.ma_thu' , '=' , 'thu_hoc.ma_thu')
-            ->join('ca_hoc' , $this->table . '.ca_id' , '=' , 'ca_hoc.id'  )
-            ->where($this->table . '.delete_at', '=', 1)
-            ->select('xep_lop.*' , 'lop.*' , 'thu_hoc.*' , 'ca_hoc.*' , $this->table . '.*')
-            ->orderByDesc($this->table . '.ngay_hoc');
+                ->join('lop', $this->table . '.lop_id', '=', 'lop.id')
+                ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
+                ->join('phong_hoc', 'xep_lop.id_phong_hoc', '=', 'phong_hoc.id')
+                ->join('thu_hoc', $this->table . '.ma_thu', '=', 'thu_hoc.ma_thu')
+                ->join('ca_hoc', $this->table . '.ca_id', '=', 'ca_hoc.id')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->where($this->table . '.lop_id' , '=' , $params['lop_id'])
+                ->select('xep_lop.*', 'lop.*', 'thu_hoc.*', 'ca_hoc.*', 'phong_hoc.*', $this->table . '.*')
+                ->orderBy($this->table . '.ngay_hoc', "ASC");
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere( 'lop.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere('lop.ten_lop', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             // nếu không phần trang
             $query = DB::table($this->table)
-                ->select($this->table . '.*')
-                ->where('delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id');
+                ->join('lop', $this->table . '.lop_id', '=', 'lop.id')
+                ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
+                ->join('thu_hoc', $this->table . '.ma_thu', '=', 'thu_hoc.ma_thu')
+                ->join('ca_hoc', $this->table . '.ca_id', '=', 'ca_hoc.id')
+                ->where($this->table . '.delete_at', '=', 1)
+                ->select('xep_lop.*', 'lop.*', 'thu_hoc.*', 'ca_hoc.*', $this->table . '.*')
+                ->orderBy($this->table . '.ngay_hoc', "ASC");
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere('lop.ten_lop', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();
@@ -53,8 +59,8 @@ class Lich extends Model
     {
         if (($id)) {
             $query = DB::table($this->table)
-                ->where('id', '=', $id)
-                ->first();
+                ->where('lop_id', '=', $id)
+                ->get();
             return $query;
         }
     }
@@ -95,6 +101,7 @@ class Lich extends Model
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
+        // dd($data);
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
@@ -113,4 +120,6 @@ class Lich extends Model
         $query = $query->update($data);
         return $query;
     }
+
+    
 }
