@@ -4,7 +4,7 @@
             <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
             <div class="feat_cour_price">
                 <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }}</span>
+                <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }} VNĐ</span>
             </div>
             <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
             <div class="feat_cour_lesson">
