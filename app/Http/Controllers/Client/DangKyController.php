@@ -37,15 +37,17 @@ class DangKyController extends Controller
     }
     public function postDangKy(Request $request ,$id)
     {
-//        dd($request->all());
 //        try {
 //            DB::beginTransaction();
         $objDangKy = new DangKy();
         $loadDangKy = $objDangKy->listDangky($id);
+        $ca_thu_id=explode(',',$loadDangKy->thu_hoc_id);
+        $layThu=$objDangKy->layThu($ca_thu_id);
         if ($loadDangKy->so_luong > 0) {
             if ($request->isMethod('post')) {
                 $objHocvien = new HocVien();
                 $params = $request->post();
+
                 $params['cols'] = array_map(function ($item) {
                     if ($item == '')
                         $item = null;
@@ -119,7 +121,10 @@ class DangKyController extends Controller
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
                             } elseif ($res > 0) {
                                 Mail::to($params['cols']['email'])->send(new SendMail([
+                                    'user'=>$params['cols'],
+                                    'dangky'=>$loadDangKy,
                                     'password'=>$password,
+                                    'thuhoc'=>$layThu,
                                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                                 return redirect()->route('client_complete_dang_ky', ['code' => $res]);
                             } else {
@@ -207,7 +212,11 @@ class DangKyController extends Controller
                                 if ($res == null) {
                                     redirect()->route('client_dang_ky', ['id' => $request->id]);
                                 } elseif ($res > 0) {
-                                    // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
+                                    Mail::to($params['cols']['email'])->send(new SendMail([
+                                        'user'=>$params['cols'],
+                                        'dangky'=>$loadDangKy,
+                                        'thuhoc'=>$layThu,
+                                        'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                                     return redirect()->route('client_complete_dang_ky', ['code' => $res]);
                                 } else {
                                     Session::flash('error', 'Lỗi đăng ký khóa học');
@@ -260,7 +269,11 @@ class DangKyController extends Controller
                             if ($res == null) {
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
                             } elseif ($res > 0) {
-                                // Mail::to('tung9122002@gmail.com')->send(new OrderShipped(['dathang'=>$params['cols']]));
+                                Mail::to($params['cols']['email'])->send(new SendMail([
+                                    'user'=>$params['cols'],
+                                    'dangky'=>$loadDangKy,
+                                    'thuhoc'=>$layThu,
+                                    'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                                 Session::flash('success', 'Đăng ký Khóa học thành công');
                                 DB::commit();
                                 return redirect()->route('client_complete_dang_ky', ['code' => $res]);
