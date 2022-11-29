@@ -90,8 +90,14 @@
             @if (Auth::user())
                 <nav id="navigation">
                     <ul>
-                        <li><a href="#" style="color: red;width: 200px" aria-haspopup="true">
-                                {{ $objUser->name }}</a>
+                        <li><a>
+                            @if (Auth::user()->hinh_anh == '')
+                            <img src="{{ asset('custom/images/avatar-01.png') }}" style="width:40px; height: 40px; border-radius: 30px;">
+                            @else
+                            <img src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width:40px; height: 40px; border-radius: 30px;">
+                            @endif
+                            
+                        </a> 
                             <ul class="dropdown" aria-label="submenu">
                                 <li><a href="{{ route('client_lich_hoc') }}">Lịch học</a></li>
                                 <li><a href="{{ route('tk_ghi_no') }}">Số dư tài khoản</a></li>
