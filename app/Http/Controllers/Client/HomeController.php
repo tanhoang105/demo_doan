@@ -67,6 +67,6 @@ class HomeController extends Controller
         // $hocvien = DB::select(DB::raw("SELECT COUNT(dang_ky.id_user) FROM dang_ky JOIN lop ON lop.id = dang_ky.id_lop JOIN khoa_hoc ON khoa_hoc.id = lop.id_khoa_hoc WHERE khoa_hoc.id = ".$id.""));
         // dd($hocvien);
 
-        return view('client.trang-chu.trang-chu', compact('hocvien'), $this->v);
+        return view('client.trang-chu.trang-chu', $this->v);
     }
 }

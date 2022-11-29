@@ -55,13 +55,13 @@
                                        placeholder="Email">
                                 <input class="login-field" name="password" id="lpassword" type="password"
                                        placeholder="Password">
-                                <div class="lost_pass">
+                                {{-- <div class="lost_pass">
                                     <input type="checkbox" id="rem-checkbox-input">
                                     <label for="rem-checkbox-input" class="rem-checkbox">
                                         <span class="rem-me">Lưu tài khoản</span>
                                     </label>
                                     <a href="#" class="forget" style="margin-left: 15px"> Quên mật khẩu? </a>
-                                </div>
+                                </div> --}}
                                 <div class="submit-area">
                                     {{-- <a href="login.html" class="submit more-link"> Đăng Nhập </a> --}}
                                     <button class="submit more-link"> Đăng Nhập </button>
