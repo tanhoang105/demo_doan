@@ -105,6 +105,13 @@ class ChoPhep extends Model
 
     }
 
+    public function getValueNhomMax(){
+        $query = DB::table($this->table)
+                ->max('trang_thai');
+        return $query;
+
+    }
+
 
 
 

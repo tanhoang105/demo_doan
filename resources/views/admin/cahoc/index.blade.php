@@ -42,7 +42,7 @@
                     <th scope="col">Thời gian kết thúc</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
-                      <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
+                        <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
                     </th>
                 </tr>
@@ -57,14 +57,16 @@
                         <td> {{ $item->thoi_gian_ket_thuc }}</td>
 
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
 
                     </tr>

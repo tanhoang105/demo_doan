@@ -9,6 +9,10 @@
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
 
@@ -18,6 +22,10 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Khuyen_Mai') }}" enctype="multipart/form-data">
@@ -38,7 +46,7 @@
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
-                      </th>
+                    </th>
 
                 </tr>
             </thead>
@@ -48,20 +56,25 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ma_khuyen_mai }}</td>
-                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Giảm giá theo phẩn trăm' : "Giảm giá theo giá tiền" }}</td>
-                        <td> {{  $item->loai_khuyen_mai == 1 ? $item->giam_gia . '%' : number_format($item->giam_gia  , 0, '.' ,'.')  }}</td>
+                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Giảm giá theo phẩn trăm' : 'Giảm giá theo giá tiền' }}</td>
+                        <td> {{ $item->loai_khuyen_mai == 1 ? $item->giam_gia . '%' : number_format($item->giam_gia, 0, '.', '.') }}
+                        </td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
-                            <a style="color: #fff" href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color: #fff"
+                                    href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: #fff"
+                                    href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
 
                     </tr>
@@ -70,9 +83,9 @@
             </tbody>
         </table>
     </form>
-        <div class="">
-            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                {{ $list->appends('params')->links() }}
-            </div>
+    <div class="">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            {{ $list->appends('params')->links() }}
         </div>
-    @endsection
+    </div>
+@endsection

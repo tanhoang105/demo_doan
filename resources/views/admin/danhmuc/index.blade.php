@@ -50,14 +50,16 @@
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td>
-                            <a href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}">
-                                <button class="btn btn-success">
-                                    <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color: aliceblue" href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
 
                     </tr>

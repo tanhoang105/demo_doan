@@ -73,13 +73,20 @@ class LichHoc extends Model
             $list = $query->paginate($perpage);
         } else {
             $query = DB::table($this->table)
-                ->where($this->table . '.delete_at', '=', 1)
+            ->where($this->table . '.delete_at', '=', 1)
                 ->join('lop', 'lop.id', '=', $this->table . '.lop_id')
-                ->Where('lop.id_giang_vien' ,  '=' , $params['id'])
                 ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
                 ->join('dang_ky', 'dang_ky.id_lop', '=', 'lop.id')
                 ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
-                ->select('dang_ky.*', 'lop.*', 'xep_lop.*', 'khoa_hoc.*', $this->table . '.*');
+                ->select('dang_ky.*', 'lop.*', 'xep_lop.*', 'khoa_hoc.*', $this->table . '.*')
+                ->where('lop.id_giang_vien' ,  '=' , $params['id']);
+                // ->where($this->table . '.delete_at', '=', 1)
+                // ->join('lop', 'lop.id', '=', $this->table . '.lop_id')
+                // ->Where('lop.id_giang_vien' ,  '=' , $params['id'])
+                // ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
+                // ->join('dang_ky', 'dang_ky.id_lop', '=', 'lop.id')
+                // ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
+                // ->select('dang_ky.*', 'lop.*', 'xep_lop.*', 'khoa_hoc.*', $this->table . '.*');
                
                 
               

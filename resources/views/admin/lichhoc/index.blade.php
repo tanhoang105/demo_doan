@@ -65,35 +65,35 @@
 
                         <td>
                             <?php
-
+                            
                             for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
                                 $str = explode(',', $item->thu_hoc_id);
                             }
-
-
-
+                            
                             for ($i = 0; $i < count($str); $i++) {
-                                  foreach ($thu as $key => $value) {
-                                        if($str[$i] == $value->id){
-                                             echo   '<li>' . $value->ten_thu . '</li><br>'  ;
-                                        }
-                                  }
+                                foreach ($thu as $key => $value) {
+                                    if ($str[$i] == $value->id) {
+                                        echo '<li>' . $value->ten_thu . '</li><br>';
+                                    }
+                                }
                             }
-
+                            
                             ?>
 
 
                         </td>
 
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
 
                     </tr>

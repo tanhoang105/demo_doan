@@ -25,6 +25,7 @@ class Lich extends Model
                 ->join('thu_hoc', $this->table . '.ma_thu', '=', 'thu_hoc.ma_thu')
                 ->join('ca_hoc', $this->table . '.ca_id', '=', 'ca_hoc.id')
                 ->where($this->table . '.delete_at', '=', 1)
+                
                 ->where($this->table . '.lop_id' , '=' , $params['lop_id'])
                 ->select('xep_lop.*', 'lop.*', 'thu_hoc.*', 'ca_hoc.*', 'phong_hoc.*', $this->table . '.*')
                 ->orderBy($this->table . '.ngay_hoc', "ASC");
@@ -37,13 +38,16 @@ class Lich extends Model
         } else {
             // nếu không phần trang
             $query = DB::table($this->table)
-                ->join('lop', $this->table . '.lop_id', '=', 'lop.id')
-                ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
-                ->join('thu_hoc', $this->table . '.ma_thu', '=', 'thu_hoc.ma_thu')
-                ->join('ca_hoc', $this->table . '.ca_id', '=', 'ca_hoc.id')
-                ->where($this->table . '.delete_at', '=', 1)
-                ->select('xep_lop.*', 'lop.*', 'thu_hoc.*', 'ca_hoc.*', $this->table . '.*')
-                ->orderBy($this->table . '.ngay_hoc', "ASC");
+            ->join('lop', $this->table . '.lop_id', '=', 'lop.id')
+            ->join('xep_lop', 'xep_lop.id_lop', '=', 'lop.id')
+            ->join('phong_hoc', 'xep_lop.id_phong_hoc', '=', 'phong_hoc.id')
+            ->join('thu_hoc', $this->table . '.ma_thu', '=', 'thu_hoc.ma_thu')
+            ->join('ca_hoc', $this->table . '.ca_id', '=', 'ca_hoc.id')
+            ->where($this->table . '.delete_at', '=', 1)
+            
+            ->where($this->table . '.lop_id' , '=' , $params['lop_id'])
+            ->select('xep_lop.*', 'lop.*', 'thu_hoc.*', 'ca_hoc.*', 'phong_hoc.*', $this->table . '.*')
+            ->orderBy($this->table . '.ngay_hoc', "ASC");
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere('lop.ten_lop', 'like', '%' . $params['keyword']  . '%');

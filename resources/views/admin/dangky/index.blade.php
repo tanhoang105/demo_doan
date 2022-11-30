@@ -3,7 +3,8 @@
     <div class="row p-3">
 
 
-        <a style="color: red" href=" {{route('route_BE_Admin_Add_Dang_Ky')}} "> <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
+        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Dang_Ky') }} "> <button class='btn btn-primary'> <i
+                    class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     @if (Session::has('error'))
@@ -57,7 +58,7 @@
                         <td> {{ $item->ten_hoc_vien }}</td>
                         <td> {{ $item->ten_lop }}</td>
                         <td> {{ $item->ten_khoa_hoc }}</td>
-                        <td> {{ $item->gia_khoa_hoc }}</td>
+                        <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
                         <td>
                             @if ($item->trang_thai == 2)
                                 <button class="btn btn-primary">Xuất hóa đơn</button>
@@ -68,14 +69,16 @@
 
 
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
-                                <button class="btn btn-warning">
-                                 <i class="fas fa-edit "></i> Sửa</button></a>
+                            <button class="btn btn-warning">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-edit "></i> Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
                     </tr>
                 @endforeach
