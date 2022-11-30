@@ -69,6 +69,8 @@ class GiangVienController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize(mb_strtoupper('thêm giảng viên') );
+
         if ($request->isMethod('POST')) {
             // thực hiện thêm dữ liệu
             $params = [];
@@ -135,6 +137,8 @@ class GiangVienController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit giảng viên') );
+
         if ($id) {
             $request->session()->put('id', $id);
             $res = $this->giangvien->show($id);
@@ -153,6 +157,8 @@ class GiangVienController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize(mb_strtoupper('update giảng viên') );
+
         if (session('id')) {
             $id = session('id');
             $params = [];
@@ -261,6 +267,8 @@ class GiangVienController extends Controller
 
     public function lichDay()
     {
+        $this->authorize(mb_strtoupper('xem lịch dạy') );
+
         $id = Auth::user()->id;
         $params['id'] = $id;
         $listThuHoc = $this->thuhoc->index(null, false, null);
@@ -271,7 +279,7 @@ class GiangVienController extends Controller
         $this->v['giang_vien'] = $this->giang_vien->index(null , false , null);
         $this->v['ca_hoc'] = $this->ca_hoc->index(null , false , null);
 
-        $res  = $this->lichday->showLichGiaoVien($params ,false  , null);
+        $res  = $this->lichday->showLichGiaoVien($params ,true  , 10);
        
         $array = [];
         foreach($res as $item){

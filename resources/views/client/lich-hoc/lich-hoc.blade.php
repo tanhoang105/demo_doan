@@ -4,7 +4,6 @@
 @endsection
 @section('content')
 
-     <h2>Lịch học</h2>
     <div class="calendar">
         <div class="row align-content-center bg-dedede" style="height: 50px;">
             <span class="font-weight-bold text-dark">Lịch học</span>
@@ -42,6 +41,7 @@
         </div>
 
         @foreach ($list as $value )
+            @if($value->ngay_hoc >= date('Y-m-d'))
             <div class="row align-content-center bg-dedede" style="height: 50px; border-top: 1px solid #CFCECE">
                 <div class="col">
                     <span> {{ $loop->iteration }} </span>
@@ -114,8 +114,17 @@
                     </span>
                 </div>
             </div>
+            @endif
         @endforeach
 
+        
     </div>
+
+    <div class="row pt-5">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            {{ $list->appends('extParams')->links() }}
+        </div>
+    </div>
+    
 
 @endsection

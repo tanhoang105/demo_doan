@@ -70,7 +70,7 @@
     </table>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('extParams')->links() }}
+            {{ $list->appends('params')->links() }}
         </div>
     </div>
 @endsection
