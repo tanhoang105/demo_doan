@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <h2>Đổi mật khẩu</h2>
+    <h2 class="font-family-awesome font-size-40">Đổi mật khẩu</h2>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
@@ -56,7 +56,7 @@
                         <span style="color: red"> {{ $message }} </span>
                         @enderror
 
-                        <div class="col-2 pt-4">
+                        <div class="col-3 pt-4">
                             <button class="btn btn-success" type="submit">Cập nhật</button>
                         </div>
 

@@ -20,27 +20,6 @@ class ThongTinController extends Controller
 
     public function update(Request $request) {
         $id = Auth::user()->id;
-//        $params = [];
-//        $params['cols'] = array_map(function ($item) {
-//            if ($item == '') {
-//                $item  = null;
-//            }
-//            if (is_string($item)) {
-//                $item = $item;
-//            }
-//            return $item;
-//        }, $request->post());
-//        unset($params['cols']['_token']);
-//        $params['cols']['id'] = $id;
-//        $modelUsers = new User();
-//        $res  = $modelUsers->saveupdate($params);
-//        if ($res > 0) {
-//            Session::flash('success', 'Cập nhập thành công');
-//            return redirect()->route('client_thong_tin_ca_nhan');
-//        } else {
-//            Session::flash('error', 'Cập nhập không thành công');
-//            return back();
-//        }
         $params = [];
         $params['cols'] = array_map(function ($item) {
             if ($item == '') {
@@ -64,7 +43,6 @@ class ThongTinController extends Controller
         } else {
             unset($params['cols']['password']);
         }
-//        $res = $this->taikhoan->saveupdate($params);
         $modelUsers = new User();
         $res  = $modelUsers->saveupdate($params);
         if ($res > 0) {

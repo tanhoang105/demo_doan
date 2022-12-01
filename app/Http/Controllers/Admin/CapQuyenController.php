@@ -30,7 +30,9 @@ class CapQuyenController extends Controller
      */
     public function index()
     {
+
         // hiển thị ra những tài khoản -> vai trò  -> quyền 
+        $this->authorize(mb_strtoupper('xem cấp quyền') );
         $vaitro = VaiTro::all();
         // dd($vaitro);
         // $list = ($vaitro[0]->role)->permissions;
@@ -97,7 +99,8 @@ class CapQuyenController extends Controller
      */
     public function update(Request $request)
     {
-        // $this->authorize(mb_strtoupper('update cấp quyền') );
+        // dd(123);
+        $this->authorize(mb_strtoupper('update cấp quyền') );
 
         // dd($request->all());
         $id_vaitro = session('id_vaitro');
@@ -119,7 +122,9 @@ class CapQuyenController extends Controller
         $this->v['quyen'] = $quyen;
         // dd($params['cols']['cho_phep']);
         $quyenTheoVaiTro->detach();
-        // dd($params['cols']['cho_phep']);
+       if($params['cols'] == null){
+        return back();
+       }
         for ($i = 0; $i < count($params['cols']['cho_phep']); $i++) {
        
             $quyenTheoVaiTro->attach($id_vaitro,  ['cho_phep_id' => $params['cols']['cho_phep'][$i]  ]);
@@ -142,6 +147,8 @@ class CapQuyenController extends Controller
 
     public function detail($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('xem cấp quyền') );
+
         session()->put('id_vaitro' ,$id);
         // $this->authorize(mb_strtoupper('xem cấp quyền') );
         
@@ -158,6 +165,10 @@ class CapQuyenController extends Controller
         // hiển thị những record có trong bản cho phép
         $quyen = $this->chophep->index(null, false, null);
         $this->v['quyen'] = $quyen;
+
+       $valueNhomTop1 = $this->chophep->getValueNhomMax();
+       $this->v['valueNhomTop1'] = $valueNhomTop1;
+    //    dd($valueNhomTop1);
        
 
         return view('admin.capquyen.show', $this->v);

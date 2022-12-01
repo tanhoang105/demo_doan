@@ -12,6 +12,7 @@ use App\Models\PhongHoc;
 use App\Models\ThuHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Svg\Tag\Rect;
 
 class LichHocController extends Controller
 {
@@ -37,17 +38,14 @@ class LichHocController extends Controller
     }
     public function index(Request $request)
     {
-        $this->v['params'] = $request->all();
-        $this->v['ca'] = $this->ca->index(null, false, null);
-        $this->v['thu'] = $this->thu->index(null, false, null);
-        $this->v['phong'] = $this->phong->index(null, false, null);
-        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
-        $this->v['lop'] = $this->lop->index(null, false, null);
-        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
-        $this->v['list'] = $this->lich->index($this->v['params'], true, 10);
-
-        // dd($this->v['list']);
-        return view('admin.lich.index', $this->v);
+        $this->authorize(mb_strtoupper('xem lịch học') );
+        // hiển thị ra danh sách lớp học 
+        $this->v['params']  = $request->all();
+       
+        unset($this->v['params']['_token']);
+        $this->v['list']  = $this->lop->index($this->v['params'] , true , 10);
+        return view('admin.lich.listlop', $this->v);
+        
     }
 
     /**
@@ -68,6 +66,8 @@ class LichHocController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize(mb_strtoupper('thêm lịch học') );
+
         $this->v['ca'] = $this->ca->index(null, false, null);
         $this->v['thu'] = $this->thu->index(null, false, null);
         $this->v['phong'] = $this->phong->index(null, false, null);
@@ -104,9 +104,24 @@ class LichHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id , Request $request)
     {
-        //
+        $this->authorize(mb_strtoupper('xem chi tiết lịch học') );
+
+        // hiển thị lịch học của lớp học khi ấn vào lớp học đó 
+        $this->v['params'] = $request->all();
+        $this->v['params']['lop_id'] = $id;
+        // dd($this->v['params']);
+        $this->v['ca'] = $this->ca->index(null, false, null);
+        $this->v['thu'] = $this->thu->index(null, false, null);
+        $this->v['phong'] = $this->phong->index(null, false, null);
+        $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['lop'] = $this->lop->index(null, false, null);
+        $this->v['giangvien'] = $this->giangvien->index(null, false, null);
+        $this->v['list'] = $this->lich->index($this->v['params'] , true , 10);
+
+        // dd($this->v['list']);    
+        return view('admin.lich.index', $this->v);
     }
 
     /**
@@ -117,6 +132,8 @@ class LichHocController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit lịch học') );
+
         if ($id) {
             $this->v['ca'] = $this->ca->index(null, false, null);
             $this->v['thu'] = $this->thu->index(null, false, null);
@@ -140,6 +157,7 @@ class LichHocController extends Controller
     public function update(Request $request)
     {
         // dd($request->all());
+        $this->authorize(mb_strtoupper('update lịch học') );
         
             $params = [];
             $params['cols'] = array_map(function ($item) {
@@ -174,6 +192,8 @@ class LichHocController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa lịch học') );
+
         if ($id) {
             // dd($id);
             $res = $this->lich->remove($id);
@@ -191,6 +211,7 @@ class LichHocController extends Controller
         // dd($request->all);
         // $request  =  $request->all();
         // $this->authorize(mb_strtoupper('xóa khuyến mại') );
+        $this->authorize(mb_strtoupper('xóa lịch học') );
 
         if($request->isMethod('POST')){
             $params = [];

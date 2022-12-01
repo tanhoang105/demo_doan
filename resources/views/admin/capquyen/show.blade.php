@@ -150,7 +150,7 @@
                         @endforeach
                     </div><br> --}}
 
-                    @for ($i = 2; $i <= 17; $i++)
+                    @for ($i = 0; $i <= $valueNhomTop1; $i++)
                     <div class="row">
                         {{-- <div class="col-12 p-2">Modul</div> --}}
                         @foreach ($quyen as $item)

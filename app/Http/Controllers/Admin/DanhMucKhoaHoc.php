@@ -29,6 +29,7 @@ class DanhMucKhoaHoc extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem danh mục khóa học') );
         $this->v['pramas'] = $request->all();
         $list = $this->danh_muc->index($this->v, true, 10);
         $this->v['list'] = $list;

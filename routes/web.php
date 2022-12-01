@@ -21,7 +21,9 @@ use App\Http\Controllers\Admin\LichHocController;
 use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\QuenMatKhauController;
 use App\Http\Controllers\DoiLopKhoaController;
+use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
@@ -80,6 +82,11 @@ Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocControlle
 Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 
+Route::get('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showForgetPasswordForm'])->name('form_quen_mat_khau');
+Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitForgetPasswordForm'])->name('quen_mat_khau'); 
+Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
+Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
+
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
 // hiển thị khóa theo lớp
@@ -89,6 +96,11 @@ Route::prefix('/admin')->group(function () {
     Route::get('/', function () {
         return view('admin.trangchu');
     });
+    Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
+        Route::get('/quan_ly_tk_ghi_no', [GhiNoController::class, 'quan_ly_tk_ghi_no'])->name('quan_ly_tk_ghi_no');
+        Route::put('/cap_nhat_so_du/{id}', [GhiNoController::class, 'cap_nhat_so_du'])->name('cap_nhat_so_du');
+    });
+
     Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
         Route::get('/list', [DoiLopKhoaController::class, 'index'])->name('danh_sach_doi_lop');
         Route::post('hienthidoilop/{id}', [DoiLopKhoaController::class, 'hienthidoilop'])->name('hienthidoilop');
@@ -151,7 +163,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/delete/{id}', [LichHocController::class, 'destroy'])->name('Xoa_Lich_Hoc');
         Route::get('/edit/{id}', [LichHocController::class, 'edit'])->name('Edit_Lich_Hoc'); // hiển thị chi tiết bản ghi
         Route::post('/update', [LichHocController::class, 'update'])->name('Update_Lich_Hoc');
-        Route::get('/show', [LichHocController::class, 'show'])->name('');
+        Route::get('/show/{id}', [LichHocController::class, 'show'])->name('Detail_Lich');
     });
     // tha
 
@@ -314,7 +326,7 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add', [\App\Http\Controllers\Admin\BannerController::class, 'store'])->name('Add_Banner');
     });
 
-    Route::get('/thong-ke', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('Thong_Ke');
+    Route::get('/thong-ke', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('route_BE_Admin_Thong_Ke');
 });
 
 

@@ -1,8 +1,8 @@
 @extends('client.templates.layout')
-@section('title') - Đăng Nhập
+@section('title')
+    - Đăng Nhập
 @endsection
 @section('content')
-
     <!-- header -->
     <header class="single-header">
         <!-- Start: Header Content -->
@@ -20,9 +20,9 @@
     </header>
     <!--/. header -->
     <!--/
-    ==================================================-->
+        ==================================================-->
     <!-- Start: Account Section
-    ==================================================-->
+        ==================================================-->
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -49,10 +49,16 @@
                                     </div>
                                 @endif
                             </div>
+                            <div>                           
+                                @if (Session::has('message'))
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <strong>{{ Session::get('message') }}</strong>
+                                    </div>
+                                @endif
+                                </div>
                             <form method="post" action="{{route('auth.login')}}">
                                 @csrf
-                                <input class="login-field" name="email" id="lemail" type="text"
-                                       placeholder="Email">
+                                <input class="login-field" name="email" id="lemail" type="text" placeholder="Email">
                                 <input class="login-field" name="password" id="lpassword" type="password"
                                        placeholder="Password">
                                 <div class="lost_pass">
@@ -60,12 +66,11 @@
                                     <label for="rem-checkbox-input" class="rem-checkbox">
                                         <span class="rem-me">Lưu tài khoản</span>
                                     </label>
-                                    <a href="#" class="forget" style="margin-left: 15px"> Quên mật khẩu? </a>
+                                    <a href="{{ route('form_quen_mat_khau') }}" class="forget" style="margin-left: 15px"> Quên mật khẩu? </a>
                                 </div>
                                 <div class="submit-area">
-                                    {{-- <a href="login.html" class="submit more-link"> Đăng Nhập </a> --}}
                                     <button class="submit more-link"> Đăng Nhập </button>
-                                    <a href="{{route('auth.getdangki')}}" class="submit more-link"> Đăng Ký Tài Khoản</a>
+                                    <a href="{{ route('auth.getdangki') }}" class="submit more-link"> Đăng Ký Tài Khoản</a>
                                     <div id="lmsg" class="message"></div>
                                 </div>
                             </form>
@@ -80,8 +85,5 @@
         <!-- container /- -->
     </section>
     <!-- End : Account Section
-    ==================================================-->
-
-
-
+        ==================================================-->
 @endsection

@@ -24,6 +24,8 @@ class ThuHocController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem thứ học') );
+
         $this->v['params'] = $request->all();
         $list = $this->thuhoc->index($this->v['params'], true, 10);
         $this->v['list'] = $list;
@@ -49,6 +51,7 @@ class ThuHocController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize(mb_strtoupper('thêm thứ học') );
         if ($request->isMethod('POST')) {
             $params = [];
             $params['cols']  = array_map(function ($item) {
@@ -96,6 +99,8 @@ class ThuHocController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit thứ học') );
+
         if ($id) {
             $request->session()->put('id', $id);
             $res = $this->thuhoc->show($id);
@@ -121,6 +126,8 @@ class ThuHocController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize(mb_strtoupper('update thứ học') );
+
         if (session('id')) {
             $id = session('id');
             $params = [];
@@ -155,6 +162,8 @@ class ThuHocController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa thứ học') );
+
         if ($id) {
             $res = $this->thuhoc->remove($id);
             if ($res) {

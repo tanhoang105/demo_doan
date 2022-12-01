@@ -13,15 +13,15 @@
         @endif
     </div>
     <br>
-  <div>
-   <form method="GET" action="{{route('route_BE_Admin_Add_doi_lop')}}">
-    @csrf
-    <a style="color: red" href="">
-        <button class="btn btn-primary"> <i class="fas fa-plus "></i> Thêm</button>
-    </a>
-   </form>
-  </div>
-  <br>
+    <div>
+        <form method="GET" action="{{ route('route_BE_Admin_Add_doi_lop') }}">
+            @csrf
+            <a style="color: red" href="">
+                <button class="btn btn-primary"> <i class="fas fa-plus "></i> Thêm</button>
+            </a>
+        </form>
+    </div>
+    <br>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -102,20 +102,22 @@
                                         class="fas fa-check"></i></button>
                             </form>
                         @endif
-                        @if ($item->status == 2 || $item->status == 3)
+                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4)
                             <form action="{{ route('route_BE_Admin_updateStatus_doilop', $item->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <input hidden type="text" name="id_lopcu" value="{{ $id_lopcu }}" id="">
                                 <input hidden type="text" name="id_lopmoi" value="{{ $item->lop_id }}" id="">
                                 <input type="text" name="user_id" value="{{ $item->id_user }}" hidden id="">
-                                <select {{ $item->status == 3 ? 'disabled' : '' }} style="height: 30px" name="status"
+                                <select {{ $item->status == 4 ? 'disabled' : '' }} style="height: 30px" name="status"
                                     id="">
-                                    <option {{ $item->status == 2 ? 'selected' : '' }} value="0">Đang chờ xác nhận
+                                    <option {{ $item->status == 2 ? 'selected' : '' }} value="2">Đang chờ xác nhận
                                     </option>
-                                    <option {{ $item->status == 3 ? 'selected' : '' }} value="1">Đã xác nhận</option>
+                                    <option {{ $item->status == 3 ? 'selected' : '' }} value="3">Đã xác nhận</option>
+                                    <option {{ $item->status == 4 ? 'selected' : '' }} value="4">Đã thanh toán
+                                    </option>
                                 </select>
-                                <button {{ $item->status == 3 ? 'disabled' : '' }}
+                                <button {{ $item->status == 4 ? 'disabled' : '' }}
                                     onclick="return confirm('Bạn có chắc muốn thay đổi trạng thái?')" style="height: 30px;"
                                     class="btn btn-outline-info" type="submit"><i style=""
                                         class="fas fa-check"></i></button>

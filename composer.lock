@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be3e61c26f303c2742b79f38c236ef26",
+    "content-hash": "c2afcc4a854f7ec20bb7f74c105828e8",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -707,35 +707,33 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.5.0",
+            "version": "7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b50a2a1251152e43f6a37f0fa053e730a67d25ba"
+                "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b50a2a1251152e43f6a37f0fa053e730a67d25ba",
-                "reference": "b50a2a1251152e43f6a37f0fa053e730a67d25ba",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/0aa74dfb41ae110835923ef10a9d803a22d50e79",
+                "reference": "0aa74dfb41ae110835923ef10a9d803a22d50e79",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5",
-                "guzzlehttp/psr7": "^1.9 || ^2.4",
+                "guzzlehttp/promises": "^1.4",
+                "guzzlehttp/psr7": "^1.7",
                 "php": "^7.2.5 || ^8.0",
-                "psr/http-client": "^1.0",
-                "symfony/deprecation-contracts": "^2.2 || ^3.0"
+                "psr/http-client": "^1.0"
             },
             "provide": {
                 "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.1",
                 "ext-curl": "*",
                 "php-http/client-integration-tests": "^3.0",
-                "phpunit/phpunit": "^8.5.29 || ^9.5.23",
-                "psr/log": "^1.1 || ^2.0 || ^3.0"
+                "phpunit/phpunit": "^8.5.5 || ^9.3.5",
+                "psr/log": "^1.1"
             },
             "suggest": {
                 "ext-curl": "Required for CURL handler support",
@@ -744,12 +742,8 @@
             },
             "type": "library",
             "extra": {
-                "bamarni-bin": {
-                    "bin-links": true,
-                    "forward-command": false
-                },
                 "branch-alias": {
-                    "dev-master": "7.5-dev"
+                    "dev-master": "7.1-dev"
                 }
             },
             "autoload": {
@@ -766,42 +760,18 @@
             ],
             "authors": [
                 {
-                    "name": "Graham Campbell",
-                    "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
-                },
-                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
-                    "name": "Jeremy Lindblom",
-                    "email": "jeremeamia@gmail.com",
-                    "homepage": "https://github.com/jeremeamia"
-                },
-                {
-                    "name": "George Mponos",
-                    "email": "gmponos@gmail.com",
-                    "homepage": "https://github.com/gmponos"
-                },
-                {
-                    "name": "Tobias Nyholm",
-                    "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
-                },
-                {
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://github.com/sagikazarmark"
-                },
-                {
-                    "name": "Tobias Schultze",
-                    "email": "webmaster@tubo-world.de",
-                    "homepage": "https://github.com/Tobion"
+                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
+            "homepage": "http://guzzlephp.org/",
             "keywords": [
                 "client",
                 "curl",
@@ -815,7 +785,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.5.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.2.0"
             },
             "funding": [
                 {
@@ -827,11 +797,15 @@
                     "type": "github"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/guzzle",
-                    "type": "tidelift"
+                    "url": "https://github.com/alexeyshockov",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/gmponos",
+                    "type": "github"
                 }
             ],
-            "time": "2022-08-28T15:39:27+00:00"
+            "time": "2020-10-10T11:47:56+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -919,47 +893,43 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.4.3",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "67c26b443f348a51926030c83481b85718457d3d"
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/67c26b443f348a51926030c83481b85718457d3d",
-                "reference": "67c26b443f348a51926030c83481b85718457d3d",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                "reference": "e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2.5 || ^8.0",
-                "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
-                "ralouphie/getallheaders": "^3.0"
+                "php": ">=5.4.0",
+                "psr/http-message": "~1.0",
+                "ralouphie/getallheaders": "^2.0.5 || ^3.0.0"
             },
             "provide": {
-                "psr/http-factory-implementation": "1.0",
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.1",
-                "http-interop/http-factory-tests": "^0.9",
-                "phpunit/phpunit": "^8.5.29 || ^9.5.23"
+                "ext-zlib": "*",
+                "phpunit/phpunit": "~4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20 || ^8.5.8 || ^9.3.10"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
             "type": "library",
             "extra": {
-                "bamarni-bin": {
-                    "bin-links": true,
-                    "forward-command": false
-                },
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "1.9-dev"
                 }
             },
             "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
                 "psr-4": {
                     "GuzzleHttp\\Psr7\\": "src/"
                 }
@@ -998,11 +968,6 @@
                     "name": "Tobias Schultze",
                     "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
-                },
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "PSR-7 message implementation that also provides common utility methods",
@@ -1018,7 +983,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.3"
+                "source": "https://github.com/guzzle/psr7/tree/1.9.0"
             },
             "funding": [
                 {
@@ -1034,7 +999,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-26T14:07:24+00:00"
+            "time": "2022-06-20T21:43:03+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1605,16 +1570,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.10.3",
+            "version": "3.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a"
+                "reference": "a7790f3dd1b27af81d380e6b2afa77c16ab7e181"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a",
-                "reference": "8013fb046c6a244b2b1b75cc95d732ed6bcdeb8a",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a7790f3dd1b27af81d380e6b2afa77c16ab7e181",
+                "reference": "a7790f3dd1b27af81d380e6b2afa77c16ab7e181",
                 "shasum": ""
             },
             "require": {
@@ -1676,7 +1641,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.10.3"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.10.4"
             },
             "funding": [
                 {
@@ -1692,7 +1657,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-14T10:42:43+00:00"
+            "time": "2022-11-26T19:48:01+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -2767,61 +2732,6 @@
                 "source": "https://github.com/php-fig/http-client/tree/master"
             },
             "time": "2020-06-29T06:28:15+00:00"
-        },
-        {
-            "name": "psr/http-factory",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0.0",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
-            "keywords": [
-                "factory",
-                "http",
-                "message",
-                "psr",
-                "psr-17",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
-            },
-            "time": "2019-04-30T12:38:16+00:00"
         },
         {
             "name": "psr/http-message",

@@ -41,7 +41,7 @@
                 <th scope="row"> {{ $loop->iteration }}</th>
                 <td> <img src="{{ Storage::url($item->anh_banner) }}" style="width: 100px;"> </td>
                 <td>
-{{--                    <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} "><button class="btn btn-success"> Sửa </button></a>--}}
+                   <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} "><button class="btn btn-success"> Sửa </button></a>
                 </td>
                 <td>
                     <a href=" {{ route('route_BE_Admin_Xoa_Banner',['id' => $item->id] ) }} "><button class="btn btn-danger"
@@ -55,7 +55,7 @@
     </table>
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
-            {{ $list->appends('extParams')->links() }}
+            {{ $list->appends('params')->links() }}
         </div>
     </div>
 @endsection

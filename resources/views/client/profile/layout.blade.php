@@ -1,4 +1,7 @@
-
+<?php
+$objUser = \Illuminate\Support\Facades\Auth::user();
+// dd($objUser)
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,31 +27,16 @@
 {{--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">--}}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">--}}
+
+    <!-- Main Style -->
+    <link href="{{asset('client/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('client/css/responsive.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 justify-content-between">
-
-    {{--        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">--}}
-    <div class="logo">
-        <a href="{{route('home')}}"><img class="img-responsive p-3" src="{{asset('client/images/logo-white.png')}}" alt="logo-white" style="width: 150px;">
-        </a>
-    </div>
-
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">
-                @if (Auth::user()->hinh_anh == '')
-                <img class="border rounded-circle" src="{{ asset('custom/images/avatar-01.png') }}" style="width: 40px;height: 40px;">
-                @else
-                <img class="border rounded-circle" src="{{ Storage::url(Auth::user()->hinh_anh) }}" style="width: 40px;height: 40px;">
-                @endif
-            </a>
-        </li>
-
-    </ul>
-</nav>
+    @include('client.templates.header')
 
 <div class="container-fluid">
     <div class="row">
@@ -60,6 +48,8 @@
         </main>
     </div>
 </div>
+
+    @include('client.templates.footer')
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

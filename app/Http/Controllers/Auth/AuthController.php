@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\Message;
 use App\Http\Controllers\Controller;
+use App\Models\GhiNo;
 use App\Models\User;
-
+use Carbon\Carbon;
 use Illuminate\Foundation\Events\Dispatchable ;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Queue\SerializesModels;
@@ -13,8 +14,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use MongoDB\Driver\Session;
 
 class AuthController extends Controller
@@ -86,7 +89,7 @@ class AuthController extends Controller
                 $user = Auth::user();
                 if ($user->status == 0) {
                     if ($user->vai_tro_id == 1) {
-                        return redirect()->route('route_BE_Admin_Khoa_Hoc');
+                        return redirect()->route('home');
                     }
                     if ($user->vai_tro_id != 1) {
                         return redirect()->route('client_khoa_hoc');
@@ -116,6 +119,17 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         // 3. Lưu $user vào CSDL
         $user->save();
+        $data = User::where('users.email','=',$request->email)
+        ->get();
+
+        // dd($data);
+        foreach($data as $value){
+            $ghino = new GhiNo();
+            $ghino->user_id = $value->id;
+            $ghino->tien_no = 0;
+            $ghino->trang_thai = 0;
+            $ghino->save();
+        }
         session()->flash('success', 'bạn đã đăng kí thành công');
         return redirect()->route('auth.loginForm');
     }
