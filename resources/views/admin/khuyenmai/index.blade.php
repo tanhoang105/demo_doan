@@ -56,16 +56,10 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ma_khuyen_mai }}</td>
-<<<<<<< HEAD
                         <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : "Đối với tất cả khóa học" }}</td>
                         <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : "Đối với phần trăm" }}</td>
                         <td> {{  $item->loai_giam_gia == 1 ? number_format($item->giam_gia  , 0, '.' ,'.').' VNĐ' : $item->giam_gia . '%' }}</td>
-=======
-                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Giảm giá theo phẩn trăm' : 'Giảm giá theo giá tiền' }}</td>
-                        <td> {{ $item->loai_khuyen_mai == 1 ? $item->giam_gia . '%' : number_format($item->giam_gia, 0, '.', '.') }}
-                        </td>
->>>>>>> 20dcfc5526c56ab1d0d3ce4767a337f456b33dac
-                        <td> {{ $item->ngay_bat_dau }}</td>
+                        <td> {{ $item->ngay_bat_dau }}</td> 
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
