@@ -153,7 +153,7 @@ class DangKy extends Model
             ->join('ca_hoc','ca_hoc.id','=','ca_thu.ca_id')
             ->join('thu_hoc','thu_hoc.id','=','ca_thu.thu_hoc_id')
             ->where('dang_ky.id',$code)
-            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','gia_khoa_hoc','name','dang_ky.email','dia_chi','ten_lop','ten_khoa_hoc','ca_hoc','thoi_gian_bat_dau','thoi_gian_ket_thuc','thu_hoc.ten_thu','ca_thu.thu_hoc_id','ca_thu.ca_id')
+            ->select('dang_ky.id','users.sdt','lop.ngay_bat_dau','lop.ngay_ket_thuc','ngay_dang_ky','dang_ky.gia as gia_khoa_hoc','users.name','dang_ky.email','dia_chi','ten_lop','ten_khoa_hoc','ca_hoc','thoi_gian_bat_dau','thoi_gian_ket_thuc','thu_hoc.ten_thu','ca_thu.thu_hoc_id','ca_thu.ca_id')
             ->first();
         return $query;
     }

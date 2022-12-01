@@ -221,12 +221,13 @@
 
                     <div class="col-12 p-3">
                         <label class="text-lg text-danger" >Học phí:</label>
-                        <h3>{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
+                        <h3 id="gia_kh">{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
                     </div>
                     <div>
-                        <input class="form-control"  placeholder="Nhập mã khuyến mại ..."/> 
-                        <button class="btn btn-danger btn-sm mt-1 mb-4">Áp dụng</button>
+                        <input class="form-control coupon-value"  placeholder="Nhập mã khuyến mại ..."/> 
+                        <button class="btn btn-danger btn-sm mt-1 mb-4 btn-apply" data-url="{{route('apply_coupon')}}">Áp dụng</button>
                     </div>
+                    
                 </div>
 
                 <div class="row col border rounded" style="margin-left: 10px">
@@ -238,13 +239,13 @@
                         @csrf
                         <div class="row">
                             {{-- {{dd($loadDangKy)}}; --}}
-
+                            <input type="text" name="khuyen_mai_id" id="khuyen_mai_id" hidden>
                             <input type="text" name="user_id" id="" value="{{Auth::user()->id??""}}" hidden>
                             <input type="text" name="lop_id" id="" value="{{isset($loadDangKy->id) ? ($loadDangKy->id): "" }}" hidden>
                             <input type="text" name="thu_hoc_id" id="" value="{{isset($loadDangKy->thu_hoc_id) ? ($loadDangKy->thu_hoc_id): "" }}" hidden>
                             <input type="text" name="ca_id" id="" value="{{isset($loadDangKy->ca_id) ? ($loadDangKy->ca_id): "" }}" hidden>
-                            <input type="text" name="id_khoa_hoc" hidden value="{{isset($loadDangKy->id_khoa_hoc) ? ($loadDangKy->id_khoa_hoc): "" }}">
-                            <input type="text" name="gia_khoa_hoc" id=""  value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
+                            <input type="text" name="id_khoa_hoc" id="id_khoa_hoc" hidden value="{{isset($loadDangKy->id_khoa_hoc) ? ($loadDangKy->id_khoa_hoc): "" }}">
+                            <input type="text" name="gia_khoa_hoc" id="gia_khoa_hoc"  value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Họ Tên</label>
@@ -322,32 +323,63 @@
         $(document).ready(function () {
             $('.radio_input')[0].checked = true;
             let checkEmail=false;
-          $('#email').blur(function () {
-            let email=$(this).val();
-            let url=$(this).data('url');
-            $.ajax({
-                type:'GET',
-                url :url,
-                data:{
-                    email:email,
+            $('#email').blur(function () {
+                let email=$(this).val();
+                let url=$(this).data('url');
+                $.ajax({
+                    type:'GET',
+                    url :url,
+                    data:{
+                        email:email,
 
-                },
-                success:function (res) {
-                    if(res['status']==200){
-                        checkEmail=true;
-                        $('.error_email').html('')
-                        $('#submit').attr('disabled',false)
+                    },
+                    success:function (res) {
+                        if(res['status']==200){
+                            checkEmail=true;
+                            $('.error_email').html('')
+                            $('#submit').attr('disabled',false)
+                        }
+                        else {
+                            checkEmail=false;
+                            $('.error_email').html('Email này đã đăng ký tài khoản')
+                            $('#submit').attr('disabled',true)
+                        }
                     }
-                    else {
-                        checkEmail=false;
-                        $('.error_email').html('Email này đã đăng ký tài khoản')
-                        $('#submit').attr('disabled',true)
-                    }
-                }
+
+                })
 
             })
+            let gia_khoa_hoc_old = $('#gia_khoa_hoc').val()
 
-          })
+            $('.btn-apply').on('click',function() {
+                let couponValue = $('.coupon-value').val();
+                let id_khoa_hoc = $('#id_khoa_hoc').val();
+                let gia_khoa_hoc = gia_khoa_hoc_old;
+                // let url = $('#id_khoa_hoc')
+                if(couponValue != '') {
+                    $.get(
+                        '{{ route('apply_coupon') }}',
+                        {
+                            ma_khuyen_mai:couponValue,
+                            id_khoa_hoc: id_khoa_hoc,
+                            gia_khoa_hoc: gia_khoa_hoc 
+                        }, 
+                        function(data){
+                            console.log(data.success);
+                            $('#khuyen_mai_id').val(data.id_km);
+                            if(data.success) {
+                                let gia = data.gia_khoa_hoc.toLocaleString();
+                                $('#gia_kh').html(gia + ' VNĐ');
+                                $('#gia_khoa_hoc').val(data.gia_khoa_hoc);
+                                alert('Áp dụng mã giảm giá thành công');
+                            }else {
+                                alert(data.msg);
+                            }
+                    });
+                }else {
+                    alert('Vui lòng nhập mã khuyến mãi')
+                }
+            })
 
         })
     </script>

@@ -1,7 +1,7 @@
 @extends('Admin.templates.layout')
 @section('content')
     <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Khuyen_Mai') }}">
+        <a style="color: red" href=" {{ route('route_BE_Admin_create') }}">
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
 
         </a>
@@ -29,12 +29,12 @@
                     <th scope="col">STT</th>
                     <th scope="col">Mã khuyến mại </th>
                     <th scope="col">Loại khuyến mại </th>
+                    <th scope="col">Loại giảm giá </th>
                     <th scope="col">Giảm giá </th>
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc</th>
                     <th scope="col">Mô tả</th>
                     <th scope="col">Sửa</th>
-
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
@@ -48,8 +48,9 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ma_khuyen_mai }}</td>
-                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Giảm giá theo phẩn trăm' : "Giảm giá theo giá tiền" }}</td>
-                        <td> {{  $item->loai_khuyen_mai == 1 ? $item->giam_gia . '%' : number_format($item->giam_gia  , 0, '.' ,'.')  }}</td>
+                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : "Đối với tất cả khóa học" }}</td>
+                        <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : "Đối với phần trăm" }}</td>
+                        <td> {{  $item->loai_giam_gia == 1 ? number_format($item->giam_gia  , 0, '.' ,'.').' VNĐ' : $item->giam_gia . '%' }}</td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
