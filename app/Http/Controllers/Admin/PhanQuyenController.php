@@ -25,7 +25,7 @@ class PhanQuyenController extends Controller
      */
     public function index(Request $request)
     {
-        // $this->authorize(mb_strtoupper('xem phân quyền'));
+        $this->authorize(mb_strtoupper('xem phân quyền'));
 
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->quyen->index($this->v['params'], true, 10);

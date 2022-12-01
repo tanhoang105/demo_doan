@@ -1,8 +1,8 @@
 @extends('client.templates.layout')
-@section('title') - Đăng Nhập
+@section('title')
+    - Đăng Nhập
 @endsection
 @section('content')
-
     <!-- header -->
     <header class="single-header">
         <!-- Start: Header Content -->
@@ -20,9 +20,9 @@
     </header>
     <!--/. header -->
     <!--/
-    ==================================================-->
+        ==================================================-->
     <!-- Start: Account Section
-    ==================================================-->
+        ==================================================-->
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -58,8 +58,7 @@
                                 </div>
                             <form method="post" action="{{route('auth.login')}}">
                                 @csrf
-                                <input class="login-field" name="email" id="lemail" type="text"
-                                       placeholder="Email">
+                                <input class="login-field" name="email" id="lemail" type="text" placeholder="Email">
                                 <input class="login-field" name="password" id="lpassword" type="password"
                                        placeholder="Password">
                                 <div class="lost_pass">
@@ -71,7 +70,7 @@
                                 </div>
                                 <div class="submit-area">
                                     <button class="submit more-link"> Đăng Nhập </button>
-                                    <a href="{{route('auth.getdangki')}}" class="submit more-link"> Đăng Ký Tài Khoản</a>
+                                    <a href="{{ route('auth.getdangki') }}" class="submit more-link"> Đăng Ký Tài Khoản</a>
                                     <div id="lmsg" class="message"></div>
                                 </div>
                             </form>
@@ -86,8 +85,5 @@
         <!-- container /- -->
     </section>
     <!-- End : Account Section
-    ==================================================-->
-
-
-
+        ==================================================-->
 @endsection

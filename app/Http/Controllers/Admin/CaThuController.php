@@ -33,6 +33,8 @@ class CaThuController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize(mb_strtoupper('xem ca thứ') );
+
         $this->v['params'] =  $request->all();
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
         $this->v['thu'] = $this->thu->index(null, false, null);
@@ -62,6 +64,8 @@ class CaThuController extends Controller
     public function store(Request $request)
     {
         //
+        $this->authorize(mb_strtoupper('thêm ca thứ') );
+
         $this->v['ca'] = $this->cahoc->index(null, false, null);
         $this->v['thuhoc'] = $this->thu->index(null, false, null);
         if ($request->isMethod('POST')) {
@@ -105,6 +109,8 @@ class CaThuController extends Controller
      */
     public function show()
     {
+        $this->authorize(mb_strtoupper('xem chi tiết ca thứ') );
+
         function createDatesTable($period, $start)
         {
             // tìm lớp  theo id
@@ -257,6 +263,8 @@ class CaThuController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $this->authorize(mb_strtoupper('edit ca thứ') );
+
         if ($id) {
             // id của ca
             $request->session()->put('id', $id);
@@ -281,6 +289,8 @@ class CaThuController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize(mb_strtoupper('update ca thứ') );
+
         $id = session('id');
         $params = [];
         $params['cols'] = array_map(function ($item) {
@@ -320,6 +330,8 @@ class CaThuController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize(mb_strtoupper('xóa ca thứ') );
+
         if ($id) {
             $res = $this->cathu->remove($id);
             if ($res) {
@@ -334,6 +346,7 @@ class CaThuController extends Controller
 
     public function destroyAll(Request $request)
     {
+        $this->authorize(mb_strtoupper('xóa ca thứ') );
 
         if ($request->isMethod('POST')) {
             $params = [];

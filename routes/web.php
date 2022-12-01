@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\QuenMatKhauController;
 use App\Http\Controllers\DoiLopKhoaController;
+use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
 use App\Models\VaiTro;
@@ -94,6 +95,11 @@ Route::prefix('/admin')->group(function () {
     Route::get('/', function () {
         return view('admin.trangchu');
     });
+    Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
+        Route::get('/quan_ly_tk_ghi_no', [GhiNoController::class, 'quan_ly_tk_ghi_no'])->name('quan_ly_tk_ghi_no');
+        Route::put('/cap_nhat_so_du/{id}', [GhiNoController::class, 'cap_nhat_so_du'])->name('cap_nhat_so_du');
+    });
+
     Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
         Route::get('/list', [DoiLopKhoaController::class, 'index'])->name('danh_sach_doi_lop');
         Route::post('hienthidoilop/{id}', [DoiLopKhoaController::class, 'hienthidoilop'])->name('hienthidoilop');
