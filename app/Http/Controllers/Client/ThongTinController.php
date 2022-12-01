@@ -67,7 +67,7 @@ class ThongTinController extends Controller
     public function update_password(DoimatkhauRequest $request) {
         $curent_user = Auth::user();
         if(Hash::check($request->old_password,$curent_user->password)) {
-            $curent_user -> update([
+            $curent_user->update([
                 'password' => bcrypt($request->new_password)
             ]);
             return redirect()->back()->with('success','Cập nhật thành công');
