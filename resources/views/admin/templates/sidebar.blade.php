@@ -6,8 +6,13 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           @if (isset($objUser))
               <div class="image">
-                  <img style="border-radius: 100px;width: 50px; height: 50px;%"
-                      src="{{ \Illuminate\Support\Facades\Storage::URL($objUser->hinh_anh) }}">     
+                  @if ($objUser->hinh_anh == '')
+                      <img src="{{ asset('custom/images/avatar-01.png') }}"
+                          style="width:40px; height: 40px; border-radius: 30px;">
+                  @else
+                      <img src="{{ Storage::url($objUser->hinh_anh) }}"
+                          style="width:40px; height: 40px; border-radius: 30px;">
+                  @endif
               </div>
               <div class="info d-flex align-content-center flex-wrap">
 
@@ -37,15 +42,15 @@
               @hasRoles(['admin'])
 
               <li class="nav-item">
-                <a href=" {{ route('route_BE_Admin_Thong_Ke') }}" class="nav-link ">
-                    <i class="nav-icon fas fa-chart-pie"></i>
-                    <p>
-                        Thống kê
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-            </li>
-            
+                  <a href=" {{ route('route_BE_Admin_Thong_Ke') }}" class="nav-link ">
+                      <i class="nav-icon fas fa-chart-pie"></i>
+                      <p>
+                          Thống kê
+                          <i class="right fas fa-angle-left"></i>
+                      </p>
+                  </a>
+              </li>
+
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_Tai_Khoan') }}" class="nav-link ">
                       <i class="nav-icon fas fa-address-card"></i>
@@ -237,15 +242,15 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
-                    <i class="nav-icon fas fa-edit"></i>
-                    <p>
-                        Lịch học của học viên
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Lịch học của học viên
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
-            </li>
+              </li>
 
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Lop') }}" class="nav-link ">
@@ -315,17 +320,7 @@
 
               </li>
 
-              <li class="nav-item">
-                  <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
-                      <i class="nav-icon fas fa-user-plus"></i>
-                      <p>
 
-                          Đăng ký
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-
-              </li>
 
               @endhasRoles
               {{-- end tác vụ đào tạo --}}
@@ -359,18 +354,36 @@
 
               @endhasRoles
 
-              @hasRoles(['giảng viên'])
+              @hasRoles(['admin','giảng viên'])
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_Lich_Day_Giang_Vien') }} " class="nav-link">
                       <i class="nav-icon fas fa-calendar"></i>
                       <p>
-                         Lịch dạy
+                          Lịch dạy
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
 
               </li>
               @endhasRoles
+
+              @hasRoles(['tuyển sinh'])
+              <li class="nav-item">
+                  <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
+                      <i class="nav-icon fas fa-user-plus"></i>
+                      <p>
+
+                          Đăng ký
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
+
+              </li>
+
+              @endhasRoles
+
+
+
           </ul>
       </nav>
       <!-- /.sidebar-menu -->

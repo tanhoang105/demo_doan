@@ -35,25 +35,40 @@
                     <select class="form-control" name="ca_thu_id" id="">
                         <option value="">Chọn lịch học</option>
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}">{{ 'Ca ' . $item->ca_id }}  : 
-                                <?php
+                            <option value="{{ $item->id }}">
+                               
+                               
+                                    @foreach ($cahoc as $itemCa) 
+                                         {{-- {{$itemCa->ca_hoc}} --}}
+                                        @if($item->ca_id == $itemCa->id)
+                                            {{ $itemCa->ca_hoc  . ' ( ' . $itemCa->thoi_gian_bat_dau  . ' - ' . $itemCa->thoi_gian_ket_thuc . ' ) ' . ' : ' }}
+                                        @else 
+                                         {{''}}    
+                                        @endif
+                                    @endforeach
                                 
+
+
+                                <?php
+
                                 for ($i = 0; $i < count([$item->thu_hoc_id]); $i++) {
                                     $str = explode(',', $item->thu_hoc_id);
                                 }
                                 
                                 for ($i = 0; $i < count($str); $i++) {
                                     foreach ($thu as $key => $value) {
-                                        if($i == 0){
+                                        $count = count($str) -1 ;
+                                            if($i ==  $count  ){
+                                                if ($str[$i] == $value->id) {
+                                                    echo   $value->ten_thu . ' ';
+                                                }
+                                            }else  {
 
-                                            if ($str[$i] == $value->id) {
-                                                echo '' . $value->ten_thu . ' -- ';
+                                                if ($str[$i] == $value->id) {
+                                                    echo   $value->ten_thu . ' & ';
+                                                }
                                             }
-                                        }else{
-                                            if ($str[$i] == $value->id) {
-                                                echo '' . $value->ten_thu . '';
-                                            }
-                                        }
+                                        
                                     }
                                 }
                                 

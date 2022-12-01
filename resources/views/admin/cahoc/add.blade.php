@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ca học</label>
+                    <label for="chuyenBay" class="form-label">Ca học </label>
                     <input value="{{ old('ca_hoc') ?? request()->ca_hoc }}" type="text" name="ca_hoc"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

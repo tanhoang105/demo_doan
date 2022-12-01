@@ -1,13 +1,13 @@
 @extends('Admin.templates.layout')
 
 @section('form-search')
-    {{route('route_BE_Admin_List_Lop')}}
+    {{ route('route_BE_Admin_List_Lop') }}
 @endsection
 
 @section('content')
     <div class="row p-3">
         <a href="{{ route('route_BE_Admin_Add_Lop') }}">
-            <button class='btn btn-primary'>  <i class="fas fa-plus "></i> Thêm</button>
+            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -63,7 +63,9 @@
                         <td> {{ $item->so_luong }}</td>
                         <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
-                        <td><button class="bt btn-primary"><a style="color: aliceblue" href=" {{route('route_BE_Admin_Detail_Lop' , ['id'=>$item->id_lop])}} ">Chi tiết</a></button></td>
+                        <td><button class="bt btn-primary"><a style="color: aliceblue"
+                                    href=" {{ route('route_BE_Admin_Detail_Lop', ['id' => $item->id_lop]) }} ">Chi
+                                    tiết</a></button></td>
                         <td>
                             @foreach ($giangvien as $gv)
                                 {{-- {{$gv->ten_giang_vien}} --}}
@@ -75,14 +77,16 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
-                                <button class="btn btn-success">
-                                <i class="fas fa-edit "></i>Sửa</button></a>
+                            <button class="btn btn-success">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
+                                    <i class="fas fa-edit "></i>Sửa</a>
+                            </button>
                         </td>
                         <td>
-                            <a href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
-                                <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i> Xóa</button></a>
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
+                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
+                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            </button>
                         </td>
 
                     </tr>
@@ -95,7 +99,7 @@
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $list->appends('params')->links() }}
-            <div class="d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
+            {{-- <div class="d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
                 <button style="margin-right : 55px" class="btn btn-light"><a
                         href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 1]) }} ">
                         Lớp chưa có giảng viên</a></button>
@@ -103,11 +107,10 @@
                         href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 2]) }}">
                         Lớp có giảng viên</a></button>
                 <button style="margin-right : 55px" class="btn btn-light"><a
-
                         href=" {{ route('route_BE_Admin_List_Lop') }}">
                         Tất cả lớp học</a></button>
 
-            </div>
+            </div> --}}
 
         </div>
 

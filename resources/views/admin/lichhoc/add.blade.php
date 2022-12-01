@@ -23,8 +23,9 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Ca Học</label>
                     <select name="ca_id" class="form-control" id="">
+                        <option value="">Chọn ca học</option>
                         @foreach ($ca as $item)
-                            <option value="{{ $item->id }}"> {{ $item->ca_hoc }} </option>
+                            <option value="{{ $item->id }}"> {{ $item->ca_hoc . ' ( ' . $item->thoi_gian_bat_dau  . ' - ' . $item->thoi_gian_ket_thuc . ' ) ' }} </option>
                         @endforeach
                     </select>
                     @error('ca_id')
@@ -36,7 +37,7 @@
 
                     @foreach ($thuhoc as $item)
                         <div>
-                            <input value="{{ old($item->id) ?? (request()->id ?? $item->id) }}"
+                            <input  value="{{ old($item->id) ?? (request()->id ?? $item->id) }}"
                                 type="checkbox" name="thu_hoc_id[]" id="" aria-describedby="emailHelp">
                             {{ $item->ten_thu }}
                         </div>

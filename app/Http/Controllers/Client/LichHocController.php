@@ -30,10 +30,12 @@ class LichHocController extends Controller
         $this->ca_hoc = new CaHoc();
       
     }
-    public function index()
+    public function index(Request  $request)
     {
         $idUser = Auth::user()->id;
         // dd($idUser);
+        $this->v['params'] = $request->all();
+        // dd(date('Y-m-d'));
         $listThuHoc = $this->thuhoc->index(null, false, null);
         $this->v['thuhoc'] = $listThuHoc;
         $this->v['phonghoc'] = $this->phonghoc->index(null, false, null);
@@ -43,7 +45,7 @@ class LichHocController extends Controller
         $this->v['ca_hoc'] = $this->ca_hoc->index(null , false , null);
 
         $params['id'] = $idUser;
-        $list = $this->lichHoc->index($params, false, null);
+        $list = $this->lichHoc->index($params, true, 7);
         $this->v['list'] = $list;
         // dd($list);
 
