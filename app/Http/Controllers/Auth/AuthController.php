@@ -87,7 +87,7 @@ class AuthController extends Controller
                 $user = Auth::user();
                 if ($user->status == 0) {
                     if ($user->vai_tro_id == 1) {
-                        return redirect()->route('route_BE_Admin_Khoa_Hoc');
+                        return redirect()->route('home');
                     }
                     if ($user->vai_tro_id != 1) {
                         return redirect()->route('client_khoa_hoc');
