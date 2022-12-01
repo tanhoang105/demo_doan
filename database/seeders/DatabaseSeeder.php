@@ -131,31 +131,31 @@ class DatabaseSeeder extends Seeder
 
 
         }
-        DB::table('danh_muc')->insert($danh_muc);
-        DB::table('khoa_hoc')->insert($khoa_hoc);
-        DB::table('lop')->insert($lop);
-        DB::table('ca_hoc')->insert($ca_hoc);
-        DB::table('phong_hoc')->insert($phong_hoc);
-        DB::table('xep_lop')->insert($xep_lop);
-        DB::table('thanh_toan')->insert($thanh_toan);
-        DB::table('phuong_thuc_thanh_toan')->insert($phuong_thuc_thanh_toan);
-        DB::table('hoc_vien')->insert($hoc_vien);
-        DB::table('giang_vien')->insert($giang_vien);
-        DB::table('dang_ky')->insert($dang_ky);
-        DB::table('khuyen_mai')->insert($khuyen_mai);
-        DB::table('users')->insert([
-            'name' => "Poly",
-            'email' => 'poly@gmail.com',
-            'hinh_anh'=>'1.jpg',
-            'sdt'=>'0392725483',
-            'dia_chi'=>'Thạch Thất',
-            'password' => Hash::make('123456'),
-        ]);
+        // DB::table('danh_muc')->insert($danh_muc);
+        // DB::table('khoa_hoc')->insert($khoa_hoc);
+        // DB::table('lop')->insert($lop);
+        // DB::table('ca_hoc')->insert($ca_hoc);
+        // DB::table('phong_hoc')->insert($phong_hoc);
+        // DB::table('xep_lop')->insert($xep_lop);
+        // DB::table('thanh_toan')->insert($thanh_toan);
+        // DB::table('phuong_thuc_thanh_toan')->insert($phuong_thuc_thanh_toan);
+        // DB::table('hoc_vien')->insert($hoc_vien);
+        // DB::table('giang_vien')->insert($giang_vien);
+        // DB::table('dang_ky')->insert($dang_ky);
+        // DB::table('khuyen_mai')->insert($khuyen_mai);
+        // DB::table('users')->insert([
+        //     'name' => "Poly",
+        //     'email' => 'poly@gmail.com',
+        //     'hinh_anh'=>'1.jpg',
+        //     'sdt'=>'0392725483',
+        //     'dia_chi'=>'Thạch Thất',
+        //     'password' => Hash::make('123456'),
+        // ]);
 
-        DB::table('vai_tro_cho_phep')->insert([
-            'vai_tro_id' => 1,
-            'cho_phep_id' => 1,
+        // DB::table('vai_tro_cho_phep')->insert([
+        //     'vai_tro_id' => 1,
+        //     'cho_phep_id' => 1,
 
-        ]);
+        // ]);
     }
 }

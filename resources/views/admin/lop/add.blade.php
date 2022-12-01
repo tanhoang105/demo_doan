@@ -97,7 +97,7 @@
                     <label for="chuyenBay" class="form-label">Giảng Viên</label>
                     <select class="form-control" name="id_giang_vien" id="">
                         @foreach ($giangvien as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_giang_vien }}</option>
+                            <option value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                         @endforeach
                     </select>
                     @error('ten_khoa_hoc')

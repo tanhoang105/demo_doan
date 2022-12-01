@@ -114,9 +114,11 @@ class AuthController extends Controller
         // dd($request->all());
         $request->hinh_anh = 'https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-thumbnail.png';
         $user = new User();
+        // $array = array_merge($request->all());
         $user->fill($request->all());
         // 2. Kiểm tra file và lưu
         $user->password = Hash::make($request->password);
+        $user->vai_tro_id = 4;
         // 3. Lưu $user vào CSDL
         $user->save();
         $data = User::where('users.email','=',$request->email)

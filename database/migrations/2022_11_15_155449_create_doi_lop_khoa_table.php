@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('id_user');
             $table->integer('id_lop_cu');
             $table->integer('id_lop_moi');
-            $table->string('ly_do');
-            $table->integer('status');
+            $table->string('ly_do')->nullable();
+            $table->integer('status')->default(0);
+            $table->integer('delete_at')->default(1);
             $table->timestamps();
         });
     }

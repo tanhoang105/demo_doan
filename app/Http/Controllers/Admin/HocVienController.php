@@ -250,4 +250,10 @@ class HocVienController extends Controller
     public function exportExcel(){
         
     }
+
+    public function uploadFile($file)
+    {
+        $filename =  time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('imageHocvien', $filename,  'public');
+    }
 }

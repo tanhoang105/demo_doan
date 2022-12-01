@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('gia')->nullable();
             $table->integer('id_lop');
             $table->integer('id_user');
+            $table->string('email');
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();

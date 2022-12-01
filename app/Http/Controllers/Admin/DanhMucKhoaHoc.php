@@ -61,7 +61,6 @@ class DanhMucKhoaHoc extends Controller
         $this->v['exParam'] = $request->all();
         if ($request->isMethod('POST')) {
 
-
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -81,11 +80,11 @@ class DanhMucKhoaHoc extends Controller
             if ($res > 0) {
                 // thêm thành công
                 Session::flash('success', "Thêm thành công");
-                return redirect()->route('route_BE_Admin_Danh_Muc_Khoa_Hoc');
+                return redirect()->route('route_Admin_BE_Danh_Muc_Khoa_Hoc');
             } else {
                 // thêm không thành công
                 Session::flash('error', "Thêm không thành công");
-                return redirect()->route('route_BE_Admin_Danh_Muc_Khoa_Hoc');
+                return redirect()->route('route_Admin_BE_Danh_Muc_Khoa_Hoc');
             }
         }
 

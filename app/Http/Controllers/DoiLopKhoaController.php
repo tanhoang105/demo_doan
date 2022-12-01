@@ -33,7 +33,7 @@ class DoiLopKhoaController extends Controller
         $data = DoiLopKhoa::find($doilop);
         // dd($data->status);
         if ($data->status == 0) {
-            dd('123');
+            // dd('123');
             // $data = DoiLopKhoa::find($doilop);
             $data->status = $request->status;
             session()->flash('sucssec', 'đơn hàng đã được cập nhật');
@@ -52,6 +52,7 @@ class DoiLopKhoaController extends Controller
             // luu du lieu
             $lop_cu->save();
             $lop_moi->save();
+            $data->save();
             return redirect()->back();
         } elseif ($data->status) {
             // dd($request->status);

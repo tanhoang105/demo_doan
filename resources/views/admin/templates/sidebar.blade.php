@@ -367,7 +367,7 @@
               </li>
               @endhasRoles
 
-              @hasRoles(['tuyển sinh'])
+              @hasRoles(['tuyển sinh','admin'])
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
                       <i class="nav-icon fas fa-user-plus"></i>
