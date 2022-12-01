@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DoimatkhauRequest extends FormRequest
+class QuenMatKhauRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,12 +29,19 @@ class DoimatkhauRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 switch ($ActionCurrent) {
-                    // nếu là method chỉnh sửa bản ghi
-                    case 'update_password':
+                    // nếu là method thêm mới bản ghi
+                    case 'submitForgetPasswordForm':
                         $rules = [
-                            'old_password' => 'required',
-                            'new_password' => 'required | confirmed',
-                            'password_confirmation' => 'required | same:new_password'
+                            'email' => 'required|email|exists:users',
+                        ];
+                        break;
+
+                    // nếu là method chỉnh sửa bản ghi
+                    case 'submitResetPasswordForm':
+                        $rules = [
+                            'email' => 'required|email|exists:users',
+                            'password' => 'required|confirmed',
+                            'password_confirmation' => 'required | same:password'
                         ];
                         break;
 
@@ -54,11 +61,14 @@ class DoimatkhauRequest extends FormRequest
     public function messages()
     {
         return [
-           'old_password.required' => 'Bắt buộc nhập mật khẩu cũ',
-           'new_password.required' => 'Bắt buộc nhập mật khẩu mới',
-           'new_password.confirmed' => 'Xác nhận mật khẩu không khớp',
+           'email.required' => 'Bắt buộc nhập Email',
+           'email.email' => 'Sai định dạng Email',
+           'email.exists' => 'Email chưa được đăng ký',
+           'password.required' => 'Bắt buộc nhập mật khẩu mới ',
+           'password.confirmed' => 'Xác nhận mật khẩu không khớp',
            'password_confirmation.required' => 'Bắt buộc nhập nhập lại mật khẩu',
            'password_confirmation.same' => 'Xác nhận mật khẩu không khớp',
         ];
     }
 }
+
