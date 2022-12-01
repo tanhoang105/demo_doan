@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('ten_hoc_vien');
             $table->string('dia_chi')->nullable();
             $table->string('email')->unique();
-            $table->integer('sdt');
+            $table->text('sdt');
             $table->string('hinh_anh')->nullable();
             $table->integer('gioi_tinh')->nullable();
             $table->integer('trang_thai')->default(1);

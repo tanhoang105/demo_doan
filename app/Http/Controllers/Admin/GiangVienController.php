@@ -290,4 +290,10 @@ class GiangVienController extends Controller
         $this->v['list']   = $array ;
         return view('admin.lichday.index' , $this->v );
     }
+
+    public function uploadFile($file)
+    {
+        $filename =  time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('imageGiangVien', $filename,  'public');
+    }
 }

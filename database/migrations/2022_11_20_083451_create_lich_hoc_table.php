@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('lop_id');
             $table->integer('ma_thu');
             $table->integer('ca_id');
+            $table->integer('phong_id')->nullable();
+            $table->integer('giang_vien_id')->nullable();
             $table->integer('delete_at')->default(1);
             $table->timestamps();
         });

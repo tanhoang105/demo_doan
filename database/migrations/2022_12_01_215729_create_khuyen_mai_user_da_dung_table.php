@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('khoa_hoc', function (Blueprint $table) {
-            $table->string('luot_xem')->nullable();
+        Schema::create('khuyen_mai_user_da_dung', function (Blueprint $table) {
+            $table->id();
+            $table->integer('id_user')->nullable();
+            $table->integer('khuyen_mai_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,7 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('khoa_hoc', function (Blueprint $table) {
-        });
+        Schema::dropIfExists('khuyen_mai_user_da_dung');
     }
 };
