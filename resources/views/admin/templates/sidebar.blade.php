@@ -170,6 +170,16 @@
 
               </li>
 
+              <li class="nav-item">
+                <a href="{{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}" class="nav-link">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Tài khoản ghi nợ 
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+
+            </li>
 
               <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Vai_Tro') }}" class="nav-link">

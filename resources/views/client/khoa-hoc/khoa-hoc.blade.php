@@ -21,14 +21,18 @@
     </header>
     <!--/. header -->
     <!--/
-                                    <!-- Start: Featured Courses Section
-                                        ==================================================-->
+
+
+
+
+                                        <!-- Start: Featured Courses Section
+                                            ==================================================-->
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-3 course_sidebar">
                     <div class="course_cat_sidebar">
-                        <h4 class="course_cat_title">Category</h4>
+                        <h4 class="course_cat_title">Khóa học</h4>
                         <ul>
                             @foreach ($danhmuc as $value)
                                 <li>
@@ -52,7 +56,7 @@
 
 
 
-                    <div class="course_instructor_sidebar">
+                    {{-- <div class="course_instructor_sidebar">
                         <h4 class="course_cat_title">Instructor </h4>
                         <ul>
                             <li>
@@ -102,7 +106,7 @@
                             </li>
 
                         </ul>
-                    </div>
+                    </div> --}}
                     <!-- end: Instructor Widget-->
                 </div>
                 <!-- end: col-sm-12 col-lg-3-->
@@ -152,11 +156,13 @@
                                 {{-- {{count($value->ten_lop)}} --}}
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="feat_course_item">
-                                       <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
-                                        {{-- <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image" style="width: 300px;height: 200px;-radius: 15px;"> --}}
+                                        {{-- <img src="{{ asset('client/images/courses1.jpg') }}" alt="image"> --}}
+                                        <img src="{{ Storage::url($value->hinh_anh) }}" alt="image"
+                                            style="width: 380px;height: 200px;-radius: 15px;">
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                            <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc,0,'.','.') }} VND</span>
+                                            <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc, 0, '.', '.') }}
+                                                VND</span>
                                         </div>
                                         <h4 class="feat_cour_tit"><a
                                                 href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">{{ $value->ten_khoa_hoc }}</a>
@@ -187,7 +193,11 @@
                         @endforeach
                             
                     </div>
-                          </div>
+                    <div class="">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            {{ $list->appends('params')->links() }}
+                        </div>
+                    </div>
                 @else
                     <?php
                     $loc_danhmuc = DB::table('khoa_hoc')
@@ -252,7 +262,7 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-                                        ==================================================-->
+                                            ==================================================-->
 @endsection
 @section('js')
     <script>
