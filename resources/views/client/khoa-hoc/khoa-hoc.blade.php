@@ -21,17 +21,12 @@
     </header>
     <!--/. header -->
     <!--/
-<<<<<<< HEAD
 
 
 
 
                                         <!-- Start: Featured Courses Section
                                             ==================================================-->
-=======
-                                    <!-- Start: Featured Courses Section
-                                        ==================================================-->
->>>>>>> 4c4e60db828f6b720f38e6efa3d96861a2390e93
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
@@ -161,14 +156,9 @@
                                 {{-- {{count($value->ten_lop)}} --}}
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="feat_course_item">
-<<<<<<< HEAD
                                         {{-- <img src="{{ asset('client/images/courses1.jpg') }}" alt="image"> --}}
                                         <img src="{{ Storage::url($value->hinh_anh) }}" alt="image"
                                             style="width: 380px;height: 200px;-radius: 15px;">
-=======
-                                       <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
-                                        {{-- <img src="{{ Storage::url($value->hinh_anh)  }}" alt="image" style="width: 300px;height: 200px;-radius: 15px;"> --}}
->>>>>>> 4c4e60db828f6b720f38e6efa3d96861a2390e93
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
                                             <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc, 0, '.', '.') }}
@@ -203,15 +193,11 @@
                         @endforeach
                             
                     </div>
-<<<<<<< HEAD
                     <div class="">
                         <div class="d-flex align-items-center justify-content-between flex-wrap">
                             {{ $list->appends('params')->links() }}
                         </div>
                     </div>
-=======
-                          </div>
->>>>>>> 4c4e60db828f6b720f38e6efa3d96861a2390e93
                 @else
                     <?php
                     $loc_danhmuc = DB::table('khoa_hoc')
