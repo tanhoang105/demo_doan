@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\LichHocController;
 use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\QuenMatKhauController;
 use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
@@ -79,6 +80,11 @@ Route::get('/get_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::cla
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
+
+Route::get('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showForgetPasswordForm'])->name('form_quen_mat_khau');
+Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitForgetPasswordForm'])->name('quen_mat_khau'); 
+Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
+Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
 
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');

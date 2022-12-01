@@ -6,7 +6,7 @@ use App\Events\Message;
 use App\Http\Controllers\Controller;
 use App\Models\GhiNo;
 use App\Models\User;
-
+use Carbon\Carbon;
 use Illuminate\Foundation\Events\Dispatchable ;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Queue\SerializesModels;
@@ -14,8 +14,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use MongoDB\Driver\Session;
 
 class AuthController extends Controller
