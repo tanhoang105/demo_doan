@@ -1,5 +1,6 @@
 @extends('Client.templates.layout')
 @section('content')
+    {{-- {{dd($complete)}} --}}
     <section class="middle">
         <div class="container">
             <div class="row justify-content-center">

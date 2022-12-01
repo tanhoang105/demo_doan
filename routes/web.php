@@ -52,6 +52,7 @@ Route::get('/chi-tiet-khoa-hoc/{id}', [\App\Http\Controllers\Client\KhoaHocContr
 Route::get('/chi-tiet-giang-vien/{id}', [\App\Http\Controllers\Client\GiangVienController::class, 'chiTietGiangVien'])->name('client_chi_tiet_giang_vien');
 Route::get('check-email', [\App\Http\Controllers\Client\DangKyController::class, 'checkEmail'])->name('client_check_email');
 Route::get('/loc-khoa-hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'locKhoaHoc'])->name('loc_khoa_hoc');
+Route::get('apply-coupon', [KhuyenMaiController::class, 'apDungKM'])->name('apply_coupon');
 
 Route::get('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'loadDangKy'])->name('client_dang_ky');
 Route::post('/dang-ky/{id?}', [\App\Http\Controllers\Client\DangKyController::class, 'postDangKy'])->name('client_post_dang_ky');
@@ -153,8 +154,8 @@ Route::prefix('/admin')->group(function () {
         Route::post('/giang-vien-update', [GiangVienController::class, 'update'])->name('Update_Giang_Vien');
         Route::get('/lich-day', [GiangVienController::class, 'lichDay'])->name('Lich_Day_Giang_Vien');
     });
-    
-    // phần lịch 
+
+    // phần lịch
     Route::prefix('/lich-hoc')->name('route_BE_Admin_')->group(function () {
         Route::get('/', [LichHocController::class, 'index'])->name('List_Lich_Hoc');
         Route::post('xoa-all', [LichHocController::class, 'destroyAll'])->name('Xoa_All_Lich_Hoc');
@@ -286,7 +287,9 @@ Route::prefix('/admin')->group(function () {
         Route::get('/xoa/{id}', [KhuyenMaiController::class, 'destroy'])->name('Xoa_Khuyen_Mai');
         Route::get('/edit/{id}', [KhuyenMaiController::class, 'edit'])->name('Edit_Khuyen_Mai');
         Route::post('/update', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
-        Route::match(['get', 'post'], '/add', [KhuyenMaiController::class, 'store'])->name('Add_Khuyen_Mai');
+        Route::get('add',[KhuyenMaiController::class,'create'])->name('create');
+        Route::post('add', [KhuyenMaiController::class, 'store'])->name('store');
+        Route::get('get-form', [KhuyenMaiController::class, 'get_coupon_form'])->name('Coupon_Form');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
     });
 

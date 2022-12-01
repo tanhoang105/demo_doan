@@ -60,6 +60,7 @@ class DangKyController extends Controller
                 unset($params['cols']['id_khoa_hoc']);
                 unset($params['cols']['ca_id']);
                 unset($params['cols']['thu_hoc_id']);
+                unset($params['cols']['khuyen_mai_id']);
                 // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
@@ -116,17 +117,23 @@ class DangKyController extends Controller
                                 'id_thanh_toan' => $insertThanhToan,
                                 'email' => $request->email,
                             ];
-                            $res = $objDangKy->saveNew($data);
-                            if ($res == null) {
+                            $resDK = $objDangKy->saveNew($data);
+                            if ($resDK == null) {
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
-                            } elseif ($res > 0) {
+                            } elseif ($resDK > 0) {
+                                if(!empty($request->khuyen_mai_id)) {
+                                    $km = DB::table('khuyen_mai_user_da_dung')->insertGetId([
+                                        'id_user' => $res,
+                                        'khuyen_mai_id' => $request->khuyen_mai_id
+                                    ]);
+                                }
                                 Mail::to($params['cols']['email'])->send(new SendMail([
                                     'user'=>$params['cols'],
                                     'dangky'=>$loadDangKy,
                                     'password'=>$password,
                                     'thuhoc'=>$layThu,
                                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
-                                return redirect()->route('client_complete_dang_ky', ['code' => $res]);
+                                return redirect()->route('client_complete_dang_ky', ['code' => $resDK]);
                             } else {
                                 Session::flash('error', 'Lỗi đăng ký khóa học');
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
@@ -189,41 +196,45 @@ class DangKyController extends Controller
                     // kiểm tra user đăng nhập đã là học viên
 //                    dd($query);
                     if (!empty($query->user_id) > 0) {
-                    //    dd(1);
-                       
-                            
-                                // ->where('user_id',$user->id)
-                                if (!empty($insertThanhToan) > 0) {
-                                    $tinhSoLuong = $loadDangKy->so_luong - 1;
-                                    $soLuongLop = DB::table('lop')
-                                        ->where('id', $id)
-                                        ->update(['so_luong' => $tinhSoLuong]);
-        
-                                    $data = [
-                                        'ngay_dang_ky' => date('Y-m-d H:i:s'),
-                                        'id_lop' => $request->lop_id,
-                                        'id_user' => $request->user_id,
-                                        'gia' => $request->gia_khoa_hoc,
-                                        'id_thanh_toan' => $insertThanhToan,
-                                        'email' => $request->email,
-                                    ];
-                                    $res = $objDangKy->saveNew($data);
+                            // ->where('user_id',$user->id)
+                            if (!empty($insertThanhToan) > 0) {
+                                $tinhSoLuong = $loadDangKy->so_luong - 1;
+                                $soLuongLop = DB::table('lop')
+                                    ->where('id', $id)
+                                    ->update(['so_luong' => $tinhSoLuong]);
+    
+                                $data = [
+                                    'ngay_dang_ky' => date('Y-m-d H:i:s'),
+                                    'id_lop' => $request->lop_id,
+                                    'id_user' => $request->user_id,
+                                    'gia' => $request->gia_khoa_hoc,
+                                    'id_thanh_toan' => $insertThanhToan,
+                                    'email' => $request->email,
+                                ];
+                                $res = $objDangKy->saveNew($data);
+                            }
+                            if ($res == null) {
+                                redirect()->route('client_dang_ky', ['id' => $request->id]);
+                            } elseif ($res > 0) {
+
+                                if(!empty($request->khuyen_mai_id)) {
+                                    $km = DB::table('khuyen_mai_user_da_dung')->insertGetId([
+                                        'id_user' => Auth::user()->id,
+                                        'khuyen_mai_id' => $request->khuyen_mai_id
+                                    ]);
                                 }
-                                if ($res == null) {
-                                    redirect()->route('client_dang_ky', ['id' => $request->id]);
-                                } elseif ($res > 0) {
-                                    Mail::to($params['cols']['email'])->send(new SendMail([
-                                        'user'=>$params['cols'],
-                                        'dangky'=>$loadDangKy,
-                                        'thuhoc'=>$layThu,
-                                        'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
-                                    return redirect()->route('client_complete_dang_ky', ['code' => $res]);
-                                } else {
-                                    Session::flash('error', 'Lỗi đăng ký khóa học');
-                                    return redirect()->route('client_dang_ky', ['id' => $request->id]);
-                                }
-            
-                               
+
+                                Mail::to($params['cols']['email'])->send(new SendMail([
+                                    'user'=>$params['cols'],
+                                    'dangky'=>$loadDangKy,
+                                    'thuhoc'=>$layThu,
+                                    'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
+                                return redirect()->route('client_complete_dang_ky', ['code' => $res]);
+
+                            } else {
+                                Session::flash('error', 'Lỗi đăng ký khóa học');
+                                return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                            }
                         
 
                     }
@@ -269,6 +280,12 @@ class DangKyController extends Controller
                             if ($res == null) {
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
                             } elseif ($res > 0) {
+                                if(!empty($request->khuyen_mai_id)) {
+                                    $km = DB::table('khuyen_mai_user_da_dung')->insertGetId([
+                                        'id_user' => Auth::user()->id,
+                                        'khuyen_mai_id' => $request->khuyen_mai_id
+                                    ]);
+                                }
                                 Mail::to($params['cols']['email'])->send(new SendMail([
                                     'user'=>$params['cols'],
                                     'dangky'=>$loadDangKy,
