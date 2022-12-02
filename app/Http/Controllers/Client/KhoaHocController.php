@@ -145,7 +145,7 @@ class KhoaHocController extends Controller
         $data = GhiNo::select('ghi_no.*')->where('ghi_no.user_id', '=', Auth::user()->id)->get();
         // dd($data);
         foreach ($data as $value) {
-            dd(1);
+            // dd(1);
             if (($value->tien_no + $khoahoc_cu->gia_khoa_hoc) >= $khoahoc_moi->gia_khoa_hoc) {
                 $doi_lop = new DoiLopKhoa();
                 $doi_lop->fill($request->all());
