@@ -29,10 +29,6 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Cập Nhập</button>
-                <a href="{{ route('route_BE_Admin_Phong_Hoc') }}">
-                <button type="button" class="btn btn-danger">Hủy</button></a>
-
             </div>
             <div class="col-6">
                 <div class="mb-3">
@@ -43,7 +39,7 @@
             <input type="text" name="dia_chi" id="" hidden value="hà nội">
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
-        <a btn btn-danger href="{{ route('route_BE_Admin_Phong_Hoc') }}">
+        <a class="btn btn-danger"  href="{{ route('route_BE_Admin_Phong_Hoc') }}">
             Hủy</a>
 
     </form>

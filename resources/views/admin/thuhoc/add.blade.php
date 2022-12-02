@@ -40,9 +40,6 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('route_BE_Admin_List_Thu_Hoc') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
-
             </div>
 
             <div class="col-6">
