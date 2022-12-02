@@ -90,9 +90,10 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
-                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
-                        class="form-control" id="" aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%" width="100px" height="100px" alt="">
+                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                           class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
+                    
                     @error('hinh_anh')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -103,6 +104,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_List_Giang_Vien')}} ">Quay lại </a>
+        
 
     </form>
 @endsection

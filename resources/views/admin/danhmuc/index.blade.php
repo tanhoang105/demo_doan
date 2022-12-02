@@ -1,4 +1,7 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}
+@endsection
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_Admin_BE_Add_Danh_Muc') }}">
@@ -50,16 +53,15 @@
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color: aliceblue" href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
+                            <a class="btn btn-success" style="color: aliceblue"
+                                href="{{ route('route_Admin_BE_Edit_Danh_Muc', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: aliceblue" href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
-                                    <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
+                                style="color: aliceblue"
+                                href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
+                                <i class="fas fa-trash-alt"></i> Xóa</a>
                         </td>
 
                     </tr>

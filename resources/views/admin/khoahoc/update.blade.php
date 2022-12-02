@@ -1,4 +1,6 @@
 @extends('Admin.templates.layout')
+
+
 @section('content')
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
@@ -75,6 +77,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Cập nhập</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Khoa_Hoc')}} ">Quay lại </a>
+
     </form>
     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>

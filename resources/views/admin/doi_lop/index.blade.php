@@ -124,9 +124,9 @@
                             </form>
                         @endif
                     </td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
+                    <td> <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
                                 href="{{ route('route_BE_Admin_Xoa_Khoa_Hoc', ['id' => $item->id]) }}">
-                                <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
+                                <i class="fas fa-trash-alt"></i> Xóa</a></td>
 
                 </tr>
             @endforeach

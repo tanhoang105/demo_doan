@@ -54,17 +54,13 @@
 
                         <td> {{ $item->ten_thu }}</td>
                         <td>
-                            <button class="btn btn-success">
-                                <a href="{{ route('route_BE_Admin_Edit_Thu_Hoc', ['id' => $item->id]) }}">
+                                <a class="btn btn-success" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Thu_Hoc', ['id' => $item->id]) }}">
 
                                     <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a href="{{ route('route_BE_Admin_Xoa_Thu_Hoc', ['id' => $item->id]) }}">
+                                <a style="color: aliceblue" onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" href="{{ route('route_BE_Admin_Xoa_Thu_Hoc', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
                         </td>
 
                     </tr>

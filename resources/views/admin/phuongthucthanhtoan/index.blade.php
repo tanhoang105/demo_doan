@@ -1,4 +1,8 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }}
+@endsection
+
 @section('content')
     <div class="row p-3">
         <a style="color: red"href=" {{ route('route_BE_Admin_Add_Phuong_Thuc_Thanh_Toan') }}">
@@ -52,16 +56,12 @@
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten }}</td>
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
+                                <a class="btn btn-success" style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
                         </td>
                         <td>
-                            <button class="btn btn-danger">
-                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
+                                <a class="btn btn-danger" style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
                         </td>
 
                     </tr>
