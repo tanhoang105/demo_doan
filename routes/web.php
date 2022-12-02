@@ -107,6 +107,8 @@ Route::prefix('/admin')->group(function () {
         Route::put('/updateStatus/{doilop}', [DoiLopKhoaController::class, 'updateStatus'])->name('updateStatus_doilop');
         Route::match(['get', 'post'], '/add-dang-ky', [DoiLopKhoaController::class, 'create'])->name('Add_doi_lop');
         Route::post('store_doi_khoa', [DoiLopKhoaController::class, 'store'])->name('store_doi_khoa');
+        Route::get('Xoa_Yc_doi_Khoa_Hoc/{id}', [DoiLopKhoaController::class, 'Xoa_Yc_doi_Khoa_Hoc'])->name('Xoa_Yc_doi_Khoa_Hoc');
+
     });
 
     Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {

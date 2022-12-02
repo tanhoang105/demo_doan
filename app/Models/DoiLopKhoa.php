@@ -10,5 +10,11 @@ class DoiLopKhoa extends Model
     use HasFactory;
     protected $table = 'doi_lop_khoa';
     protected $guarded = [];
-
+    public function scopeSearch($query) {
+        if($key = request()->search){
+            $query = $query->where('id_user','like', '%'.$key.'%');
+        }
+        // dd($query);
+        return $query;
+    }
 }

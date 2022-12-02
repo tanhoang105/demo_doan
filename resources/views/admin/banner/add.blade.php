@@ -40,7 +40,9 @@ s
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+
         <a class="btn btn-danger" href="{{ route('route_BE_Admin_Banner') }}">Hủy</a>
+
     </form>
 
     <script>
