@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\GhiNo;
 use App\Models\GiangVien;
 use App\Models\HocVien;
 use App\Models\User;
@@ -35,7 +36,7 @@ class TaiKhoanController extends Controller
     public function index(Request $request)
     {
 
-        $this->authorize(mb_strtoupper('xem tài khoản') );
+        $this->authorize(mb_strtoupper('xem tài khoản'));
 
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
@@ -63,11 +64,12 @@ class TaiKhoanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         // dd(Auth::user()->id);
         // $vaitro = User::find(Auth::user()->id)->role;
         // dd($vaitro->permissions);
 
-        $this->authorize(mb_strtoupper('thêm tài khoản') );
+        $this->authorize(mb_strtoupper('thêm tài khoản'));
 
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
         //        dd($this->v['vaitro']);
@@ -105,20 +107,29 @@ class TaiKhoanController extends Controller
                         'sdt' => $params['cols']['sdt'],
                         // 'hinh_anh' => $params['cols']['hinh_anh'],
                     ]);
-                   
                 }
                 if (!strcasecmp($vaitro->ten_vai_tro, 'giảng viên')) {
                     $this->giangvien->insert([
-                        'id_user' => $res , 
+                        'id_user' => $res,
                         'ten_giang_vien' => $params['cols']['name'],
-                        'dia_chi'=> $params['cols']['dia_chi'],
+                        'dia_chi' => $params['cols']['dia_chi'],
                         'email' => $params['cols']['email'],
                         'sdt' => $params['cols']['sdt'],
 
                     ]);
                 }
+                // them tk ghi no
+                $data = User::where('users.email', '=', $request->email)
+                    ->get();
 
-
+                // dd($data);
+                foreach ($data as $value) {
+                    $ghino = new GhiNo();
+                    $ghino->user_id = $value->id;
+                    $ghino->tien_no = 0;
+                    $ghino->trang_thai = 0;
+                    $ghino->save();
+                }
                 Session::flash('success', 'Thêm thành công');
                 return redirect()->route('route_BE_Admin_Tai_Khoan');
             } else {
@@ -150,7 +161,7 @@ class TaiKhoanController extends Controller
     public function edit($id, Request $request)
     {
         // dd(123);
-        $this->authorize(mb_strtoupper('edit tài khoản') );
+        $this->authorize(mb_strtoupper('edit tài khoản'));
 
         if ($id) {
             $request->session()->put('id', $id);
@@ -177,7 +188,7 @@ class TaiKhoanController extends Controller
      */
     public function update(Request $request)
     {
-        $this->authorize(mb_strtoupper('update tài khoản') );
+        $this->authorize(mb_strtoupper('update tài khoản'));
 
         if (session('id')) {
             $id = session('id');
@@ -212,10 +223,10 @@ class TaiKhoanController extends Controller
             $res = $this->taikhoan->saveupdate($params);
             if ($res > 0) {
                 // if($)
-                if($tkCurrent->vai_tro_id == 2){
+                if ($tkCurrent->vai_tro_id == 2) {
                     // giảng viên 
                     GiangVien::where('id_user', $id)->update([
-                       
+
                         'ten_giang_vien' => $params['cols']['name'],
                         'dia_chi' => $params['cols']['dia_chi'],
                         'email' => $params['cols']['email'],
@@ -223,7 +234,7 @@ class TaiKhoanController extends Controller
                         'hinh_anh' => $params['cols']['hinh_anh'],
                     ]);
                 }
-                if($tkCurrent->vai_tro_id == 2){
+                if ($tkCurrent->vai_tro_id == 2) {
                     // giảng viên 
                     HocVien::where('user_id', $id)->update([
                         'user_id' => $id,
@@ -252,12 +263,12 @@ class TaiKhoanController extends Controller
     public function destroy($id)
     {
         //
-        $this->authorize(mb_strtoupper('xóa tài khoản') );
+        $this->authorize(mb_strtoupper('xóa tài khoản'));
 
         if ($id) {
             $res = $this->taikhoan->remove($id);
             // tìm học viên tương ứng 
-            
+
             if ($res > 0) {
 
                 // xóa những học viên giảng viên tương ứng
@@ -278,31 +289,31 @@ class TaiKhoanController extends Controller
         return $file->storeAs('imageTaiKhoan', $filename,  'public');
     }
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa tài khoản') );
+        $this->authorize(mb_strtoupper('xóa tài khoản'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->taikhoan->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 // khi xóa tài khoản thành công thì xóa những học viên và giảng viên tương ứng 
                 $this->hocvien->remoAll($params);
                 $this->giangvien->remoAll($params);
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
     }
 }

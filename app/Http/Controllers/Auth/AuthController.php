@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\Message;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DangkyTKRequest;
 use App\Models\GhiNo;
 use App\Models\User;
 use Carbon\Carbon;
@@ -109,9 +110,9 @@ class AuthController extends Controller
     {
         return view('auth.dang-ky');
     }
-    public function store(Request $request)
+    public function store(DangkyTKRequest $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $request->hinh_anh = 'https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-thumbnail.png';
         $user = new User();
         // $array = array_merge($request->all());
@@ -120,7 +121,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->vai_tro_id = 4;
         // 3. Lưu $user vào CSDL
-        $user->save();
+        $user->save();  
         $data = User::where('users.email','=',$request->email)
         ->get();
 
