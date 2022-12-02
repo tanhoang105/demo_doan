@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ngày thanh toán</label>
+                    <label for="chuyenBay" class="form-label">Ngày thanh toán <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_thanh_toan') ?? (request()->ngay_thanh_toan ?? $res->ngay_thanh_toan) }}"
                         type="date" name="ngay_thanh_toan" class="form-control" id=""
                         aria-describedby="emailHelp">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Phương thức thanh toán</label>
+                    <label for="chuyenBay" class="form-label">Phương thức thanh toán <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_phuong_thuc_thanh_toan" id="">
                         @foreach ($phuongthucthanhtoan as $item)
                             @if ($item->id == $res->id_phuong_thuc_thanh_toan)
@@ -48,12 +48,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Giá</label>
+                    <label for="chuyenBay" class="form-label">Giá <span class="text-danger">*</span></label>
                     <input class="form-control" type="text" name="gia" id="" value="{{ $res->gia }}">
                     @error('gia')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
+
+            </div>
+
+            <div class="col-6">
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô tả</label>
@@ -62,12 +66,12 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
             </div>
 
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Cập nhập</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{ route('route_BE_Admin_List_Thanh_Toan') }} ">Quay lại </a>
+
 
     </form>
 @endsection

@@ -39,7 +39,7 @@ class VaitroRequest extends FormRequest
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'ten_vai_tro' => 'required | min:4| unique:vai_tro,ten_vai_tro',
+                            'ten_vai_tro' => 'required | min:4',
                         ];
                         break;
 

@@ -77,16 +77,14 @@
                             @endforeach
                         </td>
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
+                          
+                                <a class="btn btn-success" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Lop', ['id' => $item->id_lop]) }}">
                                     <i class="fas fa-edit "></i>Sửa</a>
-                            </button>
+                            
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
+                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
                         </td>
 
                     </tr>
@@ -99,18 +97,7 @@
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $list->appends('params')->links() }}
-            {{-- <div class="d-flex flex-row-reverse align-items-center justify-content-between flex-wrap">
-                <button style="margin-right : 55px" class="btn btn-light"><a
-                        href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 1]) }} ">
-                        Lớp chưa có giảng viên</a></button>
-                <button style="margin-right : 55px" class="btn btn-light"><a
-                        href=" {{ route('route_BE_Admin_List_Lop', ['checkgv' => 2]) }}">
-                        Lớp có giảng viên</a></button>
-                <button style="margin-right : 55px" class="btn btn-light"><a
-                        href=" {{ route('route_BE_Admin_List_Lop') }}">
-                        Tất cả lớp học</a></button>
-
-            </div> --}}
+            
 
         </div>
 

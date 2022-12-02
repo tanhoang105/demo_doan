@@ -142,7 +142,14 @@ class CapQuyenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $res = $this->cap->remove($id);
+        // if ($res > 0) {
+        //     Session::flash('success', "Xóa thành công");
+        //     return back();
+        // } else {
+        //     Session::flash('error', 'Xóa không thành công');
+        //     return back();
+        // }
     }
 
     public function detail($id, Request $request)

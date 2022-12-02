@@ -145,7 +145,6 @@
                     <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
                                 href="{{ route('route_BE_Admin_Xoa_Yc_doi_Khoa_Hoc', ['id' => $item->id]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
-
                 </tr>
             @endforeach
 

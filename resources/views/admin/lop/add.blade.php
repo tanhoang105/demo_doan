@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Tên Lớp</label>
+                    <label for="chuyenBay" class="form-label">Tên Lớp <span class="text-danger">*</span></label>
                     <input value="{{ old('ten_lop') ?? request()->ten_lop }}" type="text" name="ten_lop"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Lịch học</label>
+                    <label for="chuyenBay" class="form-label">Lịch học <span class="text-danger">*</span></label>
                     <select class="form-control" name="ca_thu_id" id="">
-                        <option value="">Chọn lịch học</option>
+                        <option value="0">--- Chọn lịch học ---</option>
                         @foreach ($cathu as $item)
                             <option value="{{ $item->id }}">
                                
@@ -82,25 +82,27 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Khóa học</label>
+                    <label for="chuyenBay" class="form-label">Khóa học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_khoa_hoc" id="">
+                            <option value="0">--- Chọn khóa học ---</option>
                         @foreach ($khoahoc as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
                         @endforeach
                     </select>
-                    @error('ten_khoa_hoc')
+                    @error('id_khoa_hoc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Giảng Viên</label>
+                    <label for="chuyenBay" class="form-label">Giảng Viên <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_giang_vien" id="">
+                            <option value="0">--- Chọn giảng viên ---</option>
                         @foreach ($giangvien as $item)
                             <option value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
                         @endforeach
                     </select>
-                    @error('ten_khoa_hoc')
+                    @error('id_giang_vien')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
@@ -110,16 +112,16 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Số ghế </label>
-                    <input class="form-control" type="number" name="so_luong" id="">
+                    <label for="" class="form-label">Số ghế <span class="text-danger">*</span></label>
+                    <input value="{{ old('so_luong') ?? request()->so_luong }}" class="form-control" type="number" name="so_luong" id="">
                     @error('so_luong')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ngày bắt đầu</label>
-                    <input class="form-control" type="date" name="ngay_bat_dau" id="">
+                    <label for="" class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
+                    <input value="{{ old('ngay_bat_dau') ?? request()->ngay_bat_dau }}" class="form-control" type="date" name="ngay_bat_dau" id="">
                     @error('ngay_bat_dau')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -127,8 +129,8 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ngày kết thúc</label>
-                    <input class="form-control" type="date" name="ngay_ket_thuc" id="">
+                    <label for="" class="form-label">Ngày kết thúc <span class="text-danger">*</span></label>
+                    <input value="{{ old('ngay_ket_thuc') ?? request()->ngay_ket_thuc }}" class="form-control" type="date" name="ngay_ket_thuc" id="">
                     @error('ngay_ket_thuc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -139,7 +141,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button" class="btn btn-danger">Hủy</button></a>
+        <a class="btn btn-danger" href=" {{ route('route_BE_Admin_List_Lop') }} ">Hủy</a>
 
     </form>
 @endsection

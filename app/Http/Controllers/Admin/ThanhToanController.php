@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ThanhToanRequest;
 use App\Models\HocVien;
 use App\Models\Lop;
 use App\Models\PhuongThucThanhToan;
@@ -58,7 +59,7 @@ class ThanhToanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ThanhToanRequest $request)
     {
         $this->v['phuongthucthanhtoan']  = $this->phuongthucthanhtoan->index(null, false, null);
 
@@ -117,8 +118,10 @@ class ThanhToanController extends Controller
             if ($res) {
 
                 $this->v['res'] = $res;
+                // dd(123);
                 return view('admin.thanhtoan.update', $this->v);
             } else {
+                // dd(123);
                 Session::flash('error', "Lỗi hiển thị");
                 return back();
             }

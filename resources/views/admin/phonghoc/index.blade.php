@@ -1,4 +1,8 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_Phong_Hoc') }}
+@endsection
+
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Phong_Hoc') }}">
@@ -32,7 +36,7 @@
                 <tr>
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col"> </th>
+                    <th scope="col">Tên lớp</th>
                     <th scope="col">Mô Tả </th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
@@ -51,17 +55,13 @@
                         <td> {!! $item->mo_ta !!}</td>
 
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}">
+                                <a class="btn btn-success" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Phong_Hoc', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa </a>
 
-                            </button>
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
+                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
                         </td>
                     </tr>
                 @endforeach

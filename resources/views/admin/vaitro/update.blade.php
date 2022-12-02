@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Tên Vai Tro</label>
+                    <label for="chuyenBay" class="form-label">Tên Vai Trò <span class="text-danger">*</span></label>
                     <input value="{{ old('ten_vai_tro') ?? request()->ten_vai_tro ?? $detail->ten_vai_tro }}" type="text" name="ten_vai_tro"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -46,6 +46,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Vai_Tro')}} ">Quay lại </a>
+
     </form>
     {{-- <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>

@@ -1,4 +1,8 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}
+@endsection
+
 @section('content')
 <h2 style="text-align: center;padding-top: 20px; margin-bottom: 20px">Quản Lý Số dư tài khoản</h2>
     {{-- <div class="row p-3">

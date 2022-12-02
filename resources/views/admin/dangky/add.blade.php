@@ -84,6 +84,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_List_Dang_Ky')}} ">Quay lại </a>
+       
 
     </form>
 @endsection

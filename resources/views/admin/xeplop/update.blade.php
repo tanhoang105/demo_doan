@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ngày đăng ký</label>
+                    <label for="chuyenBay" class="form-label">Ngày đăng ký <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_dang_ky') ?? (request()->ngay_dang_ky ?? $res->ngay_dang_ky) }}"
                         type="date" name="ngay_dang_ky" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Lớp học</label>
+                    <label for="chuyenBay" class="form-label">Lớp học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="">
                         @foreach ($listLop as $item)
                             @if ($res->id_lop == $item->id)
@@ -51,7 +51,7 @@
 
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Phòng học</label>
+                    <label for="" class="form-label">Phòng học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_phong_hoc" id="">
                         @foreach ($listPhongHoc as $item)
                             @if ($res->id_phong_hoc == $item->id)
@@ -72,6 +72,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Xep_Lop')}} ">Quay lại </a>
+
 
     </form>
 @endsection

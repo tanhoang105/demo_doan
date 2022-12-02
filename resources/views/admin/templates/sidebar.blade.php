@@ -354,7 +354,7 @@
 
               @endhasRoles
 
-              @hasRoles(['admin','giảng viên'])
+              @hasRoles(['giảng viên'])
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_Lich_Day_Giang_Vien') }} " class="nav-link">
                       <i class="nav-icon fas fa-calendar"></i>

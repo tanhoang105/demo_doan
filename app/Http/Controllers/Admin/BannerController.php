@@ -106,9 +106,11 @@ class BannerController extends Controller
 //        dd($id);
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
         if ($id) {
+            // dd($id);
             $this->v['params'] = $request->all();
             $request->session()->put('id', $id);
             $banner = $this->banner->show($id);
+            // dd($banner);
             $this->v['banner'] = $banner;
             return view('admin.banner.update', $this->v);
         } else {

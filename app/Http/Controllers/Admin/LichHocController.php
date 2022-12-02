@@ -44,6 +44,7 @@ class LichHocController extends Controller
        
         unset($this->v['params']['_token']);
         $this->v['list']  = $this->lop->index($this->v['params'] , true , 10);
+
         return view('admin.lich.listlop', $this->v);
         
     }
