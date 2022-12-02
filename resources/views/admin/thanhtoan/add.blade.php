@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ngày thanh toán</label>
+                    <label for="chuyenBay" class="form-label">Ngày thanh toán <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_thanh_toan') ?? request()->ngay_thanh_toan }}" type="date"
                         name="ngay_thanh_toan" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,8 +31,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Phương thức thanh toán</label>
+                    <label for="chuyenBay" class="form-label">Phương thức thanh toán <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_phuong_thuc_thanh_toan" id="">
+                            <option value="0">--- Chọn phương thức thanh toán ---</option>
                         @foreach ($phuongthucthanhtoan as $item)
                             <option value="{{ $item->id }}">{{ $item->ten }}</option>
                         @endforeach
@@ -43,13 +44,14 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Giá</label>
+                    <label for="chuyenBay" class="form-label">Giá <span class="text-danger">*</span></label>
                     <input class="form-control" type="text" name="gia" id="">
                     @error('gia')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
+            </div>
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô tả</label>
                     <input class="form-control" type="text" name="mo_ta" id="">
@@ -57,8 +59,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
             </div>
 
         </div>
@@ -67,4 +67,5 @@
 
 
     </form>
+
 @endsection

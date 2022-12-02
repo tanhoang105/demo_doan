@@ -1,6 +1,6 @@
 @extends('Admin.templates.layout')
 @section('form-search')
-    {{ route('route_BE_Admin_List_Thu_Hoc') }}
+    {{ route('route_BE_Admin_Add_Thu_Hoc') }}
 @endsection
 @section('content')
     <div class="row p-3">

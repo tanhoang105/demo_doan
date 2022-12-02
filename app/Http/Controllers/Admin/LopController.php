@@ -269,7 +269,7 @@ class LopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(LopRequest $request)
     {
 
         $this->authorize(mb_strtoupper('update lớp học'));
@@ -384,7 +384,7 @@ class LopController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store(LopRequest $request)
     {
         //
         $this->authorize(mb_strtoupper('thêm lớp học'));

@@ -32,7 +32,7 @@ class DanhMucRequest extends FormRequest
                         // nếu là method thêm mới bản ghi
                         case 'store':
                                 $rules = [
-                                    'ten_danh_muc' => 'required | min:4 | unique:danh_muc',
+                                    'ten_danh_muc' => 'required | min:4 | unique:danh_muc,ten_danh_muc',
                                 ];
                             break;
 

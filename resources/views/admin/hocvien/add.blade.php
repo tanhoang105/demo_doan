@@ -29,7 +29,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên tài khoản</label>
+                    <label for="" class="form-label">Tên tài khoản <span class="text-danger">*</span></label>
                     <input value="{{ old('name') ?? request()->name }}" type="text" name="name" class="form-control"
                         id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mật khẩu</label>
+                    <label for="" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
                     <input value="{{ old('password') ?? request()->name }}" type="password" name="password"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -50,7 +50,7 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Email</label>
+                    <label for="" class="form-label">Email <span class="text-danger">*</span></label>
                     <input value="{{ old('email') ?? request()->email }}" type="email" name="email" class="form-control"
                         id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

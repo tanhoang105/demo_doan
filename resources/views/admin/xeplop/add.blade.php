@@ -24,7 +24,7 @@
                 
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ngày đăng ký</label>
+                    <label for="chuyenBay" class="form-label">Ngày đăng ký <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_dang_ky') ?? request()->ngay_dang_ky }}" type="date" name="ngay_dang_ky"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -34,8 +34,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Lớp học</label>
+                    <label for="chuyenBay" class="form-label">Lớp học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="">
+                            <option value="0">--- Chọn lớp học ---</option>
                         @foreach ($lophoc as $item)
                             <option value="{{$item->id}}">{{ $item->ten_lop }}</option>
                         @endforeach
@@ -48,13 +49,14 @@
 
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Phòng học</label>
+                    <label for="" class="form-label">Phòng học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_phong_hoc" id="">
+                        <option value="0">--- Chọn phòng học ---</option>
                         @foreach ($phonghoc as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_phong }}</option>
                         @endforeach
                     </select>
-                    @error('gia')
+                    @error('id_phong_hoc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>

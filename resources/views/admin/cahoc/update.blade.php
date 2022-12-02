@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Ca học</label>
+                    <label for="chuyenBay" class="form-label">Ca học <span class="text-danger">*</span></label>
                     <input value="{{ old('ca_hoc') ?? request()->ca_hoc ?? $cahoc->ca_hoc }}" type="text" name="ca_hoc"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,6 +31,24 @@
                 </div>
 
                 <div class="mb-3">
+
+                    <label for="chuyenBay" class="form-label">Thời gian bắt đầu</label>
+                    <input value="{{ old('thoi_gian_bat_dau') ?? request()->thoi_gian_bat_dau  ?? $cahoc->thoi_gian_bat_dau  }}" type="time" name="thoi_gian_bat_dau"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('thoi_gian_bat_dau')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Thời gian kết thúc</label>
+                    <input value="{{ old('thoi_gian_ket_thuc') ?? request()->thoi_gian_ket_thuc ?? $cahoc->thoi_gian_ket_thuc }}" type="time" name="thoi_gian_ket_thuc"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                    @error('thoi_gian_ket_thuc')
+
                     <label for="chuyenBay" class="form-label">Thời gian bắt đầu</label>
                     <input value="{{ old('thoi_gian_bat_dau') ?? request()->thoi_gian_bat_dau  ?? $cahoc->thoi_gian_bat_dau  }}" type="time" name="thoi_gian_bat_dau"
                         class="form-control" id="" aria-describedby="emailHelp">
@@ -51,6 +69,15 @@
                     @enderror
                 </div>
 
+
+                <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Thời gian kết thúc <span class="text-danger">*</span></label>
+                    <input value="{{ old('thoi_gian_ket_thuc') ?? request()->thoi_gian_ket_thuc }}" type="time" name="thoi_gian_ket_thuc"
+                        class="form-control" id="" aria-describedby="emailHelp">
+                    @error('thoi_gian_ket_thuc')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
 
             </div>
 

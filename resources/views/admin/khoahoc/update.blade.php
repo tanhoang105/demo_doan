@@ -23,7 +23,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Tên Khóa Học</label>
+                    <label for="chuyenBay" class="form-label">Tên Khóa Học <span class="text-danger">*</span></label>
                     <input value="{{ old('ten_khoa_hoc') ?? $khoahoc->ten_khoa_hoc }}" type="text" name="ten_khoa_hoc"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Danh Mục</label>
+                    <label for="chuyenBay" class="form-label">Danh Mục <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_danh_muc" id="">
                         @foreach ($danhmuc as $item)
                             @if ($item->id == $khoahoc->id_danh_muc)
@@ -43,12 +43,9 @@
                             @endif
                         @endforeach
                     </select>
-                    {{-- @error('ten_khoa_hoc')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror --}}
 
                     <div class="mb-3">
-                        <label for="chuyenBay" class="form-label">Giá Khóa Học</label>
+                        <label for="chuyenBay" class="form-label">Giá Khóa Học <span class="text-danger">*</span></label>
                         <input value="{{ old('gia_khoa_hoc') ?? request()->gia_khoa_hoc ?? $khoahoc->gia_khoa_hoc }}" type="text" name="gia_khoa_hoc"
                             class="form-control" id="" aria-describedby="emailHelp">
                         {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

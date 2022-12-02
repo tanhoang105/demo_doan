@@ -36,7 +36,7 @@
                 <tr>
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col"> </th>
+                    <th scope="col">Tên lớp</th>
                     <th scope="col">Mô Tả </th>
                     <th scope="col">Sửa</th>
                     <th scope="col">

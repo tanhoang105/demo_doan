@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên Lớp </label>
+                    <label for="" class="form-label">Tên Lớp <span class="text-danger">*</span></label>
                     <input value="{{ old('ten_lop') ?? (request()->ten_lop ?? $lop->ten_lop) }}" type="text"
                         name="ten_lop" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Khóa học</label>
+                    <label for="" class="form-label">Khóa học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_khoa_hoc" id="">
                         @foreach ($khoahoc as $item)
                             @if ($item->id == $lop->id_khoa_hoc)
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Giảng Viên</label>
+                    <label for="" class="form-label">Giảng Viên <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_giang_vien" id="">
                       
                         @foreach ($giangvien as $item)
@@ -68,7 +68,7 @@
                
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Số ghế </label>
+                    <label for="" class="form-label">Số ghế <span class="text-danger">*</span></label>
                     <input value=" {{ $lop->so_luong }} " class="form-control" type="text" name="so_luong"
                         id="">
                     @error('so_luong')
@@ -79,7 +79,7 @@
                
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ngày bắt đầu</label>
+                    <label for="" class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_bat_dau') ?? $lop->ngay_bat_dau }}" type="date" name="ngay_bat_dau"
                         class="form-control" id="" aria-describedby="">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -90,7 +90,7 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ngày kết thúc</label>
+                    <label for="" class="form-label">Ngày kết thúc <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_ket_thuc') ?? $lop->ngay_ket_thuc ?? request()->ngay_ket_thuc}}" type="date" name="ngay_ket_thuc"
                         class="form-control" id="" aria-describedby="">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -105,7 +105,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
         <a class="btn btn-danger" href=" {{ route('route_BE_Admin_List_Lop') }} ">Hủy</a>
-
 
     </form>
 @endsection

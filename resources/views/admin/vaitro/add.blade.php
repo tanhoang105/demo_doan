@@ -18,7 +18,7 @@
             @csrf
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Tên Vai Tro</label>
+                    <label for="chuyenBay" class="form-label">Tên Vai Trò <span class="text-danger">*</span></label>
                     <input value="{{ old('ten_vai_tro') ?? request()->ten_vai_tro }}" type="text" name="ten_vai_tro"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

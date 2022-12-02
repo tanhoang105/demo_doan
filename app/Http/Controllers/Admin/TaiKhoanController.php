@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TaiKhoanRequest;
 use App\Models\GiangVien;
 use App\Models\HocVien;
 use App\Models\User;
@@ -61,7 +62,7 @@ class TaiKhoanController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaiKhoanRequest $request)
     {
         // dd(Auth::user()->id);
         // $vaitro = User::find(Auth::user()->id)->role;
@@ -175,7 +176,7 @@ class TaiKhoanController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(TaiKhoanRequest $request)
     {
         $this->authorize(mb_strtoupper('update tài khoản') );
 
