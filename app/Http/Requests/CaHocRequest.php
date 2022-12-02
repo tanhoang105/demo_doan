@@ -33,7 +33,7 @@ class CaHocRequest extends FormRequest
                         $rules = [
                             'ca_hoc' => 'required | unique:ca_hoc,ca_hoc',
                             'thoi_gian_bat_dau' => 'required | unique:ca_hoc,thoi_gian_bat_dau',
-                            'thoi_gian_ket_thuc' => 'required | unique:ca_hoc,thoi_gian_ket_thuc',
+                            'thoi_gian_ket_thuc' => 'required | after:thoi_gian_bat_dau',
                         ];
                         break;
                     case 'update':
@@ -58,6 +58,7 @@ class CaHocRequest extends FormRequest
         return [
             'required' => ':attribute bắt buộc phải nhập',
             'unique' => ':attribute đã tồn tại',
+            'thoi_gian_ket_thuc.after' => ':attribute không thể trước thời gian bắt đầu',
         ];
     }
     // 
@@ -66,7 +67,8 @@ class CaHocRequest extends FormRequest
         return [
 
             'ca_hoc' => 'Ca học',
-            'thoi_gian_bat_dau' => 'thời gian bắt đầu',
+            'thoi_gian_bat_dau' => 'Thời gian bắt đầu',
+            'thoi_gian_ket_thuc' => 'Thời gian kết thúc',
         ];
     }
 }

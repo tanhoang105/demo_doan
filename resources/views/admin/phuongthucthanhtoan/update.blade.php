@@ -32,6 +32,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Cập nhập</button>
+        <a href="{{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
 
     </form>
 @endsection

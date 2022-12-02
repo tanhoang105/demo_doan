@@ -29,7 +29,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên tài khoản</label>
+                    <label for="" class="form-label">Tên tài khoản <span class="text-danger">*</span></label>
                     <input value="{{ old('name') ?? request()->name }}" type="text"
                            name="name" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mật khẩu</label>
+                    <label for="" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
                     <input value="{{ old('password') ?? request()->name }}" type="password"
                            name="password" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -50,7 +50,7 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Email</label>
+                    <label for="" class="form-label">Email <span class="text-danger">*</span></label>
                     <input value="{{ old('email') ?? request()->email }}" type="email"
                            name="email" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -67,7 +67,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số điện thoại</label>
-                    <input type="text" name="sdt" id="" class="form-control"></input>
+                    <input type="text" name="sdt" id="" class="form-control">
                     @error('sdt')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -84,8 +84,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Vai trò</label>
+                    <label for="" class="form-label">Vai trò <span class="text-danger">*</span></label>
                     <select class="form-control" name="vai_tro_id" id="">
+                            <option value="0">--- Chọn vai trò ---</option>
                         @foreach($vaitro as $item)
                             <option value=" {{$item->id}}"> {{$item->ten_vai_tro}} </option>
                         @endforeach
@@ -111,6 +112,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('route_BE_Admin_Tai_Khoan') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+        
 
     </form>
 @endsection

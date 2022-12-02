@@ -34,6 +34,8 @@
             
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+        
           
     </form>
 

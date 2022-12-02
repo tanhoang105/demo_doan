@@ -20,7 +20,7 @@
             @csrf
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên hình thức thành toán</label>
+                    <label for="" class="form-label">Tên hình thức thành toán <span class="text-danger">*</span></label>
                     <input value="{{ old('ten') ?? request()->ten }}" type="text"
                         name="ten" class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -31,6 +31,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a href="{{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
 
     </form>
 @endsection

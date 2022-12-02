@@ -41,11 +41,13 @@
                 <th scope="row"> {{ $loop->iteration }}</th>
                 <td> <img src="{{ Storage::url($item->anh_banner) }}" style="width: 100px;"> </td>
                 <td>
-                   <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} "><button class="btn btn-success"> Sửa </button></a>
+                   <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} ">
+                    <button class="btn btn-success"> Sửa </button></a>
                 </td>
                 <td>
-                    <a href=" {{ route('route_BE_Admin_Xoa_Banner',['id' => $item->id] ) }} "><button class="btn btn-danger"
-                                                                                                      onclick="return confirm('Bạn có chắc muốn xóa ?')"> Xóa </button></a>
+                    <a href=" {{ route('route_BE_Admin_Xoa_Banner',['id' => $item->id] ) }} ">
+                        <button class="btn btn-danger"
+                        onclick="return confirm('Bạn có chắc muốn xóa ?')"> Xóa </button></a>
                 </td>
 
             </tr>

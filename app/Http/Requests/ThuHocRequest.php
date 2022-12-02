@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class KhoahocRequest extends FormRequest
+class ThuHocRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,19 +32,16 @@ class KhoahocRequest extends FormRequest
                         // nếu là method thêm mới bản ghi
                         case 'store':
                                 $rules = [
-                                    'ten_khoa_hoc' => 'required | unique:khoa_hoc,ten_khoa_hoc',
-                                    'id_danh_muc' => 'numeric|min:1',
-                                    'gia_khoa_hoc' => 'required | numeric|min:1000',
-                                    'hinh_anh' => 'required'
+                                    'ma_thu' => 'required | unique:thu_hoc',
+                                    'ten_thu' => 'required | unique:thu_hoc',
                                 ];
                             break;
 
                             // nếu là method chỉnh sửa bản ghi
                             case 'update':
                                 $rules = [
-                                    'ten_khoa_hoc' => 'required',
-                                    'gia_khoa_hoc' => 'required | numeric|min:1000',
-                                    // 'hinh_anh' => 'required'
+                                    'ma_thu' => 'required',
+                                    'ten_thu' => 'required',
                                 ];
                             break;    
                         
@@ -61,27 +58,13 @@ class KhoahocRequest extends FormRequest
         return $rules ;
     }
 
-
     public function messages()
     {
         return [
-            'required' => ':attribute bắt buộc phải nhập',
-            'min' => ':attribute lớn hơn 20 ký tự',
-            'unique' => ':attribute đã tồn tại',
-            'id_danh_muc.min' => 'Danh mục bắt buộc phải chọn',
-            'gia_khoa_hoc.required' => 'Giá tiền bắt buộc phải nhập',
-            'gia_khoa_hoc.min' => 'Giá tiền không được nhỏ hơn 1000',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'ten_khoa_hoc' => 'Tên khóa học',
-            'ten_danh_muc' => 'Khóa học',
-            'mo_ta' => 'Mô tả',
-            'hinh_anh' => 'Hình ảnh',
-
+            'ma_thu.required' => 'Mã thứ bắt buộc phải nhập',
+            'ten_thu.required' => 'Tên thứ bắt buộc phải nhập',
+            'ma_thu.unique' => 'Mã thứ này đã tồn tại',
+            'ten_thu.unique' => 'Tên thứ thứ này đã tồn tại',
         ];
     }
 }

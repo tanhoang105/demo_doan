@@ -27,7 +27,8 @@
             </div>
             
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
           
     </form>
 

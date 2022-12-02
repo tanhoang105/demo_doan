@@ -58,7 +58,7 @@
                             </button>
                         </td>
                         <td>
-                            <button class="btn btn-danger">
+                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
                                 <a style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Phuong_Thuc_Thanh_Toan', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
                             </button>

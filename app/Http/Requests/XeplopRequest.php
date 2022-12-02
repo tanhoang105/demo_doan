@@ -34,6 +34,9 @@ class XeplopRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'ngay_dang_ky' => 'required | after:today',
+                            'id_lop' => 'numeric|min:1',
+                            'id_phong_hoc' => 'numeric|min:1',
+
                             // 'id_lop' => [
                             //     function ($attribute, $value, $fali) {
                             //         $data = XepLop::all();
@@ -57,6 +60,8 @@ class XeplopRequest extends FormRequest
                     case 'update':
                         $rules = [
                             'ngay_dang_ky' => 'required | after:today',
+                            'id_lop' => 'numeric|min:1',
+                            'id_phong_hoc' => 'numeric|min:1',
                         ];
                         break;
 
@@ -78,8 +83,9 @@ class XeplopRequest extends FormRequest
     {
         return [
             'required' => ':attribute bắt buộc phải nhập',
-            'after' => 'thông tin :attribute sai'
-
+            'ngay_dang_ky.after' => 'Ngày đăng ký phải từ sau ngày hôm nay',
+            'id_lop.min' => 'Lớp bắt buộc phải chọn',
+            'id_phong_hoc.min' => 'Phòng học bắt buộc phải chọn',
         ];
     }
 
@@ -87,7 +93,7 @@ class XeplopRequest extends FormRequest
     {
         return [
 
-            'ngay_dang_ky' => 'ngày đăng kí',
+            'ngay_dang_ky' => 'Ngày đăng kí',
         ];
     }
 }
