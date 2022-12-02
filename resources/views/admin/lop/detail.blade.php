@@ -5,11 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="row p-3">
-        <a href="{{ route('route_BE_Admin_Add_Lop') }}">
-            <button class='btn btn-success'>  <i class="fas fa-plus "></i> Thêm</button>
-        </a>
-    </div>
+    
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">

@@ -59,6 +59,8 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Cập nhập</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_List_Ca_Thu')}} ">Quay lại </a>
+
 
 
 

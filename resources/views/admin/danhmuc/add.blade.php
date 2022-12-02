@@ -34,6 +34,7 @@
             
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_Admin_BE_Danh_Muc_Khoa_Hoc')}} ">Quay lại </a>
           
     </form>
 

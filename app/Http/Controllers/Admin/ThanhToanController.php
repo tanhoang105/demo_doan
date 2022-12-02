@@ -117,8 +117,10 @@ class ThanhToanController extends Controller
             if ($res) {
 
                 $this->v['res'] = $res;
+                // dd(123);
                 return view('admin.thanhtoan.update', $this->v);
             } else {
+                // dd(123);
                 Session::flash('error', "Lỗi hiển thị");
                 return back();
             }

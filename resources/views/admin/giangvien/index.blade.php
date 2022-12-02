@@ -1,4 +1,8 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_List_Giang_Vien') }}
+@endsection
+
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Giang_Vien') }}">
@@ -61,16 +65,16 @@
                             {{ $item->sdt_giang_vien }}
                         </td>
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color: #fff" href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
+                           
+                                <a class="btn btn-success" style="color: #fff" href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id_user]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
+                            
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
+                            
+                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>   
+                            
                         </td>
 
                     </tr>

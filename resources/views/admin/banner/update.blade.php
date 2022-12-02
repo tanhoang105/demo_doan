@@ -12,13 +12,14 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Edit_Banner') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Banner') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
                 <div class="mb-3">
                     <label for="" class="form-label">Ảnh Banner</label>
-                    <input value="{{ old('anh_banner' ?? $banner->anh_banner) }}" type="file"
+                    <img id="anh" width="1000px" src=" {{ Storage::url($banner->anh_banner) }} " alt="">
+                    <input id="hinhanh" value="{{ old('anh_banner' ?? $banner->anh_banner) }}" type="file"
                            name="anh_banner" class="form-control" id="" aria-describedby="">
                     @error('anh_banner')
                     <span style="color: red"> {{ $message }} </span>
@@ -28,6 +29,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Banner')}} ">Quay lại </a>
     </form>
 
 @endsection

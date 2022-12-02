@@ -63,18 +63,16 @@
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color: #fff"
+                                <a class="btn btn-success" style="color: #fff"
                                     href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color: #fff"
+                            
+                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff"
                                     href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
+                            
                         </td>
 
                     </tr>
