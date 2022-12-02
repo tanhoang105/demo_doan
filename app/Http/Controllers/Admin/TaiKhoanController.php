@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
 use App\Models\GhiNo;
-=======
 use App\Http\Requests\TaiKhoanRequest;
->>>>>>> 40bb04043b768d5a5a12d562a69220014dcf8f72
 use App\Models\GiangVien;
 use App\Models\HocVien;
 use App\Models\User;

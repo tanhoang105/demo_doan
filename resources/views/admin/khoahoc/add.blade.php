@@ -49,9 +49,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-                <button type="submit" class="btn btn-primary">Thêm</button>
-                <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
                 
             </div>
 
