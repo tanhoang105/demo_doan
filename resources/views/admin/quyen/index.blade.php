@@ -1,4 +1,8 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_List_Quyen') }}
+@endsection
+
 @section('content')
     <div class="row p-3">
         <button class="btn btn-primary"><a style="color: #fff" href=" {{ route('route_BE_Admin_Add_Quyen') }}">
@@ -52,15 +56,12 @@
                     <td> {{ $item->ten }}</td>
                     <td> {{ $item->trang_thai }}</td>
                     <td>
-                        <button class="btn btn-success">
-                            <a style="color:#fff" href="{{ route('route_BE_Admin_Edit_Quyen', ['id' => $item->id]) }}">
-                                <i class="fas fa-edit "></i> Sửa</a></button>
+                            <a class="btn btn-success" style="color:#fff" href="{{ route('route_BE_Admin_Edit_Quyen', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa</a>
                     </td>
                     <td>
-                        <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                            <a style="color:#fff" href="{{ route('route_BE_Admin_Xoa_Quyen', ['id' => $item->id]) }}">
+                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color:#fff" href="{{ route('route_BE_Admin_Xoa_Quyen', ['id' => $item->id]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a>
-                        </button>
                     </td>
 
                 </tr>

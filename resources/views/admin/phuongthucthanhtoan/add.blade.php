@@ -4,6 +4,10 @@
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
 
@@ -13,6 +17,10 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
         </div>
     @endif
     <form class="p-5" action=" {{ route('route_BE_Admin_Add_Phuong_Thuc_Thanh_Toan') }}" method="post" enctype="multipart/form-data">
@@ -31,7 +39,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Phuong_Thuc_Thanh_Toan')}} ">Quay lại </a>
 
     </form>
 @endsection

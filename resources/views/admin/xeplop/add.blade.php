@@ -1,4 +1,5 @@
 @extends('Admin.templates.layout')
+
 @section('content')
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))
@@ -65,7 +66,9 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('route_BE_Admin_Xep_Lop') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Xep_Lop')}} ">Quay lại </a>
+
+        
 
     </form>
 @endsection

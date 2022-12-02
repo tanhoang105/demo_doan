@@ -1,6 +1,9 @@
 @extends('Admin.templates.layout')
-@section('content')
 
+@section('form-search')
+    {{route('route_BE_Admin_Banner')}}
+@endsection
+@section('content')
     <div class="row p-3">
         <a href=" {{ route('route_BE_Admin_Add_Banner') }} "><button class="btn btn-primary">Thêm</button></a>
     </div>
@@ -28,30 +31,30 @@
     @endif
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th scope="col">STT</th>
-            <th scope="col">Ảnh Banner </th>
-            <th scope="col">Sửa</th>
-            <th scope="col">Xóa </th>
-        </tr>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh Banner </th>
+                <th scope="col">Sửa</th>
+                <th scope="col">Xóa </th>
+            </tr>
         </thead>
         <tbody>
-        @foreach ($list as $key => $item)
-            <tr>
-                <th scope="row"> {{ $loop->iteration }}</th>
-                <td> <img src="{{ Storage::url($item->anh_banner) }}" style="width: 100px;"> </td>
-                <td>
-                   <a href=" {{ route('route_BE_Admin_Edit_Banner',['id' => $item->id] ) }} ">
-                    <button class="btn btn-success"> Sửa </button></a>
-                </td>
-                <td>
-                    <a href=" {{ route('route_BE_Admin_Xoa_Banner',['id' => $item->id] ) }} ">
-                        <button class="btn btn-danger"
-                        onclick="return confirm('Bạn có chắc muốn xóa ?')"> Xóa </button></a>
-                </td>
+            @foreach ($list as $key => $item)
+                <tr>
+                    <th scope="row"> {{ $loop->iteration }}</th>
+                    <td> <img src="{{ Storage::url($item->anh_banner) }}" style="width: 100px;"> </td>
+                    <td>
+                        <a class="btn btn-success" style="color: aliceblue"
+                            href=" {{ route('route_BE_Admin_Edit_Banner', ['id' => $item->id]) }} ">Sửa</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" style="color: aliceblue"
+                            onclick="return confirm('Bạn có chắc muốn xóa ?')"
+                            href=" {{ route('route_BE_Admin_Xoa_Banner', ['id' => $item->id]) }} ">Xóa</a>
+                    </td>
 
-            </tr>
-        @endforeach
+                </tr>
+            @endforeach
 
         </tbody>
     </table>

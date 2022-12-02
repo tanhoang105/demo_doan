@@ -58,9 +58,12 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="" class="form-label">Ảnh</label><br>
-{{--                    <img width="200px" id="anh" src="" alt=""><br>--}}
-                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
-                        class="form-control" accept=".png, .jpg, .jpeg">
+                    {{--                    <img width="200px" id="anh" src="" alt=""><br> --}}
+                    <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%"
+                        width="100px" height="100px" alt="">
+
+                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file"
+                        name="hinh_anh" class="form-control" accept=".png, .jpg, .jpeg">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
                         <span style="color: red"> {{ $message }} </span>
@@ -69,17 +72,20 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Mô Tả</label>
-                    <textarea id="ckeditor2" class="form-control" name="mo_ta" id="" ></textarea>
+                    <textarea id="ckeditor2" class="form-control" name="mo_ta" id=""></textarea>
                     @error('mo_ta')
-                    <span style="color: red"> {{ $message }} </span>
-                @enderror
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
 
             </div>
 
         </div>
-        
+        <button type="submit" class="btn btn-primary">Thêm</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Khoa_Hoc')}} ">Quay lại </a>
+
+
     </form>
     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>

@@ -176,6 +176,7 @@
 
 
                     <button class="btn btn-primary" type="submit">Cấp quyền</button>
+                    <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_List_Cap_Quyen')}} ">Quay lại </a>
                 </form>
             </div>
         </div>
@@ -187,4 +188,5 @@
             {{-- {{ $list->appends('params')->links() }} --}}
         </div>
     </div>
+
 @endsection

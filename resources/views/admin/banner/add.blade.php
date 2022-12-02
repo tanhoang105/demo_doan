@@ -1,4 +1,5 @@
 @extends('Admin.templates.layout')
+s
 @section('content')
 
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
@@ -28,8 +29,7 @@
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Thêm</button>
-                <a href="{{ route('route_BE_Admin_Banner') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
+                
             </div>
 
             <div class="col-6">
@@ -39,7 +39,8 @@
             </div>
 
         </div>
-        
+        <button type="submit" class="btn btn-primary">Thêm</button>
+        <a class="btn btn-danger" href="{{ route('route_BE_Admin_Banner') }}">Hủy</a>
     </form>
 
     <script>

@@ -141,7 +141,7 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button" class="btn btn-danger">Hủy</button></a>
+        <a class="btn btn-danger" href=" {{ route('route_BE_Admin_List_Lop') }} ">Hủy</a>
 
     </form>
 @endsection

@@ -104,7 +104,12 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Cập Nhập</button>
+<<<<<<< HEAD
         <a href=" {{ route('route_BE_Admin_List_Lop') }} "><button type="button" class="btn btn-danger">Hủy</button></a>
+=======
+        <a class="btn btn-danger" href=" {{ route('route_BE_Admin_List_Lop') }} ">Hủy</a>
+
+>>>>>>> 7669b939b1c163a5461febac55504ff08d16e69c
 
     </form>
 @endsection

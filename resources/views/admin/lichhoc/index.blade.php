@@ -84,16 +84,12 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-success">
-                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
+                                <a class="btn btn-success" style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
-                            </button>
                         </td>
                         <td>
-                            <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger">
-                                <a style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
+                                <a  onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            </button>
                         </td>
 
                     </tr>

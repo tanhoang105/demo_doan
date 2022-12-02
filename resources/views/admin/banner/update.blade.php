@@ -17,27 +17,25 @@
             @csrf
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Ảnh Banner <span class="text-danger">*</span></label>
-                    <input value="{{ old('anh_banner' ?? $banner->anh_banner) }}" type="file"
+                    <label for="" class="form-label">Ảnh Banner</label>
+                    {{-- <img id="anh" width="1000px" src=" {{ Storage::url($banner->anh_banner) }} " alt=""> --}}
+                    <input id="hinhanh" value="{{ old('anh_banner' ?? $banner->anh_banner) }}" type="file"
                            name="anh_banner" class="form-control" id="" aria-describedby="" onchange="loadFile(event)">
                     @error('anh_banner')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-                <button type="submit" class="btn btn-primary">Cập Nhật</button>
-                <a href="{{ route('route_BE_Admin_Banner') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
             </div>
 
             <div class="col-6">
                 <div class="mb-3">
-                    <img id="preview" src="{{ Storage::url($banner->anh_banner)  }}" style="width: 130px;height: 130px;">
+                    <img id="preview" style="border-radius: 100%;width:130px;height: 130px;" src="{{ Storage::url($banner->anh_banner)  }}">
                 </div>
             </div>
 
         </div>
-        
-
+        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Banner')}} ">Quay lại </a>
     </form>
 
     <script>

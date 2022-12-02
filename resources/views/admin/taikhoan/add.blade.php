@@ -99,7 +99,8 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
-                    <input value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                    <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%" width="100px" height="100px" alt="">
+                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                            class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
@@ -112,8 +113,8 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('route_BE_Admin_Tai_Khoan') }}"><button type="button" class="btn btn-danger">Hủy</button></a>
-        
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Tai_Khoan')}} ">Quay lại </a>
+
 
     </form>
 @endsection

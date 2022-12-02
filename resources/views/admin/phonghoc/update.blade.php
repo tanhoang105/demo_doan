@@ -42,7 +42,10 @@
             </div>
             <input type="text" name="dia_chi" id="" hidden value="hà nội">
         </div>
-        
+        <button type="submit" class="btn btn-primary">Cập Nhập</button>
+        <a btn btn-danger href="{{ route('route_BE_Admin_Phong_Hoc') }}">
+            Hủy</a>
+
     </form>
     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
