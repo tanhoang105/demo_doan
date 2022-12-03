@@ -39,7 +39,7 @@ class XepLopController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(mb_strtoupper('xem xếp lớp') );
+        $this->authorize(mb_strtoupper('xem xếp lớp'));
 
         $this->v['params'] = $request->all();
 
@@ -69,7 +69,7 @@ class XepLopController extends Controller
     // sau khi nhập dữ liệu thêm và submit form 
     public function store(XeplopRequest $request)
     {
-        $this->authorize(mb_strtoupper('thêm xếp lớp') );
+        $this->authorize(mb_strtoupper('thêm xếp lớp'));
 
         //
         if ($request->isMethod('POST')) {
@@ -104,7 +104,17 @@ class XepLopController extends Controller
         $this->v['phonghoc'] = $this->phong_hoc->index(null, false, null);
         $this->v['cahoc'] = $this->ca_hoc->index(null, false, null);
         $this->v['lophoc'] = $this->lop_hoc->index(null, false, null);
-        // dd($this->v['giangvien']);
+        $this->v['lophocdaxep'] = $this->xep_lop->index(null, false, null);
+        // dd($this->v['lophocdaxep']);
+        $arrayLopChuaXep = [];
+        foreach ($this->v['lophoc'] as $itemLop) {
+            if ($this->xep_lop->checkLop($itemLop->id)) {
+            } else {
+                $arrayLopChuaXep[] =  $itemLop;
+            }
+        }
+        // dd($arrayLopChuaXep);
+        $this->v['lopxep'] =$arrayLopChuaXep;
         return view('admin.xeplop.add', $this->v);
     }
 
@@ -127,7 +137,7 @@ class XepLopController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('edit xếp lớp') );
+        $this->authorize(mb_strtoupper('edit xếp lớp'));
 
         if (!empty($id)) {
             $request->session()->put('id', $id);
@@ -156,7 +166,7 @@ class XepLopController extends Controller
      */
     public function update(XeplopRequest $request)
     {
-        $this->authorize(mb_strtoupper('update xếp lớp') );
+        $this->authorize(mb_strtoupper('update xếp lớp'));
 
         if (session('id')) {
             $id  =  session('id');
@@ -196,7 +206,7 @@ class XepLopController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa xếp lớp') );
+        $this->authorize(mb_strtoupper('xóa xếp lớp'));
 
         if (!empty($id)) {
 
@@ -212,28 +222,28 @@ class XepLopController extends Controller
     }
 
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa xếp lớp') );
+        $this->authorize(mb_strtoupper('xóa xếp lớp'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->xep_lop->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
     }
 }
