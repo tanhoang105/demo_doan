@@ -23,9 +23,9 @@ class XepLop extends Model
                 // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
-                ->join('giang_vien', 'giang_vien.id_user', '=','lop.id_giang_vien')
-                ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*','khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
+                ->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')
+                ->join('khoa_hoc', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
@@ -41,10 +41,12 @@ class XepLop extends Model
                 // ->join('ca_hoc',  'lop.id_ca_hoc', '=', 'ca_hoc.id')
                 ->join('phong_hoc', $this->table . '.id_phong_hoc', '=', 'phong_hoc.id')
                 // ->join('users', $this->table . '.id_user', '=', 'users.id')
-                ->join('giang_vien', 'giang_vien.id', '=',  'lop.id_giang_vien')
-                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*',  'users.*', 'giang_vien.*', 'phong_hoc.*')
+                ->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')
+                ->join('khoa_hoc', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
+                ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
+
             $list = $query->get();
         }
         return $list;
@@ -106,16 +108,24 @@ class XepLop extends Model
         return $query;
     }
 
-    public function remoAll($params){
+    public function remoAll($params)
+    {
         // dd($params['id']['id']);
         $data = [
             'delete_at' => 0
         ];
         $query = DB::table($this->table)
-                ->whereIn('id', $params['cols']['id']);
+            ->whereIn('id', $params['cols']['id']);
         // dd($query);
         $query = $query->update($data);
         return $query;
+    }
 
+    public function checkLop($id_lop)
+    {
+        $query = DB::table($this->table)
+            ->where('id_lop', '=', $id_lop)
+            ->first();
+        return $query;
     }
 }

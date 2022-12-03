@@ -17,6 +17,11 @@
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+
         </div>
     @endif
 
@@ -26,6 +31,11 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+
         </div>
     @endif
     <form action="" method="get">
@@ -39,9 +49,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-2">
-                <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau">
-            </div>
+            
 
             <div class="col-2">
                 <select class="form-control" name="giang_vien" id="">
@@ -104,19 +112,27 @@
                         <option value=" {{ $itemKhoaHoc->id }} "> {{ $itemKhoaHoc->ten_khoa_hoc }} </option>
                     @endforeach
                 </select>
+            </div> --}}
+            <div class="col-2">
+                {{-- <label for=""> bắt đầu</label> --}}
+                <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau">
             </div>
 
-            <div class="col-1">
-                <select class="form-control" name="" id="">
-                    @foreach ($khoa_hoc as $itemKhoaHoc)
-                        <option value=" {{ $itemKhoaHoc->id }} "> {{ $itemKhoaHoc->ten_khoa_hoc }} </option>
-                    @endforeach
-                </select>
-            </div> --}}
+            <div class="col-2">
+                {{-- <select class="form-control" name="" id="">
+                    <option value="">Lọc theo xếp lớp</option>
+                    <option value="0"> Lớp chưa đc xếp </option>
+                    <option value="1"> Lớp đã đc xếp </option>
+
+                </select> --}}
+                {{-- <label for=""> bắt đầu</label> --}}
+                <input type="date" name="ngay_ket_thuc" class="form-control">
+            </div>
 
             <div class="col-1">
                 <button class="btn btn-success">Lọc</button>
             </div>
+
         </div>
     </form>
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lop') }}" enctype="multipart/form-data">

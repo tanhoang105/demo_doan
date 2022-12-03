@@ -95,23 +95,10 @@ class Lop extends Model
                     // dd($params);
                     // if (!empty($params['khoa_hoc'])) {
 
-                        $q->Where($this->table . '.id_khoa_hoc', 'like', '%' . $params['khoa_hoc']  . '%');
-                        $q->Where($this->table . '.id_giang_vien', 'like', '%' . $params['giang_vien']  . '%');
-                        $q->Where($this->table . '.ngay_bat_dau', 'like', '%' . $params['ngay_bat_dau']  . '%');
-                        $q->Where($this->table . '.ca_thu_id', 'like', '%' . $params['ca_thu']  . '%');
+                        $q->Where($this->table . '.vai_tro_id', 'like', '%' . $params['vai_tro']  . '%');
+                        
 
-
-                    // }
-
-                    // if (!empty($params['giang_vien'])) {
-
-                    //     $q->orWhere($this->table . '.id_giang_vien', 'like', '%' . $params['giang_vien']  . '%');
-                    // }
-
-                    // if (!empty($params['ngay_bat_dau'])) {
-
-                    //     $q->orWhere($this->table . '.ngay_bat_dau', 'like', '%' . $params['ngay_bat_dau']  . '%');
-                    // }
+                  
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();

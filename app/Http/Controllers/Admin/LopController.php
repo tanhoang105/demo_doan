@@ -8,6 +8,7 @@ use App\Models\CaHoc;
 use App\Models\CaThu;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
+use App\Models\Lich;
 use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
@@ -23,7 +24,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu;
+    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu ,  $lich;
 
     public function __construct()
     {
@@ -34,6 +35,7 @@ class LopController extends Controller
         $this->cahoc = new CaHoc();
         $this->cathu = new CaThu();
         $this->thu = new ThuHoc();
+        $this->lich = new Lich();
     }
     /**
      * 
@@ -325,6 +327,8 @@ class LopController extends Controller
         if ($id) {
             $res = $this->lophoc->remove($id);
             if ($res > 0) {
+                // khi xóa thành công lớp thì xóa luôn lịch học của lớp đó
+                $this->lich->removeWithIDLop($id);
                 Session::flash('success', "Xóa thành công");
                 return back();
             } else {
