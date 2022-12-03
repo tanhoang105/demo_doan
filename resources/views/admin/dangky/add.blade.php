@@ -13,6 +13,7 @@
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
+            
         </div>
     @endif
     <form class="p-5" action=" {{ route('route_BE_Admin_Add_Dang_Ky') }}" method="post" enctype="multipart/form-data">
