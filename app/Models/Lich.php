@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class Lich extends Model
 {
@@ -123,6 +124,19 @@ class Lich extends Model
         // dd($query);
         $query = $query->update($data);
         return $query;
+    }
+
+    public function removeWithIDLop($id){
+        if ($id) {
+            // dd($id);
+            $query = DB::table($this->table)
+                ->where('lop_id', '=', $id);
+            $data = [
+                'delete_at' => 0
+            ];
+            $query = $query->update($data);
+            return $query;
+        }
     }
 
     

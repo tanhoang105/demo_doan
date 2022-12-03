@@ -8,6 +8,7 @@ use App\Models\CaHoc;
 use App\Models\CaThu;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
+use App\Models\Lich;
 use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
@@ -23,7 +24,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu;
+    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu ,  $lich;
 
     public function __construct()
     {
@@ -34,6 +35,7 @@ class LopController extends Controller
         $this->cahoc = new CaHoc();
         $this->cathu = new CaThu();
         $this->thu = new ThuHoc();
+        $this->lich = new Lich();
     }
     /**
      * 
@@ -47,11 +49,19 @@ class LopController extends Controller
         $this->authorize(mb_strtoupper('xem lớp học'));
 
         $this->v['params'] =  $request->all();
+        // dd($this->v['params']);
+        // dd($request->get());
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false  , null);
+        $this->v['giang_vien'] = $this->giangvien->index(null , false  , null);
+        $this->v['cahoc'] = $this->cahoc->index(null , false  , null);
+
+
         unset($this->v['params']['_token']);
-        $list = $this->lophoc->listGiangVien($this->v['params'], true, 10, true);
+        $list = $this->lophoc->index($this->v['params'], true, 10);
+        $this->v['list'] = $list;
+        
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien'][2]);   
-        $this->v['list'] = $list;
 
 
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
@@ -317,6 +327,8 @@ class LopController extends Controller
         if ($id) {
             $res = $this->lophoc->remove($id);
             if ($res > 0) {
+                // khi xóa thành công lớp thì xóa luôn lịch học của lớp đó
+                $this->lich->removeWithIDLop($id);
                 Session::flash('success', "Xóa thành công");
                 return back();
             } else {

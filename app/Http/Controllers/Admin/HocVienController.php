@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HocVienRequest;
+use App\Models\GhiNo;
 use App\Models\HocVien;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -89,6 +90,17 @@ class HocVienController extends Controller
                     'sdt' => $params['cols']['sdt'],
                     'hinh_anh' => $params['cols']['hinh_anh'],
                 ]);
+                $data = User::where('users.email', '=', $request->email)
+                    ->get();
+
+                // dd($data);
+                foreach ($data as $value) {
+                    $ghino = new GhiNo();
+                    $ghino->user_id = $value->id;
+                    $ghino->tien_no = 0;
+                    $ghino->trang_thai = 0;
+                    $ghino->save();
+                }
 
 
 
@@ -181,7 +193,7 @@ class HocVienController extends Controller
                     'sdt' => $params['cols']['sdt'],
                     'hinh_anh' => $params['cols']['hinh_anh'],
                 ]);
-            
+
                 Session::flash('success', 'Cập nhập thành công');
                 return redirect()->route('route_BE_Admin_List_Hoc_Vien');
             } else {
@@ -248,8 +260,8 @@ class HocVienController extends Controller
         }
     }
 
-    public function exportExcel(){
-        
+    public function exportExcel()
+    {
     }
 
     public function uploadFile($file)

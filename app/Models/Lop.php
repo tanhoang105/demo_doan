@@ -22,7 +22,7 @@ class Lop extends Model
     {
         if ($pagination) {
             $query  = DB::table($this->table)
-                ->where($this->table . '.delete_at', '=', 1 )
+                ->where($this->table . '.delete_at', '=', 1)
                 // ->where($this->table . '.delete_at', '=', 1 )
                 ->join('khoa_hoc', $this->table  . '.id_khoa_hoc', 'khoa_hoc.id')
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*')
@@ -30,13 +30,13 @@ class Lop extends Model
 
 
             // hiển thị những lớp đã có giảng viên
-            if (!empty($params['checkgv']) && $params['checkgv'] ==  1 ) {
+            if (!empty($params['checkgv']) && $params['checkgv'] ==  1) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.id_giang_vien');
                 });
             }
             // hiển thị những lớp chưa có giảng viên 
-            if (!empty($params['checkgv']) && $params['checkgv'] ==  2 ) {
+            if (!empty($params['checkgv']) && $params['checkgv'] ==  2) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhereNotNull($this->table . '.id_giang_vien');
                 });
@@ -73,6 +73,7 @@ class Lop extends Model
     public function index($params, $pagination = true, $perpage)
     {
         if ($pagination) {
+            // dd($params);
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
                 ->join('khoa_hoc', $this->table  . '.id_khoa_hoc', 'khoa_hoc.id')
@@ -82,9 +83,22 @@ class Lop extends Model
                 ->orderByDesc($this->table . '.id');
 
 
+
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                });
+            }
+
+            if (!empty($params)) {
+                $query =  $query->where(function ($q) use ($params) {
+                    // dd($params);
+                    // if (!empty($params['khoa_hoc'])) {
+
+                        $q->Where($this->table . '.vai_tro_id', 'like', '%' . $params['vai_tro']  . '%');
+                        
+
+                  
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -136,13 +150,13 @@ class Lop extends Model
 
 
     // hàm xóa bản ghi theo id
-    public function remove($id = null , $id_khoahoc = null)
+    public function remove($id = null, $id_khoahoc = null)
     {
         if ($id != null) {
 
 
             $query = DB::table($this->table)->where('id', '=', $id);
-           
+
             // dd($query);
             $data = [
                 'delete_at' => 0
@@ -150,9 +164,9 @@ class Lop extends Model
             $query = $query->update($data);
 
             // return $query;
-        }elseif($id == null && $id_khoahoc != null ) {
+        } elseif ($id == null && $id_khoahoc != null) {
             $query = DB::table($this->table)->where('id_khoa_hoc', '=', $id_khoahoc);
-           
+
             // dd($query);
             $data = [
                 'delete_at' => 0
@@ -160,8 +174,8 @@ class Lop extends Model
             $query = $query->update($data);
 
             // return $query;
-        }else{
-            Session::flash('error' , 'Lỗi xóa bản ghi');
+        } else {
+            Session::flash('error', 'Lỗi xóa bản ghi');
             return back();
         }
         return $query;
@@ -176,46 +190,46 @@ class Lop extends Model
         $query =  DB::table($this->table)
             ->where('id', '=', $params['cols']['id'])
             ->update($data);
-        
+
         return $query;
     }
 
     // hiển thị lớp
-    public function LoadLopofKhoaHoc($id){
-        $lop = Lop::select('lop.*','giang_vien.ten_giang_vien')
+    public function LoadLopofKhoaHoc($id)
+    {
+        $lop = Lop::select('lop.*', 'giang_vien.ten_giang_vien')
             ->where('lop.id_khoa_hoc', '=', $id)
-            ->join('giang_vien','lop.id_giang_vien','=','giang_vien.id')
-            ->where('lop.id_giang_vien','<>','null')
+            ->join('giang_vien', 'lop.id_giang_vien', '=', 'giang_vien.id')
+            ->where('lop.id_giang_vien', '<>', 'null')
             ->get();
         return $lop;
     }
 
 
-    public function remoAll($params= null , $id_khoahoc = null){
+    public function remoAll($params = null, $id_khoahoc = null)
+    {
         // dd($params['id']['id']);
 
-        if($params != null){
+        if ($params != null) {
 
             $data = [
                 'delete_at' => 0
             ];
-            $query = DB::table($this->table) 
-                    ->whereIn('id', $params['cols']['id']);
+            $query = DB::table($this->table)
+                ->whereIn('id', $params['cols']['id']);
             // dd($query);
             $query = $query->update($data);
-           
-        }elseif ($params == null && $id_khoahoc != null){
+        } elseif ($params == null && $id_khoahoc != null) {
             $data = [
                 'delete_at' => 0
             ];
-            $query = DB::table($this->table) 
-                    ->whereIn('id_khoa_hoc', $id_khoahoc['cols']['id']);
+            $query = DB::table($this->table)
+                ->whereIn('id_khoa_hoc', $id_khoahoc['cols']['id']);
             // dd($query);
             $query = $query->update($data);
-        }else{
-            Session::flash('error' , 'Lỗi xóa ');
+        } else {
+            Session::flash('error', 'Lỗi xóa ');
             return back();
         }
-
     }
 }

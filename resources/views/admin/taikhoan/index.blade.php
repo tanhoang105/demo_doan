@@ -31,6 +31,37 @@
             </button>
         </div>
     @endif
+    <form action="" method="get">
+        @csrf
+        <div class="row p-3">
+            <div class="col-2">
+                <select class="form-control" name="vai_tro" id="">
+                    <option value="">Lọc theo vai tro</option>
+                    @foreach ($vaitro as $itemVaiTro)
+                        <option value=" {{ $itemVaiTro->id }} "> {{ $itemVaiTro->ten_vai_tro }} </option>
+                    @endforeach
+                </select>
+            </div>
+            
+
+            {{-- <div class="col-2">
+                <select class="form-control" name="giang_vien" id="">
+                    <option value="">Lọc theo giảng viên</option>
+
+                    @foreach ($giang_vien as $itemGiangVien)
+                        <option value=" {{ $itemGiangVien->id_user }} "> {{ $itemGiangVien->ten_giang_vien }} </option>
+                    @endforeach
+                </select>
+            </div> --}}
+
+            
+           
+            <div class="col-1">
+                <button class="btn btn-success">Lọc</button>
+            </div>
+
+        </div>
+    </form>
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Tai_Khoan') }}" enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">
