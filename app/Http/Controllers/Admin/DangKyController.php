@@ -13,6 +13,7 @@ use App\Models\ThanhToan;
 use App\Models\GhiNo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -130,6 +131,7 @@ class DangKyController extends Controller
                         'gia'=>$request->gia_khoa_hoc,
                     ]);
 
+
                     if ($saveNewHocVien > 0 && $inserThanhToan>0) {
 
                         $data = User::where('users.email','=',$request->email)
@@ -152,6 +154,10 @@ class DangKyController extends Controller
                             'id_thanh_toan'=>$inserThanhToan,
                             'email'=>$request->email,
                         ];
+                        $tinhSoLuong = $loadDangKy->so_luong - 1;
+                        $soLuongLop = DB::table('lop')
+                            ->where('id', $request->id_lop)
+                            ->update(['so_luong' => $tinhSoLuong]);
                         $objDangKy->saveNew($data);
                         Session::flash('success', 'Đăng ký Khóa học thành công');
 
