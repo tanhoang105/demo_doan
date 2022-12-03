@@ -82,6 +82,8 @@ class DangKyController extends Controller
                 $objDangKy = new DangKy();
             if ($request->isMethod('post')) {
                 $loadDangKy = $objDangKy->listDangky($request->id_lop);
+                $ca_thu_id=explode(',',$loadDangKy->thu_hoc_id);
+                $layThu=$objDangKy->layThu($ca_thu_id);
                 if ($loadDangKy->so_luong > 0) {
                 $objHocvien = new HocVien();
                 $objDangKy = new DangKy();
@@ -138,7 +140,10 @@ class DangKyController extends Controller
 
                         // dd($params['cols']['email']);
                         Mail::to($params['cols']['email'])->send(new SendMail([
+                            'user'=>$params['cols'],
+                            'dangky'=>$loadDangKy,
                             'password'=>$password,
+                            'thuhoc'=>$layThu,
                             'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                     }
                 } else {
