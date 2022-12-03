@@ -26,7 +26,8 @@ class DangKy extends Model
                 ->join('lop' , 'lop.id' , '=' , $this->table . '.id_lop')
                 ->join('khoa_hoc' , 'khoa_hoc.id' , '=' , 'lop.id_khoa_hoc')
                 ->join('hoc_vien' , 'hoc_vien.user_id' , '=' , $this->table . '.id_user')
-                ->select( 'hoc_vien.*','khoa_hoc.*', 'lop.*' , $this->table . '.*')
+                ->join('thanh_toan' , 'thanh_toan.id' , '=' , $this->table . '.id_thanh_toan')
+                ->select( 'hoc_vien.*','thanh_toan.trang_thai as trang_thai_thanh_toan','khoa_hoc.*', 'lop.*' , $this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -117,6 +118,7 @@ class DangKy extends Model
         $query=DB::table('lop')
             ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
             ->select('lop.*','khoa_hoc.ten_khoa_hoc','khoa_hoc.gia_khoa_hoc')
+            ->where('lop.id_giang_vien','>',0)
             ->where('lop.id_khoa_hoc','=',$id_khoa_hoc);
         $list=$query->get();
         return $list;
@@ -135,6 +137,20 @@ class DangKy extends Model
             ->where('lop.id','=',$id);
         $list=$query->first();
         return $list;
+    }
+
+    public function loadOne($id) {
+        $query = DB::table('dang_ky')
+                ->join('users','users.id','=','dang_ky.id_user')
+                ->join('hoc_vien' , 'hoc_vien.user_id' , '=' ,  'dang_ky.id_user')
+                ->join('lop','lop.id','=','dang_ky.id_lop')
+                ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
+                ->join('thanh_toan','thanh_toan.id','=','dang_ky.id_thanh_toan')
+                ->select('dang_ky.id','dang_ky.id_user','dang_ky.id_thanh_toan','hoc_vien.sdt','dang_ky.gia as gia_khoa_hoc','hoc_vien.ten_hoc_vien as name','dang_ky.email','hoc_vien.dia_chi','ten_lop','ten_khoa_hoc','thanh_toan.trang_thai')
+                ->where('dang_ky.id',$id)
+                ->first();
+        return $query;
+        
     }
     // lấy thứ
     public function layThu($thu_hoc_id){

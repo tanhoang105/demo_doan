@@ -10,60 +10,64 @@
 
     {{-- hiển thị message đc gắn ở session::flash('success') --}}
 
-    @if (Session::has('success'))
+    @if (Session::has('msg'))
         <div class="alert alert-success alert-dismissible" role="alert">
-            <strong>{{ Session::get('success') }}</strong>
+            <strong>{{ Session::get('msg') }}</strong>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Add_Dang_Ky') }}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Dang_Ky',$loadDangKy->id) }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
                 <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="" hidden>
                 <div class="mb-3">
                     <label for="" class="form-label">Tên </label>
-                    <input class="form-control" value="" name="name" id="name" type="text" placeholder="Tên">
+                    <input class="form-control" value="{{$loadDangKy->name}}" name="name" id="name" type="text" placeholder="Tên">
                     @error('name')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Email </label>
-                    <input class="form-control" value="" name="email" id="email" type="text" placeholder="Email">
+                    <input class="form-control" value="{{$loadDangKy->email}}" name="email" id="email" type="text" placeholder="Email">
                     @error('email')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Sđt </label>
-                    <input class="form-control" value="" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
+                    <input class="form-control" value="{{$loadDangKy->sdt}}" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
                     @error('sdt')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Địa chỉ </label>
-                    <input class="form-control" value="" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
+                    <input class="form-control" value="{{$loadDangKy->dia_chi}}" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
                     @error('dia_chi')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học </label>
-                    <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}">
-                        <option>-- Chọn khóa học --</option>--}}
-                            @foreach ($listKhoaHoc as $item)
-                                <option  value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
-                            @endforeach
-                    </select>
+                    <input type="text" name="ten_khoa_hoc" id="" disabled value="{{$loadDangKy->ten_khoa_hoc}}" class="form-control">
                     @error('id_khoa_hoc')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
-                    <select class="form-control" name="id_lop" id="id_lop">
-                        <option>--Chọn Lớp--</option>--}}
+                   <input type="text" name="lop" value="{{$loadDangKy->ten_lop}}" class="form-control" disabled>
+                    @error('id_lop')
+                    <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="chuyenBay" class="form-label">Trạng thái thanh toán </label>
+                    <select name="id_thanh_toan" id="" class="form-control select-control">
+                        <option value="2" {{$loadDangKy->trang_thai == 2 ? 'selected' : ''}}>Đã thanh toán</option>
+                        <option value="1" {{$loadDangKy->trang_thai == 1 ? 'selected' : ''}}>Chưa thanh toán</option>
                     </select>
                     @error('id_lop')
                     <span style="color: red"> {{ $message }} </span>
@@ -72,7 +76,7 @@
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Học phí</label>
-                    <input class="form-control" name="" id="id_gia" type="text" value="" disabled>
+                    <input class="form-control" name="" id="id_gia" type="text" value="{{$loadDangKy->gia_khoa_hoc}}" disabled>
 
                     @error('id_gia')
                         <span style="color: red"> {{ $message }} </span>
@@ -83,7 +87,7 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Sửa</button>
         <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_List_Dang_Ky')}} ">Quay lại </a>
        
 
