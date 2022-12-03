@@ -47,11 +47,19 @@ class LopController extends Controller
         $this->authorize(mb_strtoupper('xem lớp học'));
 
         $this->v['params'] =  $request->all();
+        // dd($this->v['params']);
+        // dd($request->get());
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false  , null);
+        $this->v['giang_vien'] = $this->giangvien->index(null , false  , null);
+        $this->v['cahoc'] = $this->cahoc->index(null , false  , null);
+
+
         unset($this->v['params']['_token']);
-        $list = $this->lophoc->listGiangVien($this->v['params'], true, 10, true);
+        $list = $this->lophoc->index($this->v['params'], true, 10);
+        $this->v['list'] = $list;
+        
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien'][2]);   
-        $this->v['list'] = $list;
 
 
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
