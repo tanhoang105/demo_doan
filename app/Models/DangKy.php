@@ -188,4 +188,13 @@ class DangKy extends Model
         $list=$query;
         return $list;
     }
+
+    public function timTheoIdThanhToan($id_thanh_toan){
+        if (!empty($id_thanh_toan)) {
+            $query = DB::table($this->table)
+                ->where('id_thanh_toan', '=', $id_thanh_toan)
+                ->first();
+            return $query;
+        }
+    }
 }
