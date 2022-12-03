@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Mail;
 
 class DoiLopKhoaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $status = $request->trang_thai;
+
         $doi_lop_khoa = DoiLopKhoa::join('users', 'users.id', '=', 'id_user')
             ->join('lop', 'id_lop_moi', '=', 'lop.id')
             ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
@@ -27,7 +29,14 @@ class DoiLopKhoaController extends Controller
             ->get();
         $data = DB::table('lop')->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
             ->select('lop.*', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')->get();
-        return view('Admin.doi_lop.index', compact('doi_lop_khoa', 'data'));
+
+            $loc_trang_thai = DoiLopKhoa::join('users', 'users.id', '=', 'id_user')
+            ->join('lop', 'id_lop_moi', '=', 'lop.id')
+            ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
+            ->select('doi_lop_khoa.*', 'users.id as user_id', 'users.name', 'lop.ten_lop', 'lop.id as lop_id', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')
+            ->where('doi_lop_khoa.status','=',$request->trang_thai)
+            ->get();
+        return view('Admin.doi_lop.index', compact('doi_lop_khoa', 'data','loc_trang_thai','status'));
     }
     public function updateStatus($doilop, Request $request)
     {
@@ -196,6 +205,32 @@ class DoiLopKhoaController extends Controller
         } else {
             session()->flash('error', 'yêu cầu chưa được xử lý !');
             return redirect()->back();
+        }
+    }
+    public function loc_theo_trang_thai(Request $request)
+    {
+        dd($request->trang_thai);
+        if ($request->trang_thai == 0) {
+            $result = DoiLopKhoa::where('status','=',2)->get();
+            // 
+            // $result = array_merge($data, $data2);
+            // dd($result);
+        }
+        if ($request->trang_thai == 1) {
+            $result = DoiLopKhoa::
+            // where('status','=',0)
+            where('status','=',3)
+            ->get();
+        }        
+        if ($request->trang_thai == 2) {
+            $result = DoiLopKhoa::
+            // where('status','=',0)
+            where('status','=',4)
+            ->get();
+        }
+        if($request->trang_thai == 3){
+            $result = DoiLopKhoa::where('status','=',5)->get();
+            return redirect()->route('route_BE_Admin_danh_sach_doi_lop',compact('data'));
         }
     }
 }
