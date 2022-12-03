@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HocVienRequest;
 use App\Models\HocVien;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class HocVienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HocVienRequest $request)
     {
         $this->v['params'] = $request->all();
         if ($request->isMethod('POST')) {
@@ -138,7 +139,7 @@ class HocVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(HocVienRequest $request)
     {
 
         if (session('id')) {
@@ -249,5 +250,11 @@ class HocVienController extends Controller
 
     public function exportExcel(){
         
+    }
+
+    public function uploadFile($file)
+    {
+        $filename =  time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('imageHocvien', $filename,  'public');
     }
 }

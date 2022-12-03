@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('ten_giang_vien');
             $table->string('dia_chi')->nullable();
             $table->string('email');
-            $table->integer('sdt')->nullable();
+            $table->text('sdt')->nullable();
+            $table->string('hinh_anh')->nullable();
             $table->integer('gioi_tinh')->nullable();
             $table->string('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);

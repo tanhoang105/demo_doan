@@ -76,7 +76,7 @@ class Lop extends Model
             $query  = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)
                 ->join('khoa_hoc', $this->table  . '.id_khoa_hoc', 'khoa_hoc.id')
-                ->join('giang_vien', $this->table  . '.id_giang_vien', 'giang_vien.id')
+                ->join('giang_vien', $this->table  . '.id_giang_vien', 'giang_vien.id_user')
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*', 'giang_vien.*')
                 ->select($this->table . '.*', $this->table . '.id as id_lop',  'khoa_hoc.*')
                 ->orderByDesc($this->table . '.id');

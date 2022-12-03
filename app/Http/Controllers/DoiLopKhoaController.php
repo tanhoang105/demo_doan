@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
+use App\Mail\sendmail3;
 use App\Mail\Senmail2;
 use App\Models\DangKy;
 use App\Models\DoiLopKhoa;
@@ -22,6 +23,7 @@ class DoiLopKhoaController extends Controller
             ->join('lop', 'id_lop_moi', '=', 'lop.id')
             ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
             ->select('doi_lop_khoa.*', 'users.id as user_id', 'users.name', 'lop.ten_lop', 'lop.id as lop_id', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')
+            ->search()
             ->get();
         $data = DB::table('lop')->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
             ->select('lop.*', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')->get();
@@ -33,7 +35,7 @@ class DoiLopKhoaController extends Controller
         $data = DoiLopKhoa::find($doilop);
         // dd($data->status);
         if ($data->status == 0) {
-            dd('123');
+            // dd('123');
             // $data = DoiLopKhoa::find($doilop);
             $data->status = $request->status;
             session()->flash('sucssec', 'đơn hàng đã được cập nhật');
@@ -50,8 +52,12 @@ class DoiLopKhoaController extends Controller
                 ->update(['dang_ky.id_lop' => $lop_moi->id]);
             // dd($dang_ky);
             // luu du lieu
+            Mail::to('hoandepzai00@gmail.com')->send(new sendmail3([
+                'message' => 'Xin chào bạn , Bạn vừa đăng ký đổi lớp thành công'
+            ]));
             $lop_cu->save();
             $lop_moi->save();
+            $data->save();
             return redirect()->back();
         } elseif ($data->status) {
             // dd($request->status);
@@ -133,6 +139,12 @@ class DoiLopKhoaController extends Controller
                 // dd('xac nhan'); 
                 session()->flash('sucssec', 'Yêu cầu đã được cập nhật');
                 return redirect()->back();
+            } elseif ($request->status == 5) {
+                // dd($request->all());
+                $data->status = $request->status;
+                $data->save();
+                session()->flash('sucssec', 'Đã từ chối yêu cầu đổi lớp !');
+                return redirect()->back();
             }
         }
     }
@@ -172,5 +184,18 @@ class DoiLopKhoaController extends Controller
             ->where('id_user', '=', $request->id_user)
             ->update(['dang_ky.id_lop' => $lop_moi->id]);
         return redirect()->route('route_BE_Admin_danh_sach_doi_lop');
+    }
+    public function Xoa_Yc_doi_Khoa_Hoc($id)
+    {
+        // dd($id);
+        $data = DoiLopKhoa::find($id);
+        if ($data->status == 1 || $data->status == 4 || $data->status == 5) {
+            $data->delete();
+            session()->flash('sucssec', 'Đã xóa thành công !');
+            return redirect()->back();
+        } else {
+            session()->flash('error', 'yêu cầu chưa được xử lý !');
+            return redirect()->back();
+        }
     }
 }

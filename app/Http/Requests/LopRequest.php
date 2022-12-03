@@ -31,44 +31,24 @@ class LopRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'ten_lop' => 'required | unique:lop,ten_lop',
-                            // 'mo_ta' => 'required | min:20 |',
-                            'gia' => 'required | integer | max:10000000',
-                            'so_luong' => 'required | integer | max:40',
-                            // 'ngay_bat_dau' => 'required',
-                            'ngay_bat_dau' => [
-                                function ($attribute, $value, $fali) {
-                                    if ($value == null) {
-                                        return $fali('ngày bắt đầu không được để trống');
-                                    } elseif ($value = date(now())) {
-                                        return $fali('ngày bắt đầu không được nhỏ hơn ngày hôm nay');
-                                    }
-                                    
-                                }
-                            ],
-                            'ngay_ket_thuc' => [
-                                function ($attribute, $value, $fali) {
-                                    // dd($value);
-                                    if ($value == null) {
-                                        return $fali('ngày kết thúc không được để trống');
-                                    } elseif ($value < date(now())) {
-                                        return $fali('ngày kết thúc không được nhỏ hơn ngày hôm nay');
-                                    } elseif ($value < date('ngay_bat_dau')) {
-                                        return $fali('ngày kết thúc không được nhỏ hơn ngày ngày bắt đầu');
-                                    }
-                                }
-                            ],
-                            // 'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            'id_giang_vien' => 'numeric|min:1',
+                            'ca_thu_id' => 'numeric|min:1',
+                            'id_khoa_hoc' => 'numeric|min:1',
+                            'so_luong' => 'required | integer | min:1 | max:40',
+                            'ngay_bat_dau' => 'required | date | after:today',
+                            'ngay_ket_thuc' => 'required | date | after:ngay_bat_dau',
                         ];
                         break;
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
                             'ten_lop' => 'required',
-                            // 'mo_ta' => 'required | min:20 |',
-                            'gia' => 'required | integer | max:10000000',
-                            'so_luong' => 'required | integer | max:40',
-                            // 'ngay_bat_dau' => 'required | after:now',
-                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            'id_giang_vien' => 'numeric|min:1',
+                            'ca_thu_id' => 'numeric|min:1',
+                            'id_khoa_hoc' => 'numeric|min:1',
+                            'so_luong' => 'required | integer | min:1 | max:40',
+                            'ngay_bat_dau' => 'required | date | after:today',
+                            'ngay_ket_thuc' => 'required | date | after:ngay_bat_dau',
                         ];
                         break;
                     default:
@@ -89,18 +69,22 @@ class LopRequest extends FormRequest
             'min' => ':attribute lớn hơn 3 ký tự',
             'unique' => ':attribute đã tồn tại',
             'max' => ':attribute vượt quá kí tự cho phép',
-            'after' => ':attribute không được nhỏ hơn ngày bắt đầu',
+            'min' => ':attribute không được nhỏ hơn 0',
+            'ngay_bat_dau.after' => ':attribute không được nhỏ hơn hoặc bằng ngày hôm nay',
+            'ngay_ket_thuc.after' => ':attribute không được nhỏ hơn hoặc bằng ngày bắt đầu',
+            'id_giang_vien.min' => 'Giảng viên bắt buộc phải chọn',
+            'ca_thu_id.min' => 'Lịch học bắt buộc phải chọn',
+            'id_khoa_hoc.min' => 'Khóa học bắt buộc phải chọn',
             'integer' => ':attribute định dạng bắt buộc là số'
         ];
     }
     public function attributes()
     {
         return [
-            'ten_lop' => 'tên lớp',
-            'gia' => 'Giá tiền',
-            'so_luong' => 'Số lượng',
-            'ngay_bat_dau' => 'ngày bắt đầu',
-            'ngay_ket_thuc' => 'ngày kết thúc',
+            'ten_lop' => 'Tên lớp',
+            'so_luong' => 'Số lượng ghế',
+            'ngay_bat_dau' => 'Ngày bắt đầu',
+            'ngay_ket_thuc' => 'Ngày kết thúc',
         ];
     }
 }

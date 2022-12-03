@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('gia_khoa_hoc');
             $table->string('mo_ta')->nullable();
             $table->string('hinh_anh')->nullable();
+            $table->integer('luot_xem')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();

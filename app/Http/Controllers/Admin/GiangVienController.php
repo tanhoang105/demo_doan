@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GiangVienRequest;
 use App\Models\CaHoc;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
@@ -67,7 +68,7 @@ class GiangVienController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GiangVienRequest $request)
     {
         $this->authorize(mb_strtoupper('thêm giảng viên') );
 
@@ -155,7 +156,7 @@ class GiangVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(GiangVienRequest $request)
     {
         $this->authorize(mb_strtoupper('update giảng viên') );
 
@@ -289,5 +290,11 @@ class GiangVienController extends Controller
         }
         $this->v['list']   = $array ;
         return view('admin.lichday.index' , $this->v );
+    }
+
+    public function uploadFile($file)
+    {
+        $filename =  time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs('imageGiangVien', $filename,  'public');
     }
 }

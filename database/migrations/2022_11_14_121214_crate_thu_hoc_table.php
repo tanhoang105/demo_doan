@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('ma_thu');
             $table->string('ten_thu');
-            $table->text('mo_ta');
+            $table->text('mo_ta')->nullable();
             $table->integer('trang_thai')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();

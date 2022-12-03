@@ -171,15 +171,15 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}" class="nav-link">
-                    <i class="nav-icon fas fa-edit"></i>
-                    <p>
-                        Tài khoản ghi nợ 
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+                  <a href="{{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                      <p>
+                          Tài khoản ghi nợ
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
-            </li>
+              </li>
 
               <li class="nav-item">
                   <a href="{{ route('route_BE_Admin_Vai_Tro') }}" class="nav-link">
@@ -354,7 +354,7 @@
 
               @endhasRoles
 
-              @hasRoles(['admin','giảng viên'])
+              @hasRoles(['giảng viên'])
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_Lich_Day_Giang_Vien') }} " class="nav-link">
                       <i class="nav-icon fas fa-calendar"></i>
@@ -367,7 +367,7 @@
               </li>
               @endhasRoles
 
-              @hasRoles(['tuyển sinh'])
+              @hasRoles(['tuyển sinh','admin'])
               <li class="nav-item">
                   <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
                       <i class="nav-icon fas fa-user-plus"></i>
@@ -382,7 +382,16 @@
 
               @endhasRoles
 
+              <li class="nav-item">
+                  <a href=" {{ route('logout') }} " class="nav-link">
+                      <i class="nav-icon fas fa-user-plus"></i>
+                      <p>
+                          Đăng xuất
+                          <i class="fas fa-angle-left right"></i>
+                      </p>
+                  </a>
 
+              </li>
 
           </ul>
       </nav>

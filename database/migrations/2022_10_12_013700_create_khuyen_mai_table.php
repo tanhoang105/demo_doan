@@ -18,10 +18,13 @@ return new class extends Migration
             $table->string('ma_khuyen_mai');
             $table->string('loai_khuyen_mai');
             $table->string('mo_ta')->nullable();
+            $table->integer('so_luong')->nullable();
             $table->integer('giam_gia');
+            $table->integer('loai_giam_gia');
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
-            $table->integer('trang_thai')->default(1);
+            $table->string('chi_tiet_khoa')->nullable();
+            $table->integer('status')->default(1);
             $table->integer('delete_at')->default(1);
             $table->timestamps();
         });

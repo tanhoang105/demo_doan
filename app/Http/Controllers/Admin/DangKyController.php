@@ -106,6 +106,7 @@ class DangKyController extends Controller
                 unset($dataUser['cols']['id_khoa_hoc']);
                 unset($dataUser['cols']['id_lop']);
                 unset($dataUser['cols']['gia_khoa_hoc']);
+                $dataUser['cols']['vai_tro_id'] = 4;
 //                dd($password,$params['cols']['password']);
                 $modelTest = new User();
                 $res = $modelTest->saveNew($dataUser);
@@ -134,6 +135,7 @@ class DangKyController extends Controller
                             'id_user' => $res,
                             'gia' => $request->gia_khoa_hoc,
                             'id_thanh_toan'=>$inserThanhToan,
+                            'email'=>$request->email,
                         ];
                         $objDangKy->saveNew($data);
                         Session::flash('success', 'Đăng ký Khóa học thành công');

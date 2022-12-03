@@ -61,7 +61,6 @@ class DanhMucKhoaHoc extends Controller
         $this->v['exParam'] = $request->all();
         if ($request->isMethod('POST')) {
 
-
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -81,11 +80,11 @@ class DanhMucKhoaHoc extends Controller
             if ($res > 0) {
                 // thêm thành công
                 Session::flash('success', "Thêm thành công");
-                return redirect()->route('route_BE_Admin_Danh_Muc_Khoa_Hoc');
+                return redirect()->route('route_Admin_BE_Danh_Muc_Khoa_Hoc');
             } else {
                 // thêm không thành công
                 Session::flash('error', "Thêm không thành công");
-                return redirect()->route('route_BE_Admin_Danh_Muc_Khoa_Hoc');
+                return redirect()->route('route_Admin_BE_Danh_Muc_Khoa_Hoc');
             }
         }
 
@@ -150,6 +149,15 @@ class DanhMucKhoaHoc extends Controller
         }, $request->post());
         unset($params['cols']['_token']);
         $params['cols']['id'] = $id;
+        // dd($params['cols']['ten_danh_muc']);
+        $check = $this->danh_muc->tendanhmuc($params['cols']['ten_danh_muc']);
+        // dd($check);
+        if($check) {
+            // dd(1);
+            Session::flash('mes','Ten danh muc da ton tai');
+            return back();
+        }
+        
         if ($request->file('anh_danh_muc')) {
             $params['cols']['anh_dahh_muc'] = $this->uploadFile($request->file('anh_danh_muc'));
         }

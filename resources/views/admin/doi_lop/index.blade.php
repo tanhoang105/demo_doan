@@ -22,6 +22,13 @@
         </form>
     </div>
     <br>
+    <div>
+        <form action="" class="form-group">
+            <input type="text" style="height: 38px" name="search" placeholder="Tìm kiếm mã học viên...">
+            <button class="btn btn-outline-dark"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <br>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -91,33 +98,44 @@
                                 <input hidden type="text" name="id_lopcu" value="{{ $id_lopcu }}" id="">
                                 <input hidden type="text" name="id_lopmoi" value="{{ $item->lop_id }}" id="">
                                 <input type="text" name="user_id" value="{{ $item->id_user }}" hidden id="">
-                                <select {{ $item->status == 1 ? 'disabled' : '' }} style="height: 30px" name="status"
+                                <select {{ $item->status == 1 ? 'disabled' : '' }}
+                                    {{ $item->status == 5 ? 'disabled' : '' }} style="height: 30px" name="status"
                                     id="">
                                     <option {{ $item->status == 0 ? 'selected' : '' }} value="0">Đang chờ xác nhận
                                     </option>
                                     <option {{ $item->status == 1 ? 'selected' : '' }} value="1">Đã xác nhận</option>
+                                    <option {{ $item->status == 5 ? 'selected' : '' }} value="5">Từ chối yêu cầu
+                                    </option>
                                 </select>
-                                <button {{ $item->status == 1 ? 'disabled' : '' }} dis style="height: 30px;"
+                                <button {{ $item->status == 1 ? 'disabled' : '' }}
+                                    {{ $item->status == 5 ? 'disabled' : '' }} dis style="height: 30px;"
                                     class="btn btn-outline-info" type="submit"><i style=""
                                         class="fas fa-check"></i></button>
                             </form>
                         @endif
-                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4)
+                        @if ($item->status == 2 || $item->status == 3 || $item->status == 4 || $item->status == 5)
                             <form action="{{ route('route_BE_Admin_updateStatus_doilop', $item->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <input hidden type="text" name="id_lopcu" value="{{ $id_lopcu }}" id="">
                                 <input hidden type="text" name="id_lopmoi" value="{{ $item->lop_id }}" id="">
                                 <input type="text" name="user_id" value="{{ $item->id_user }}" hidden id="">
-                                <select {{ $item->status == 4 ? 'disabled' : '' }} style="height: 30px" name="status"
+                                <select {{ $item->status == 4 ? 'disabled' : '' }}
+                                    {{ $item->status == 5 ? 'disabled' : '' }} style="height: 30px" name="status"
                                     id="">
-                                    <option {{ $item->status == 2 ? 'selected' : '' }} value="2">Đang chờ xác nhận
+                                    <option {{ $item->status == 2 ? 'selected' : '' }}
+                                        {{ $item->status == 4 ? 'disabled' : '' }}
+                                        {{ $item->status == 3 ? 'disabled' : '' }} value="2">Đang chờ xác nhận
                                     </option>
                                     <option {{ $item->status == 3 ? 'selected' : '' }} value="3">Đã xác nhận</option>
-                                    <option {{ $item->status == 4 ? 'selected' : '' }} value="4">Đã thanh toán
+                                    <option {{ $item->status == 4 ? 'selected' : '' }}
+                                        {{ $item->status == 2 ? 'disabled' : '' }} value="4">Đã thanh toán
+                                    </option>
+                                    <option {{ $item->status == 5 ? 'selected' : '' }} value="5">Từ chối yêu cầu
                                     </option>
                                 </select>
                                 <button {{ $item->status == 4 ? 'disabled' : '' }}
+                                    {{ $item->status == 5 ? 'disabled' : '' }}
                                     onclick="return confirm('Bạn có chắc muốn thay đổi trạng thái?')" style="height: 30px;"
                                     class="btn btn-outline-info" type="submit"><i style=""
                                         class="fas fa-check"></i></button>
@@ -125,9 +143,8 @@
                         @endif
                     </td>
                     <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
-                                href="{{ route('route_BE_Admin_Xoa_Khoa_Hoc', ['id' => $item->id]) }}">
+                                href="{{ route('route_BE_Admin_Xoa_Yc_doi_Khoa_Hoc', ['id' => $item->id]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
-
                 </tr>
             @endforeach
 
