@@ -44,7 +44,7 @@ class TaiKhoanRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email',
-                                    'password' => 'required | min:6',
+                                    
                                 ];
                             break;    
                         

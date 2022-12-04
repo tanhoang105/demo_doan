@@ -170,9 +170,12 @@ class HocVienController extends Controller
             unset($params['cols']['_token']);
             $params['cols']['id'] = $id;
             $params['cols']['hinh_anh'] = null;
+            $flag = null;
             if ($request->file('hinh_anh')) {
-
+                $flag = 1;
                 $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
+            } else {
+                unset($params['cols']['hinh_anh']);
             }
 
             if ($request->input('password')) {
@@ -185,14 +188,25 @@ class HocVienController extends Controller
             $res = $this->user->saveupdate($params);
 
             if ($res > 0) {
-                HocVien::where('user_id', $id)->update([
-                    'user_id' => $id,
-                    'ten_hoc_vien' => $params['cols']['name'],
-                    'dia_chi' => $params['cols']['dia_chi'],
-                    'email' => $params['cols']['email'],
-                    'sdt' => $params['cols']['sdt'],
-                    'hinh_anh' => $params['cols']['hinh_anh'],
-                ]);
+                if ($flag == 1) {
+
+                    HocVien::where('user_id', $id)->update([
+                        'user_id' => $id,
+                        'ten_hoc_vien' => $params['cols']['name'],
+                        'dia_chi' => $params['cols']['dia_chi'],
+                        'email' => $params['cols']['email'],
+                        'sdt' => $params['cols']['sdt'],
+                        'hinh_anh' => $params['cols']['hinh_anh'],
+                    ]);
+                } else {
+                    HocVien::where('user_id', $id)->update([
+                        'user_id' => $id,
+                        'ten_hoc_vien' => $params['cols']['name'],
+                        'dia_chi' => $params['cols']['dia_chi'],
+                        'email' => $params['cols']['email'],
+                        'sdt' => $params['cols']['sdt'],
+                    ]);
+                }
 
                 Session::flash('success', 'Cập nhập thành công');
                 return redirect()->route('route_BE_Admin_List_Hoc_Vien');
