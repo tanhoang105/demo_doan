@@ -36,10 +36,10 @@
                         </div>
                         <h4>{{ $detail->ten_khoa_hoc }}</h4>
                         <div class="course_meta">
-                            <img src="{{ asset('client/images/author2.png') }}">
-                            <p>Nelson Mandela</p>
-                            <span class="sin_cour_stu"> <i class="fal fa-graduation-cap"></i> 20,153 Students </span>
-                            <span class="sin_cour_rat">
+                            {{-- <img src="{{ asset('client/images/author2.png') }}">
+                            <p>Tên giảng viển</p> --}}
+                            {{-- <span class="sin_cour_stu"> <i class="fal fa-graduation-cap"></i> 20,153 Students </span> --}}
+                            {{-- <span class="sin_cour_rat">
                                 4.7
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
@@ -47,7 +47,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 (4,5609)
-                            </span>
+                            </span> --}}
                         </div>
 
                         <div class="course_tab">

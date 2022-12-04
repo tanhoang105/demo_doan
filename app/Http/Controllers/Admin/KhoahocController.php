@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KhoahocRequest;
+use App\Models\CaHoc;
+use App\Models\CaThu;
 use App\Models\DanhMuc;
+use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
+use App\Models\ThuHoc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -33,6 +37,10 @@ class KhoahocController extends Controller
         $this->v['params'] = $request->all();
         $khoahoc =  $this->khoahoc->index($this->v['params'], true, 10);
         $this->v['list'] = $khoahoc;
+
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false  , null);
+        $this->v['danh_muc'] = $this->danhmuc->index(null , false  , null);
+
 //        dd($khoahoc);
         return view('admin.khoahoc.index', $this->v);
     }

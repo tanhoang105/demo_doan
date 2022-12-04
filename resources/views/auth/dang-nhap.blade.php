@@ -62,11 +62,7 @@
                                 <input class="login-field" name="password" id="lpassword" type="password"
                                        placeholder="Password">
                                 <div class="lost_pass">
-                                    <input type="checkbox" id="rem-checkbox-input">
-                                    <label for="rem-checkbox-input" class="rem-checkbox">
-                                        <span class="rem-me">Lưu tài khoản</span>
-                                    </label>
-                                    <a href="{{ route('form_quen_mat_khau') }}" class="forget" style="margin-left: 15px"> Quên mật khẩu? </a>
+                                    <a href="{{ route('form_quen_mat_khau') }}" class="forget" style="margin-left: 15px"> Bạn quên mật khẩu? </a>
                                 </div>
                                 <div class="submit-area">
                                     <button class="submit more-link"> Đăng Nhập </button>
