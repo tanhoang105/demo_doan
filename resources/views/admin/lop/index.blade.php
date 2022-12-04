@@ -171,8 +171,8 @@
                         <td> {{ $item->ten_lop }}</td>
 
                         <td> {{ $item->so_luong }}</td>
-                        <td> {{ $item->ngay_bat_dau }}</td>
-                        <td> {{ $item->ngay_ket_thuc }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_bat_dau)) }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_ket_thuc)) }}</td>
                         <td>
                             <a class="bt btn-primary" style="color: aliceblue ; padding:5px"
                                 href=" {{ route('route_BE_Admin_Detail_Lop', ['id' => $item->id_lop]) }} ">Chi

@@ -152,7 +152,7 @@
 
 
 {{-- tan xóa nhiều bản ghi  --}}
-=======
+
 @yield('js')
 
 <script type="text/javascript">
