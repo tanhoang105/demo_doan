@@ -146,7 +146,7 @@ class DangKy extends Model
                 ->join('lop','lop.id','=','dang_ky.id_lop')
                 ->join('khoa_hoc','khoa_hoc.id','=','lop.id_khoa_hoc')
                 ->join('thanh_toan','thanh_toan.id','=','dang_ky.id_thanh_toan')
-                ->select('dang_ky.id','dang_ky.id_user','dang_ky.id_thanh_toan','hoc_vien.sdt','dang_ky.gia as gia_khoa_hoc','hoc_vien.ten_hoc_vien as name','dang_ky.email','hoc_vien.dia_chi','ten_lop','ten_khoa_hoc','thanh_toan.trang_thai')
+                ->select('dang_ky.id','dang_ky.id_user','id_lop','lop.so_luong','dang_ky.id_thanh_toan','hoc_vien.sdt','dang_ky.gia as gia_khoa_hoc','hoc_vien.ten_hoc_vien as name','dang_ky.email','hoc_vien.dia_chi','ten_lop','ten_khoa_hoc','thanh_toan.trang_thai')
                 ->where('dang_ky.id',$id)
                 ->first();
         return $query;
