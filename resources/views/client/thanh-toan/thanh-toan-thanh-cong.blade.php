@@ -14,7 +14,7 @@
                 <!-- Text -->
                 <p class="ft-regular fs-md mb-5">Đơn hàng <span class="text-body text-dark"></span> đã thanh toán. Chi tiết đơn hàng của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
                 <!-- Button -->
-                <a class="btn btn-dark" href="{{route('client_lich_su_dang_ky',[Auth::user()->id])}}">Xem chi tiết</a>
+                <a class="btn btn-dark" href="{{route('home')}}">Xem chi tiết</a>
             </div>
         </div>
     </div>

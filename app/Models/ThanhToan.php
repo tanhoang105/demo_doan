@@ -137,6 +137,7 @@ class ThanhToan extends Model
             ->where('dang_ky.id', $id)
             ->update([
                 'thanh_toan.trang_thai' => 2,
+                'thanh_toan.ngay_thanh_toan' => date('Y-m-d H:i:s'),
             ]);
         return $query;
     }

@@ -74,9 +74,7 @@ class DangKyController extends Controller
 
     public function store(Request $request)
     {
-
         $this->authorize(mb_strtoupper('thêm đăng ký') );
-
         $lop = $this->lop->index(null, false, null);
         $this->v['lop'] =  $lop;
 
@@ -154,6 +152,7 @@ class DangKyController extends Controller
                             'id_thanh_toan'=>$inserThanhToan,
                             'email'=>$request->email,
                         ];
+                        
                         $tinhSoLuong = $loadDangKy->so_luong - 1;
                         $soLuongLop = DB::table('lop')
                             ->where('id', $request->id_lop)

@@ -150,7 +150,6 @@
 {{--        </div>--}}
         <!-- container /- -->
         <div class="container">
-
                 <?php //Hiển thị thông báo thành công?>
             @if ( Session::has('success') )
                 <div class="alert alert-success alert-dismissible" role="alert">
@@ -235,7 +234,7 @@
                         <h3>Thông tin cá nhân</h3>
                     </div>
                     {{-- {{dd($loadDangKy);}} --}}
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" action="{{route('client_post_dang_ky',$loadDangKy->id)}}" enctype="multipart/form-data" id="form">
                         @csrf
                         <div class="row">
                             {{-- {{dd($loadDangKy)}}; --}}
@@ -284,33 +283,29 @@
                                 {{-- {{dd($paymeny_method)}} --}}
                                 @foreach($payment_method as $method)
                                     <div>
-                                        <input name="ten" type="radio" class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
+                                        <input name="ten" type="radio"  class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
                                         <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan mb-3" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
                                     </div>
                                 @endforeach
-{{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
-{{--                                    @csrf--}}
-{{--                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>--}}
-{{--                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
+                                {{-- Thanh toán online --}}
+                               
                             </div>
-
-{{--                            <div class="col-12 p-3">--}}
-{{--                                <label class="text-lg">Hình thức thanh toán</label>--}}
-
-{{--                            </div>--}}
-
-                            <div class="col-6 p-3">
-                                <button class="btn btn-primary" id="submit" type="submit">Xác nhận</button>
-                            </div>
+                           
 
                         </div>
 
                     </form>
+                    <div class="col-6 p-3">
+                        <button class="btn btn-primary" data-url="{{route('client_post_dang_ky',$loadDangKy->id)}}" id="submit" type="button">Xác nhận</button>
+                    </div>
 
+                    <form action="" method="post" id="form-payment" hidden>
+                        @csrf
+                        <input type="text" name="gia_khoa_hoc_payment" id="gia_khoa_hoc_payment" >
+                        <input type="text" name="id" id="id_dang_ky" >
+                        <input type="text"  id="" name="redirect">
+                       
+                    </form>
                 </div>
             </div>
 
@@ -321,6 +316,32 @@
 @section('js')
     <script>
         $(document).ready(function () {
+
+            $('#submit').on('click',function(e) {
+                let payment = $('.radio_input:checked').val();
+                let url = $(this).data('url')
+                if(payment == 1) {
+                    $('#form').submit();
+                }else{
+                    let data = $('#form').serialize();
+                    $.ajax({
+                        type: 'post',
+                        url: url,
+                        data: data,
+                        success: function(res) {
+                            console.log(res);
+                            $('#gia_khoa_hoc_payment').val(res.gia_khoa_hoc);
+                            $('#id_dang_ky').val(res.id_dang_ky);
+                            $('#form-payment').attr('action',`/vnp_payment/${res.id_dang_ky}`)
+                            $('#form-payment').submit();
+
+                        }
+                    })
+                }
+
+            })
+            
+
             $('.radio_input')[0].checked = true;
             let checkEmail=false;
             $('#email').blur(function () {
@@ -331,7 +352,6 @@
                     url :url,
                     data:{
                         email:email,
-
                     },
                     success:function (res) {
                         if(res['status']==200){
