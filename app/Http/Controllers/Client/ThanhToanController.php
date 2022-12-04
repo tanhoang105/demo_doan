@@ -259,7 +259,8 @@ class ThanhToanController extends Controller
                         //Việc kiểm tra trạng thái của đơn hàng giúp hệ thống không xử lý trùng lặp, xử lý nhiều lần một giao dịch
                         //Giả sử: $order = mysqli_fetch_assoc($result);
                         $result=$this->obj->loadOne($id);
-        //                dd($result);
+                        $objDangKy = new DangKy();
+                        $dangKy=$objDangKy->loadOne($id);
                         $order = [];
                         foreach ($result as $or) {
                             $order[] = $or;
@@ -280,6 +281,10 @@ class ThanhToanController extends Controller
                                     $returnData['Message'] = 'Confirm Success';
                                     //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
                                     $query=$this->obj->updatePaid($id);
+                                    $tinhSoLuong = $dangKy->so_luong - 1;
+                                    $soLuongLop = DB::table('lop')
+                                        ->where('id', $dangKy->id_lop)
+                                        ->update(['so_luong' => $tinhSoLuong]);
                                     return view('client.thanh-toan.thanh-toan-thanh-cong');
                                 } else {
                                     $returnData['RspCode'] = '02';

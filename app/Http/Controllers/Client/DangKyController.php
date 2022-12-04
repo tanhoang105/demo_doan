@@ -123,11 +123,7 @@ class DangKyController extends Controller
 
                         if (!empty($insertThanhToan) > 0) {
                             
-                            $tinhSoLuong = $loadDangKy->so_luong - 1;
-                            $soLuongLop = DB::table('lop')
-                                ->where('id', $id)
-                                ->update(['so_luong' => $tinhSoLuong]);
-                            // $objDangKy = new DangKy();
+                           // $objDangKy = new DangKy();
 
                             $data = [
                                 'ngay_dang_ky' => date('Y-m-d H:i:s'),
@@ -226,11 +222,6 @@ class DangKyController extends Controller
                     if (!empty($query->user_id) > 0) {
                             // ->where('user_id',$user->id)
                             if (!empty($insertThanhToan) > 0) {
-                                $tinhSoLuong = $loadDangKy->so_luong - 1;
-                                $soLuongLop = DB::table('lop')
-                                    ->where('id', $id)
-                                    ->update(['so_luong' => $tinhSoLuong]);
-    
                                 $data = [
                                     'ngay_dang_ky' => date('Y-m-d H:i:s'),
                                     'id_lop' => $request->lop_id,
