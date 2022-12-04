@@ -154,7 +154,7 @@
 
                 <div class="col-12 pt-2 d-flex justify-content-between">
                     <label class="text-dark" style="font-size:18px;">Ngày khai giảng</label>
-                    <span style="font-size:16px;"> {{$loadDangKy->ngay_bat_dau}}</span>
+                    <span style="font-size:16px;"> {{ date('d-m-Y', strtotime($loadDangKy->ngay_bat_dau))}}</span>
                 </div>
 
                 <div class="col-12 pt-2 d-flex justify-content-between">

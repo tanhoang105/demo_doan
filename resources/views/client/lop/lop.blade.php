@@ -102,7 +102,7 @@
 
                 <div class="">
                     <label class="">Ngày bắt đầu: </label>
-                    <span class="">{{ $value->ngay_bat_dau }}</span>
+                    <span class="">{{ date('d-m-Y', strtotime($value->ngay_bat_dau)) }}</span>
                 </div>
 
                 <div class="">

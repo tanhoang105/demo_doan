@@ -32,7 +32,7 @@
 
                     <div class="">
                         <label>Giá tiền: </label>
-                        <span> {{ number_format($value->gia_khoa_hoc) }} VNĐ</span>
+                        <span> {{ number_format($value->gia_khoa_hoc,0,'.','.') }} VNĐ</span>
                     </div>
 
                     <hr>

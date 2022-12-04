@@ -31,7 +31,7 @@ class KhoaHoc extends Model
 
                 ->select('danh_muc.*', $this->table . '.*')
                 ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.id', $this->table . '.*');
+                ->orderByDesc($this->table . '.luot_xem', $this->table . '.*');
 
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {

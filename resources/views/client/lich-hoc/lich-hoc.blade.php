@@ -56,7 +56,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span> {{ $value->ngay_hoc }} </span>
+                    <span> {{ date('d-m-Y', strtotime($value->ngay_hoc)) }} </span>
                 </div>
                 <div class="col">
                     <span>

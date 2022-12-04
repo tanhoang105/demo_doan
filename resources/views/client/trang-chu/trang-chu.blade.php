@@ -17,7 +17,7 @@
                                     Chỉ từ một thiết bị</h2>
                                 <p> Học trực tuyến không phải là điều lớn lao tiếp theo, <br />
                                     nó bây giờ là điều tuyệt vời nhất từ ​​trước đến nay. </p>
-                                <a href="#" class="more-link"> Bắt đầu </a>
+                                <a href="{{ route('client_khoa_hoc') }}" class="more-link"> Bắt đầu </a>
                             </div>
                             <!-- /.hero_text -->
                         </div>
@@ -235,12 +235,19 @@
                                 <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
                             </a>
                             <div class="feat_cour_lesson">
-                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 1 Lớp </span>
-                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 1 Học viên </span>
+                                <span hidden>{{ $count_lop = DB::table('lop')
+                                            ->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
+                                <span hidden>{{ $total = 0 }}</span>
+                                @foreach ($count_lop as $data)
+                                    <span hidden>{{ $count_sv = 40 - $data->so_luong }}</span>
+                                    <span hidden>{{ $total = $total + $count_sv }}</span>
+                                @endforeach
+                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> {{ count($count_lop) }} Lớp </span>
+                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> {{ $total }} Học viên </span>
                             </div>
                             <div class="feat_cour_rating">
                                 <span class="feat_cour_stu">
-                                    <i class="pe-7s-look"></i> 1 Lượt xem </span>
+                                    <i class="pe-7s-look"></i>  {{ number_format($value->luot_xem) }} Lượt xem </span>
                                 </span>
                                 <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
                                         class="arrow_right"></i>
@@ -296,7 +303,7 @@
                         <label> {{ $value->ten_khoa_hoc }} </label>
                     </div>
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{ ( $value->ngay_bat_dau) . ' - ' . $value->ngay_ket_thuc }} </label>
+                        <label> {{  date('d-m-Y', strtotime($value->ngay_bat_dau)) . ' -- ' . date('d-m-Y', strtotime($value->ngay_ket_thuc)) }} </label>
                     </div>
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
                         <label>
