@@ -33,7 +33,7 @@
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <!-- teacher-list -->
                 <div class="teacher-img">
-                    <img src="{{ asset('client/images/teacher1.jpg') }}" alt="image">
+                    <img src="{{ Storage::url($value->hinh_anh) }} " alt="image">
                 </div>
                 <div class="teacher-info">
                     <div class="teacher-social">
@@ -61,7 +61,7 @@
             </div>
               @endforeach
             </div>
-            <div class="row teacher_partner">
+            {{-- <div class="row teacher_partner">
                 <div class="partner_col">
                     <span>Cơ hội đặc biệt</span>
                     <h2> Trở thành một Instractor</h2>
@@ -72,7 +72,7 @@
                     <h2> Tham gia cộng đồng chúng tôi</h2>
                     <a href="contact.html" class="more-link"> Liên Hệ Chúng Tôi </a>
                 </div>
-            </div>
+            </div> --}}
             <!-- /. row -->
         </div>
         <!-- /. container -->

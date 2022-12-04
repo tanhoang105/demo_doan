@@ -43,7 +43,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ number_format($doanhthu,0,'.','.') }}<sup style="font-size: 20px">VNĐ</sup></h3>
+                                <h3>{{ number_format($doanhthu,0,'.','.') }}<sup style="font-size: 20px">₫</sup></h3>
 
                                 <p>Tổng doanh thu</p>
                             </div>
