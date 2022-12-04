@@ -38,6 +38,29 @@ class KhoaHoc extends Model
                     $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
                 });
             }
+            if (!empty($params)) {
+                $query =  $query->where(function ($q) use ($params) {
+                    // dd($params);
+                    // if (!empty($params['khoa_hoc'])) {
+                        $q->Where($this->table . '.id_danh_muc', 'like', '%' . $params['danh_muc']  . '%');      
+
+                        if( $params['gia_khoa_hoc'] == 1 ) {
+                            $q->Where( 'gia_khoa_hoc', '<', '200000');
+                        } elseif( $params['gia_khoa_hoc'] == 2 ) {
+                            $q->Where( 'gia_khoa_hoc', '>', '200000',);
+                            $q->Where( 'gia_khoa_hoc', '<', '500000',);
+                        } elseif( $params['gia_khoa_hoc'] == 3 ) {
+                            $q->Where( 'gia_khoa_hoc', '>', '500000');
+                        }
+                        
+                    //     if( $params['luot_xem'] == 1 ) {
+                    // $q->orderByDesc($this->table . '.luot_xem');
+                    // // dd(1);
+                    //         } 
+
+                });
+                
+            } 
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             // nếu không phần trang

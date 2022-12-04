@@ -1,7 +1,7 @@
 @foreach ($listKh as $value)
     <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="feat_course_item">
-            <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image">
             <div class="feat_cour_price">
                 <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
                 <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }} VNĐ</span>

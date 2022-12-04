@@ -210,7 +210,6 @@
                             ==================================================-->
 
 
-
     <!-- Start: Featured Courses Section
                             ==================================================-->
     <section class="feat-course-section">
@@ -272,34 +271,34 @@
             <!-- End: Heading -->
 
             <div class="row bg-muted" style="text-align: center;background: #DEDEDE">
-                <div class="col-lg-2 pt-3">
+                <div class="col pt-3">
                     <h4>Tên Lớp</h4>
                 </div>
-                <div class="col-lg-4 pt-3">
+                <div class="col pt-3">
                     <h4>Khóa Học</h4>
                 </div>
-                <div class="col-lg-2 pt-3">
+                <div class="col pt-3">
                     <h4>Thời gian dự kiến</h4>
                 </div>
-                <div class="col-lg-2 pt-3">
+                <div class="col pt-3">
                     <h4>Ca học</h4>
                 </div>
-                <div class="col-lg-2 pt-3"></div>
+                <div class="col pt-3"></div>
             </div>
 
             @foreach ($khaigiang as $value)
                 <div class="row text-dark align-content-center"
-                    style="text-align: center;height: 80px;border-top: 1px solid #DEDEDE">
-                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
+                    style="text-align: center;height: 100px;border-top: 1px solid #DEDEDE">
+                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
                         <label> {{ $value->ten_lop }} </label>
                     </div>
-                    <div class="col-lg-4 pt-3 d-flex align-content-center flex-wrap justify-content-center">
+                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
                         <label> {{ $value->ten_khoa_hoc }} </label>
                     </div>
-                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{ $value->ngay_bat_dau . ' - ' . $value->ngay_ket_thuc }} </label>
+                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                        <label> {{ ( $value->ngay_bat_dau) . ' - ' . $value->ngay_ket_thuc }} </label>
                     </div>
-                    <div class="col-lg-2 pt-3 d-flex align-content-center flex-wrap justify-content-center">
+                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
                         <label>
                             <?php
                             foreach ($array as $item) {
@@ -341,11 +340,8 @@
                             ?>
                         </label>
                     </div>
-                    {{-- <div class="col-lg-2 pt-3">
-                    <label> {{ $value->thoi_gian }} </label>
-                </div> --}}
-                    <div class="col-lg-2 pt-2 d-flex align-content-center flex-wrap justify-content-center">
-                        <a href="#">
+                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                        <a href=" {{route('client_dang_ky',['id'=> $item->id])}} ">
                             <button class="text-white"
                                 style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">
                                 ĐĂNG KÝ</button>

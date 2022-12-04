@@ -33,6 +33,42 @@
             </button>
         </div>
     @endif
+
+    <form action="" method="get">
+        @csrf
+        <div class="row p-3">
+            <div class="col-2">
+                <select class="form-control" name="danh_muc" id="">
+                    <option value="">Lọc theo danh mục</option>
+                    @foreach ($danh_muc as $itemDanhMuc)
+                        <option value=" {{ $itemDanhMuc->id }} "> {{ $itemDanhMuc->ten_danh_muc }} </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="gia_khoa_hoc" id="">
+                    <option value="">Lọc theo giá khóa học</option>
+                        <option value="1"> Dưới 200.000 VNĐ </option>
+                        <option value="2"> Khoảng từ 200.000 đến 500.000 VNĐ </option>
+                        <option value="3"> Trên 500.000 VNĐ </option>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="luot_xem" id="">
+                    <option value="">Lọc theo lượt xem</option>
+                        <option value="1"> Từ nhiều nhất đến ít nhất </option>
+                        <option value="2"> Từ ít đến nhiều nhất </option>
+                </select>
+            </div>
+
+            <div class="col-1">
+                <button class="btn btn-success">Lọc</button>
+            </div>
+        </div>
+    </form>
+
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Khoa_Hoc') }}" enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">

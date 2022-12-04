@@ -69,8 +69,9 @@ class DangKyController extends Controller
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
                     // dd(123);
-                    $password = Str::random(8);
+                    $password = Str::random(8); 
                     $dataUser = $params;
+                    $dataUser['cols']['vai_tro_id']= 4;
                     $dataUser['cols']['password'] = Hash::make($password);
                     unset($dataUser['cols']['user_id']);
                     unset($dataUser['cols']['id_khoa_hoc']);
