@@ -39,7 +39,7 @@
             </div>
 
         </div>
-
+        {{-- @if() --}}
         @foreach ($list as $value )
             @if($value->ngay_hoc >= date('Y-m-d'))
             <div class="row align-content-center bg-dedede" style="height: 50px; border-top: 1px solid #CFCECE">
