@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ThanhToanRequest;
+use App\Models\DangKy;
 use App\Models\HocVien;
 use App\Models\Lop;
 use App\Models\PhuongThucThanhToan;
@@ -18,7 +19,7 @@ use PDF;
 class ThanhToanController extends Controller
 {
 
-    protected $v, $thanhtoan, $phuongthucthanhtoan , $lop , $hocvien;
+    protected $v, $thanhtoan, $phuongthucthanhtoan , $lop , $hocvien , $dangky;
     public function __construct()
     {
         $this->v = [];
@@ -26,6 +27,7 @@ class ThanhToanController extends Controller
         $this->phuongthucthanhtoan = new PhuongThucThanhToan();
         $this->lop = new Lop();
         $this->hocvien = new HocVien();
+        $this->dangky = new DangKy();
     }
     /**
      * Display a listing of the resource.
@@ -195,10 +197,13 @@ class ThanhToanController extends Controller
         // dd($this->v['list']);
         $this->v['lop'] = $this->lop->index(null , false  , null);
         $this->v['hocvien'] = $this->hocvien->index(null , false  , null);
-        // dd($this->v['list']->id);
+        // dd($this->v['list']);
+        $dangky = $this->dangky->timTheoIdThanhToan($id);
+        $this->v['dangky'] = $dangky;
+        // dd($dangky);
         $pdf = FacadePdf::loadView('admin.pdf',$this->v );
    
-        return $pdf->download('tuts_notes.pdf');
+        return $pdf->download('hoadon.pdf');
     }
 
 

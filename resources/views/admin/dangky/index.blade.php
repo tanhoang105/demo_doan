@@ -65,8 +65,8 @@
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
                         <td>
-                            @if ($item->trang_thai == 2)
-                                <button class="btn btn-primary">Xuất hóa đơn</button>
+                            @if ($item->trang_thai_thanh_toan == 2)
+                                <button class="btn btn-primary">Đã thanh toán</button>
                             @else
                                 <button class="btn btn-warning">Chưa thanh toán</button>
                             @endif
@@ -74,7 +74,7 @@
 
 
                         <td>
-                                <a class="btn btn-warning" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Hoc', ['id' => $item->id]) }}">
+                                <a class="btn btn-warning" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Dang_Ky', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>

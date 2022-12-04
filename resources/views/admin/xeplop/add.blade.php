@@ -37,7 +37,7 @@
                     <label for="chuyenBay" class="form-label">Lớp học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="">
                             <option value="0">--- Chọn lớp học ---</option>
-                        @foreach ($lophoc as $item)
+                        @foreach ($lopxep as $item)
                             <option value="{{$item->id}}">{{ $item->ten_lop }}</option>
                         @endforeach
                     </select>

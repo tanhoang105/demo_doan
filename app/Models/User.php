@@ -82,10 +82,20 @@ class User extends Authenticatable
                 ->select($this->table . '.*');
             if (!empty($params['keyword'])) {
                 $query = $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.name   ', 'like', '%' . $params['keyword'] . '%');
-                    $q->orWhere($this->table . '.dia_chi   ', 'like', '%' . $params['keyword'] . '%');
-                    $q->orWhere($this->table . '.email   ', 'like', '%' . $params['keyword'] . '%');
+                    $q->orWhere($this->table . '.name', 'like', '%' . $params['keyword'] . '%');
+                    $q->orWhere($this->table . '.dia_chi', 'like', '%' . $params['keyword'] . '%');
+                    $q->orWhere($this->table . '.email', 'like', '%' . $params['keyword'] . '%');
 
+                });
+            }
+
+            if (!empty($params)) {
+                $query =  $query->where(function ($q) use ($params) {
+                    // dd($params);
+                    // if (!empty($params['khoa_hoc'])) {
+
+                        $q->Where($this->table . '.vai_tro_id', 'like', '%' . $params['vai_tro']  . '%');
+                       
                 });
             }
 

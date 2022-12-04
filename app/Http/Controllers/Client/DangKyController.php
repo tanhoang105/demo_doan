@@ -10,6 +10,7 @@ use App\Models\KhachHang;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
 use App\Models\Order;
+use App\Models\GhiNo;
 use App\Models\ThanhToan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -65,8 +66,9 @@ class DangKyController extends Controller
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
                     // dd(123);
-                    $password = Str::random(8);
+                    $password = Str::random(8); 
                     $dataUser = $params;
+                    $dataUser['cols']['vai_tro_id']= 4;
                     $dataUser['cols']['password'] = Hash::make($password);
                     unset($dataUser['cols']['user_id']);
                     unset($dataUser['cols']['id_khoa_hoc']);
@@ -87,6 +89,19 @@ class DangKyController extends Controller
                         unset($dataHocVien['cols']['ten']);
                         unset($dataHocVien['cols']['gia_khoa_hoc']);
                         $saveNewHocVien = $objHocvien->saveNew($dataHocVien);
+
+                        $data = User::where('users.email','=',$request->email)
+                        ->get();
+
+                        // dd($data);
+                        foreach($data as $value){
+                            $ghino = new GhiNo();
+                            $ghino->user_id = $value->id;
+                            $ghino->tien_no = 0;
+                            $ghino->trang_thai = 0;
+                            $ghino->save();
+                        }
+
                         $objThanhToan = new ThanhToan();
                         if ($request->ten == 1) {
                             $dataThanhToan = [

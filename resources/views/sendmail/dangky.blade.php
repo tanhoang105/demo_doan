@@ -15,9 +15,6 @@
 </head>
 
 <body>
-
-    {{-- <p> {{ $emails['message'] }}</p>
-    <p>{{ $emails['password'] }}</p> --}}
 </body>
 
 </html>

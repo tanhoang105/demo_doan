@@ -108,7 +108,8 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add-dang-ky', [DoiLopKhoaController::class, 'create'])->name('Add_doi_lop');
         Route::post('store_doi_khoa', [DoiLopKhoaController::class, 'store'])->name('store_doi_khoa');
         Route::get('Xoa_Yc_doi_Khoa_Hoc/{id}', [DoiLopKhoaController::class, 'Xoa_Yc_doi_Khoa_Hoc'])->name('Xoa_Yc_doi_Khoa_Hoc');
-
+        //loc 
+        Route::get('/loc_theo_trang_thai', [DoiLopKhoaController::class, 'loc_theo_trang_thai'])->name('loc_theo_trang_thai');
     });
 
     Route::prefix('/ca-hoc')->name('route_BE_Admin_')->group(function () {
@@ -134,7 +135,7 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add-dang-ky',   [DangKyController::class, 'store'])->name('Add_Dang_Ky'); // hiển thi form để thêm dữ liệu và insert dữ liệu vào data
         Route::get('/dang-ky-delete/{id}', [DangKyController::class, 'destroy'])->name('Xoa_Giang_Vien');
         Route::get('/dang-ky-edit/{id}', [DangKyController::class, 'edit'])->name('Edit_Dang_Ky'); // hiển thị chi tiết bản ghi
-        Route::post('/dang-ky-update', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
+        Route::post('/dang-ky-update/{id}', [DangKyController::class, 'update'])->name('Update_Dang_Ky');
         Route::post('xoa-all', [DangKyController::class, 'destroyAll'])->name('Xoa_All_Dang_Ky');
     });
     // thứ học

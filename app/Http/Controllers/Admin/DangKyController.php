@@ -10,8 +10,10 @@ use App\Models\KhoaHoc;
 use App\Models\Lop;
 use App\Models\PhuongThucThanhToan;
 use App\Models\ThanhToan;
+use App\Models\GhiNo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -82,6 +84,9 @@ class DangKyController extends Controller
                 $objDangKy = new DangKy();
             if ($request->isMethod('post')) {
                 $loadDangKy = $objDangKy->listDangky($request->id_lop);
+                // dd($loadDangKy);
+                $ca_thu_id=explode(',',$loadDangKy->thu_hoc_id);
+                $layThu=$objDangKy->layThu($ca_thu_id);
                 if ($loadDangKy->so_luong > 0) {
                 $objHocvien = new HocVien();
                 $objDangKy = new DangKy();
@@ -125,7 +130,21 @@ class DangKyController extends Controller
                         'ngay_thanh_toan'=>date('Y-m-d'),
                         'gia'=>$request->gia_khoa_hoc,
                     ]);
+
+
                     if ($saveNewHocVien > 0 && $inserThanhToan>0) {
+
+                        $data = User::where('users.email','=',$request->email)
+                                ->get();
+
+                                // dd($data);
+                                foreach($data as $value){
+                                    $ghino = new GhiNo();
+                                    $ghino->user_id = $value->id;
+                                    $ghino->tien_no = 0;
+                                    $ghino->trang_thai = 0;
+                                    $ghino->save();
+                                }
 
                         $data = [
                             'ngay_dang_ky' => date('Y-m-d'),
@@ -135,12 +154,19 @@ class DangKyController extends Controller
                             'id_thanh_toan'=>$inserThanhToan,
                             'email'=>$request->email,
                         ];
+                        $tinhSoLuong = $loadDangKy->so_luong - 1;
+                        $soLuongLop = DB::table('lop')
+                            ->where('id', $request->id_lop)
+                            ->update(['so_luong' => $tinhSoLuong]);
                         $objDangKy->saveNew($data);
                         Session::flash('success', 'Đăng ký Khóa học thành công');
 
                         // dd($params['cols']['email']);
                         Mail::to($params['cols']['email'])->send(new SendMail([
+                            'user'=>$params['cols'],
+                            'dangky'=>$loadDangKy,
                             'password'=>$password,
+                            'thuhoc'=>$layThu,
                             'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                     }
                 } else {
@@ -148,8 +174,6 @@ class DangKyController extends Controller
                 }
             }
 //            $this->v['listthanhtoan'] = $this->phuongthucthanhtoan->index(null, false, null);
-
-
 
         }
                 $objKhoaHoc = new KhoaHoc();
@@ -178,6 +202,10 @@ class DangKyController extends Controller
     public function edit($id)
     {
         //
+        $objDangKy = new DangKy();
+        $loadDangKy = $objDangKy->loadOne($id);
+        // dd($loadDangKy);
+        return view('admin.dangky.update',compact('loadDangKy'));
     }
 
     /**
@@ -189,7 +217,40 @@ class DangKyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $objDangKy = new DangKy();
+        $loadDangKy = $objDangKy->loadOne($id);
+
+        $dataUser = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'sdt' => $request->sdt,
+            'dia_chi' => $request->dia_chi,
+        ];
+       
+        User::where('id',$loadDangKy->id_user)->update($dataUser);
+
+        $dataHocVien = [
+            'ten_hoc_vien' =>  $request->name,
+            'email' =>  $request->email,
+            'sdt' =>  $request->sdt,
+            'dia_chi' =>  $request->dia_chi,
+        ];
+        HocVien::where('user_id',$loadDangKy->id_user)->update($dataHocVien);
+
+        $dataDangKy = [
+            'email' =>  $request->email,
+        ];
+        DangKy::where('id',$id)->update($dataDangKy);
+
+        $objThanhToan = new ThanhToan();
+        $dataThanhToan = [
+            'trang_thai' => $request->id_thanh_toan
+        ];
+        ThanhToan::where('id',$loadDangKy->id_thanh_toan)->update($dataThanhToan);
+
+
+        return redirect()->route('route_BE_Admin_Edit_Dang_Ky', $id)->with('msg','Cập nhật thành công !');
+
     }
 
     /**
