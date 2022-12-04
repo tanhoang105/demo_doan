@@ -27,14 +27,7 @@
                     <!-- Text -->
                     <p class="ft-regular fs-md mb-5">Đơn hàng <span class="text-body text-dark">{{$complete->id}}#</span> đã hoàn thành. Chi tiết đơn hàng của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
                     <!-- Button -->
-                    <form action="{{route('payment',[$complete->id])}}" method="post">
-                        @csrf
-                        <input type="text" name="gia_khoa_hoc" value="{{$complete->gia_khoa_hoc}}" hidden>
-                        <input type="text" name="id" value="{{$complete->id}}" hidden>
-                        <div class="form-group">
-                            <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
-                        </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>
