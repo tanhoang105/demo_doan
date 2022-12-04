@@ -147,8 +147,19 @@ class ThanhToan extends Model
         $query = DB::table($this->table)
             ->join('dang_ky', 'dang_ky.id_thanh_toan', '=', $this->table . '.id')
             ->select('dang_ky.*', $this->table . '.*')
-            ->where($this->table.'.id' , '=' , $id  );
+            ->where($this->table . '.id', '=', $id);
 
         return $query->get();
+    }
+
+
+    public function checkThanhToan($id_user)
+    {
+        $query  = DB::table($this->table)
+            ->where($this->table . '.delete_at', 1)
+            ->join('dang_ky', 'dang_ky.id_thanh_toan',  '=', $this->table . '.id')
+            ->where('dang_ky.id_user', '=', $id_user)
+            ->select('dang_ky.*', $this->table . '.*')->get();
+        return $query;
     }
 }
