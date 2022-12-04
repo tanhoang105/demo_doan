@@ -86,8 +86,7 @@
                                             <tr>
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Tên Lớp </th>
-                                                <th scope="col">Giá </th>
-                                                <th scope="col">Số lượng học viên </th>
+                                                <th scope="col">Số lượng</th>
                                                 <th scope="col">Ngày bắt đầu </th>
                                                 <th scope="col">Ngày kết thúc </th>
                                                 <th scope="col">Giảng viên </th>
@@ -99,10 +98,9 @@
                                                 <tr>
                                                     <th scope="row">{{ $item->id }}</th>
                                                     <td> {{ $item->ten_lop }}</td>
-                                                    <td> {{ $item->gia }}</td>
                                                     <td> {{ $item->so_luong }}</td>
-                                                    <td> {{ $item->ngay_bat_dau }}</td>
-                                                    <td> {{ $item->ngay_ket_thuc }}</td>
+                                                    <td> {{ date('d-m-Y', strtotime($item->ngay_bat_dau)) }}</td>
+                                                    <td> {{ date('d-m-Y', strtotime($item->ngay_ket_thuc)) }}</td>
                                                     <td>
                                                         @foreach ($giang_vien as $gv)
                                                             @if ($gv->id_user == $item->id_giang_vien)
@@ -149,21 +147,6 @@
                                         dolore magna valiquyam erat, sed diam voluptua. At vero eos et accusam et justo
                                         duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
                                         Lorem ipsum dolor sit.
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.
-                                        E learning dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                                        vero eos keti accusam et justo duo dolores et ea rebum. Stet clita kasd
-                                        gubergren, no sea takimel.
-                                        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                        done sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore facts.
-                                        E learning dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                                        vero eos keti accusam et justo duo dolores et ea rebum. Stet clita kasd
-                                        gubergren, no sea takimel.
-                                        sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                        done sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                                        dolore facts.
                                     </p>
                                     <div class="share_course">
                                         <span> Share Course : </span>
@@ -292,7 +275,7 @@
                 <div class="col-lg-4 col-sm-12 single_curs_right">
                     <!-- Widget Course Details -->
                     <aside class="widget-course-details">
-                        <h2> Giá tiền <span>{{ number_format($detail->gia_khoa_hoc)}}VND</span></h2>
+                        <h2> Giá tiền <span>{{ number_format($detail->gia_khoa_hoc,0,'.','.')}}VNĐ</span></h2>
                         <div class="course-detail-list">
                             <span> <i class="far fa-user"></i>Tên khóa học </span>
                             <span> {{$detail->ten_khoa_hoc}} </span>
@@ -341,7 +324,7 @@
                             <div class="feat_course_item">
                                 <img src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="height: 75px;width: 140px;border-radius: 10px;">
                                 <div class="feat_cour_price">
-                                    <span class="feat_cour_tag">Giá tiền {{number_format($value->gia_khoa_hoc)}}VND</span>
+                                    <span class="feat_cour_tag">Giá tiền {{number_format($value->gia_khoa_hoc,0,'.','.')}}VNĐ</span>
                                     {{-- <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span> --}}
                                 </div>
                                 <div class="feat_cour_rating">
