@@ -281,46 +281,12 @@
                             <div class="col-md-6 col-sm-12">
                                 {{-- <label class="signup-field">Chọn phương thức thanh toán</label> --}}
                                 {{-- {{dd($paymeny_method)}} --}}
-                                <select class="form-control" name="ten" id="">
+                                <select style="margin: 10px;height: 50px" class="form-control" name="ten" id="select_payment">
                                 @foreach($payment_method as $method)
-<<<<<<< HEAD
-                                    <div>
-                                        <input name="ten" type="radio"  class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
-=======
-                                {{-- <option value="">Chọn phương thức thanh toán</option> --}}
                                     <option value=" {{$method->id}} "> {{{$method->ten}}} </option>
-                                    {{-- <div>
-                                        <input name="ten" type="radio" class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" >
->>>>>>> 76e2f0750e284a769749d487e53a7724c3ae78d3
-                                        <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan mb-3" id="{{$method->id}}" name="ten">{{$method->ten}}</label>
-                                    </div> --}}
                                 @endforeach
-<<<<<<< HEAD
-                                {{-- Thanh toán online --}}
-                               
-=======
                             </select>
-{{--                                <form id="form-vnpay" class="d-none" action="{{route('payment',[$loadDangKy->id])}}" method="post">--}}
-{{--                                    @csrf--}}
-{{--                                    <input type="text" name="gia_khoa_hoc" value="{{$loadDangKy->gia_khoa_hoc}}" hidden>--}}
-{{--                                    <input type="text" name="id" value="{{$loadDangKy->id}}" hidden>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
                             </div>
-
-{{--                            <div class="col-12 p-3">--}}
-{{--                                <label class="text-lg">Hình thức thanh toán</label>--}}
-
-{{--                            </div>--}}
-
-                            <div class="col-6 p-3">
-                                <button class="btn btn-success" id="submit" type="submit">Xác nhận</button>
->>>>>>> 76e2f0750e284a769749d487e53a7724c3ae78d3
-                            </div>
-                           
-
                         </div>
 
                     </form>
@@ -347,7 +313,7 @@
         $(document).ready(function () {
 
             $('#submit').on('click',function(e) {
-                let payment = $('.radio_input:checked').val();
+                let payment = $('#select_payment').val();
                 let url = $(this).data('url')
                 if(payment == 1) {
                     $('#form').submit();
@@ -370,8 +336,6 @@
 
             })
             
-
-            $('.radio_input')[0].checked = true;
             let checkEmail=false;
             $('#email').blur(function () {
                 let email=$(this).val();
