@@ -43,6 +43,7 @@
                     </th>
                     <th scope="col">STT</th>
                     <th scope="col">Tên giảng viên </th>
+                    <th scope="col">Ảnh</th>
                     <th scope="col">Địa chỉ </th>
                     <th scope="col">Email </th>
                     <th scope="col">Số điện thoại</th>
@@ -59,6 +60,9 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id_user }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_giang_vien }}</td>
+                        <td>
+                            <img width="50px" height="50px " style="border-radius:100%" src="{{Storage::url($item->hinh_anh)}}" alt="">
+                        </td>
                         <td> {{ $item->dia_chi_giang_vien }}</td>
                         <td> {{ $item->email_giang_vien }}</td>
                         <td>

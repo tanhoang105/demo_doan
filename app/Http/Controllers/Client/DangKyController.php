@@ -44,6 +44,7 @@ class DangKyController extends Controller
         $loadDangKy = $objDangKy->listDangky($id);
         $ca_thu_id=explode(',',$loadDangKy->thu_hoc_id);
         $layThu=$objDangKy->layThu($ca_thu_id);
+
         if ($loadDangKy->so_luong > 0) {
             if ($request->isMethod('post')) {
                 $objHocvien = new HocVien();
@@ -62,6 +63,8 @@ class DangKyController extends Controller
                 unset($params['cols']['ca_id']);
                 unset($params['cols']['thu_hoc_id']);
                 unset($params['cols']['khuyen_mai_id']);
+                unset($params['cols']['gia_khoa_hoc_payment']);
+                unset($params['cols']['id']);
                 // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
@@ -117,7 +120,9 @@ class DangKyController extends Controller
                             ];
                         }
                         $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
+
                         if (!empty($insertThanhToan) > 0) {
+                            
                             $tinhSoLuong = $loadDangKy->so_luong - 1;
                             $soLuongLop = DB::table('lop')
                                 ->where('id', $id)
@@ -148,6 +153,14 @@ class DangKyController extends Controller
                                     'password'=>$password,
                                     'thuhoc'=>$layThu,
                                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
+                                if($request->ten == 2) {
+                                    return response()->json([
+                                        'msg' => 'Chưa đăng nhập',
+                                        'id_dang_ky' => $resDK,
+                                        'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                    ]);
+                                }
+                               
                                 return redirect()->route('client_complete_dang_ky', ['code' => $resDK]);
                             } else {
                                 Session::flash('error', 'Lỗi đăng ký khóa học');
@@ -203,7 +216,7 @@ class DangKyController extends Controller
                                 'id_phuong_thuc_thanh_toan' => $request->ten,
                                 'ngay_thanh_toan' => date('Y-m-d H:i:s'),
                                 'gia' => $request->gia_khoa_hoc,
-                                'mo_ta' => 'quá nhanh',
+                                'mo_ta' => 'Thanh toán khóa học online',
                             ];
                         }
                         $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
@@ -227,6 +240,7 @@ class DangKyController extends Controller
                                     'email' => $request->email,
                                 ];
                                 $res = $objDangKy->saveNew($data);
+
                             }
                             if ($res == null) {
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
@@ -238,12 +252,20 @@ class DangKyController extends Controller
                                         'khuyen_mai_id' => $request->khuyen_mai_id
                                     ]);
                                 }
-
                                 Mail::to($params['cols']['email'])->send(new SendMail([
                                     'user'=>$params['cols'],
                                     'dangky'=>$loadDangKy,
                                     'thuhoc'=>$layThu,
                                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
+
+                                if($request->ten == 2) {
+                                    return response()->json([
+                                        'msg' => 'đã đăng nhập',
+                                        'id_dang_ky' => $res,
+                                        'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                    ]);
+                                }
+                                
                                 return redirect()->route('client_complete_dang_ky', ['code' => $res]);
 
                             } else {
@@ -306,6 +328,13 @@ class DangKyController extends Controller
                                     'dangky'=>$loadDangKy,
                                     'thuhoc'=>$layThu,
                                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
+                                if($request->ten == 2) {
+                                    return response()->json([
+                                        'id_dang_ky' => $res,
+                                        'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                    ]);
+                                }
+                                
                                 Session::flash('success', 'Đăng ký Khóa học thành công');
                                 DB::commit();
                                 return redirect()->route('client_complete_dang_ky', ['code' => $res]);

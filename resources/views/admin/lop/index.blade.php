@@ -196,7 +196,7 @@
 
                         </td>
                         <td>
-                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
+                            <a {{$item->so_luong < 40 ? 'hidden' : ''}}  onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
                                 style="color: aliceblue"
                                 href="{{ route('route_BE_Admin_Xoa_Lop', ['id' => $item->id_lop]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a>

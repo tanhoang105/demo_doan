@@ -12,6 +12,7 @@ use App\Models\Lich;
 use App\Models\LichHoc;
 use App\Models\Lop;
 use App\Models\ThuHoc;
+use App\Models\User;
 use App\Models\XepLop;
 use DateInterval;
 use DatePeriod;
@@ -424,9 +425,19 @@ class LopController extends Controller
             }, $request->post());
 
             unset($params['cols']['_token']);
+            // dd($params);
             $res = $this->lophoc->create($params);
 
             if ($res > 0) {
+                // khi thêm giảng vien vào lớp thì cần update lại trạng thái của giảng viên đó 1 là chưa có lớp dạy , 2 là đã có lớp dạy
+                // GiangVien::where('id_user', $params['cols']['id_giang_vien'])->update([
+
+                //     'trang_thai' => 2
+                // ]);
+                // User::where('id', $params['cols']['id_giang_vien'])->update([
+
+                //     'trang_thai' => 2
+                // ]);
                 $request->session()->put('idLopCurrent', $res);
                 // thêm thành công
                 // khi thêm thành công thì đồng nghĩa isnsert thời gian học vào bảng lịch học để 

@@ -7,6 +7,7 @@ use App\Models\GhiNo;
 use App\Http\Requests\TaiKhoanRequest;
 use App\Models\GiangVien;
 use App\Models\HocVien;
+use App\Models\Lop;
 use App\Models\User;
 use App\Models\VaiTro;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class TaiKhoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $v, $taikhoan, $vaitro, $hocvien, $giangvien;
+    protected $v, $taikhoan, $vaitro, $hocvien, $giangvien ,  $lop;
 
     public function __construct()
     {
@@ -32,6 +33,7 @@ class TaiKhoanController extends Controller
         $this->vaitro = new VaiTro();
         $this->hocvien = new HocVien();
         $this->giangvien = new GiangVien();
+        $this->lop = new Lop();
     }
 
     public function index(Request $request)
@@ -42,7 +44,16 @@ class TaiKhoanController extends Controller
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
         $this->v['list'] = $this->taikhoan->index($this->v['params'], true, 10);
-        //        dd($this->v['list']);
+        $this->v['lop'] = $this->lop->index(null , false  , null);
+        $arrayIdGiangVienCuaLop = [];
+        foreach($this->v['lop'] as $itemLop){
+            $arrayIdGiangVienCuaLop[] = $itemLop->id_giang_vien;
+        }
+        $arrayIdGiangVienCuaLop = array_unique($arrayIdGiangVienCuaLop);
+        // dd($arrayIdGiangVienCuaLop);
+        $this->v['arrayIdGiangVienCuaLop'] = $arrayIdGiangVienCuaLop;
+        // $check = in_array(3 , $arrayIdGiangVienCuaLop);
+        
 
         return view('admin.taikhoan.index', $this->v);
     }
@@ -206,10 +217,13 @@ class TaiKhoanController extends Controller
             //            dd($id);
             unset($params['cols']['_token']);
             $params['cols']['id'] = $id;
-            $params['cols']['hinh_anh'] = null;
-            if ($request->file('hinh_anh')) {
 
+            $flag = null;
+            if ($request->file('hinh_anh')) {
+                $flag = 1;
                 $params['cols']['hinh_anh'] = $this->uploadFile($request->file('hinh_anh'));
+            } else {
+                unset($params['cols']['hinh_anh']);
             }
 
             if ($request->input('password')) {
@@ -226,25 +240,47 @@ class TaiKhoanController extends Controller
                 // if($)
                 if ($tkCurrent->vai_tro_id == 2) {
                     // giảng viên 
-                    GiangVien::where('id_user', $id)->update([
+                    if ($flag == 1) {
+                        GiangVien::where('id_user', $id)->update([
 
-                        'ten_giang_vien' => $params['cols']['name'],
-                        'dia_chi' => $params['cols']['dia_chi'],
-                        'email' => $params['cols']['email'],
-                        'sdt' => $params['cols']['sdt'],
-                        'hinh_anh' => $params['cols']['hinh_anh'],
-                    ]);
+                            'ten_giang_vien' => $params['cols']['name'],
+                            'dia_chi' => $params['cols']['dia_chi'],
+                            'email' => $params['cols']['email'],
+                            'sdt' => $params['cols']['sdt'],
+                            'hinh_anh' => $params['cols']['hinh_anh'],
+                        ]);
+                    } else {
+                        GiangVien::where('id_user', $id)->update([
+
+                            'ten_giang_vien' => $params['cols']['name'],
+                            'dia_chi' => $params['cols']['dia_chi'],
+                            'email' => $params['cols']['email'],
+                            'sdt' => $params['cols']['sdt'],
+                        ]);
+                    }
                 }
-                if ($tkCurrent->vai_tro_id == 2) {
-                    // giảng viên 
-                    HocVien::where('user_id', $id)->update([
-                        'user_id' => $id,
-                        'ten_hoc_vien' => $params['cols']['name'],
-                        'dia_chi' => $params['cols']['dia_chi'],
-                        'email' => $params['cols']['email'],
-                        'sdt' => $params['cols']['sdt'],
-                        'hinh_anh' => $params['cols']['hinh_anh'],
-                    ]);
+                if ($tkCurrent->vai_tro_id == 4) {
+                    // học viên 
+                    if ($flag == 1) {
+                        HocVien::where('user_id', $id)->update([
+                            'user_id' => $id,
+                            'ten_hoc_vien' => $params['cols']['name'],
+                            'dia_chi' => $params['cols']['dia_chi'],
+                            'email' => $params['cols']['email'],
+                            'sdt' => $params['cols']['sdt'],
+                            'hinh_anh' => $params['cols']['hinh_anh'],
+                        ]);
+                    } else {
+
+
+                        HocVien::where('user_id', $id)->update([
+                            'user_id' => $id,
+                            'ten_hoc_vien' => $params['cols']['name'],
+                            'dia_chi' => $params['cols']['dia_chi'],
+                            'email' => $params['cols']['email'],
+                            'sdt' => $params['cols']['sdt'],
+                        ]);
+                    }
                 }
                 Session::flash('success', 'Cập nhập thành công');
                 return redirect()->route('route_BE_Admin_Tai_Khoan');
