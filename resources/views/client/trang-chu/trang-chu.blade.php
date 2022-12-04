@@ -330,9 +330,13 @@
                                                         if ($arrayThu[$i] == $itemThu->id) {
                                                             echo '( ' . $itemThu->ten_thu . ' & ';
                                                         }
-                                                    } else {
+                                                    } elseif($i == (count($arrayThu) - 1) ) {
                                                         if ($arrayThu[$i] == $itemThu->id) {
-                                                            echo '' . $itemThu->ten_thu . ' )';
+                                                            echo '' . $itemThu->ten_thu . ')';
+                                                        }
+                                                    }else {
+                                                        if ($arrayThu[$i] == $itemThu->id) {
+                                                            echo '' . $itemThu->ten_thu . ' & ';
                                                         }
                                                     }
                                                 }
