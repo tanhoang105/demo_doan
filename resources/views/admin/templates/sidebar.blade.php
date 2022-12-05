@@ -204,7 +204,7 @@
                             <a href="{{ route('route_BE_Admin_List_Lop') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Lớp Học
+                                    Danh sách lớp học
                                 </p>
                             </a>
                         </li>
@@ -228,7 +228,7 @@
                             <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Lịch Học
+                                    Lịch Học của học viên
                                 </p>
                             </a>
                         </li>
@@ -236,18 +236,18 @@
                             <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Ca Thứ
+                                    Tạo lịch cho lớp
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('route_BE_Admin_List_Thu_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Thứ Học
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('route_BE_Admin_Ca_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -309,14 +309,14 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href=" {{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
                                 Pương thức thanh toán
                             </p>
                         </a>
-                    </li>
+                    </li> --}}
                   </ul>
 
               </li>
