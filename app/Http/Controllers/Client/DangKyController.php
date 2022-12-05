@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DangKyRequest;
 use App\Mail\SendMail;
 use App\Models\DangKy;
 use App\Models\HocVien;
@@ -36,7 +37,7 @@ class DangKyController extends Controller
         // dd($layThu);
         return view('client.khoa-hoc.dang-ky-khoa-hoc',compact('loadDangKy','payment_method','layThu'));
     }
-    public function postDangKy(Request $request ,$id)
+    public function postDangKy(DangKyRequest $request ,$id)
     {
 //        try {
 //            DB::beginTransaction();

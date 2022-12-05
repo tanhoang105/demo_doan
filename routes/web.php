@@ -83,7 +83,7 @@ Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::cl
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 
 Route::get('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showForgetPasswordForm'])->name('form_quen_mat_khau');
-Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitForgetPasswordForm'])->name('quen_mat_khau'); 
+Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitForgetPasswordForm'])->name('quen_mat_khau');
 Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
 
@@ -108,7 +108,7 @@ Route::prefix('/admin')->group(function () {
         Route::match(['get', 'post'], '/add-dang-ky', [DoiLopKhoaController::class, 'create'])->name('Add_doi_lop');
         Route::post('store_doi_khoa', [DoiLopKhoaController::class, 'store'])->name('store_doi_khoa');
         Route::get('Xoa_Yc_doi_Khoa_Hoc/{id}', [DoiLopKhoaController::class, 'Xoa_Yc_doi_Khoa_Hoc'])->name('Xoa_Yc_doi_Khoa_Hoc');
-        //loc 
+        //loc
         Route::get('/loc_theo_trang_thai', [DoiLopKhoaController::class, 'loc_theo_trang_thai'])->name('loc_theo_trang_thai');
     });
 
@@ -289,10 +289,11 @@ Route::prefix('/admin')->group(function () {
         Route::get('/list', [KhuyenMaiController::class, 'index'])->name('Khuyen_Mai');
         Route::get('/xoa/{id}', [KhuyenMaiController::class, 'destroy'])->name('Xoa_Khuyen_Mai');
         Route::get('/edit/{id}', [KhuyenMaiController::class, 'edit'])->name('Edit_Khuyen_Mai');
-        Route::post('/update', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
+        Route::post('/update/{id}', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
         Route::get('add',[KhuyenMaiController::class,'create'])->name('create');
         Route::post('add', [KhuyenMaiController::class, 'store'])->name('store');
         Route::get('get-form', [KhuyenMaiController::class, 'get_coupon_form'])->name('Coupon_Form');
+        Route::get('get-form-edit',[KhuyenMaiController::class,'get_coupon_form_edit'])->name('Khuyen_mai_form_edit');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
     });
 

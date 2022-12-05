@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DangKyRequest;
 use App\Mail\SendMail;
 use App\Models\DangKy;
 use App\Models\HocVien;
@@ -12,7 +13,7 @@ use App\Models\PhuongThucThanhToan;
 use App\Models\ThanhToan;
 use App\Models\GhiNo;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;    
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -214,7 +215,7 @@ class DangKyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DangKyRequest $request, $id)
     {
         $objDangKy = new DangKy();
         $loadDangKy = $objDangKy->loadOne($id);
