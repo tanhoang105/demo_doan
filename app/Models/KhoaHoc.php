@@ -59,7 +59,7 @@ class KhoaHoc extends Model
                 }elseif($params['luot_xem'] == 2){
                     $query->orderBy($this->table . '.luot_xem');
                 }else {
-                    query->orderBy($this->table . '.id');
+                    $query->orderBy($this->table . '.id');
                 }
             }
             $list = $query->paginate($perpage)->withQueryString();
