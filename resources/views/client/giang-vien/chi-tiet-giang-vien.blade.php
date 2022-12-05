@@ -1,5 +1,5 @@
 @extends('Client.templates.layout')
-@section('title') - Trainers
+@section('title') - Giảng viên
 @endsection
 @section('content')
 
@@ -33,7 +33,7 @@
                 <div class="col-lg-4 col-md-5 col-sm-12">
                     <div class="teacher_left">
                         <div class="teacher_avatar">
-                            <img src="{{ asset('client/images/author.png')}}" alt="">
+                            <img src="{{ Storage::url($giang_vien->hinh_anh) }}" alt="">
                             <h3> {{$giang_vien->ten_giang_vien}} </h3>
                             <span>@if ($giang_vien->gioi_tinh == 1)
                                 Nam

@@ -53,7 +53,7 @@
         <form method="post" enctype="multipart/form-data">
             @csrf
         <div class="row">
-            <div class="col-4">
+            <div class="row col-8">
                 <div class="col-12">
                     <h3>Thông tin cá nhân</h3>
                 </div>
@@ -65,24 +65,27 @@
                 <input type="text" name="id_khoa_hoc" id="id_khoa_hoc" hidden value="{{isset($loadDangKy->id_khoa_hoc) ? ($loadDangKy->id_khoa_hoc): "" }}">
                 <input type="text" name="gia_khoa_hoc" id="gia_khoa_hoc"  value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
 
-                <div class="col-12 pt-3">
+                <div class="col-6">
+                    <label class="text-dark" style="font-size:18px;">Họ và tên</label>
+                    <input style="height: 50px" class="form-control" value="{{Auth::user()->name??''}}"  name="name" 
+                    type="text" placeholder="Họ và Tên">
+                    @error('name')
+                    <div class="text-danger">{{$message}}</div>
+                    @enderror
+                </div>
+
+                <div class="col-6">
+                    <label class="text-dark" style="font-size:18px;">Email</label>
                     <input style="height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" 
-                    class="form-control" id="email" name="email" type="text" placeholder="Email">
+                    class="form-control" id="email" name="email" type="email" placeholder="Email">
                     @error('email')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
                     <div class="text-danger error_email"></div>
                 </div>
 
-                <div class="col-12 pt-3">
-                    <input style="height: 50px" class="form-control" value="{{Auth::user()->name??''}}"  name="name" 
-                    type="text" placeholder="Họ Tên">
-                    @error('name')
-                    <div class="text-danger">{{$message}}</div>
-                    @enderror
-                </div>
-
-                <div class="col-12 pt-3">
+                <div class="col-6">
+                    <label class="text-dark" style="font-size:18px;">Số điện thoại</label>
                     <input style="height: 50px" class="form-control" value="{{Auth::user()->sdt??''}}" name="sdt" 
                     type="text" placeholder="Số điện thoại">
                     @error('sdt')
@@ -90,34 +93,33 @@
                     @enderror
                 </div>
 
-                <div class="col-12 pt-3">
+                <div class="col-6">
+                    <label class="text-dark" style="font-size:18px;">Địa chỉ</label>
                     <input style="height: 50px" class="form-control" value="{{Auth::user()->dia_chi??''}}" name="dia_chi" 
                     type="text" placeholder="Địa chỉ">
                     @error('dia_chi')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
                 </div>
-            </div>
 
-            <div class="col-4">
                 <div class="col-12">
                     <h3>Hình thức thanh toán</h3>
                 </div>
 
-                <div class="col-12 pt-3">
+                <div class="col-6">
+                    <label class="text-dark" style="font-size:18px;">Chọn hình thức thanh toán</label>
                     <select class="form-control" name="ten" style="height: 50px">
                         @foreach($payment_method as $method)
                             <option name="ten" id="{{$method->id}}">{{$method->ten}}</option>
-                        {{-- <div>
-                            <input name="ten" type="radio" class="radio_input mb-3" id="{{$method->id}}" value="{{$method->id}}" hidden>
-                            <label for="{{$method->id}}" class="btn btn-primary btn-thanh-toan mb-3 rounded" id="{{$method->id}}" name="ten"
-                                 style="height: 50px">{{$method->ten}}</label>
-                        </div> --}}
                     @endforeach
                     </select>
                     
                 </div>
             </div>
+
+            {{-- <div class="col-4">
+                
+            </div> --}}
 
             <div class="col-4">
                 <div class="col-12">
