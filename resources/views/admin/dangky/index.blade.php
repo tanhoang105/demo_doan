@@ -66,9 +66,9 @@
                         <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
                         <td>
                             @if ($item->trang_thai_thanh_toan == 2)
-                                <button class="btn btn-primary">Đã thanh toán</button>
+                               <span class="btn btn-primary">Đã thanh toán</span>
                             @else
-                                <button class="btn btn-warning">Chưa thanh toán</button>
+                            <span class="btn btn-dark">Chưa thanh toán</span>
                             @endif
                         </td>
 

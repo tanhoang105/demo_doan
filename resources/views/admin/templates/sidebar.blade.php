@@ -297,7 +297,7 @@
                         <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
-                                Đăng ký
+                                Danh sách đăng ký
                             </p>
                         </a>
                     </li>
