@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Session;
 class GiangVienController extends Controller
 {
 
-    protected $v, $giangvien, $user , $lichday;
+    protected $v, $giangvien, $user, $lichday;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class GiangVienController extends Controller
         $this->user = new User();
         $this->lichday = new LichHoc();
 
-     
+
         $this->thuhoc = new ThuHoc();
         $this->phonghoc = new PhongHoc();
         $this->khoahoc = new KhoaHoc();
@@ -49,6 +49,15 @@ class GiangVienController extends Controller
         $this->v['params'] = $request->all();
         $this->v['list'] = $this->giangvien->index($this->v['params'], true, 5);
         // dd($this->v['list']);
+
+        $this->v['lop'] = $this->lop->index(null, false, null);
+        $arrayIdGiangVienCuaLop = [];
+        foreach ($this->v['lop'] as $itemLop) {
+            $arrayIdGiangVienCuaLop[] = $itemLop->id_giang_vien;
+        }
+        $arrayIdGiangVienCuaLop = array_unique($arrayIdGiangVienCuaLop);
+        // dd($arrayIdGiangVienCuaLop);
+        $this->v['arrayIdGiangVienCuaLop'] = $arrayIdGiangVienCuaLop;
         return view('admin.giangvien.index', $this->v);
     }
 
@@ -70,7 +79,7 @@ class GiangVienController extends Controller
      */
     public function store(GiangVienRequest $request)
     {
-        $this->authorize(mb_strtoupper('thêm giảng viên') );
+        $this->authorize(mb_strtoupper('thêm giảng viên'));
 
         if ($request->isMethod('POST')) {
             // thực hiện thêm dữ liệu
@@ -138,7 +147,7 @@ class GiangVienController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('edit giảng viên') );
+        $this->authorize(mb_strtoupper('edit giảng viên'));
 
         if ($id) {
             $request->session()->put('id', $id);
@@ -158,7 +167,7 @@ class GiangVienController extends Controller
      */
     public function update(GiangVienRequest $request)
     {
-        $this->authorize(mb_strtoupper('update giảng viên') );
+        $this->authorize(mb_strtoupper('update giảng viên'));
 
         if (session('id')) {
             $id = session('id');
@@ -194,7 +203,7 @@ class GiangVienController extends Controller
             $res = $this->user->saveupdate($params);
 
             if ($res > 0) {
-                if($flag == 1){
+                if ($flag == 1) {
 
                     GiangVien::where('id_user', $id)->update([
                         // 'id_user' => $id,
@@ -204,7 +213,7 @@ class GiangVienController extends Controller
                         'sdt' => $params['cols']['sdt'],
                         'hinh_anh' => $params['cols']['hinh_anh'],
                     ]);
-                }else {
+                } else {
 
                     GiangVien::where('id_user', $id)->update([
                         // 'id_user' => $id,
@@ -283,28 +292,28 @@ class GiangVienController extends Controller
 
     public function lichDay()
     {
-        $this->authorize(mb_strtoupper('xem lịch dạy') );
+        $this->authorize(mb_strtoupper('xem lịch dạy'));
 
         $id = Auth::user()->id;
         $params['id'] = $id;
         $listThuHoc = $this->thuhoc->index(null, false, null);
         $this->v['thuhoc'] = $listThuHoc;
         $this->v['phonghoc'] = $this->phonghoc->index(null, false, null);
-        $this->v['khoa_hoc'] = $this->khoahoc->index(null  , false , null);
-        $this->v['lop'] = $this->lop->index(null , false , null);
-        $this->v['giang_vien'] = $this->giang_vien->index(null , false , null);
-        $this->v['ca_hoc'] = $this->ca_hoc->index(null , false , null);
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['lop'] = $this->lop->index(null, false, null);
+        $this->v['giang_vien'] = $this->giang_vien->index(null, false, null);
+        $this->v['ca_hoc'] = $this->ca_hoc->index(null, false, null);
 
-        $res  = $this->lichday->showLichGiaoVien($params ,true  , 10);
-       
+        $res  = $this->lichday->showLichGiaoVien($params, true, 10);
+
         $array = [];
-        foreach($res as $item){
-            if($item->ngay_hoc > date('Y-m-d')){
+        foreach ($res as $item) {
+            if ($item->ngay_hoc > date('Y-m-d')) {
                 $array[] = $item;
             }
         }
-        $this->v['list']   = $array ;
-        return view('admin.lichday.index' , $this->v );
+        $this->v['list']   = $array;
+        return view('admin.lichday.index', $this->v);
     }
 
     public function uploadFile($file)

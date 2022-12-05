@@ -76,7 +76,7 @@
                         </td>
                         <td>
                             
-                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
+                                <a {{in_array($item->id_user , $arrayIdGiangVienCuaLop) == true ? 'hidden' : '' }}  onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Giang_Vien', ['id' => $item->id_user]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
                             
                         </td>

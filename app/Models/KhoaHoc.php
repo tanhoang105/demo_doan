@@ -28,10 +28,9 @@ class KhoaHoc extends Model
             // nếu phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-
                 ->select('danh_muc.*', $this->table . '.*')
-                ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.luot_xem', $this->table . '.*');
+                ->where($this->table . '.delete_at', '=', 1);
+                // ->orderByDesc($this->table . '.id');
 
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
@@ -42,25 +41,27 @@ class KhoaHoc extends Model
                 $query =  $query->where(function ($q) use ($params) {
                     // dd($params);
                     // if (!empty($params['khoa_hoc'])) {
-                        $q->Where($this->table . '.id_danh_muc', 'like', '%' . $params['danh_muc']  . '%');      
+                    $q->Where($this->table . '.id_danh_muc', 'like', '%' . $params['danh_muc']  . '%');
 
-                        if( $params['gia_khoa_hoc'] == 1 ) {
-                            $q->Where( 'gia_khoa_hoc', '<', '200000');
-                        } elseif( $params['gia_khoa_hoc'] == 2 ) {
-                            $q->Where( 'gia_khoa_hoc', '>', '200000',);
-                            $q->Where( 'gia_khoa_hoc', '<', '500000',);
-                        } elseif( $params['gia_khoa_hoc'] == 3 ) {
-                            $q->Where( 'gia_khoa_hoc', '>', '500000');
-                        }
-                        
-                    //     if( $params['luot_xem'] == 1 ) {
-                    // $q->orderByDesc($this->table . '.luot_xem');
-                    // // dd(1);
-                    //         } 
+                    if ($params['gia_khoa_hoc'] == 1) {
+                        $q->Where('gia_khoa_hoc', '<', '200000');
+                    } elseif ($params['gia_khoa_hoc'] == 2) {
+                        $q->Where('gia_khoa_hoc', '>', '200000',);
+                        $q->Where('gia_khoa_hoc', '<', '500000',);
+                    } elseif ($params['gia_khoa_hoc'] == 3) {
+                        $q->Where('gia_khoa_hoc', '>', '500000');
+                    }
 
                 });
-                
-            } 
+                if ($params['luot_xem'] == 1) {
+                    $query->orderByDesc($this->table . '.luot_xem');
+                    // dd(1);
+                }elseif($params['luot_xem'] == 2){
+                    $query->orderBy($this->table . '.luot_xem');
+                }else {
+                    query->orderBy($this->table . '.id');
+                }
+            }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             // nếu không phần trang
@@ -166,5 +167,21 @@ class KhoaHoc extends Model
 
         return $query;
     }
-}
 
+
+    public function DanhSachKhoaHocTheoIDKhoa($params)
+    {
+        $query = DB::table($this->table)
+            ->whereIn('id', $params)
+            ->get();
+        return $query;
+    }
+
+    public function DanhSachKhoaHocTheoIDDanhMuc($id)
+    {
+        $query = DB::table($this->table)
+            ->where('id_danh_muc', $id)
+            ->get();
+        return $query;
+    }
+}
