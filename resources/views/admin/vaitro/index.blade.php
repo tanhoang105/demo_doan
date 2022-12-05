@@ -39,7 +39,7 @@
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
                     <th scope="col">Tên Vai Tro </th>
-                    <th scope="col">Quyền tài khoản</th>
+                    {{-- <th scope="col">Quyền tài khoản</th> --}}
                     <th scope="col">Thêm quyền tài khoản</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
@@ -55,7 +55,7 @@
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_vai_tro }}</td>
 
-                        <td> <a class="btn btn-primary" href="">Xem Quyền</a> </td>
+                        {{-- <td> <a class="btn btn-primary" href="">Xem Quyền</a> </td> --}}
                         <td> <a class="btn btn-dark" href=" {{route('route_BE_Admin_Detail_Cap_Quyen' , [ 'id' => $item->id ])}} ">Cấp Quyền</a> </td>
                         <td>
                                 <a  class="btn btn-success" style="color: #fff" href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}">
