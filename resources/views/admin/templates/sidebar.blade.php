@@ -62,7 +62,7 @@
                         <a href=" {{ route('route_BE_Admin_Tai_Khoan') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
-                                Tài Khoản chung
+                                Danh sách tài khoản
                             </p>
                         </a>
                     </li>
@@ -85,15 +85,15 @@
                   </ul>
               </li>
               <li class="nav-item">
-                  <a href="  " class="nav-link">
+                  <a href=" {{ route('route_BE_Admin_Vai_Tro') }} " class="nav-link">
                       <i class="nav-icon fas fa-bars"></i>
                       <p>
-                          Phân quyền
+                          Vai trò
                           <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                    {{-- <ul class="nav nav-treeview">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('route_BE_Admin_List_Quyen') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -108,16 +108,16 @@
                                     Cấp quyền tài khoản
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('route_BE_Admin_Vai_Tro') }}" class="nav-link">
+                        </li> --}}
+                        {{-- <li class="nav-item">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Vai Trò
                                 </p>
                             </a>
-                        </li>
-                    </ul>
+                        </li> --}}
+                    {{-- </ul>  --}}
               </li>
               {{-- <ul class="nav nav-treeview">
                     <li class="nav-item">

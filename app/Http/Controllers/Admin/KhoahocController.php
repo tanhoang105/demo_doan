@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 class KhoahocController extends Controller
 {
     protected $v;
-    protected $khoahoc , $lop;
+    protected $khoahoc, $lop;
 
     public function __construct()
     {
@@ -33,15 +33,31 @@ class KhoahocController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(mb_strtoupper('xem khóa học') );
-        $this->v['params'] = $request->all();
-        $khoahoc =  $this->khoahoc->index($this->v['params'], true, 10);
+        $this->authorize(mb_strtoupper('xem khóa học'));
+        // $this->v['params'] = $request->all();
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        // dd($params);
+        if($request->keyword){
+           
+            $params['loc']['keyword'] = $request->keyword;
+            
+        }
+        $khoahoc =  $this->khoahoc->index($params, true, 10);
         $this->v['list'] = $khoahoc;
 
-        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false  , null);
-        $this->v['danh_muc'] = $this->danhmuc->index(null , false  , null);
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['danh_muc'] = $this->danhmuc->index(null, false, null);
 
-//        dd($khoahoc);
+        //        dd($khoahoc);
         return view('admin.khoahoc.index', $this->v);
     }
 
@@ -62,7 +78,7 @@ class KhoahocController extends Controller
      */
     public function store(KhoahocRequest $request)
     {
-        $this->authorize(mb_strtoupper('thêm khóa học') );
+        $this->authorize(mb_strtoupper('thêm khóa học'));
 
         $this->v['params'] = $request->all();
 
@@ -109,7 +125,7 @@ class KhoahocController extends Controller
      */
     public function show($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('xem khóa học') );
+        $this->authorize(mb_strtoupper('xem khóa học'));
 
         // lấy ra 1 bản ghi theo id
         if (!empty($id)) {
@@ -130,11 +146,11 @@ class KhoahocController extends Controller
     public function edit($id, Request $request)
     {
 
-        $this->authorize(mb_strtoupper('edit khóa học') );
+        $this->authorize(mb_strtoupper('edit khóa học'));
 
         // lấy ra dữ liệu bản ghi cần chỉnh sửa
         if (!empty($id)) {
-        $this->v['params'] = $request->all();
+            $this->v['params'] = $request->all();
 
             $danhmuc = $this->danhmuc->index($this->v['params'], false, null);
             $this->v['danhmuc'] = $danhmuc;
@@ -158,7 +174,7 @@ class KhoahocController extends Controller
      */
     public function update(KhoahocRequest $request)
     {
-        $this->authorize(mb_strtoupper('update khóa học') );
+        $this->authorize(mb_strtoupper('update khóa học'));
 
         // sau khi chỉnh sửa xong thì update vào cơ sở dữ liệu
         // cần thực hiện validate
@@ -199,7 +215,7 @@ class KhoahocController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa khóa học') );
+        $this->authorize(mb_strtoupper('xóa khóa học'));
 
         // xóa bản ghi theo id - xóa mềm
         if ($id) {
@@ -208,7 +224,7 @@ class KhoahocController extends Controller
             // dd($res);
             if ($res > 0) {
                 // khi xóa khoa học đi thì cần xóa những lớp học của khóa học đó
-                $this->lop->remove(null , $id);
+                $this->lop->remove(null, $id);
                 Session::flash('success', 'Xóa thành công');
                 return back();
             } else {
@@ -224,29 +240,29 @@ class KhoahocController extends Controller
         return $file->storeAs('imageKhoaHoc', $filename,  'public');
     }
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa khóa học') );
+        $this->authorize(mb_strtoupper('xóa khóa học'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->khoahoc->remoAll($params);
             // dd($res);
 
-            if($res > 0){
-                $this->lop->remoAll(null ,$params);
+            if ($res > 0) {
+                $this->lop->remoAll(null, $params);
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
     }
 }
