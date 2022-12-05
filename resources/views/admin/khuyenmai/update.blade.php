@@ -15,86 +15,67 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <form class="p-5" action=" {{ route('route_BE_Admin_Update_Khuyen_Mai') }}" method="post" enctype="multipart/form-data">
-        <div class="row">
-            @csrf
-            <div class="col-6">
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Mã khuyến mại</label>
-                    <input value="{{ old('ma_khuyen_mai') ?? (request()->ma_khuyen_mai ?? $khuyenmai->ma_khuyen_mai) }}"
-                        type="text" name="ma_khuyen_mai" class="form-control" id=""
-                        aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('ma_khuyen_mai')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Loại khuyến mại</label>
-                    <input
-                        value="{{ old('loai_khuyen_mai') ?? (request()->loai_khuyen_mai ?? $khuyenmai->loai_khuyen_mai) }}"
-                        type="text" name="loai_khuyen_mai" class="form-control" id=""
-                        aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('loai_khuyen_mai')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Mô tả</label>
-                    <textarea id="ckeditor1" name="mo_ta" id="" class="form-control"> {{ $khuyenmai->mo_ta }} </textarea>
-                    @error('mo_ta')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0 h6">Cập nhập thông tin khuyến mãi</h3>
             </div>
+            <form action="{{route('route_BE_Admin_Update_Khuyen_Mai',$coupon->id)}}" method="POST" enctype="multipart/form-data">
+                <input name="_method" type="hidden" value="POST">
+                @csrf
+                <div class="card-body">
+                    <input type="hidden" name="id" value="{{ $coupon->id }}" id="id">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-from-label" for="name">Loại mã giảm giá</label>
+                        <div class="col-lg-9">
+                            <select name="coupon_type" id="coupon_type" class="form-control aiz-selectpicker" onchange="coupon_form()" required>
+                                @if ($coupon->loai_khuyen_mai == 1)
+                                <option value="1" selected>Đối với khóa học</option>
+                                @elseif ($coupon->loai_khuyen_mai == 2)
+                                    <option value="2">Đối với tất cả khóa học</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
 
+                    <div id="coupon_form">
 
-            <div class="col-6">
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Giảm giá (%)</label>
-                    <input value="{{ old('giam_gia') ?? (request()->giam_gia ?? $khuyenmai->giam_gia) }}" type="text"
-                        name="giam_gia" class="form-control" id="" aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('giam_gia')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
+                    </div>
+                    <div class="form-group mb-0 text-right">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
                 </div>
-
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Ngày bắt đầu</label>
-                    <input value="{{ old('ngay_bat_dau')  ?? $khuyenmai->ngay_bat_dau }}"
-                        type="date" name="ngay_bat_dau" class="form-control" id="" aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('ngay_bat_dau')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="" class="form-label">Ngày kết thúc</label>
-                    <input value="{{ old('ngay_ket_thuc')  ?? $khuyenmai->ngay_ket_thuc}}"
-                        type="date" name="ngay_ket_thuc" class="form-control" id=""
-                        aria-describedby="emailHelp">
-                    {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    @error('ngay_ket_thuc')
-                        <span style="color: red"> {{ $message }} </span>
-                    @enderror
-
-                </div>
-            </div>
-
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">Cập nhập</button>
-    </form>
-    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('ckeditor1');
+        </div>
+    </div>
+@endsection
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function coupon_form(){
+            var coupon_type = $('#coupon_type').val();
+            console.log(coupon_type);
+            var id = $('#id').val();
+            $.get('{{ route('route_BE_Admin_Khuyen_mai_form_edit') }}',{coupon_type:coupon_type, id:id}, function(data){
+                console.log(id)
+                $('#coupon_form').html(data);
+
+                //    $('#demo-dp-range .input-daterange').datepicker({
+                //        startDate: '-0d',
+                //        todayBtn: "linked",
+                //        autoclose: true,
+                //        todayHighlight: true
+                // });
+            });
+        }
+
+        $(document).ready(function(){
+            coupon_form();
+        });
+
+
     </script>
+
 @endsection

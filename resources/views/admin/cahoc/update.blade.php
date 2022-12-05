@@ -19,7 +19,7 @@
         <div class="row">
             @csrf
             <div class="col-6">
-
+                <input type="text" value="{{$cahoc->id}}" name="id" hidden>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Ca học <span class="text-danger">*</span></label>
                     <input value="{{ old('ca_hoc') ?? request()->ca_hoc ?? $cahoc->ca_hoc }}" type="text" name="ca_hoc"

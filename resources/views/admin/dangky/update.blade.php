@@ -18,6 +18,7 @@
     <form class="p-5" action=" {{ route('route_BE_Admin_Update_Dang_Ky',$loadDangKy->id) }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
+            <input type="text" hidden value="{{$loadDangKy->id_user}}" name="id_user">
             <div class="col-6">
                 <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="" hidden>
                 <div class="mb-3">

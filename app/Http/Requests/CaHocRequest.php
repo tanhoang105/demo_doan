@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class CaHocRequest extends FormRequest
 {
@@ -21,7 +22,7 @@ class CaHocRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         $rules = [];
         $ActionCurrent = $this->route()->getActionMethod();
@@ -33,14 +34,16 @@ class CaHocRequest extends FormRequest
                         $rules = [
                             'ca_hoc' => 'required | unique:ca_hoc,ca_hoc',
                             'thoi_gian_bat_dau' => 'required | unique:ca_hoc,thoi_gian_bat_dau',
-                            'thoi_gian_ket_thuc' => 'required | after:thoi_gian_bat_dau',
+                            'thoi_gian_ket_thuc' => 'required | after:thoi_gian_bat_dau|unique:ca_hoc,thoi_gian_ket_thuc',
                         ];
                         break;
                     case 'update':
+                        $id = $request->id;
+
                         $rules = [
-                            'ca_hoc' => 'required',
-                            'thoi_gian_bat_dau' => 'required',
-                            'thoi_gian_ket_thuc' => 'required',
+                            'ca_hoc' => 'required | unique:ca_hoc,ca_hoc,'.$id,
+                            'thoi_gian_bat_dau' => 'required | unique:ca_hoc,thoi_gian_bat_dau,'.$id,
+                            'thoi_gian_ket_thuc' => 'required | after:thoi_gian_bat_dau| unique:ca_hoc,thoi_gian_ket_thuc, '.$id,
                         ];
                         break;
                     default:

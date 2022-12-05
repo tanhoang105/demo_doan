@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class DangKyRequest extends FormRequest
 {
@@ -21,7 +22,7 @@ class DangKyRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         $rules = [];
         $ActionCurrent  = $this->route()->getActionMethod(); // trả về method đang hoạt động 
@@ -43,13 +44,22 @@ class DangKyRequest extends FormRequest
 
                             // nếu là method chỉnh sửa bản ghi
                             case 'update':
+                                $id = $request->id_user;
                                 $rules = [
                                     'name' => 'required',
-                                    'email' => 'required | email',
-                                    'password' => 'required | min:6',
+                                    'email' => 'required | email | unique:users,email,'.$id,
+                                    'sdt' => 'required | min:6',
+                                    'dia_chi' => 'required | min:6',
                                 ];
-                            break;    
-                        
+                            break;   
+                            case 'postDangKy':
+                                $rules = [
+                                    'name' => 'required',
+                                    'email' => 'required',
+                                    'sdt' => 'required | min:6',
+                                    'dia_chi' => 'required | min:6',
+                                ];
+                                break;
                         default:
                             # code...
                             break;
@@ -66,13 +76,12 @@ class DangKyRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Tên tài khoản bắt buộc phải nhập',
+            'name.required' => 'Họ tên bắt buộc nhập',
             'email.required' => 'Email bắt buộc phải nhập',
             'email.email' => 'Sai định dạng Email',
             'email.unique' => 'Email đã tồn tại',
-            'password.required' => 'Mật khẩu bắt buộc phải nhập',
-            'password.min' => 'Mật khẩu bắt buộc nhiều hơn 6 ký tự',
-
+            'sdt.required' => 'Số điện thoại bắt buộc nhập',
+            'dia_chi.required' => 'Địa chỉ bắt buộc nhập',
         ];
     }
 }

@@ -1,5 +1,5 @@
 <div class="card-header mb-2">
-    <h3 class="h6">Thêm mã giảm giá cho sản phẩm</h3>
+    <h3 class="h6">Thêm phiếu giảm giá cho tất cả khóa học</h3>
 </div>
 <div class="form-group row">
     <label class="col-lg-3 col-from-label" for="coupon_code">Ma </label>
@@ -10,15 +10,15 @@
 <div class="form-group row">
     <label class="col-md-3 col-from-label">Mo ta</label>
     <div class="col-md-9">
-        <textarea class="aiz-text-editor" name="mo_ta" rows="9"></textarea>
+        <textarea class="aiz-text-editor" name="mo_ta" rows="9" required></textarea>
     </div>
 </div>
 
 <div class="form-group row">
-    <label class="col-sm-3 control-label" for="start_date">Ngay </label>
+    <label class="col-sm-3 control-label" for="start_date">Ngày bắt đầu và ngày kết thúc </label>
     <div class="col-sm-9">
-      <input type="date" class="form-control aiz-date-range" name="ngay_bat_dau" placeholder="Select Date">
-      <input type="date" class="form-control aiz-date-range" name="ngay_ket_thuc" placeholder="Select Date">
+      <input type="date" class="form-control aiz-date-range" name="ngay_bat_dau" placeholder="Select Date" required>
+      <input type="date" class="form-control aiz-date-range" name="ngay_ket_thuc" placeholder="Select Date" required>
     </div>
 </div>
 <div class="form-group row">
