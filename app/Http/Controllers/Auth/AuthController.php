@@ -101,7 +101,7 @@ class AuthController extends Controller
                 }
             }
         } else {
-            session()->flash('error', 'Tài khoản mật khẩu không chính xác !');
+            session()->flash('error', 'Email hoặc mật khẩu không chính xác !');
             return redirect()->route('auth.loginForm');
             // dd('cc');
         }
@@ -112,7 +112,7 @@ class AuthController extends Controller
     }
     public function store(DangkyTKRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->hinh_anh = 'https://w7.pngwing.com/pngs/754/2/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere-thumbnail.png';
         $user = new User();
         // $array = array_merge($request->all());
@@ -133,7 +133,7 @@ class AuthController extends Controller
             $ghino->trang_thai = 0;
             $ghino->save();
         }
-        session()->flash('success', 'bạn đã đăng kí thành công');
+        session()->flash('success', 'Bạn đã đăng kí thành công');
         return redirect()->route('auth.loginForm');
     }
     public function logout(Request $request)
