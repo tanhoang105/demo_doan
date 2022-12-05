@@ -8,6 +8,9 @@
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Tai_Khoan') }}">
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
+        <a style="margin-left: 10px" href="{{ route('route_BE_Admin_Tai_Khoan') }}">
+            <button class='btn btn-warning'> Tất cả danh sách</button>
+        </a>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
