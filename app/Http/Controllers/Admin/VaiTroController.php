@@ -27,7 +27,7 @@ class VaiTroController extends Controller
     {   
 
         $this->authorize(mb_strtoupper('xem vai trò'));
-
+        // dd(12);
         $this->v['params'] = $request->all();
         $list = $this->vaitro->index($this->v['params'], true, 10);
         $this->v['list'] = $list;

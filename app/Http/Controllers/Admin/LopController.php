@@ -25,7 +25,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu ,  $lich;
+    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu,  $lich;
 
     public function __construct()
     {
@@ -52,15 +52,31 @@ class LopController extends Controller
         $this->v['params'] =  $request->all();
         // dd($this->v['params']);
         // dd($request->get());
-        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false  , null);
-        $this->v['giang_vien'] = $this->giangvien->index(null , false  , null);
-        $this->v['cahoc'] = $this->cahoc->index(null , false  , null);
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null, false, null);
+        $this->v['giang_vien'] = $this->giangvien->index(null, false, null);
+        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        // lọc
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        // dd($params);
+        if($request->keyword){
+           
+            $params['loc']['keyword'] = $request->keyword;
+            
+        }
 
-
-        unset($this->v['params']['_token']);
-        $list = $this->lophoc->index($this->v['params'], true, 10);
+       
+        $list = $this->lophoc->index($params, true, 10);
         $this->v['list'] = $list;
-        
+
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
         // dd($this->v['giangvien'][2]);   
 
@@ -397,7 +413,7 @@ class LopController extends Controller
 
 
 
-    public function store(LopRequest $request)
+    public function store(Request $request)
     {
         //
         $this->authorize(mb_strtoupper('thêm lớp học'));
@@ -412,6 +428,8 @@ class LopController extends Controller
         // dd($this->v['cathu']);
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
+        dd($request->all());
+
             $params = [];
             $params['cols'] = array_map(function ($item) {
                 if ($item == '') {
@@ -425,7 +443,15 @@ class LopController extends Controller
             }, $request->post());
 
             unset($params['cols']['_token']);
+            $params['cols']['so_luong'] = 40;
+
+            $timeStart = $params['cols']['ngay_bat_dau'];
+
+            $timeEnd = strtotime('+' . $params['cols']['thoi_gian'] . 'month', strtotime($timeStart));
+            $timeEnd = date('Y-m-d', $timeEnd);
+            $params['cols']['ngay_ket_thuc'] =  $timeEnd;
             // dd($params);
+            unset($params['cols']['thoi_gian']);
             $res = $this->lophoc->create($params);
 
             if ($res > 0) {
@@ -519,9 +545,9 @@ class LopController extends Controller
                         'ma_thu' => (int) $dayofweek,
                         'ca_id' => $ca->id,
                         'ngay_hoc' => $date_row->format('Y-m-d'),
-                        'lop_id' => $lop->id , 
-                        'giang_vien_id' =>$lop->id_giang_vien,
-                     
+                        'lop_id' => $lop->id,
+                        'giang_vien_id' => $lop->id_giang_vien,
+
 
                     ];
                     // dd($params);

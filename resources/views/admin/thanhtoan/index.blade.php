@@ -42,7 +42,7 @@
                     <th scope="col">Phương thức thanh toán </th>
                     <th scope="col">Ngày thanh toán</th>
                     <th scope="col">Tiền thanh toán</th>
-                    <th scope="col">In hóa đơn</th>
+                    {{-- <th scope="col">In hóa đơn</th> --}}
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -65,11 +65,11 @@
                         </td>
                         <td> {{ $item->ngay_thanh_toan }}</td>
                         <td> {{ number_format($item->gia, 0, '.', ',') }}</td>
-                        <td>
+                        {{-- <td>
                             <a class="btn btn-primary" style="color: #fff"
                                 href=" {{ route('route_BE_Admin_In_Hoa_Don', ['id' => $item->id]) }} ">
                                 In</a>
-                        </td>
+                        </td> --}}
                         <td>
                             <a class="btn btn-success" style="color: #fff"
                                 href="{{ route('route_BE_Admin_Edit_Thanh_Toan', ['id' => $item->id]) }}">

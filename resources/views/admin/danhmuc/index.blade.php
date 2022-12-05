@@ -8,6 +8,9 @@
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
 
         </a>
+        <a style="margin-left: 10px" href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}">
+            <button class='btn btn-warning'> Tất cả danh sách</button>
+        </a>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -49,7 +52,7 @@
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <td><input {{ in_array($item->id, $arrayIdDanhMuc) ? '' : 'value=' . $item->id }} class="checkitem" type="checkbox" name="id[]"  /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td>
@@ -58,7 +61,8 @@
                                 <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
-                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
+                            <a {{ in_array($item->id, $arrayIdDanhMuc) ? 'hidden' : '' }}
+                                onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
                                 style="color: aliceblue"
                                 href="{{ route('route_Admin_BE_Xoa_Danh_Muc', ['id' => $item->id]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a>

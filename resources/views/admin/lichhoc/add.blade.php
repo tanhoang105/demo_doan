@@ -33,7 +33,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    {{-- <label for="" class="form-label">Thứ</label> --}}
+                    <label for="" class="form-label">Chọn thứ *</label>
 
                     @foreach ($thuhoc as $item)
                         <div>

@@ -22,45 +22,56 @@ class KhoaHoc extends Model
     // hàm lấy tất cả các bản ghi
     public function index($params, $pagination = true,  $perpage)
     {
-
+        // dd($params);
         // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
             // nếu phần trang
             $query = DB::table($this->table)
                 ->join('danh_muc', $this->table . '.id_danh_muc', '=', 'danh_muc.id')
-
                 ->select('danh_muc.*', $this->table . '.*')
-                ->where($this->table . '.delete_at', '=', 1)
-                ->orderByDesc($this->table . '.luot_xem', $this->table . '.*');
+                ->where($this->table . '.delete_at', '=', 1);
+            // ->orderByDesc($this->table . '.id');
 
-            if (!empty($params['keyword'])) {
+            if (!empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_khoa_hoc', 'like', '%' . $params['loc']['keyword']  . '%');
                 });
             }
-            if (!empty($params)) {
+            if (empty($params['loc']['keyword']) ) {
+                // dd($params['loc']);
                 $query =  $query->where(function ($q) use ($params) {
                     // dd($params);
                     // if (!empty($params['khoa_hoc'])) {
-                        $q->Where($this->table . '.id_danh_muc', 'like', '%' . $params['danh_muc']  . '%');      
+                    if (!empty($params['loc']['danh_muc'])) {
 
-                        if( $params['gia_khoa_hoc'] == 1 ) {
-                            $q->Where( 'gia_khoa_hoc', '<', '200000');
-                        } elseif( $params['gia_khoa_hoc'] == 2 ) {
-                            $q->Where( 'gia_khoa_hoc', '>', '200000',);
-                            $q->Where( 'gia_khoa_hoc', '<', '500000',);
-                        } elseif( $params['gia_khoa_hoc'] == 3 ) {
-                            $q->Where( 'gia_khoa_hoc', '>', '500000');
+                        $q->Where($this->table . '.id_danh_muc', 'like', '%' . $params['loc']['danh_muc']  . '%');
+                    }
+
+                    if (!empty($params['loc']['gia_khoa_hoc'])) {
+
+                        if ($params['loc']['gia_khoa_hoc'] == 1) {
+                            $q->Where('gia_khoa_hoc', '<', '200000');
+                        } elseif ($params['loc']['gia_khoa_hoc'] == 2) {
+                            $q->Where('gia_khoa_hoc', '>', '200000',);
+                            $q->Where('gia_khoa_hoc', '<', '500000',);
+                        } elseif ($params['loc']['gia_khoa_hoc'] == 3) {
+                            $q->Where('gia_khoa_hoc', '>', '500000');
                         }
-                        
-                    //     if( $params['luot_xem'] == 1 ) {
-                    // $q->orderByDesc($this->table . '.luot_xem');
-                    // // dd(1);
-                    //         } 
-
+                    }
                 });
-                
-            } 
+
+                if (!empty($params['loc']['luot_xem'])) {
+
+                    if ($params['loc']['luot_xem'] == 1) {
+                        $query->orderByDesc($this->table . '.luot_xem');
+                        // dd(1);
+                    } elseif ($params['loc']['luot_xem'] == 2) {
+                        $query->orderBy($this->table . '.luot_xem');
+                    } else {
+                        $query->orderBy($this->table . '.id');
+                    }
+                }
+            }
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             // nếu không phần trang
@@ -166,5 +177,21 @@ class KhoaHoc extends Model
 
         return $query;
     }
-}
 
+
+    public function DanhSachKhoaHocTheoIDKhoa($params)
+    {
+        $query = DB::table($this->table)
+            ->whereIn('id', $params)
+            ->get();
+        return $query;
+    }
+
+    public function DanhSachKhoaHocTheoIDDanhMuc($id)
+    {
+        $query = DB::table($this->table)
+            ->where('id_danh_muc', $id)
+            ->get();
+        return $query;
+    }
+}

@@ -256,7 +256,7 @@
                         <label> {{ $value->ten_khoa_hoc }} </label>
                     </div>
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{  date('d-m-Y', strtotime($value->ngay_bat_dau)) . ' -- ' . date('d-m-Y', strtotime($value->ngay_ket_thuc)) }} </label>
+                        <label> {{  date('d/m/Y', strtotime($value->ngay_bat_dau)) . ' -- ' . date('d/m/Y', strtotime($value->ngay_ket_thuc)) }} </label>
                     </div>
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
                         <label>
