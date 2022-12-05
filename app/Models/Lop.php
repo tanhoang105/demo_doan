@@ -84,21 +84,32 @@ class Lop extends Model
 
 
 
-            if (!empty($params['keyword'])) {
+            if (!empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['loc']['keyword']  . '%');
                 });
             }
 
-            if (!empty($params)) {
+            if (empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     // dd($params);
                     // if (!empty($params['khoa_hoc'])) {
+                    if (!empty($params['loc']['khoa_hoc'])) {
 
-                    $q->Where($this->table . '.id_khoa_hoc', 'like', '%' . $params['khoa_hoc']  . '%');
-                    $q->Where($this->table . '.id_giang_vien', 'like', '%' . $params['giang_vien']  . '%');
-                    $q->Where($this->table . '.ngay_bat_dau', 'like', '%' . $params['ngay_bat_dau']  . '%');
-                    $q->Where($this->table . '.ca_thu_id', 'like', '%' . $params['ca_thu']  . '%');
+                        $q->Where($this->table . '.id_khoa_hoc',  $params['loc']['khoa_hoc']  );
+                    }
+                    if (!empty($params['loc']['giang_vien'])) {
+
+                        $q->Where($this->table . '.id_giang_vien',  $params['loc']['giang_vien']  );
+                    }
+                    if (!empty($params['loc']['ca_thu'])) {
+
+                        $q->Where($this->table . '.ca_thu_id',  $params['loc']['ca_thu']  );
+                    }
+                    
+                   
+                   
+                   
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
