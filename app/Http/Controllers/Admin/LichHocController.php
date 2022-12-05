@@ -10,6 +10,7 @@ use App\Models\Lich;
 use App\Models\Lop;
 use App\Models\PhongHoc;
 use App\Models\ThuHoc;
+use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Svg\Tag\Rect;
@@ -24,7 +25,7 @@ class LichHocController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien;
+    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien ,$xeplop;
     public function __construct()
     {
         $this->v  = [];
@@ -35,6 +36,7 @@ class LichHocController extends Controller
         $this->khoahoc = new KhoaHoc();
         $this->lop = new Lop();
         $this->giangvien = new GiangVien();
+        $this->xeplop = new XepLop();
     }
     public function index(Request $request)
     {
@@ -44,7 +46,8 @@ class LichHocController extends Controller
        
         unset($this->v['params']['_token']);
         $this->v['list']  = $this->lop->index($this->v['params'] , true , 10);
-
+        $this->v['xepLop'] = $this->xeplop->index(null , false , null);
+        //  dd($this->v['list']);
         return view('admin.lich.listlop', $this->v);
         
     }
@@ -120,7 +123,7 @@ class LichHocController extends Controller
         $this->v['lop'] = $this->lop->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
         $this->v['list'] = $this->lich->index($this->v['params'] , true , 10);
-
+// dd(123);
         // dd($this->v['list']);    
         return view('admin.lich.index', $this->v);
     }
