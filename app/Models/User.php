@@ -80,21 +80,20 @@ class User extends Authenticatable
             $query = DB::table($this->table)
                 ->where('delete_at', '=', 1)
                 ->select($this->table . '.*');
-            if (!empty($params['keyword'])) {
+            if (!empty($params['loc']['keyword'])) {
                 $query = $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.name', 'like', '%' . $params['keyword'] . '%');
-                    $q->orWhere($this->table . '.dia_chi', 'like', '%' . $params['keyword'] . '%');
-                    $q->orWhere($this->table . '.email', 'like', '%' . $params['keyword'] . '%');
+                    $q->orWhere($this->table . '.name', 'like', '%' . $params['loc']['keyword'] . '%');
+                    $q->orWhere($this->table . '.dia_chi', 'like', '%' . $params['loc']['keyword'] . '%');
+                    $q->orWhere($this->table . '.email', 'like', '%' . $params['loc']['keyword'] . '%');
 
                 });
             }
 
-            if (!empty($params)) {
+            if (empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    // dd($params);
-                    // if (!empty($params['khoa_hoc'])) {
+                    if(!empty($params['loc']['vai_tro']))
 
-                        $q->Where($this->table . '.vai_tro_id', 'like', '%' . $params['vai_tro']  . '%');
+                        $q->Where($this->table . '.vai_tro_id', 'like', '%' . $params['loc']['vai_tro']  . '%');
                        
                 });
             }
