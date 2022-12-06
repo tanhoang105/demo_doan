@@ -24,7 +24,7 @@ class TaiKhoanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $v, $taikhoan, $vaitro, $hocvien, $giangvien ,  $lop;
+    protected $v, $taikhoan, $vaitro, $hocvien, $giangvien,  $lop;
 
     public function __construct()
     {
@@ -44,16 +44,16 @@ class TaiKhoanController extends Controller
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
         $this->v['list'] = $this->taikhoan->index($this->v['params'], true, 10);
-        $this->v['lop'] = $this->lop->index(null , false  , null);
+        $this->v['lop'] = $this->lop->index(null, false, null);
         $arrayIdGiangVienCuaLop = [];
-        foreach($this->v['lop'] as $itemLop){
+        foreach ($this->v['lop'] as $itemLop) {
             $arrayIdGiangVienCuaLop[] = $itemLop->id_giang_vien;
         }
         $arrayIdGiangVienCuaLop = array_unique($arrayIdGiangVienCuaLop);
         // dd($arrayIdGiangVienCuaLop);
         $this->v['arrayIdGiangVienCuaLop'] = $arrayIdGiangVienCuaLop;
         // $check = in_array(3 , $arrayIdGiangVienCuaLop);
-        
+
 
         return view('admin.taikhoan.index', $this->v);
     }
@@ -132,6 +132,7 @@ class TaiKhoanController extends Controller
                 }
                 // them tk ghi no
                 $data = User::where('users.email', '=', $request->email)
+                    ->where('users.vai_tro_id', '=', 4)
                     ->get();
 
                 // dd($data);

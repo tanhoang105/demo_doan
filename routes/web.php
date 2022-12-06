@@ -78,7 +78,7 @@ Route::get('/lich-hoc', [\App\Http\Controllers\Client\LichHocController::class, 
 //doi khoa_hoc
 Route::get('/khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'khoa_hoc'])->name('khoa_hoc_dang_ki');
 Route::get('/get_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'get_khoa_hoc'])->name('get_khoa_hoc');
-Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
+// Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 Route::post('/doi_khoa_hoc', [\App\Http\Controllers\Client\KhoaHocController::class, 'doi_khoa_hoc'])->name('doi_khoa_hoc');
 Route::get('/form_doi_khoa/{id}', [\App\Http\Controllers\Client\KhoaHocController::class, 'form_doi_khoa'])->name('form_doi_khoa');
 
@@ -91,6 +91,7 @@ Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
 // hiển thị khóa theo lớp
 Route::get('listLop', [DangKyController::class, 'listDangKy'])->name('admin_dang_ky');
+Route::get('siso_doilop', [DoiLopKhoaController::class, 'siso_doilop'])->name('siso_doilop');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', function () {

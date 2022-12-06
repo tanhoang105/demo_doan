@@ -20,7 +20,7 @@
                         {{-- <button type="submit" class="btn" style="">Xóa</button> --}}
                     </th>
                     <th scope="col">STT</th>
-                    <th scope="col">Mã học viên </th>
+                    {{-- <th scope="col">Mã học viên </th> --}}
                     <th scope="col">Tên học viên</th>
                     <th scope="col">Số dư tài khoản </th>
                     <th  scope="col">Hành động</th>
@@ -31,7 +31,7 @@
                     <tr>
                         <td><input class="checkitem" type="checkbox" name="id[]" value="" /></td>
                         <th scope="row"> {{ $item->id }}</th>
-                        <td> {{ $item->user_id }}</td>
+                        {{-- <td> {{ $item->user_id }}</td> --}}
                         <td>
                             {{ $item->name }}
                         </td>

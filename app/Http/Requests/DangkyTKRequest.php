@@ -32,7 +32,7 @@ class DangkyTKRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'name' => 'required',
-                            'email' => 'required | email',
+                            'email' => 'required | email | unique:users,email',
                             'password' => 'required',
                             'sdt' => 'required | min:10 | max:11',
                             'dia_chi' => 'required | max:100',

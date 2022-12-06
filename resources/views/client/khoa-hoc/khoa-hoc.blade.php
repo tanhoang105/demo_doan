@@ -25,8 +25,8 @@
 
 
 
-                                        <!-- Start: Featured Courses Section
-                                            ==================================================-->
+                                                                    <!-- Start: Featured Courses Section
+                                                                        ==================================================-->
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
@@ -144,13 +144,38 @@
                                 </div>
                             </div>
                             <!-- end: select box -->
-                            <div class="cat_item_count">
-                                Hiển thị 1-8 trong số 22 kết quả
-                            </div>
+                            @if ($id_danhmuc)
+                                <div class="cat_item_count">
+                                    <?php
+                                    $loc_danhmuc = DB::table('khoa_hoc')
+                                        ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
+                                        ->where('khoa_hoc.id_danh_muc', '=', $id_danhmuc)
+                                        ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
+                                        ->get();
+                                    ?>
+                                    Hiển thị @if (count($loc_danhmuc) <= 6)
+                                        {{ count($loc_danhmuc) }}
+                                    @else
+                                        1-6
+                                    @endif
+                                    trong số {{ count($loc_danhmuc) }} kết quả
+                                </div>
                         </div>
-                        <!--  End: Search Filter -->
-                        <input type="text" name="id_danh_muc" id="id_danh_muc" value="{{isset(request()->id_danhmuc) ? request()->id_danhmuc : ''}}" hidden>
-                    <div class="row" id="course-container"> 
+                    @else
+                        <div class="cat_item_count">
+                            Hiển thị @if (count($list) <= 6)
+                                {{ count($list) }}
+                            @else
+                                1-6
+                            @endif
+                            trong số {{ count($list) }} kết quả
+                        </div>
+                    </div>
+                    @endif
+                    <!--  End: Search Filter -->
+                    <input type="text" name="id_danh_muc" id="id_danh_muc"
+                        value="{{ isset(request()->id_danhmuc) ? request()->id_danhmuc : '' }}" hidden>
+                    <div class="row" id="course-container">
                         @if (!$id_danhmuc)
                             @foreach ($list as $value)
                                 {{-- {{count($value->ten_lop)}} --}}
@@ -161,7 +186,8 @@
                                             style="width: 380px;height: 200px;-radius: 15px;">
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                            <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc, 0, '.', '.') }}
+                                            <span
+                                                class="feat_cour_p">{{ number_format($value->gia_khoa_hoc, 0, '.', '.') }}
                                                 VND</span>
                                         </div>
                                         <h4 class="feat_cour_tit"><a
@@ -177,7 +203,8 @@
                                             @endforeach
                                             <span class="feat_cour_less"> <i class="pe-7s-note2"></i>{{ count($sl_lop) }}
                                                 Lớp học</span>
-                                            <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }} Học
+                                            <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }}
+                                                    Học
                                                     viên</i></span>
                                         </div>
                                         <div class="feat_cour_rating">
@@ -190,8 +217,8 @@
                                         </div>
                                     </div>
                                 </div>
-                        @endforeach
-                            
+                            @endforeach
+
                     </div>
                     <div class="">
                         <div class="d-flex align-items-center justify-content-between flex-wrap">
@@ -262,7 +289,7 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-                                            ==================================================-->
+                                                                        ==================================================-->
 @endsection
 @section('js')
     <script>
