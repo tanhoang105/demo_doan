@@ -95,6 +95,7 @@ class GiangVienController extends Controller
                 return $item;
             }, $request->post());
             unset($params['cols']['_token']);
+            unset($params['cols']['mo_ta']);
             $params['cols']['vai_tro_id'] = 2;
             $params['cols']['hinh_anh'] = null;
             // dd($params);
@@ -106,7 +107,7 @@ class GiangVienController extends Controller
             $res = $this->user->create($params);
 
             if ($res > 0) {
-
+                $params['cols']['mo_ta'] = $request->mo_ta;
                 $this->giangvien->insert([
                     'id_user' => $res,
                     'ten_giang_vien' => $params['cols']['name'],
@@ -114,6 +115,8 @@ class GiangVienController extends Controller
                     'email' => $params['cols']['email'],
                     'sdt' => $params['cols']['sdt'],
                     'hinh_anh' => $params['cols']['hinh_anh'],
+                    'mo_ta' =>  $params['cols']['mo_ta'],
+
                 ]);
 
 
