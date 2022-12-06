@@ -44,10 +44,10 @@
             @if($value->ngay_hoc >= date('Y-m-d'))
             <div class="row align-content-center bg-dedede" style="height: 50px; border-top: 1px solid #CFCECE">
                 <div class="col">
-                    <span> {{ $loop->iteration }} </span>
+                    <span class="text-dark"> {{ $loop->iteration }} </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($thuhoc as $item)
                             @if ($item->id == $value->ma_thu)
                                 {{ $item->ten_thu }}
@@ -56,10 +56,10 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span> {{ date('d-m-Y', strtotime($value->ngay_hoc)) }} </span>
+                    <span class="text-dark"> {{ date('d-m-Y', strtotime($value->ngay_hoc)) }} </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($phonghoc as $item)
                             @if ($item->id == $value->id_phong_hoc)
                                 {{ $item->ten_phong }}
@@ -68,7 +68,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($khoa_hoc as $item)
                             @if ($item->id == $value->id_khoa_hoc)
                                 {{ $item->ten_khoa_hoc }}
@@ -77,7 +77,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($lop as $item)
                             @if ($item->id == $value->id_lop)
                                 {{ $item->ten_lop }}
@@ -86,7 +86,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($giang_vien as $item)
                             @if ($item->id_user == $value->id_giang_vien)
                                 {{ $item->ten_giang_vien }}
@@ -95,7 +95,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($ca_hoc as $item)
                             @if ($item->id == $value->ca_id)
                                 {{ $item->ca_hoc }}
@@ -104,7 +104,7 @@
                     </span>
                 </div>
                 <div class="col">
-                    <span>
+                    <span class="text-dark">
                         @foreach ($ca_hoc as $item)
                             @if ($item->id == $value->ca_id)
                                 {{ $item->thoi_gian_bat_dau  }} -

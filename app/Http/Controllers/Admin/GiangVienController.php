@@ -215,6 +215,7 @@ class GiangVienController extends Controller
                         'email' => $params['cols']['email'],
                         'sdt' => $params['cols']['sdt'],
                         'hinh_anh' => $params['cols']['hinh_anh'],
+                        'mo_ta' => $params['cols']['mo_ta'],
                     ]);
                 } else {
 
@@ -224,9 +225,9 @@ class GiangVienController extends Controller
                         'dia_chi' => $params['cols']['dia_chi'],
                         'email' => $params['cols']['email'],
                         'sdt' => $params['cols']['sdt'],
+                        'mo_ta' => $params['cols']['mo_ta'],
                     ]);
                 }
-
                 Session::flash('success', 'Cập nhập thành công');
                 return redirect()->route('route_BE_Admin_List_Giang_Vien');
             } else {

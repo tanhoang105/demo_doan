@@ -70,7 +70,7 @@
             @foreach ($doi_lop_khoa as $key => $item)
                 <tr>
                     <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
-                    <td> {{ $item->id }}</td>
+                    <td> {{ $loop->iteration }}</td>
                     <td> {{ $item->user_id }}</td>
                     <td> {{ $item->name }}</td>
                     <td>

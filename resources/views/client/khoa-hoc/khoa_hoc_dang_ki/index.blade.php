@@ -20,24 +20,24 @@
             <h2>Các Khóa học đã đăng kí </h2>
             <div class="row">
                 @foreach ($khoa_hoc_cu as $value)
-                <div class="col-lg-3 box-shadow br-15" style="height: 320px;margin-left: 70px;margin-top: 40px;">
+                <div class="col-lg-4 box-shadow br-15" style="height: 370px; width: 350px;;margin-left: 20px;margin-top: 40px;">
                     <div class="row">
                         <div class="image pt-2">
-                            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="width: 275px;height: 145px;">
+                            <img class="br-15" src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="width: 345px;height: 185px;">
                         </div>
 
                         <div class="pt-2">
-                            <h4>{{ $value->ten_khoa_hoc }}</h4>
+                            <h3>{{ $value->ten_khoa_hoc }}</h3>
                         </div>
 
                         <div class="">
-                            <label>Danh mục:</label>
-                            <span>{{ $value->ten_danh_muc }}</span>
+                            <label class="text-dark">Danh mục:</label>
+                            <span class="text-dark">{{ $value->ten_danh_muc }}</span>
                         </div>
 
                         <div class="">
-                            <label>Giá tiền: </label>
-                            <span> {{ number_format($value->gia_khoa_hoc,0,'.','.') }} VNĐ</span>
+                            <label class="text-dark">Giá tiền: </label>
+                            <span class="text-dark"> {{ number_format($value->gia_khoa_hoc,0,'.','.') }}VNĐ</span>
                         </div>
 
                         <hr>
@@ -49,7 +49,7 @@
                                 <input type="text" name="khoahoc_id" hidden id="" value="{{$value->id}}">
                                 <input hidden type="text" value="{{$value->lop_id}}" name="lopcu_id"  id="">
                                 <input hidden type="text" name="dangky_id" value="{{$value->dang_ky_id}}"  id="">
-                                <button class="btn btn-primary">Đổi khóa học</button>
+                                <button class="btn btn-primary" style="border-radius: 8px">Đổi khóa học</button>
                             </form>
                         </div>
                     </div>
