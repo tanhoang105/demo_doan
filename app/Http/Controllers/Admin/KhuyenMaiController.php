@@ -31,7 +31,7 @@ class KhuyenMaiController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(mb_strtoupper('xem khuyến mại') );
+        $this->authorize(mb_strtoupper('xem khuyến mại'));
 
         $this->v['params']  = $request->all();
         $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
@@ -46,7 +46,7 @@ class KhuyenMaiController extends Controller
     public function create()
     {
         //
-    return view('admin.khuyenmai.add');
+        return view('admin.khuyenmai.add');
     }
 
     /**
@@ -85,7 +85,7 @@ class KhuyenMaiController extends Controller
     {
         //
         $coupon = KhuyenMai::findOrFail($id);
-        return view('admin.khuyenmai.update' ,compact('coupon'));
+        return view('admin.khuyenmai.update', compact('coupon'));
     }
 
     /**
@@ -95,7 +95,7 @@ class KhuyenMaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         // dd($request->all());
         $coupon = KhuyenMai::findOrFail($id);
@@ -114,7 +114,7 @@ class KhuyenMaiController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+        $this->authorize(mb_strtoupper('xóa khuyến mại'));
 
         if ($id) {
             $res = $this->khuyenmai->remove($id);
@@ -128,31 +128,32 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
-        $this->authorize(mb_strtoupper('xóa khuyến mại') );
+        $this->authorize(mb_strtoupper('xóa khuyến mại'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['_token']);
             $res = $this->khuyenmai->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-
         }
     }
-    public function khuyenMaiData($request, $coupon){
+    public function khuyenMaiData($request, $coupon)
+    {
         // dd($request->all(),$coupon);
         if ($request->loai_khuyen_mai == 1) {
             $coupon->loai_khuyen_mai = $request->loai_khuyen_mai;
@@ -160,11 +161,11 @@ class KhuyenMaiController extends Controller
             $coupon->mo_ta = $request->mo_ta;
             $coupon->giam_gia = $request->giam_gia;
             $coupon->ngay_bat_dau = $request->ngay_bat_dau;
-            $coupon->ngay_ket_thuc =$request->ngay_ket_thuc;
-            $coupon->so_luong =$request->so_luong;
-            $coupon->loai_giam_gia =$request->loai_giam_gia;
+            $coupon->ngay_ket_thuc = $request->ngay_ket_thuc;
+            $coupon->so_luong = $request->so_luong;
+            $coupon->loai_giam_gia = $request->loai_giam_gia;
             $cupon_details = array();
-            foreach($request->khoa_hoc_ids as $id) {
+            foreach ($request->khoa_hoc_ids as $id) {
                 $cupon_details[] = $id;
                 // array_push($cupon_details, $data);
             }
@@ -177,75 +178,171 @@ class KhuyenMaiController extends Controller
             $coupon->mo_ta = $request->mo_ta;
             $coupon->giam_gia = $request->giam_gia;
             $coupon->ngay_bat_dau = $request->ngay_bat_dau;
-            $coupon->ngay_ket_thuc =$request->ngay_ket_thuc;
-            $coupon->loai_giam_gia =$request->loai_giam_gia;
-            $coupon->so_luong =$request->so_luong;
+            $coupon->ngay_ket_thuc = $request->ngay_ket_thuc;
+            $coupon->loai_giam_gia = $request->loai_giam_gia;
+            $coupon->so_luong = $request->so_luong;
         }
 
         return $coupon;
     }
     public function get_coupon_form(Request $request)
     {
-        if($request->coupon_type == 1) {
-            $khoaHocs =  KhoaHoc::where('delete_at',1)->get();
+        if ($request->coupon_type == 1) {
+            $khoaHocs =  KhoaHoc::where('delete_at', 1)->get();
             return view('admin.khuyenmai.base_khuyen_mai_khoa_hoc', compact('khoaHocs'));
-        }
-        elseif($request->coupon_type == 2){
+        } elseif ($request->coupon_type == 2) {
             return view('admin.khuyenmai.base_khuyen_mai_all');
         }
     }
     public function get_coupon_form_edit(Request $request)
     {
-        if($request->coupon_type == 1) {
+        if ($request->coupon_type == 1) {
             $coupon = KhuyenMai::findOrFail($request->id);
-            $khoaHocs =  KhoaHoc::where('delete_at',1)->get();
-            return view('admin.khuyenmai.base_khuyen_mai_khoa_hoc_edit',compact('coupon','khoaHocs'));
-        }
-        elseif($request->coupon_type == 2){
+            $khoaHocs =  KhoaHoc::where('delete_at', 1)->get();
+            return view('admin.khuyenmai.base_khuyen_mai_khoa_hoc_edit', compact('coupon', 'khoaHocs'));
+        } elseif ($request->coupon_type == 2) {
             $coupon = KhuyenMai::findOrFail($request->id);
-            return view('admin.khuyenmai.base_khuyen_mai_all_edit',compact('coupon'));
+            return view('admin.khuyenmai.base_khuyen_mai_all_edit', compact('coupon'));
         }
     }
 
-    public function apDungKM(Request $request) {
-        $now = date('Y-m-d',time());
+    // public function apDungKM(Request $request) {
+    //     $now = date('Y-m-d',time());
+    //     $objkm = new KhuyenMai();
+    //     $query = KhuyenMai::where([
+    //         ['ma_khuyen_mai',$request->ma_khuyen_mai],
+    //         ['ngay_bat_dau','<=',$now],
+    //         ['ngay_ket_thuc','>=',$now],
+    //     ]);
+    //     $km = $query->first();
+    //     $check = false;
+    //     if(!empty($km)) {
+    //         if(!empty($km->chi_tiet_khoa)) {
+    //             $khoaHocIds = json_decode($km->chi_tiet_khoa);
+    //             foreach($khoaHocIds as $val) {
+    //                 if($val == $request->id_khoa_hoc) {
+    //                     $check = true;
+    //                     break;
+    //                 }
+    //             } ;
+    //             if(!$check) {
+    //                 return response()->json([
+    //                     'success' => false,
+    //                     'msg' => 'Mã khuyến mãi không áp dụng cho khóa học này',
+    //                 ]);
+    //             }
+    //         }
+    //         else {
+    //             $check = true;
+    //         }
+
+    //     }
+
+    //     if($check) {
+    //         if(!empty(Auth::user())) {
+    //             // Check user đã sử dụng mã
+    //             $checkUsed = DB::table('khuyen_mai_user_da_dung')->where([
+    //                 ['id_user',Auth::user()->id],
+    //                 ['khuyen_mai_id',$km->id]
+    //             ])->first();
+
+    //             if(empty($checkUsed)) {
+    //                 if($km->loai_khuyen_mai == 1) {
+    //                     // dd($request->gia_khoa_hoc);
+    //                     $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+    //                 }else {
+    //                     $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+    //                 }
+    //             }else {
+    //                 return response()->json([
+    //                     'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
+    //                     'success' => false,
+    //                 ]);
+    //             }
+    //         }
+    //         // Chưa đăng nhập
+    //         else {
+    //             // dd(1);
+    //             $checkCount = DB::table('khuyen_mai_user_da_dung')->where([
+    //                 ['khuyen_mai_id',$km->id]
+    //             ])->count();
+    //             if($checkCount > $km->so_luong) {
+    //                 return response()->json([
+    //                     'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
+    //                     'success' => false,
+    //                 ]);
+    //             }else {
+
+    //                 if($km->loai_khuyen_mai == 1) {
+    //                     $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+    //                     // dd($request->gia_khoa_hoc);
+    //                 }else {
+    //                     $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+    //                 }
+    //             }
+    //         }
+
+    //         return response()->json([
+    //             'success' => true,
+    //             'gia_khoa_hoc' => $giaKhoaHoc,
+    //             'id_km' => $km->id
+    //         ]);
+    //     }else {
+    //         return response()->json([
+    //             'success' => false,
+    //             'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
+    //         ]);
+    //     }
+
+    // }
+
+    public function apDungKM(Request $request)
+    {
+        $now = date('Y-m-d', time());
         $objkm = new KhuyenMai();
         $query = KhuyenMai::where([
-            ['ma_khuyen_mai',$request->ma_khuyen_mai],
-            ['ngay_bat_dau','<=',$now],
-            ['ngay_ket_thuc','>=',$now],
+            ['ma_khuyen_mai', $request->ma_khuyen_mai],
+            ['ngay_bat_dau', '<=', $now],
+            ['ngay_ket_thuc', '>=', $now],
         ]);
         $km = $query->first();
         $check = false;
-        if(!empty($km)) {
-            if(!empty($km->chi_tiet_khoa)) {
+        if (!empty($km)) {
+            if (!empty($km->chi_tiet_khoa)) {
                 $khoaHocIds = json_decode($km->chi_tiet_khoa);
-                foreach($khoaHocIds as $val) {
-                    if($val == $request->id_khoa_hoc) {
+                foreach ($khoaHocIds as $val) {
+                    if ($val == $request->id_khoa_hoc) {
                         $check = true;
                         break;
                     }
-                } ;
-                if(!$check) {
+                };
+                if (!$check) {
                     return response()->json([
                         'success' => false,
                         'msg' => 'Mã khuyến mãi không áp dụng cho khóa học này',
                     ]);
                 }
-            }
-            else {
+            } else {
                 $check = true;
             }
-
         }
 
-        if($check) {
-            if(!empty(Auth::user())) {
+        if ($check) {
+            if (!empty(Auth::user())) {
                 // Check user đã sử dụng mã
                 $checkUsed = DB::table('khuyen_mai_user_da_dung')->where([
-                    ['id_user',Auth::user()->id],
-                    ['khuyen_mai_id',$km->id]
+                    ['id_user', Auth::user()->id],
+                    ['khuyen_mai_id', $km->id]
                 ])->first();
+<<<<<<< HEAD
+
+                if (empty($checkUsed)) {
+                    if ($km->loai_khuyen_mai == 1) {
+                        // dd($request->gia_khoa_hoc);
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                    } else {
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+=======
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
@@ -263,8 +360,9 @@ class KhuyenMaiController extends Controller
                         else{
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
+>>>>>>> 32e1f5d54af1dc8539f8a95276d49bbf192ea779
                     }
-                }else {
+                } else {
                     return response()->json([
                         'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
                         'success' => false,
@@ -275,13 +373,22 @@ class KhuyenMaiController extends Controller
             else {
                 // dd(1);
                 $checkCount = DB::table('khuyen_mai_user_da_dung')->where([
-                    ['khuyen_mai_id',$km->id]
+                    ['khuyen_mai_id', $km->id]
                 ])->count();
-                if($checkCount > $km->so_luong) {
+                if ($checkCount > $km->so_luong) {
                     return response()->json([
                         'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
                         'success' => false,
                     ]);
+<<<<<<< HEAD
+                } else {
+
+                    if ($km->loai_khuyen_mai == 1) {
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        // dd($request->gia_khoa_hoc);
+                    } else {
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+=======
                 }else {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
@@ -299,21 +406,20 @@ class KhuyenMaiController extends Controller
                         else{
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
+>>>>>>> 32e1f5d54af1dc8539f8a95276d49bbf192ea779
                     }
                 }
             }
-
             return response()->json([
                 'success' => true,
                 'gia_khoa_hoc' => $giaKhoaHoc,
                 'id_km' => $km->id
             ]);
-        }else {
+        } else {
             return response()->json([
                 'success' => false,
                 'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
             ]);
         }
-
     }
 }

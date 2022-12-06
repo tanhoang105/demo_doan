@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Nette\Utils\Random;
 
+
 class DangKyController extends Controller
 {
     //
@@ -188,6 +189,8 @@ class DangKyController extends Controller
                     if(empty($query)) {
 
                         $user = Auth::user();
+
+
                         $caHoc = DB::table('dang_ky')
                                 ->join('lop','lop.id','=','dang_ky.id_lop')
                                 ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
