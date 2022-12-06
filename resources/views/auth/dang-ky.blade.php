@@ -46,40 +46,40 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="name" id="fname" type="text"
                                                placeholder="Họ tên">
-                                               @error('name')
+                                               {{-- @error('name')
                                                <span style="color: red"> {{ $message }} </span>
-                                           @enderror
+                                           @enderror --}}
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="email" id="remail" type="email"
                                                placeholder="Email">
-                                               @error('email')
+                                               {{-- @error('email')
                                                <span style="color: red"> {{ $message }} </span>
-                                           @enderror
+                                           @enderror --}}
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="password" id="password" type="password"
                                                placeholder="Mật khẩu">
-                                               @error('password')
+                                               {{-- @error('password')
                                                <span style="color: red"> {{ $message }} </span>
-                                           @enderror
+                                           @enderror --}}
                                     </div>
 
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="sdt" id="cpassword" type="text"
                                                placeholder="Điện thoại">
-                                               @error('sdt')
+                                               {{-- @error('sdt')
                                                <span style="color: red"> {{ $message }} </span>
-                                           @enderror
+                                           @enderror --}}
                                     </div>
 
                                     <div class="col-lg-12 col-sm-12">
                                         <input class="signup-field" name="dia_chi" id="address" type="text"
                                                placeholder="Địa chỉ">
-                                               @error('dia_chi')
+                                               {{-- @error('dia_chi')
                                                <span style="color: red"> {{ $message }} </span>
-                                           @enderror
+                                           @enderror --}}
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="signup-field" value="5" name="trang_thai" id="city" type="hidden">
@@ -87,6 +87,15 @@
                                     <div hidden class="col-md-6 col-sm-12">
                                         <input class="signup-field" name="hinh_anh" id="zip" type="file">
                                     </div>
+                                    @if ($errors->any())
+                                    <div class="alert alert-secondary"> 
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li style="color: red">{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                    </div>
+                                    @endif
                                     <div class="submit-area">
                                         <button class="submit more-link"> Đăng Ký Tài Khoản </button>
                                         <a href="{{route('auth.loginForm')}}" class="submit more-link"> Đăng Nhâp </a>

@@ -43,6 +43,7 @@ class TaiKhoanController extends Controller
 
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
+
         $this->v['lop'] = $this->lop->index(null, false, null);
         //phần lọc 
         $params = [];
@@ -151,6 +152,7 @@ class TaiKhoanController extends Controller
                 }
                 // them tk ghi no
                 $data = User::where('users.email', '=', $request->email)
+                    ->where('users.vai_tro_id', '=', 4)
                     ->get();
 
                 // dd($data);

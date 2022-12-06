@@ -26,9 +26,10 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
     <!-- Custom image -->
 {{--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">--}}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">--}}
+   {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> --}}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>    <!-- Main Style -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <!-- Main Style -->
     <link href="{{asset('client/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('client/css/responsive.css')}}" rel="stylesheet">
 
@@ -95,7 +96,9 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
             }
         }
     });
+
 </script>
+@yield('js')
 </body>
 </html>
 
