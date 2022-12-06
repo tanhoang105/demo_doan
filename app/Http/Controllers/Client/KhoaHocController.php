@@ -47,6 +47,8 @@ class KhoaHocController extends Controller
             ->where('lop.id_khoa_hoc', '=', $id)
             // ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
             ->join('giang_vien', 'lop.id_giang_vien', '=', 'giang_vien.id_user')
+            ->join('xep_lop','lop.id','=','xep_lop.id_lop')
+            ->where('lop.so_luong', '>', 0)
             ->get();
         // dd($lop);
         $khoahoclienquan = KhoaHoc::select('khoa_hoc.*', 'danh_muc.ten_danh_muc')->where('khoa_hoc.id_danh_muc', '=', $detail->id_danh_muc)
@@ -65,8 +67,8 @@ class KhoaHocController extends Controller
             ->select('danh_muc.*', 'khoa_hoc.*')
             ->where('khoa_hoc.delete_at', '=', 1);
 
-        if(!empty($request->idDanhMuc)) {
-            $filter[] = ['id_danh_muc',$request->idDanhMuc];
+        if (!empty($request->idDanhMuc)) {
+            $filter[] = ['id_danh_muc', $request->idDanhMuc];
         }
 
         if (!empty($request->search)) {
@@ -75,11 +77,9 @@ class KhoaHocController extends Controller
         if (!empty($request->filterKh)) {
             if ($request->filterKh == 'new') {
                 $query = $query->orderBy('khoa_hoc.id', 'desc');
-            }
-            elseif($request->filterKh=='view'){
-                $query =$query->orderBy('khoa_hoc.luot_xem','desc');
-            }
-            else {
+            } elseif ($request->filterKh == 'view') {
+                $query = $query->orderBy('khoa_hoc.luot_xem', 'desc');
+            } else {
                 //                $sort[]=['gia_khoa_hoc',$request->filterKh];
                 $query = $query->orderBy('gia_khoa_hoc', $request->filterKh);
             }

@@ -16,7 +16,7 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <form class="p-5" action="{{route('route_BE_Admin_store_doi_khoa')}}" method="post" enctype="multipart/form-data">
+    <form class="p-5" action="{{ route('route_BE_Admin_store_doi_khoa') }}" method="post" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <div class="col-6">
@@ -70,8 +70,7 @@
                 </script>
                 <div class="mb-3">
                     <label for="" class="form-label">khóa học mới</label>
-                    <select class="form-control" name="" id="id_khoa_hoc"
-                        data-url="{{ route('admin_dang_ky') }}">
+                    <select class="form-control" name="" id="id_khoa_hoc" data-url="{{ route('admin_dang_ky') }}">
                         <option value="">chọn khóa học</option>
                         @foreach ($list_khoa_hoc as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
@@ -80,7 +79,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
-                    <select class="form-control" name="id_lop_moi" id="id_lop">
+                        <select class="form-control" name="id_lop_moi" data-url="{{ route('siso_doilop') }}" id="id_lop">
                         <option>--Chọn Lớp--</option>
                     </select>
                 </div>
@@ -112,6 +111,7 @@
                                             ` <option  value="${ item.id }">${ item.ten_lop }</option>`
                                     })
                                     $('#id_gia').val(res.gia_khoa_hoc)
+                                    // $('#so_luong').val(res.so_luong)
                                     $('#gia_khoa_hoc').val(res.gia_khoa_hoc)
                                     $('#id_lop').html(htmls)
                                 }
@@ -120,6 +120,33 @@
                     })
                 </script>
                 <div class="mb-3">
+                    <label for="" class="form-label">Số lượng ghế trống</label>
+                    <input disabled class="form-control" name="so_luong" id="so_luong" type="text">
+                </div>
+                {{-- test  --}}
+                <script>
+                    $(document).ready(function() {
+                        $(document).on('change', '#id_lop', function(event) {
+                            console.log(1)
+                            const url = $(this).data('url')
+                            const data = $(this).val();
+                            console.log(url, data);
+                            $.ajax({
+                                type: 'GET',
+                                url: url,
+                                data: {
+                                    id_lop_moi: data
+                                },
+                                success: function(res) {
+                                    console.log(res)
+                                    let so_luong = res;
+                                    $('#so_luong').val(res)
+                                }
+                            })
+                        })
+                    })
+                </script>
+                <div hidden class="mb-3">
                     <label for="" class="form-label">Trạng thái</label>
                     <input class="form-control" value="3" name="status" id="trang_thai" type="text">
                 </div>

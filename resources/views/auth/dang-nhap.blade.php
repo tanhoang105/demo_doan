@@ -20,9 +20,9 @@
     </header>
     <!--/. header -->
     <!--/
-        ==================================================-->
+            ==================================================-->
     <!-- Start: Account Section
-        ==================================================-->
+            ==================================================-->
     <section class="account-section">
         <div class="container">
             <div class="row">
@@ -49,21 +49,32 @@
                                     </div>
                                 @endif
                             </div>
-                            <div>                           
+                            <div>
                                 @if (Session::has('message'))
                                     <div class="alert alert-success alert-dismissible" role="alert">
                                         <strong>{{ Session::get('message') }}</strong>
                                     </div>
                                 @endif
-                                </div>
-                            <form method="post" action="{{route('auth.login')}}">
+                            </div>
+                            <form method="post" action="{{ route('auth.login') }}">
                                 @csrf
                                 <input class="login-field" name="email" id="lemail" type="text" placeholder="Email">
                                 <input class="login-field" name="password" id="lpassword" type="password"
-                                       placeholder="Password">
+                                    placeholder="Password">
                                 <div class="lost_pass">
-                                    <a href="{{ route('form_quen_mat_khau') }}" class="forget" style="margin-left: 15px"> Bạn quên mật khẩu? </a>
+                                    <a href="{{ route('form_quen_mat_khau') }}" class="forget" style="margin-left: 15px">
+                                        Bạn quên mật khẩu? </a>
                                 </div>
+                                @if ($errors->any())
+                                <div class="alert alert-secondary"> 
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li style="color: red">{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                </div>
+                                @endif
+
                                 <div class="submit-area">
                                     <button class="submit more-link"> Đăng Nhập </button>
                                     <a href="{{ route('auth.getdangki') }}" class="submit more-link"> Đăng Ký Tài Khoản</a>
@@ -81,5 +92,5 @@
         <!-- container /- -->
     </section>
     <!-- End : Account Section
-        ==================================================-->
+            ==================================================-->
 @endsection

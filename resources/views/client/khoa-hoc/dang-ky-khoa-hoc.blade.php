@@ -77,7 +77,7 @@
                         <span style="font-size: 18px;color: red">{{$thu->ten_thu}}</span>
                         @endforeach
                         {{-- <br> --}}
-                        <div style="margin-left: 12px;font-size: 18px;color: red"> {{$loadDangKy->ca_hoc .' - '. $loadDangKy->thoi_gian_bat_dau . ' - ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
+                        <div style="margin-left: 12px;font-size: 18px;color: red"> {{$loadDangKy->ca_hoc .' : '. $loadDangKy->thoi_gian_bat_dau . ' từ ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
