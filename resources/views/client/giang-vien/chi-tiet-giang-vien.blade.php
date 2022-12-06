@@ -43,14 +43,14 @@
                             <span> {{$giang_vien->email}}</span>
                             <span>{{$giang_vien->sdt}}</span>
                         </div>
-                        <div class="teacher_social">
+                        {{-- <div class="teacher_social">
                             <a href="#" class="fab fa-facebook-f"></a>
                             <a href="#" class="fab fa-linkedin"></a>
                             <a href="#" class="fab fa-twitter"></a>
                             <a href="#" class="fab fa-youtube"></a>
-                        </div>
-                        <div class="teacher_achieve">
-                            <div class="teacher_achieve_list">
+                        </div> --}}
+                        <div class="teacher_achieve" >
+                            {{-- <div class="teacher_achieve_list">
                                 <i class="fal fa-user-friends"></i>
                                 <h3> 56,890 </h3>
                                 <span> Học viên </span>
@@ -59,17 +59,17 @@
                                 <i class="fal fa-star"></i>
                                 <h3> 5.0 </h3>
                                 <span> Đánh giá </span>
-                            </div>
+                            </div> 
                             <div class="teacher_achieve_list">
                                 <i class="fal fa-book-open"></i>
                                 <h3> {{count($khoa_hoc)}} </h3>
                                 <span> Khóa học </span>
-                            </div>
+                            </div> --}}
                         </div>
-                        <div class="teacher_about">
+                        {{-- <div class="teacher_about">
                             <h3> Giới thiệu</h3>
                             <p>{{$giang_vien->mo_ta}}</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- /. col-lg-4 col-md-5 col-sm-12 -->
@@ -96,7 +96,7 @@
                           @foreach ($khoa_hoc as $value )
                           <div class="col-lg-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="{{ asset('client/images/best_book.jpg')}}" alt="image">
+                                <img src="{{ Storage::url($value->hinh_anh) }}" alt="image">
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag"> Development </span>
                                     <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span>
@@ -215,6 +215,13 @@
                     </div>
                 </div>
                 <!-- /. col-lg-8 col-md-7 col-sm-12 -->
+            </div>
+
+            <div class="row">
+                <div class="teacher_about">
+                    <h3> Giới thiệu</h3>
+                    <p>{!! $giang_vien->mo_ta !!}</p>
+                </div>
             </div>
             <!-- /. row -->
         </div>
