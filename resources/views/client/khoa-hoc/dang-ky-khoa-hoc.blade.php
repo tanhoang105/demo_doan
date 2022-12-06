@@ -248,7 +248,7 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Họ Tên</label>
-                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control" name="name" type="text" placeholder="Họ Tên" required>
+                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control" name="name" type="text" placeholder="Họ Tên">
                                 @error('name')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -256,7 +256,7 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Email</label>
-                                <input style="margin: 10px;height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" class="form-control" id="email" name="email" type="text" placeholder="Email" required>
+                                <input style="margin: 10px;height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" class="form-control" id="email" name="email" type="text" placeholder="Email">
                                 @error('email')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -265,7 +265,7 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Số điện thoại</label>
-                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->sdt??''}}" name="sdt" type="text" placeholder="Số điện thoại" required>
+                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->sdt??''}}" name="sdt" type="text" placeholder="Số điện thoại">
                                 @error('sdt')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
@@ -273,7 +273,7 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Địa chỉ</label>
-                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->dia_chi??''}}" name="dia_chi" type="text" placeholder="Địa chỉ" required>
+                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->dia_chi??''}}" name="dia_chi" type="text" placeholder="Địa chỉ">
                                 @error('dia_chi')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
