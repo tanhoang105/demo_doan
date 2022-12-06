@@ -128,4 +128,17 @@ class XepLop extends Model
             ->first();
         return $query;
     }
+
+    public function remoWithIdLop($id_lop)
+    {
+        if (!empty($id_lop)) {
+
+            $query = DB::table($this->table)->where('id_lop', '=', $id_lop);
+            $data = [
+                'delete_at' => 0
+            ];
+            $query = $query->update($data);
+            return $query;
+        }
+    }
 }

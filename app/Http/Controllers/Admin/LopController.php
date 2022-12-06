@@ -25,7 +25,7 @@ class LopController extends Controller
 {
     protected $v;
     protected $lophoc;
-    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu,  $lich;
+    protected $khoahoc, $cahoc, $giangvien, $cathu, $thu,  $lich , $xepLop;
 
     public function __construct()
     {
@@ -37,6 +37,7 @@ class LopController extends Controller
         $this->cathu = new CaThu();
         $this->thu = new ThuHoc();
         $this->lich = new Lich();
+        $this->xepLop = new XepLop();
     }
     /**
      * 
@@ -346,6 +347,7 @@ class LopController extends Controller
             if ($res > 0) {
                 // khi xóa thành công lớp thì xóa luôn lịch học của lớp đó
                 $this->lich->removeWithIDLop($id);
+                $this->xepLop->remoWithIdLop($id);
                 Session::flash('success', "Xóa thành công");
                 return back();
             } else {
