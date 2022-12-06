@@ -334,15 +334,7 @@ class KhuyenMaiController extends Controller
                     ['id_user', Auth::user()->id],
                     ['khuyen_mai_id', $km->id]
                 ])->first();
-<<<<<<< HEAD
 
-                if (empty($checkUsed)) {
-                    if ($km->loai_khuyen_mai == 1) {
-                        // dd($request->gia_khoa_hoc);
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                    } else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
-=======
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
@@ -360,7 +352,7 @@ class KhuyenMaiController extends Controller
                         else{
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
->>>>>>> 32e1f5d54af1dc8539f8a95276d49bbf192ea779
+
                     }
                 } else {
                     return response()->json([
@@ -380,15 +372,7 @@ class KhuyenMaiController extends Controller
                         'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
                         'success' => false,
                     ]);
-<<<<<<< HEAD
-                } else {
 
-                    if ($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                        // dd($request->gia_khoa_hoc);
-                    } else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
-=======
                 }else {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
@@ -406,7 +390,7 @@ class KhuyenMaiController extends Controller
                         else{
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
->>>>>>> 32e1f5d54af1dc8539f8a95276d49bbf192ea779
+
                     }
                 }
             }
