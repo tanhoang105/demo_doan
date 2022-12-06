@@ -11,7 +11,7 @@
                 <div class="col-sm-12">
                     <!-- Headline Goes Here -->
                     <h3>Đăng ký</h3>
-                    <h4><a href="index-2.html"> Trang chủ </a> <span> &vert; </span> Đăng ký </h4>
+                    <h4><a href="{{ route('home') }}"> Trang chủ </a> <span> &vert; </span> Đăng ký </h4>
                 </div>
             </div>
             <!-- End: .row -->

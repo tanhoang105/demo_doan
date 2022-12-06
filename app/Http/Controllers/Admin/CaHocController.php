@@ -98,7 +98,7 @@ class CaHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
+    public function edit($id, CaHocRequest $request)
     {
         //
         $this->authorize(mb_strtoupper('edit ca học') );

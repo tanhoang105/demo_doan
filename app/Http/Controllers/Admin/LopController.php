@@ -55,10 +55,26 @@ class LopController extends Controller
         $this->v['khoa_hoc'] = $this->khoahoc->index(null, false, null);
         $this->v['giang_vien'] = $this->giangvien->index(null, false, null);
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        // lọc
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        // dd($params);
+        if($request->keyword){
+           
+            $params['loc']['keyword'] = $request->keyword;
+            
+        }
 
-
-        unset($this->v['params']['_token']);
-        $list = $this->lophoc->index($this->v['params'], true, 10);
+       
+        $list = $this->lophoc->index($params, true, 10);
         $this->v['list'] = $list;
 
         $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
@@ -400,6 +416,7 @@ class LopController extends Controller
     public function store(Request $request)
     {
         //
+        // dd(123);
         $this->authorize(mb_strtoupper('thêm lớp học'));
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
         // dd($this->v['cahoc']);
@@ -412,7 +429,8 @@ class LopController extends Controller
         // dd($this->v['cathu']);
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
-        dd($request->all());
+        // dd($request->all());
+        // dd()
 
             $params = [];
             $params['cols'] = array_map(function ($item) {

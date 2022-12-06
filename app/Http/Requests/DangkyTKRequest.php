@@ -69,11 +69,11 @@ class DangkyTKRequest extends FormRequest
     {
         return [
 
-            'name' => 'Tên học viên',
-            'email' => 'email',
-            'password' => 'mật khẩu',
-            'sdt' => 'số điện thoại',
-            'dia_chi' => 'địa chỉ',
+            'name' => 'Họ tên',
+            'email' => 'Email',
+            'password' => 'Mật khẩu',
+            'sdt' => 'Số điện thoại',
+            'dia_chi' => 'Địa chỉ',
         ];
     }
 }

@@ -68,7 +68,7 @@
                     <h5>Liên kết hữu ích</h5>
                     <ul>
                         <li>
-                            <a href="courses.html">Giới thiệu</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Giới thiệu</a>
                         </li>
                         <li>
                             <a href="courses.html">Tham khảo một người bạn</a>

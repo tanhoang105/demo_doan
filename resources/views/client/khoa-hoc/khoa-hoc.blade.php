@@ -181,9 +181,10 @@
                                 {{-- {{count($value->ten_lop)}} --}}
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="feat_course_item">
-                                        {{-- <img src="{{ asset('client/images/courses1.jpg') }}" alt="image"> --}}
+                                        <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
                                         <img src="{{ Storage::url($value->hinh_anh) }}" alt="image"
                                             style="width: 380px;height: 200px;-radius: 15px;">
+                                        </a>
                                         <div class="feat_cour_price">
                                             <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
                                             <span
@@ -236,12 +237,17 @@
                     @foreach ($loc_danhmuc as $value)
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="feat_course_item">
-                                <img src="{{ asset('client/images/courses1.jpg') }}" alt="image">
+                                <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
+                                    <img src="{{ Storage::url($value->hinh_anh) }}" alt="image"
+                                    style="width: 380px;height: 200px;-radius: 15px;">
+                                </a>
                                 <div class="feat_cour_price">
                                     <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
-                                    <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc) }} VND</span>
+                                    <span class="feat_cour_p">{{ number_format($value->gia_khoa_hoc,0,'.','.') }} VND</span>
                                 </div>
+                                <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
                                 <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
+                                </a>
                                 <div class="feat_cour_lesson">
                                     <span
                                         hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>

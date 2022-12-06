@@ -4,17 +4,36 @@
 @section('content')
 
 <main id="main">
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs" data-aos="fade-in">
-        <div class="container">
-            <h2>Giới Thiệu</h2>
-            <p>Đó là một nỗi đau mà chúng tôi không thể làm cho một số người có được niềm vui của sự lựa chọn. Bởi vì điều đó hay tương tự, bởi vì nó là niềm vui, anh ta tìm kiếm những gì anh ta mắc nợ. Không ai trong số những người có mặt này sẽ thấy việc mở đầu của mọi thứ trở nên khó khăn. </p>
-        </div>
-    </div><!-- End Breadcrumbs -->
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
+            <div class="pt-5">
+                <div>
+                    <h3 style="text-align: center">GIỚI THIỆU</h3>
+                </div>
+
+                <div>
+                    <ul>
+                        <li class="text-dark">Học Với Chuyên Gia là chương trình đào tạo nguồn lực công nghệ thông tin chất lượng cao, bao gồm nhiều khoá học: online, offline ngắn hạn, bootcamp nhằm giúp bạn trở thành lập trình viên chuyên nghiệp trong thời gian ngắn nhất.</li>
+
+                        <br>
+
+                        <li class="text-dark">Bạn muốn học xong phải làm được việc? Bạn muốn học xong được cam kết 100% giới thiệu nơi thực tập hay hỗ trợ tìm việc?</li>
+
+                        <br>
+
+                        <li class="text-dark">Tất cả những mong muốn đó hoàn toàn được đáp ứng khi học tại Học Với Chuyên Gia. Đây là chương trình đào tạo được thiết kế và đúc kết từ kinh nghiệm của những chuyên gia là giảng viên đại học, trưởng ngành đào tạo, team leader… Có ít nhất 5 năm kinh nghiệm trở lên. Đối với lớp nâng cao yêu cầu có 7 năm kinh nghiệm trở lên.</li>
+
+                        <br>
+
+                        <li class="text-dark">Chúng tôi phát triển mô hình đào tạo dựa trên phương pháp học mô phỏng môi trường làm việc thực tế để tất cả học viên đều “nhập cuộc” nhanh chóng với xu hướng công nghệ đang thay đổi từng ngày. Học Với Chuyên Gia đặt mục tiêu đào tạo học viên vững kiến thức, giỏi kỹ năng, đáp ứng toàn diện yêu cầu công việc và tự tin chinh phục những nhà tuyển dụng khó tính nhất</li>
+
+                        <br>
+                    </ul>
+                </div>
+            </div>
+
+            <br>
 
             <div class="row">
                 <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
@@ -26,13 +45,10 @@
                         Điều quan trọng là phải chăm sóc bệnh nhân, được bác sĩ theo dõi, nhưng đó là khoảng thời gian rất đau đớn và đau khổ.
                     </p>
                     <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco labris yêu cầu và aliquip ex và hậu quả thoải mái.</li>
-                        <li><i class="bi bi-check-circle"></i> Nghi ngờ hoặc đau đớn khó chịu trong những lời khiển trách trong niềm vui mà anh ta muốn.</li>
-                        <li><i class="bi bi-check-circle"></i> Tôi không làm việc gì cả ngoại trừ để có được một số lợi thế từ nó. Duis aureur irure đau trong sự trừng phạt trong niềm vui tridetas stracalaperda mastir đau eu fu no be sinh.</li>
+                        <li class="text-dark">- Bên cạnh các kiến thức chuyên sâu, Học Với Chuyên Gia cung cấp một môi trường học tập và thực hành gần gũi với thực tế doanh nghiệp. Bạn sẽ được học với đội ngũ giảng viên, lập trình viên nhiều năm trong nghề, tinh thần trách nhiệm cao để hướng đến mục tiêu đào tạo ra những thế hệ lập trình viên trẻ tài năng.</li>
+                        <li class="text-dark">- Sau khi hoàn thành khoá học, chúng tôi cam kết giới thiệu cơ hội việc làm. Mục tiêu của chúng tôi là 100% học viên theo học Học Với Chuyên Gia có công việc ổn định, rộng mở về cơ hội thăng tiến.</li>
+                        <li class="text-dark">- Chúng tôi làm tất cả để bạn – học được – làm được – có việc làm – thu nhập cao và góp bàn tay xây dựng nền CNTT Việt Nam đi lên.</li>
                     </ul>
-                    <p>
-                        Tôi không làm việc gì cả ngoại trừ để có được một số lợi thế từ nó. Nghi ngờ hoặc đau đớn khó chịu khi khiển trách trong niềm vui
-                    </p>
 
                 </div>
             </div>
@@ -40,7 +56,7 @@
         </div>
     </section><!-- End About Section -->
 
-    <!-- ======= Counts Section ======= -->
+    {{-- <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts section-bg">
         <div class="container">
 
@@ -69,9 +85,9 @@
             </div>
 
         </div>
-    </section><!-- End Counts Section -->
+    </section><!-- End Counts Section --> --}}
 
-    <!-- ======= Testimonials Section ======= -->
+    {{-- <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials">
         <div class="container" data-aos="fade-up">
 
@@ -165,7 +181,7 @@
             </div>
 
         </div>
-    </section><!-- End Testimonials Section -->
+    </section><!-- End Testimonials Section --> --}}
 
 </main><!-- End #main -->
 

@@ -59,20 +59,20 @@
                         <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : "Đối với tất cả khóa học" }}</td>
                         <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : "Đối với phần trăm" }}</td>
                         <td> {{  $item->loai_giam_gia == 1 ? number_format($item->giam_gia  , 0, '.' ,'.').' VNĐ' : $item->giam_gia . '%' }}</td>
-                        <td> {{ $item->ngay_bat_dau }}</td> 
+                        <td> {{ $item->ngay_bat_dau }}</td>
                         <td> {{ $item->ngay_ket_thuc }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
                                 <a class="btn btn-success" style="color: #fff"
-                                    href="{{ route('route_BE_Admin_Edit_Giang_Vien', ['id' => $item->id]) }}">
+                                    href="{{ route('route_BE_Admin_Edit_Khuyen_Mai', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
-                            
+
                                 <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff"
                                     href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                            
+
                         </td>
 
                     </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class KhuyenmaiRequest extends FormRequest
 {
@@ -21,7 +22,7 @@ class KhuyenmaiRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         $rules = [];
         $ActionCurrent  = $this->route()->getActionMethod(); // trả về method đang hoạt động 
@@ -32,7 +33,7 @@ class KhuyenmaiRequest extends FormRequest
                         // nếu là method thêm mới bản ghi
                     case 'store':
                         $rules = [
-                            'ma_khuyen_mai' => 'required',
+                            'ma_khuyen_mai' => 'required|unique:khuyen_mai,ma_khuyen_mai',
                             // 'mo_ta' => 'required | min:20 |',
                             'loai_khuyen_mai' => 'required',
                             'giam_gia' => 'required | integer | max:100',
@@ -43,13 +44,15 @@ class KhuyenmaiRequest extends FormRequest
 
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
+                        $id = $request->id;
+                        // dd($id);
                         $rules = [
-                            'ma_khuyen_mai' => 'required | min:3 | max:30 | unique:ma_khuyen_mai',
                             // 'mo_ta' => 'required | min:20 |',
+                            'ma_khuyen_mai' => 'required|min:3|max:30|unique:khuyen_mai,ma_khuyen_mai,'.$id,
                             'loai_khuyen_mai' => 'required',
                             'giam_gia' => 'required | integer | max:100',
                             'ngay_bat_dau' => 'required | after:today',
-                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau',
                         ];
                         break;
 

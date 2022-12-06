@@ -84,7 +84,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số điện thoại</label>
-                    <input type="text" name="sdt" id="" class="form-control" value="{{ old('sdt') ?? request()->sdt ?? $res->sdt }}"></input>
+                    <input type="text" name="sdt" id="" class="form-control" value="{{ old('sdt') ?? request()->sdt ?? $res->sdt }}">
                     @error('sdt')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -104,14 +104,17 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
                     <td>
-                        <img id="anh" style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
+                        <img id="anh" style="border-radius: 100% ; width:100px ; height:100px " src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
                     </td>
-                    <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
+                    <div class="pt-3">
+                        <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh" accept=".png, .jpg, .jpeg"
                            class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
+                    </div>
+                    
                 </div>
 
 

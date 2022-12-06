@@ -43,8 +43,28 @@ class TaiKhoanController extends Controller
 
         $this->v['params'] = $request->all();
         $this->v['vaitro'] = $this->vaitro->index(null, false, null);
-        $this->v['list'] = $this->taikhoan->index($this->v['params'], true, 10);
+
         $this->v['lop'] = $this->lop->index(null, false, null);
+        //phần lọc 
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        if($request->keyword){
+            
+            $params['loc']['keyword'] = $request->keyword;
+            
+        }
+        $this->v['list'] = $this->taikhoan->index($params, true, 10);
+
+
+        // phần ẩn nút xóa
         $arrayIdGiangVienCuaLop = [];
         foreach ($this->v['lop'] as $itemLop) {
             $arrayIdGiangVienCuaLop[] = $itemLop->id_giang_vien;

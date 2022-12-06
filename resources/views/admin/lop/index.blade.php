@@ -45,7 +45,7 @@
                 <select class="form-control" name="khoa_hoc" id="">
                     <option value="">Lọc theo khóa học</option>
                     @foreach ($khoa_hoc as $itemKhoaHoc)
-                        <option value=" {{ $itemKhoaHoc->id }} "> {{ $itemKhoaHoc->ten_khoa_hoc }} </option>
+                        <option value="{{ $itemKhoaHoc->id }}"> {{ $itemKhoaHoc->ten_khoa_hoc }} </option>
                     @endforeach
                 </select>
             </div>
@@ -113,12 +113,12 @@
                     @endforeach
                 </select>
             </div> --}}
-            <div class="col-2">
+            {{-- <div class="col-2"> --}}
                 {{-- <label for=""> bắt đầu</label> --}}
-                <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau">
-            </div>
+                {{-- <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau"> --}}
+            {{-- </div> --}}
 
-            <div class="col-2">
+            {{-- <div class="col-2"> --}}
                 {{-- <select class="form-control" name="" id="">
                     <option value="">Lọc theo xếp lớp</option>
                     <option value="0"> Lớp chưa đc xếp </option>
@@ -126,8 +126,8 @@
 
                 </select> --}}
                 {{-- <label for=""> bắt đầu</label> --}}
-                <input type="date" name="ngay_ket_thuc" class="form-control">
-            </div>
+                {{-- <input type="date" name="ngay_ket_thuc" class="form-control"> --}}
+            {{-- </div> --}}
 
             <div class="col-1">
                 <button class="btn btn-success">Lọc</button>

@@ -1,5 +1,5 @@
 @extends('Client.templates.layout')
-@section('title') - Trainers
+@section('title') - Giảng viên
 @endsection
 @section('content')
 
@@ -33,10 +33,12 @@
               <div class="col-lg-3 col-md-6 col-sm-12">
                 <!-- teacher-list -->
                 <div class="teacher-img">
-                    <img src="{{ Storage::url($value->hinh_anh) }} " alt="image">
+                    <a href="{{route('client_chi_tiet_giang_vien',$value->id)}}">
+                      <img height="200px" src="{{ Storage::url($value->hinh_anh) }} " alt="image">  
+                    </a>
                 </div>
                 <div class="teacher-info">
-                    <div class="teacher-social">
+                    {{-- <div class="teacher-social">
                         <ul>
                             <li>
                                 <a href="#" class="fab fa-facebook-f"></a>
@@ -51,7 +53,7 @@
                                 <a href="#" class="fab fa-skype"></a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                     <a href="{{route('client_chi_tiet_giang_vien',$value->id)}}">
                         <h4>{{$value->ten_giang_vien}} </h4>
                     </a>

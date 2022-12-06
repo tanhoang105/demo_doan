@@ -162,54 +162,6 @@
                             ==================================================-->
 
 
-    <!-- Start: Popular Categories Section
-                            ==================================================-->
-    {{-- <section class="category-section">
-        <!-- Container -->
-        <div class="container">
-            <!-- Start: Heading -->
-            <div class="base-header">
-                <h3> Danh Mục Phổ Biến </h3>
-            </div>
-            <!-- End: Heading -->
-            <div class="row">
-                <div class="col-md-12" id="popula_cat">
-                    <!-- category 1 -->
-                    <div class="category-item">
-                        <img src="{{ asset('client/images/cat-icon1.png') }}" alt="image">
-                        <h4>Thiết kế</h4>
-                    </div>
-                    <!-- category 2 -->
-                    <div class="category-item">
-                        <img src="{{ asset('client/images/cat-icon2.png') }}" alt="image">
-                        <h4>Giáo dục</h4>
-                    </div>
-                    <!-- category 3 -->
-                    <div class="category-item">
-                        <img src="{{ asset('client/images/cat-icon3.png') }}" alt="image">
-                        <h4>Thủ công</h4>
-                    </div>
-                    <!-- category 4 -->
-                    <div class="category-item">
-                        <img src="{{ asset('client/images/cat-icon4.png') }}" alt="image">
-                        <h4>Tiếp thị</h4>
-                    </div>
-                    <!-- category 5 -->
-                    <div class="category-item">
-                        <img src="{{ asset('client/images/cat-icon2.png') }}" alt="image">
-                        <h4>Thiết kế</h4>
-                    </div>
-                </div>
-                <!--/ col-md-12  -->
-            </div>
-            <!--/ row - -->
-        </div>
-        <!--/ Container - -->
-    </section> --}}
-    <!--   End: Popular Categories Section
-                            ==================================================-->
-
-
     <!-- Start: Featured Courses Section
                             ==================================================-->
     <section class="feat-course-section">
@@ -239,7 +191,7 @@
                                             ->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
                                 <span hidden>{{ $total = 0 }}</span>
                                 @foreach ($count_lop as $data)
-                                    <span hidden>{{ $count_sv = 40 - $data->so_luong }}</span>
+                                    <span hidden>{{ $count_sv = 40 - ($data->so_luong) }}</span>
                                     <span hidden>{{ $total = $total + $count_sv }}</span>
                                 @endforeach
                                 <span class="feat_cour_less"> <i class="pe-7s-note2"></i> {{ count($count_lop) }} Lớp </span>
@@ -291,9 +243,10 @@
                     <h4>Ca học</h4>
                 </div>
                 <div class="col pt-3"></div>
-            </div>
+            </div> 
 
             @foreach ($khaigiang as $value)
+                @if( (date('d-m-Y', strtotime($value->ngay_bat_dau))) >= date('d-m-Y', time()) ) 
                 <div class="row text-dark align-content-center"
                     style="text-align: center;height: 100px;border-top: 1px solid #DEDEDE">
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
@@ -359,6 +312,7 @@
                         </a>
                     </div>
                 </div>
+            @endif            
             @endforeach
 
         </div>

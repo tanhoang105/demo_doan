@@ -84,16 +84,8 @@ class KhuyenMaiController extends Controller
     public function edit($id, Request $request)
     {
         //
-        $this->authorize(mb_strtoupper('edit khuyến mại') );
-
-        if ($id) {
-            $request->session()->put('id', $id);
-            $res = $this->khuyenmai->show($id);
-            if($res){
-                $this->v['khuyenmai']  = $res;
-            }
-            return view('admin.khuyenmai.update' ,$this->v);
-        }
+        $coupon = KhuyenMai::findOrFail($id);
+        return view('admin.khuyenmai.update' ,compact('coupon'));
     }
 
     /**
@@ -103,34 +95,15 @@ class KhuyenMaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(KhuyenmaiRequest $request)
+    public function update(Request $request,$id)
     {
-        $this->authorize(mb_strtoupper('update khuyến mại') );
-
-        if (session('id')) {
-            $id = session('id');
-            $params = [];
-            $params['cols'] = array_map(function ($item) {
-                if ($item == '') {
-                    $item = null;
-                }
-
-                if (is_string($item)) {
-                    $item = trim($item);
-                }
-                return $item;
-            }, $request->post());
-            unset($params['cols']['_token']);
-            $params['cols']['id'] = $id;
-            $res = $this->khuyenmai->saveupdate($params);
-            if ($res > 0) {
-                Session::flash('success', "Cập nhập thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
-            } else {
-                Session::flash('error', "Cập nhập không thành công");
-                return redirect()->route('route_BE_Admin_Khuyen_Mai');
-            }
-        }
+        // dd($request->all());
+        $coupon = KhuyenMai::findOrFail($id);
+        $coupon2 = $this->khuyenMaiData($request, $coupon);
+        // dd($coupon);
+        $coupon2->save();
+        Session::flash('success', "Sửa thành công");
+        return redirect()->route('route_BE_Admin_Khuyen_Mai');
     }
 
     /**
@@ -181,7 +154,6 @@ class KhuyenMaiController extends Controller
     }
     public function khuyenMaiData($request, $coupon){
         // dd($request->all(),$coupon);
-
         if ($request->loai_khuyen_mai == 1) {
             $coupon->loai_khuyen_mai = $request->loai_khuyen_mai;
             $coupon->ma_khuyen_mai = $request->ma_khuyen_mai;
@@ -222,6 +194,18 @@ class KhuyenMaiController extends Controller
             return view('admin.khuyenmai.base_khuyen_mai_all');
         }
     }
+    public function get_coupon_form_edit(Request $request)
+    {
+        if($request->coupon_type == 1) {
+            $coupon = KhuyenMai::findOrFail($request->id);
+            $khoaHocs =  KhoaHoc::where('delete_at',1)->get();
+            return view('admin.khuyenmai.base_khuyen_mai_khoa_hoc_edit',compact('coupon','khoaHocs'));
+        }
+        elseif($request->coupon_type == 2){
+            $coupon = KhuyenMai::findOrFail($request->id);
+            return view('admin.khuyenmai.base_khuyen_mai_all_edit',compact('coupon'));
+        }
+    }
 
     public function apDungKM(Request $request) {
         $now = date('Y-m-d',time());
@@ -252,9 +236,9 @@ class KhuyenMaiController extends Controller
             else {
                 $check = true;
             }
-        
+
         }
-        
+
         if($check) {
             if(!empty(Auth::user())) {
                 // Check user đã sử dụng mã
@@ -262,12 +246,23 @@ class KhuyenMaiController extends Controller
                     ['id_user',Auth::user()->id],
                     ['khuyen_mai_id',$km->id]
                 ])->first();
-
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = $request->gia_khoa_hoc - $km->giam_gia;
+                        // dd($request->gia_khoa_hoc);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
+                       
                     }else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
                     }
                 }else {
                     return response()->json([
@@ -288,11 +283,22 @@ class KhuyenMaiController extends Controller
                         'success' => false,
                     ]);
                 }else {
-
                     if($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = $request->gia_khoa_hoc - $km->giam_gia;
+                        // dd($request->gia_khoa_hoc);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
+                       
                     }else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
                     }
                 }
             }
@@ -308,6 +314,6 @@ class KhuyenMaiController extends Controller
                 'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
             ]);
         }
-       
+
     }
 }
