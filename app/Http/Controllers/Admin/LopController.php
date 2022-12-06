@@ -413,9 +413,10 @@ class LopController extends Controller
 
 
 
-    public function store(LopRequest $request)
+    public function store(Request $request)
     {
         //
+        // dd(123);
         $this->authorize(mb_strtoupper('thêm lớp học'));
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
         // dd($this->v['cahoc']);
@@ -429,6 +430,7 @@ class LopController extends Controller
         if ($request->isMethod('POST')) {
             // thêm sản phẩm
         // dd($request->all());
+        // dd()
 
             $params = [];
             $params['cols'] = array_map(function ($item) {

@@ -249,7 +249,8 @@ class KhuyenMaiController extends Controller
 
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = $request->gia_khoa_hoc - $km->giam_gia;
+                        // dd($request->gia_khoa_hoc);
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
                     }else {
                         $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                     }
@@ -274,7 +275,8 @@ class KhuyenMaiController extends Controller
                 }else {
 
                     if($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = $request->gia_khoa_hoc - $km->giam_gia;
+                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        // dd($request->gia_khoa_hoc);
                     }else {
                         $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                     }
