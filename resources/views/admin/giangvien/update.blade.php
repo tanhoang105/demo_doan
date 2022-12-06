@@ -75,16 +75,13 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Địa chỉ</label>
-                    <input value="{{ old('dia_chi') ?? request()->dia_chi ?? $res->dia_chi      }}" type="text" name="dia_chi"
+                    <input value="{{ old('dia_chi') ?? request()->dia_chi ?? $res->dia_chi }}" type="text" name="dia_chi"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('dia_chi')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
-
 
                 <div class="mb-3">
                     <label for="" class="form-label">Avatar</label>
@@ -99,6 +96,14 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="" class="form-label">Mô Tả</label>
+                    <textarea id="ckeditor2" class="form-control" name="mo_ta" value="{{ old('mo_ta') ?? request()->mo_ta ?? $res->mo_ta }}" id=""></textarea>
+                    @error('mo_ta')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                </div>
+
 
             </div>
 
@@ -108,4 +113,8 @@
 
 
     </form>
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ckeditor2');
+    </script>
 @endsection

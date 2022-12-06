@@ -85,7 +85,7 @@
                     <th scope="col">Tên Danh Mục </th>
                     <th scope="col">Giá khóa học </th>
                     <th scope="col">Ảnh </th>
-                    <th scope="col">Lượt xem </th>
+                    {{-- <th scope="col">Lượt xem </th> --}}
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -102,7 +102,7 @@
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc) }} VNĐ</td>
                         <td> <img width="150px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
-                        <td> {!! $item->luot_xem !!}</td>
+                        {{-- <td> {!! $item->luot_xem !!}</td> --}}
                         <td>
                            
                                 <a  class="btn btn-success" style="color: aliceblue" href="{{ route('route_BE_Admin_Chi_Tiet_Khoa_Hoc', ['id' => $item->id]) }}">
