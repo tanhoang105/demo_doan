@@ -97,7 +97,7 @@
                             <button onclick="confirm('Bạn đã hủy thành công!')" class="btn btn-success" type="submit" style="width: 100px;height: 95px">Hủy</button>
                         </form>
                         @else
-                        <center><span class="btn btn-success">Hủy</span></center>
+                        <center><button class="btn btn-success" style="width: 100px;height: 95px">Hủy</button></center>
                         @endif
 
                     </td>
