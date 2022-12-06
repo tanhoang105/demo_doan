@@ -246,13 +246,23 @@ class KhuyenMaiController extends Controller
                     ['id_user',Auth::user()->id],
                     ['khuyen_mai_id',$km->id]
                 ])->first();
-
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
+                       
                     }else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
                     }
                 }else {
                     return response()->json([
@@ -273,12 +283,22 @@ class KhuyenMaiController extends Controller
                         'success' => false,
                     ]);
                 }else {
-
                     if($km->loai_khuyen_mai == 1) {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
                         // dd($request->gia_khoa_hoc);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
+                       
                     }else {
-                        $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        if($km->loai_giam_gia==1){
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                        }
+                        else{
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
+                        }
                     }
                 }
             }
