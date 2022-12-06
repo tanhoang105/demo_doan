@@ -167,13 +167,13 @@ class DanhMucKhoaHoc extends Controller
         unset($params['cols']['_token']);
         $params['cols']['id'] = $id;
         // dd($params['cols']['ten_danh_muc']);
-        $check = $this->danh_muc->tendanhmuc($params['cols']['ten_danh_muc']);
+        // $check = $this->danh_muc->tendanhmuc($params['cols']['ten_danh_muc']);
         // dd($check);
-        if ($check) {
-            // dd(1);
-            Session::flash('mes', 'Ten danh muc da ton tai');
-            return back();
-        }
+        // if ($check) {
+        //     // dd(1);
+        //     Session::flash('mes', 'Ten danh muc da ton tai');
+        //     return back();
+        // }
 
         if ($request->file('anh_danh_muc')) {
             $params['cols']['anh_dahh_muc'] = $this->uploadFile($request->file('anh_danh_muc'));

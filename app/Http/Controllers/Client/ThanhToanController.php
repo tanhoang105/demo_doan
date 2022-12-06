@@ -314,20 +314,22 @@ class ThanhToanController extends Controller
             else {
                 // dd($request->vnp_TxnRef);
                 $dataDangKyOld = DB::table('dang_ky')->where('id',$request->vnp_TxnRef)->first();
-                $data = [
-                    'ngay_dang_ky' => $dataDangKyOld->ngay_dang_ky,
-                    'id_thanh_toan' => $dataDangKyOld->id_thanh_toan,
-                    'gia' => $dataDangKyOld->gia,
-                    'id_lop' => $dataDangKyOld->id_lop,
-                    'id_user' => $dataDangKyOld->id_user,
-                    'trang_thai' => $dataDangKyOld->trang_thai,
-                    'delete_at' => $dataDangKyOld->delete_at,
-                    'created_at' => $dataDangKyOld->created_at,
-                    'updated_at' => $dataDangKyOld->updated_at,
-                ];
-                DB::table('dang_ky')->where('id',$request->vnp_TxnRef)->delete();
-
-                DB::table('dang_ky')->insert($data);
+                if($dataDangKyOld != null){
+                    $data = [
+                        'ngay_dang_ky' => $dataDangKyOld->ngay_dang_ky,
+                        'id_thanh_toan' => $dataDangKyOld->id_thanh_toan,
+                        'gia' => $dataDangKyOld->gia,
+                        'email'=>$dataDangKyOld->email,
+                        'id_lop' => $dataDangKyOld->id_lop,
+                        'id_user' => $dataDangKyOld->id_user,
+                        'trang_thai' => $dataDangKyOld->trang_thai,
+                        'delete_at' => $dataDangKyOld->delete_at,
+                        'created_at' => $dataDangKyOld->created_at,
+                        'updated_at' => $dataDangKyOld->updated_at,
+                    ];
+                    DB::table('dang_ky')->where('id',$request->vnp_TxnRef)->delete();
+                    DB::table('dang_ky')->insert($data);
+                }
 
                 echo "GD Khong thanh cong";
             }

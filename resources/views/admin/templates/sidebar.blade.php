@@ -89,7 +89,6 @@
                       <i class="nav-icon fas fa-bars"></i>
                       <p>
                           Vai trò
-                          <i class="fas fa-angle-left right"></i>
                       </p>
                   </a>
                     {{-- <ul class="nav nav-treeview">
