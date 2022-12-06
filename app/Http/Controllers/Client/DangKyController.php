@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\GhiNo;
 use App\Models\ThanhToan;
 use App\Models\User;
+use Dflydev\DotAccessData\Data;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
@@ -390,6 +391,17 @@ class DangKyController extends Controller
         $obj=new DangKy();
         $list=$obj->lichsu($id);
         return view('client.dang-ky.lich-su-dang-ky',compact('list'));
+    }
+
+    // hủy đăng ký
+    public function huyDangKy($id){
+        $obj=new DangKy();
+        $query=DB::table('dang_ky')
+        ->where('id',$id)
+        ->update([
+            'trang_thai'=>3,
+        ]);
+        return redirect()->route('client_lich_su_dang_ky',['id'=>Auth::user()->id]);
     }
 
     //hàm checkemail

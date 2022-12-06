@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\QuenMatKhauController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\Client\DangKyController as ClientDangKyController;
 use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
@@ -64,6 +65,7 @@ Route::get('IPN', [\App\Http\Controllers\Client\ThanhToanController::class, 'IPN
 Route::get('payment', [\App\Http\Controllers\Client\ThanhToanController::class, 'payment'])->name('getPayment');
 Route::post('vnp_payment/{id}', [\App\Http\Controllers\Client\ThanhToanController::class, 'vnpPayment'])->name('payment');
 Route::get('lich-su-dang-ky/{id}', [\App\Http\Controllers\Client\DangKyController::class, 'lichsuDangKy'])->name('client_lich_su_dang_ky');
+Route::post('huy_dang_ky/{id}',[ClientDangKyController::class,'huyDangKy'])->name('huy_dang_ky');
 Route::get('IPN', [\App\Http\Controllers\Client\ThanhToanController::class, 'IPN'])->name('complete_pay');
 Route::get('vnp-return', [\App\Http\Controllers\Client\ThanhToanController::class, 'resultPay'])->name('result_pay');
 
