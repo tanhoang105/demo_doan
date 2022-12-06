@@ -14,6 +14,8 @@ use App\Models\Order;
 use App\Models\GhiNo;
 use App\Models\ThanhToan;
 use App\Models\User;
+use GrahamCampbell\ResultType\Success;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +68,7 @@ class DangKyController extends Controller
                 unset($params['cols']['khuyen_mai_id']);
                 unset($params['cols']['gia_khoa_hoc_payment']);
                 unset($params['cols']['id']);
+                unset($params['cols']['lop_id']);
                 // dd($params['cols']);
                 // kiểm tra nếu chưa có tài khoản
                 if (empty(Auth::user())) {
@@ -75,8 +78,6 @@ class DangKyController extends Controller
                     $dataUser['cols']['vai_tro_id']= 4;
                     $dataUser['cols']['password'] = Hash::make($password);
                     unset($dataUser['cols']['user_id']);
-                    unset($dataUser['cols']['id_khoa_hoc']);
-                    unset($dataUser['cols']['lop_id']);
                     unset($dataUser['cols']['ten']);
                     unset($dataUser['cols']['gia_khoa_hoc']);
 //                dd($password,$params['cols']['password']);
@@ -88,8 +89,6 @@ class DangKyController extends Controller
                         unset($dataHocVien['cols']['name']);
                         $dataHocVien['cols']['ten_hoc_vien'] = $request->name;
                         $dataHocVien['cols']['user_id'] = $res;
-                        unset($dataHocVien['cols']['id_khoa_hoc']);
-                        unset($dataHocVien['cols']['lop_id']);
                         unset($dataHocVien['cols']['ten']);
                         unset($dataHocVien['cols']['gia_khoa_hoc']);
                         $saveNewHocVien = $objHocvien->saveNew($dataHocVien);
@@ -155,11 +154,17 @@ class DangKyController extends Controller
                                         'msg' => 'Chưa đăng nhập',
                                         'id_dang_ky' => $resDK,
                                         'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                        'success'=>true
                                     ]);
                                 }
                                
                                 return redirect()->route('client_complete_dang_ky', ['code' => $resDK]);
                             } else {
+                                if($request->ten == 2) {
+                                    return response()->json([
+                                        'success'=>false
+                                    ]);
+                                }
                                 Session::flash('error', 'Lỗi đăng ký khóa học');
                                 redirect()->route('client_dang_ky', ['id' => $request->id]);
                             }
@@ -172,7 +177,6 @@ class DangKyController extends Controller
                 }
                 // Đã có tài khoản
                 else {
-                    // dd(1);
                     $query=DB::table('dang_ky')
                     ->join('users','users.id','=','dang_ky.id_user')
                     ->join('lop','lop.id','=','dang_ky.id_lop')
@@ -181,18 +185,15 @@ class DangKyController extends Controller
                     ->where('users.id',Auth::user()->id)
                     // ->andWhere('')
                     ->first();
-                    // dd($query);
                     if(empty($query)) {
 
                         $user = Auth::user();
-                        // dd($request->all());
                         $caHoc = DB::table('dang_ky')
                                 ->join('lop','lop.id','=','dang_ky.id_lop')
                                 ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
                                 ->where('dang_ky.id_user',$user->id)
                                 ->select('lop.ca_thu_id','ca_thu.ca_id','ca_thu.thu_hoc_id')
                                 ->get();
-                                
                         foreach ($caHoc as $item) {
                             if($request->ca_id == $item->ca_id  && $request->thu_hoc_id == $item->thu_hoc_id ) {
                                 Session::flash('error', 'Ca học đã trùng với khóa học đã đăng ký');
@@ -255,12 +256,18 @@ class DangKyController extends Controller
                                         'msg' => 'đã đăng nhập',
                                         'id_dang_ky' => $res,
                                         'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                        'success'=>true
                                     ]);
                                 }
                                 
                                 return redirect()->route('client_complete_dang_ky', ['code' => $res]);
 
                             } else {
+                                if($request->ten == 2) {
+                                    return response()->json([
+                                        'success'=>false
+                                    ]);
+                                }
                                 Session::flash('error', 'Lỗi đăng ký khóa học');
                                 return redirect()->route('client_dang_ky', ['id' => $request->id]);
                             }
@@ -324,6 +331,7 @@ class DangKyController extends Controller
                                     return response()->json([
                                         'id_dang_ky' => $res,
                                         'gia_khoa_hoc' => $request->gia_khoa_hoc,
+                                        'success'=>true,
                                     ]);
                                 }
                                 
@@ -338,6 +346,11 @@ class DangKyController extends Controller
                     }
 
                 }else {
+                    if($request->ten == 2) {
+                        return response()->json([
+                            'success'=>false
+                        ]);
+                    }
                     Session::flash('error', 'Bạn đã đăng ký khóa học này !');
                     return  redirect()->route('client_dang_ky', ['id' => $request->id]);
                 }
@@ -345,6 +358,11 @@ class DangKyController extends Controller
                 }
 
             } else {
+                if($request->ten == 2) {
+                    return response()->json([
+                        'success'=>false
+                    ]);
+                }
                 Session::flash('success', 'Lớp đã đầy Không thể đăng ký');
                 redirect()->route('client_dang_ky', ['id' => $request->id]);
             }

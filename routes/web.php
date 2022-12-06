@@ -17,11 +17,13 @@ use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VaiTroController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CaThuController;
+use App\Http\Controllers\Admin\ChinhSachController as AdminChinhSachController;
 use App\Http\Controllers\Admin\LichHocController;
 use App\Http\Controllers\Admin\ThanhToanController;
 use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\QuenMatKhauController;
+use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
@@ -243,6 +245,17 @@ Route::prefix('/admin')->group(function () {
         Route::post('/danh-muc-update', [DanhMucKhoaHoc::class, 'update'])->name('Update_Danh_Muc'); // hiển thị danh sách
         Route::get('/danh-muc-xoa/{id}', [DanhMucKhoaHoc::class, 'destroy'])->name('Xoa_Danh_Muc'); // hiển thị danh sách
         Route::post('/xoa-all', [DanhMucKhoaHoc::class, 'destroyAll'])->name('Xoa_All_Danh_Muc');
+    });
+
+    Route::prefix('chinh-sach')->name('route_BE_Admin_')->group(function () {
+
+        Route::get('/', [AdminChinhSachController::class, 'index'])->name('List_Chinh_Sach'); // hiển thị danh sách
+        Route::match(['get', 'post'], '/chinh-sach-add', [AdminChinhSachController::class, 'store'])->name('Add_Chinh_Sach'); // hiển thị danh sách
+        Route::get('/chinh-sach-edit/{id}', [AdminChinhSachController::class, 'edit'])->name('Edit_Chinh_Sach'); // hiển thị danh sách
+        Route::post('/chinh-sach-update', [AdminChinhSachController::class, 'update'])->name('Update_Chinh_Sach'); // hiển thị danh sách
+        Route::get('/chinh-sach-xoa/{id}', [AdminChinhSachController::class, 'destroy'])->name('Xoa_Chinh_Sach'); // hiển thị danh sách
+        Route::post('/xoa-all', [AdminChinhSachController::class, 'destroyAll'])->name('Xoa_All_Chinh_Sach');
+        Route::get('/xem-noi-dung{id}', [AdminChinhSachController::class, 'NoiDung'])->name('Xem_Noi_Dung');
     });
 
 
