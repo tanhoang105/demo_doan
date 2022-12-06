@@ -51,9 +51,9 @@
                 <th>Thanh toán</th>
                 <th>Trạng thái</th>
                 <th>Hủy đăng ký</th>
-                <th>Xóa</th>
             </tr>
             </thead>
+            {{-- {{dd($list)}} --}}
             @foreach ($list as $item)
                 <tbody>
                 <tr>
@@ -66,36 +66,41 @@
                     <td>{{$item->sdt}}</td>
                     <td>
                        @if($item->trang_thai_thanh_toan == 1)
-                            <form action="{{route('payment',[$item->id])}}" method="post">
-                                @csrf
-                                <input type="text" name="gia_khoa_hoc_payment" value="{{$item->gia_khoa_hoc}}" hidden>
-                                <input type="text" name="id" value="{{$item->id}}" hidden>
-                                <div class="form-group">
-                                    <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md full-width">Thanh Toán VNPAY</button>
-                                </div>
-                            </form>
+                           @if ($item->trang_thai==1)
+                           <form action="{{route('payment',[$item->id])}}" method="post">
+                            @csrf
+                            <input type="text" name="gia_khoa_hoc_payment" value="{{$item->gia_khoa_hoc}}" hidden>
+                            <input type="text" name="id" value="{{$item->id}}" hidden>
+                            <div class="form-group">
+                                <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md">Thanh Toán VNPAY</button>
+                            </div>
+                        </form>
+                           @else
+                          
+                           @endif
                         @else
-                            <center><span class="btn btn-success">Đã Thanh Toán</span></center>
+                            <center><span class="btn btn-success" >Đã Thanh Toán</span></center>
                         @endif
                     </td>
                     <td>
                         @if ($item->trang_thai==1)
-                            <center><span class="btn btn-primary">Đang duyệt</span></center>
-                        @elseif($item->trang_thai==0)
-                            <center><span class="btn btn-success">Đã duyệt</span></center>
+                            <center><button class="btn btn-primary" style="width: 100px;height: 95px">Đã duyệt</button></center>
                         @else
-                            <center><span class="btn btn-danger">Đã hủy</span></center>
+                            <center><button class="btn btn-danger" style="width: 100px;height: 95px">Đã hủy</button></center>
                         @endif
                     </td>
                     <td>
-                        <form method="post" action="">
+                        @if ($item->trang_thai==1)
+                        <form method="post" action="{{route('huy_dang_ky',[$item->id])}}">
                             @csrf
                             <input type="text" name="trang_thai" value="3" hidden>
-                            <button onclick="confirm('Bạn đã hủy thành công!')" class="btn btn-success" type="submit">Hủy</button>
+                            <button onclick="confirm('Bạn đã hủy thành công!')" class="btn btn-success" type="submit" style="width: 100px;height: 95px">Hủy</button>
                         </form>
+                        @else
+                        <center><span class="btn btn-success">Hủy</span></center>
+                        @endif
 
                     </td>
-                    <td><a onclick="confirm('Bạn đã xóa thành công!')" class="btn btn-danger" href="">Xóa</a></td>
                 </tr>
                 </tbody>
             @endforeach
