@@ -23,7 +23,7 @@
                 <div class="col-lg-3 box-shadow br-15" style="height: 320px;margin-left: 70px;margin-top: 40px;">
                     <div class="row">
                         <div class="image pt-2">
-                            <img src="{{asset('dist/img/courses1.jpg')}}" alt="image" style="width: 275px;height: 145px;">
+                            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="width: 275px;height: 145px;">
                         </div>
 
                         <div class="pt-2">

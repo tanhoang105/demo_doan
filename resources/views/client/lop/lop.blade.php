@@ -68,7 +68,7 @@
 
     <h2>Danh sách các lớp đã đăng ký</h2>
     <div class="List">
-        <div class="row justify-content-center">
+        <div class="row">
             @foreach ($list as $value)
             <div class="col-lg-3 box-shadow br-15" style="margin-left: 70px;height: 250px;margin-top: 40px;">
                 <div class="row p-1">
