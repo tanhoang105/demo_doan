@@ -82,6 +82,7 @@
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
                     <th scope="col">Tên Khóa Học </th>
+                    <th scope="col">Tiền tố  </th>
                     <th scope="col">Tên Danh Mục </th>
                     <th scope="col">Giá khóa học </th>
                     <th scope="col">Ảnh </th>
@@ -99,6 +100,7 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_khoa_hoc }}</td>
+                        <td> {{ $item->tien_to }}</td>
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc) }} VNĐ</td>
                         <td> <img width="150px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
