@@ -1,7 +1,91 @@
 @extends('Admin.templates.layout')
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        .datepicker-container.datepicker-dropdown.datepicker-top-right,
+.datepicker-container.datepicker-dropdown.datepicker-top-left {
+    border:none !important;
+    width: 293px !important;
+    box-shadow: 0 8px 6px rgb(0 0 0 / 18%);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    z-index: 10000 !important;
+}
+.datepicker-container.datepicker-dropdown.datepicker-top-right {
+    left: 65px !important;
+}
+.datepicker-panel>ul {
+    width: 100%;
+}
+.datepicker-top-left:before, .datepicker-top-right:before {
+    display: none;
+}
+.datepicker-panel>ul>li[data-view="month current"], 
+.datepicker-panel>ul>li[data-view="week"], 
+.datepicker-panel>ul>li[data-view="year current"], 
+.datepicker-panel>ul>li[data-view="years current"] {
+    font-weight: 600 !important;
+    width: 191px;
+    font-size: 14px !important;
+    color: #333333;
+
+}
+
+.datepicker-panel > ul:first-child {
+    padding-top: 12px !important;
+}
+
+.datepicker-panel>ul[data-view=week]>li {
+    width: calc(100% / 7);
+    font-weight: 600;
+    color: #333333;
+}
+.datepicker-panel>ul {
+    padding: 0 12px;
+}
+
+.datepicker-panel>ul>li {
+    height: unset;
+    color: #333333;
+    font-size: 14px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    padding: 4px 5px;
+    width: calc(100% / 7);
+}
+
+.datepicker-panel>ul>li.picked, 
+.datepicker-panel>ul>li.picked:hover {
+    background-color: #337AB7 !important;
+    color: #fff !important
+}
+.datepicker-panel>ul[data-view=years],
+.datepicker-panel>ul[data-view=months],
+.datepicker-panel>ul[data-view="days"] {
+    margin-bottom: 12px;
+}
+.datepicker-panel>ul[data-view=months]>li, 
+.datepicker-panel>ul[data-view=years]>li {
+    height: unset;
+    padding: 12px 0;
+    font-weight: 600;
+    color: #808080 ;
+    font-size: 16px;
+    margin-top: 12px 0;
+    width: calc(100% / 4);
+}
+.datepicker-panel>ul>li.picked 
+.datepicker-panel>ul>li.picked:hover {
+    color: #fff ;
+}
+    </style>
+@endsection
 @section('form-search')
     {{ route('route_BE_Admin_List_Lich_Hoc') }}
 @endsection
+
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Lich_Hoc') }}">
@@ -9,6 +93,7 @@
 
         </a>
     </div>
+{{-- 
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ Session::get('error') }}</strong>
@@ -17,11 +102,17 @@
                 <span class="sr-only">Close</span>
             </button>
         </div>
-    @endif
+    @endif --}}
 
-
+    <div class="alert alert-danger alert-dismissible d-none" role="alert">
+        <strong>Cập nhật thất bại</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
     {{-- hiển thị message đc gắn ở session::flash('success') --}}
-
+{{-- 
     @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <strong>{{ Session::get('success') }}</strong>
@@ -30,7 +121,15 @@
                 <span class="sr-only">Close</span>
             </button>
         </div>
-    @endif
+    @endif --}}
+
+    <div class="alert alert-success alert-dismissible d-none" role="alert">
+        <strong>Cập nhật thành công</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
     {{-- <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lich_Hoc') }}" enctype="multipart/form-data">
 
         @csrf --}}
@@ -54,10 +153,12 @@
             </tr>
         </thead>
         <tbody>
+            {{-- {{dd($list)}} --}}
             @foreach ($list as $key => $item)
-                <form action="{{ route('route_BE_Admin_Update_Lich_Hoc') }} " method="post">
-                    @csrf
-                    <tr>
+            {{-- <input type="text" name="_token" value="{{ csrf_field() }}" hidden> --}}
+                <tr>
+                    <form  class="form_{{$key}}">
+                        @csrf
                         <input type="hidden" name="id" value=" {{ $item->id }} ">
                         {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                         <th scope="row"> {{ $loop->iteration }}</th>
@@ -76,8 +177,8 @@
                         </td>
 
                         <td>
-
-                            <input name="ngay_hoc" type="text" value=" {{ $item->ngay_hoc }}">
+                            <input type="text"  value="{{$item->ngay_hoc}}">
+                            {{-- <input name="ngay_hoc" type="date" value=" {{ date_format($item->ngay_hoc,"m/d/y") }}"> --}}
                         </td>
 
                         <td>
@@ -145,10 +246,9 @@
                         </td>
 
 
-
                         <td>
-                            <button class="btn btn-success">
-                                <i class="fas fa-edit "></i> Sửa
+                            <button class="btn btn-success btn-update" data-key="{{$key}}" data-url='{{ route('route_BE_Admin_Update_Lich_Hoc') }}'>
+                                <i class="fas fa-edit "></i> Cập nhật
                             </button>
                         </td>
                         <td>
@@ -160,8 +260,8 @@
                             </button>
                         </td>
 
-                    </tr>
-                </form>
+                    </form>
+                </tr>
             @endforeach
 
         </tbody>
@@ -174,4 +274,49 @@
             {{ $list->appends('params')->links() }}
         </div>
     </div>
+@endsection
+
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $('[data-toggle="datepicker"]').datepicker({
+                format:'dd/mm/yyyy',
+                days: ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'],
+                daysShort: ['CN','T2','T3','T4','T5','T6','T7'],
+                daysMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                months: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12' ],
+                monthsShort: ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12' ],
+            })
+    
+            $('.btn-update').on('click',function(e) {
+                
+                e.preventDefault();
+                let key =  $(this).data('key');
+                let data = $('.form_'+key).serialize();
+                let url = $(this).data('url');
+                
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function(res) {
+                        if(res.success) {
+                            $('.alert.alert-danger').addClass('d-none');
+                            $('.alert.alert-success').removeClass('d-none');
+                        }else{
+                            $('.alert.alert-success').addClass('d-none');
+                            $('.alert.alert-danger').removeClass('d-none');
+                        }
+                    }
+                })
+            })
+        })
+
+</script>
+
 @endsection
