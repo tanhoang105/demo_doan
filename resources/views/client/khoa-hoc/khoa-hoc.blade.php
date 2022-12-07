@@ -25,8 +25,8 @@
 
 
 
-                                                                    <!-- Start: Featured Courses Section
-                                                                        ==================================================-->
+                                                                        <!-- Start: Featured Courses Section
+                                                                            ==================================================-->
     <section class="course_cat_section">
         <div class="container">
             <div class="row">
@@ -168,7 +168,7 @@
                             @else
                                 1-6
                             @endif
-                            trong số {{ count($list) }} kết quả
+                            trong số {{ $count_list }} kết quả
                         </div>
                     </div>
                     @endif
@@ -231,7 +231,7 @@
                         ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
                         ->where('khoa_hoc.id_danh_muc', '=', $id_danhmuc)
                         ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
-                        ->get();
+                        ->paginate(6);
                     ?>
                     @foreach ($loc_danhmuc as $value)
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -268,6 +268,11 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                            {{ $loc_danhmuc->appends('params')->links() }}
+                        </div>
+                    </div>
                     @endif
                     <!-- /. col-lg-4 col-md-6 col-sm-12-->
                 </div>
@@ -289,7 +294,7 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-                                                                        ==================================================-->
+                                                                            ==================================================-->
 @endsection
 @section('js')
     <script>

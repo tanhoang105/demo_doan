@@ -74,7 +74,7 @@
                                     <input type="text" hidden value="{{ $value->id }}" name="id_danhmuc"
                                         id="">
                                     <button
-                                        style="background: transparent;border: 0"><a>{{ $value->ten_danh_muc }}</a></button>
+                                        style="background: transparent;border: 0"><a style="text-align: left">{{ $value->ten_danh_muc }}</a></button>
                                 </form>
                             </li>
                         @endforeach

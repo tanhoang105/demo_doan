@@ -8,6 +8,7 @@ use App\Mail\Senmail2;
 use App\Models\DangKy;
 use App\Models\DoiLopKhoa;
 use App\Models\GhiNo;
+use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
 use Illuminate\Http\Request;
@@ -180,9 +181,11 @@ class DoiLopKhoaController extends Controller
     {
         // dd($request->all());
         $attribute = Lop::find($request->id_lop_moi);
+        $giangvien = GiangVien::find($attribute->id_giang_vien);
         $ghe_trong = $attribute->so_luong;
-        // dd($ghe_trong);
-        return response()->json($ghe_trong);
+
+        // dd($giangvien);
+        return response()->json(['success' => true, 'ghe_trong' => $ghe_trong, 'giangvien' => $giangvien->ten_giang_vien]);
     }
     public function store(Request $request)
     {
