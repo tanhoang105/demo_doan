@@ -105,16 +105,25 @@ class GiangVien extends Model
         return $query;
     }
 
-    public function remoAll($params){
+    public function remoAll($params)
+    {
         // dd($params['id']['id']);
         $data = [
             'delete_at' => 0
         ];
-        $query = DB::table($this->table) 
-                ->whereIn('id_user', $params['cols']['id']);
+        $query = DB::table($this->table)
+            ->whereIn('id_user', $params['cols']['id']);
         // dd($query);
         $query = $query->update($data);
         return $query;
+    }
 
+    public function SearchGVWithIdUser($id_user)
+    {
+        $query = DB::table($this->table)
+            ->where('delete_at', 1)
+            ->where('id_user', $id_user)
+            ->first();
+        return $query;
     }
 }

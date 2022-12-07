@@ -65,7 +65,7 @@ Route::get('IPN', [\App\Http\Controllers\Client\ThanhToanController::class, 'IPN
 Route::get('payment', [\App\Http\Controllers\Client\ThanhToanController::class, 'payment'])->name('getPayment');
 Route::post('vnp_payment/{id}', [\App\Http\Controllers\Client\ThanhToanController::class, 'vnpPayment'])->name('payment');
 Route::get('lich-su-dang-ky/{id}', [\App\Http\Controllers\Client\DangKyController::class, 'lichsuDangKy'])->name('client_lich_su_dang_ky');
-Route::post('huy_dang_ky/{id}',[ClientDangKyController::class,'huyDangKy'])->name('huy_dang_ky');
+Route::post('huy_dang_ky/{id}', [ClientDangKyController::class, 'huyDangKy'])->name('huy_dang_ky');
 Route::get('IPN', [\App\Http\Controllers\Client\ThanhToanController::class, 'IPN'])->name('complete_pay');
 Route::get('vnp-return', [\App\Http\Controllers\Client\ThanhToanController::class, 'resultPay'])->name('result_pay');
 
@@ -105,7 +105,6 @@ Route::prefix('/admin')->group(function () {
         Route::get('/quan_ly_tk_ghi_no', [GhiNoController::class, 'quan_ly_tk_ghi_no'])->name('quan_ly_tk_ghi_no');
         Route::put('/cap_nhat_so_du/{id}', [GhiNoController::class, 'cap_nhat_so_du'])->name('cap_nhat_so_du');
     });
-
     Route::prefix('/doi-lop')->name('route_BE_Admin_')->group(function () {
         Route::get('/list', [DoiLopKhoaController::class, 'index'])->name('danh_sach_doi_lop');
         Route::post('hienthidoilop/{id}', [DoiLopKhoaController::class, 'hienthidoilop'])->name('hienthidoilop');
@@ -306,10 +305,10 @@ Route::prefix('/admin')->group(function () {
         Route::get('/xoa/{id}', [KhuyenMaiController::class, 'destroy'])->name('Xoa_Khuyen_Mai');
         Route::get('/edit/{id}', [KhuyenMaiController::class, 'edit'])->name('Edit_Khuyen_Mai');
         Route::post('/update/{id}', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');
-        Route::get('add',[KhuyenMaiController::class,'create'])->name('create');
+        Route::get('add', [KhuyenMaiController::class, 'create'])->name('create');
         Route::post('add', [KhuyenMaiController::class, 'store'])->name('store');
         Route::get('get-form', [KhuyenMaiController::class, 'get_coupon_form'])->name('Coupon_Form');
-        Route::get('get-form-edit',[KhuyenMaiController::class,'get_coupon_form_edit'])->name('Khuyen_mai_form_edit');
+        Route::get('get-form-edit', [KhuyenMaiController::class, 'get_coupon_form_edit'])->name('Khuyen_mai_form_edit');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
     });
 
@@ -375,6 +374,3 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
 // 	event(new App\Events\StatusLiked('Someone'));
 // 	return "Event has been sent!";
 // });
-
-
-
