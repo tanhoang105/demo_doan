@@ -164,7 +164,7 @@ class LopController extends Controller
             foreach ($period as $key => $date_row) {
 
                 if ($start % 7 == 0) {
-                    $calendarStr .= '</tr><tr>';
+                    $calendarStr .= '</div><div class="row" style="height: 100px;">';
                 }
                 $css = '';
                 $tenca = '';
@@ -182,7 +182,7 @@ class LopController extends Controller
                     if ($dayofweek  ==  $arrayMaThu[$i]->ma_thu) {
 
                         // $flag[] = $date_row->format('Y-m-d');
-                        $css =  'style="color: red;     padding-top: 19px;"';
+                        $css =  'style="color: red;"';
                         $tenca = $ca->ca_hoc;
                         $th_start = ' ( ' . $ca->thoi_gian_bat_dau . ' -- ';
                         $th_end = $ca->thoi_gian_ket_thuc . ' ) ';
@@ -194,7 +194,8 @@ class LopController extends Controller
                     }
                 }
 
-                $calendarStr .= '<td stule="width:15%" class="date" ' . $css . ' >' . $date_row->format('d') . "<br>" . '<span>' . $tenca . '</span>' .  '<span>' . $th_start . '</span>' . '<span>' . $th_end   . '</span>' . '</td>';
+                $calendarStr .= '<div stule="width:15%" class="col date border"' . $css . ' >
+                    <div class="p-2">' . $date_row->format('d') . "<br>" . '<span>' . $tenca . '</span>' .  '<span>' . $th_start . '</span>' . '<span>' . $th_end   . '</span>' . '</div></div>';
 
 
                 $start++;
@@ -206,7 +207,7 @@ class LopController extends Controller
             } else {
                 for ($i = 0; $i <= 6; $i++) {
                     if ($start % 7 != 0)
-                        $calendarStr .= '<td class="empty_dates"></td>';
+                        $calendarStr .= '<div class="col empty_dates border" style="background: #b8bdc2;"></div>';
                     else
                         break;
                     $start++;
@@ -225,9 +226,9 @@ class LopController extends Controller
                 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
             );
 
-            $calendarStr .= '<table class="table table-border" >';
+            $calendarStr .= '<div class="calendar border" style="font-weight: 600;">';
 
-            $calendarStr .= '<tr><th class="week-days">' . implode('</th><th class="week-days">', $weekDays) . '</th></tr>';
+            $calendarStr .= '<div class="row bg-primary" ><div class="col week-days border" >' . implode('</div><div class="col week-days border">', $weekDays) . '</div></div>';
 
 
             $period = new DatePeriod(
@@ -239,9 +240,9 @@ class LopController extends Controller
             $currentDay = array_search(date('D', $startTime), $weekDays);
             $start = 0;
 
-            $calendarStr .= '<tr>';
+            $calendarStr .= '<div class="row" style="height: 100px;">';
             for ($i = $start; $i < $currentDay; $i++) {
-                $calendarStr .= '<td class="empty date"></td>';
+                $calendarStr .= '<div class="col empty date border" style="background: #b8bdc2;"></div>';
                 $start++;
             }
 
@@ -251,7 +252,7 @@ class LopController extends Controller
                 $calendarStr .= createDatesTable($period, $start);
             }
             // dd($calendarStr);
-            $calendarStr .= '</table>';
+            $calendarStr .= '</div></div>';
 
             return $calendarStr;
         }

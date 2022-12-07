@@ -21,7 +21,10 @@
             <strong>{{ Session::get('success') }}</strong>
         </div>
     @endif
-    <div>
+
+    <div class="show-calendar">
           {!! $lich  !!}
     </div>
+
+    <div class="w-100" style="height: 70px"></div>
 @endsection

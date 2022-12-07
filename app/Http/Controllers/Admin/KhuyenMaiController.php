@@ -334,7 +334,6 @@ class KhuyenMaiController extends Controller
                     ['id_user', Auth::user()->id],
                     ['khuyen_mai_id', $km->id]
                 ])->first();
-
                 if(empty($checkUsed)) {
                     if($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
