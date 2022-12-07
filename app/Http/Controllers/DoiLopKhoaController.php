@@ -184,7 +184,7 @@ class DoiLopKhoaController extends Controller
         $giangvien = GiangVien::find($attribute->id_giang_vien);
         $ghe_trong = $attribute->so_luong;
 
-        // dd($giangvien);
+        // dd($giangvien->ten_giang_vien);
         return response()->json(['success' => true, 'ghe_trong' => $ghe_trong, 'giangvien' => $giangvien->ten_giang_vien]);
     }
     public function store(Request $request)

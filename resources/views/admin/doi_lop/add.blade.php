@@ -79,7 +79,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
-                        <select class="form-control" name="id_lop_moi" data-url="{{ route('siso_doilop') }}" id="id_lop">
+                    <select class="form-control" name="id_lop_moi" data-url="{{ route('siso_doilop') }}" id="id_lop">
                         <option>--Chọn Lớp--</option>
                     </select>
                 </div>
@@ -139,8 +139,9 @@
                                 },
                                 success: function(res) {
                                     console.log(res)
-                                    let so_luong = res;
-                                    $('#so_luong').val(res)
+                                    let so_luong = res.ghe_trong;
+                                    console.log(so_luong);
+                                    $('#so_luong').val(so_luong)
                                 }
                             })
                         })
