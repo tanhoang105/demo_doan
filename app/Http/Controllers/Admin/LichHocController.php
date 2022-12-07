@@ -180,11 +180,17 @@ class LichHocController extends Controller
             $res = $this->lich->saveupdate($params);
             // dd($res);
             if ($res > 0) {
-                Session::flash('success', "Update  thành công");
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Cập nhật thành công'
+                ]);
             } else {
-                Session::flash('error', "Update không thành công");
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Cập nhật không thành công'
+                ]);
             }
-            return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
+            // return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
        
     }
 
