@@ -94,6 +94,7 @@ Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
 // hiển thị khóa theo lớp
 Route::get('listLop', [DangKyController::class, 'listDangKy'])->name('admin_dang_ky');
+Route::get('addTienTo', [LopController::class, 'getTienTo'])->name('admin_lay_tien_to');
 Route::get('siso_doilop', [DoiLopKhoaController::class, 'siso_doilop'])->name('siso_doilop');
 
 Route::prefix('/admin')->group(function () {

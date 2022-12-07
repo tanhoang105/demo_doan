@@ -379,7 +379,12 @@ class LopController extends Controller
             $params['cols'] = array_map(function ($item) {
                 return $item;
             }, $request->all());
-            unset($params['_token']);
+            unset($params['cols']['_token']);
+            if (count(($params['cols'])) <= 0) {
+                // dd(123);
+                Session::flash('error , "Xóa không thành công');
+                return back();
+            }
             $res = $this->lophoc->remoAll($params);
             // dd($res);
 
@@ -412,7 +417,12 @@ class LopController extends Controller
         }
     }
 
-
+    public function getTienTo(Request $request) {
+        $objKhoaHoc=new KhoaHoc();
+        $khoaHoc=$objKhoaHoc->show($request->id_khoa_hoc);
+        // $so_luong=$objKhoaHoc->show($request->so_luong);
+        return response()->json($khoaHoc->tien_to);
+    }
 
 
 

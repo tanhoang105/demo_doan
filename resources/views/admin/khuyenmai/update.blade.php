@@ -28,9 +28,9 @@
                     <div class="form-group row">
                         <label class="col-lg-3 col-from-label" for="name">Loại mã giảm giá</label>
                         <div class="col-lg-9">
-                            <select name="coupon_type" id="coupon_type" class="form-control aiz-selectpicker" onchange="coupon_form()" required>
+                            <select name="loai_khuyen_mai" id="coupon_type" class="form-control aiz-selectpicker" onchange="coupon_form()" required>
                                 @if ($coupon->loai_khuyen_mai == 1)
-                                <option value="1" selected>Đối với khóa học</option>
+                                    <option value="1" selected>Đối với khóa học</option>
                                 @elseif ($coupon->loai_khuyen_mai == 2)
                                     <option value="2">Đối với tất cả khóa học</option>
                                 @endif
@@ -39,6 +39,7 @@
                     </div>
 
                     <div id="coupon_form">
+
 
                     </div>
                     <div class="form-group mb-0 text-right">

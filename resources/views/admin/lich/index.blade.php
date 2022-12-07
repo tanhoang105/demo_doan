@@ -104,13 +104,7 @@
         </div>
     @endif --}}
 
-    <div class="alert alert-danger alert-dismissible d-none" role="alert">
-        <strong>Cập nhật thất bại</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
-    </div>
+   
     {{-- hiển thị message đc gắn ở session::flash('success') --}}
 {{-- 
     @if (Session::has('success'))
@@ -123,12 +117,8 @@
         </div>
     @endif --}}
 
-    <div class="alert alert-success alert-dismissible d-none" role="alert">
-        <strong>Cập nhật thành công</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-        </button>
+    <div class="alert-msg">
+        
     </div>
     {{-- <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Lich_Hoc') }}" enctype="multipart/form-data">
 
@@ -299,22 +289,35 @@
                 let key =  $(this).data('key');
                 let data = $('.form_'+key).serialize();
                 let url = $(this).data('url');
-                
+            
                 $.ajax({
                     type: 'POST',
                     url: url,
                     data: data,
                     success: function(res) {
                         if(res.success) {
-                            $('.alert.alert-danger').addClass('d-none');
-                            $('.alert.alert-success').removeClass('d-none');
+                            let html = showAlert('success',res.msg)
+                            $('.alert-msg').html(html)
                         }else{
-                            $('.alert.alert-success').addClass('d-none');
-                            $('.alert.alert-danger').removeClass('d-none');
+                            let html = showAlert('danger',res.msg)
+                            $('.alert-msg').html(html)
                         }
+                    },
+                    error: function(err) {
+                        $('.alert-msg').html()
                     }
                 })
             })
+
+            function showAlert(status,msg) { 
+                return `<div class="alert alert-${status} alert-dismissible" role="alert">
+                            <strong>${msg}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                        </div>`
+             }
         })
 
 </script>

@@ -165,7 +165,7 @@
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id_lop }}" /></td>
+                        <td><input {{$item->so_luong < 40 ? 'hidden' : 'value=' . $item->id_lop}}  class="checkitem" type="checkbox" name="id[]"  /></td>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ $item->ten_lop }}</td>

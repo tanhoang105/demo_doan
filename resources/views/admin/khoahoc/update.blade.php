@@ -53,6 +53,17 @@
                             <span style="color: red"> {{ $message }} </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="chuyenBay" class="form-label">Tiền tố<span class="text-danger">*</span></label>
+                        <input value="{{ old('tien_to') ?? request()->tien_to ?? $khoahoc->tien_to }}" type="text" name="tien_to"
+                            class="form-control" id="" aria-describedby="emailHelp">
+                        {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
+                        @error('tien_to')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+                    </div>
+
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô Tả</label>

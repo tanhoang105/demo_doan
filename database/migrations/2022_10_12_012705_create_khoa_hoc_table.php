@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ten_khoa_hoc');
             $table->integer('gia_khoa_hoc');
             $table->string('mo_ta')->nullable();
+            $table->string('tien_to')->nullable();
             $table->string('hinh_anh')->nullable();
             $table->integer('luot_xem')->nullable();
             $table->integer('trang_thai')->default(1);

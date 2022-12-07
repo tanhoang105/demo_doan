@@ -97,11 +97,10 @@ class KhuyenMaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $coupon = KhuyenMai::findOrFail($id);
-        $coupon2 = $this->khuyenMaiData($request, $coupon);
+        $coupon = $this->khuyenMaiData($request, $coupon);
         // dd($coupon);
-        $coupon2->save();
+        $coupon->save();
         Session::flash('success', "Sửa thành công");
         return redirect()->route('route_BE_Admin_Khuyen_Mai');
     }
@@ -139,7 +138,12 @@ class KhuyenMaiController extends Controller
             $params['cols'] = array_map(function ($item) {
                 return $item;
             }, $request->all());
-            unset($params['_token']);
+            unset($params['cols']['_token']);
+            if (count(($params['cols'])) <= 0) {
+                // dd(123);
+                Session::flash('error , "Xóa không thành công');
+                return back();
+            }
             $res = $this->khuyenmai->remoAll($params);
             // dd($res);
 
@@ -170,7 +174,6 @@ class KhuyenMaiController extends Controller
                 // array_push($cupon_details, $data);
             }
             $coupon->chi_tiet_khoa = json_encode($cupon_details);
-            // dd(json_encode($cupon_details));
 
         } elseif ($request->loai_khuyen_mai == 2) {
             $coupon->loai_khuyen_mai = $request->loai_khuyen_mai;

@@ -23,7 +23,7 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Tên Lớp <span class="text-danger">*</span></label>
                     <input id="tenLop1" value="{{ old('ten_lop') ?? request()->ten_lop }}" type="text" name="ten_lop"
-                        class="form-control" id="" aria-describedby="emailHelp">
+                        class="form-control"  aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('ten_lop')
                         <span style="color: red"> {{ $message }} </span>
@@ -37,7 +37,6 @@
                         @foreach ($cathu as $item)
                             <option value="{{ $item->id }}">
 
-
                                 @foreach ($cahoc as $itemCa)
                                     {{-- {{$itemCa->ca_hoc}} --}}
                                     @if ($item->ca_id == $itemCa->id)
@@ -46,8 +45,6 @@
                                         {{ '' }}
                                     @endif
                                 @endforeach
-
-
 
                                 <?php
                                 
@@ -81,7 +78,7 @@
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học <span class="text-danger">*</span></label>
-                    <select class="form-control" name="id_khoa_hoc" id="khoaHoc">
+                    <select class="form-control" name="id_khoa_hoc" id="khoaHoc" data-url='{{route('admin_lay_tien_to')}}'>
                         <option value="0">--- Chọn khóa học ---</option>
                         @foreach ($khoahoc as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
@@ -149,6 +146,30 @@
     </form>
 @endsection
 
+@section('js')
+    <script>
+        $(document).ready(function() {
 
+            $(document).on('change', '#khoaHoc', function (event) {
+                const url = $(this).data('url')
+                const data = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        id_khoa_hoc: data
+                    },
+                    success: function (res) {
+                        let today = new Date();
+                        let dd = today.getDate();
+                        let mm = today.getMonth() + 1;
+                        let yyyy = today.getFullYear();
+                       $('#tenLop1').val(res + dd + mm + yyyy);
+                    }
+                })
+            })
+        })
+    </script>
+@endsection
 
 

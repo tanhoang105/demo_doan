@@ -89,7 +89,7 @@
                         <td>
                             @if ($item->vai_tro_id != 1)
                                 <input
-                                    {{ in_array($item->id, $arrayIdGiangVienCuaLop) == true ? '' : 'value=' . $item->id }}
+                                    {{ in_array($item->id, $arrayIdGiangVienCuaLop) == true ? 'hidden' : 'value=' . $item->id }}
                                     class="checkitem" type="checkbox" name="id[]" />
                         </td>
                 @endif
