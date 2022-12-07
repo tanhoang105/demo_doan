@@ -31,10 +31,12 @@ class KhoaHocController extends Controller
             ->paginate(6);
         // dd($list);
         $danhmuc = DanhMuc::all();
-        $loc_danhmuc = KhoaHoc::select('khoa_hoc.*', 'danh_muc.ten_danh_muc')->where('khoa_hoc.id_danh_muc', '=', $request->id_danh_muc)
+        $loc_danhmuc = KhoaHoc::select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
+            ->where('khoa_hoc.id_danh_muc', '=', $request->id_danh_muc)
             ->join('danh_muc', 'khoa_hoc.id_danh_muc', '=', 'danh_muc.id')
-            ->get();
-        return view('client.khoa-hoc.khoa-hoc', compact('list', 'danhmuc', 'loc_danhmuc', 'id_danhmuc'));
+            ->paginate(6);
+        $count_list = KhoaHoc::all()->count();
+        return view('client.khoa-hoc.khoa-hoc', compact('list', 'danhmuc', 'loc_danhmuc', 'id_danhmuc', 'count_list'));
     }
     public function chiTietKhoaHoc($id)
     {
@@ -47,7 +49,7 @@ class KhoaHocController extends Controller
             ->where('lop.id_khoa_hoc', '=', $id)
             // ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
             ->join('giang_vien', 'lop.id_giang_vien', '=', 'giang_vien.id_user')
-            ->join('xep_lop','lop.id','=','xep_lop.id_lop')
+            ->join('xep_lop', 'lop.id', '=', 'xep_lop.id_lop')
             ->where('lop.so_luong', '>', 0)
             ->get();
         // dd($lop);

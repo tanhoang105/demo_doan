@@ -38,10 +38,15 @@
                         @endforeach
                     </select>
                 </div>
-                {{-- <div class="col-lg-12 font-weight-bold pt-2">
+                <div class="col-lg-12 font-weight-bold pt-2">
                     <label class="">Ghế trống</label>
                     <input disabled class="form-control" name="so_luong" id="so_luong" type="text">
-                </div> --}}
+                </div>
+
+                <div class="col-lg-12 font-weight-bold pt-2">
+                    <label class="">Giảng viên</label>
+                    <input disabled class="form-control" name="" id="giang_vien" name="giang_vien" type="text">
+                </div>
 
                 <div class="col-lg-12 font-weight-bold pt-2">
                     <label class="">Lý do</label>
@@ -60,6 +65,7 @@
     </div>
 @endsection
 @section('js')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             $(document).on('change', '#id_lop_moi', function(event) {
@@ -75,8 +81,13 @@
                     },
                     success: function(res) {
                         console.log(res)
-                        let so_luong = res;
-                        $('#so_luong').val(res)
+                        let so_luong = res.ghe_trong;
+                        let giang_vien = res.giangvien;
+                        console.log(so_luong);
+                        console.log(giang_vien);
+                        $('#so_luong').val(so_luong)
+                        $('#giang_vien').val(giang_vien)
+
                     }
                 })
 
