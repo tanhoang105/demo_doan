@@ -417,7 +417,12 @@ class LopController extends Controller
         }
     }
 
-
+    public function getTienTo(Request $request) {
+        $objKhoaHoc=new KhoaHoc();
+        $khoaHoc=$objKhoaHoc->show($request->id_khoa_hoc);
+        // $so_luong=$objKhoaHoc->show($request->so_luong);
+        return response()->json($khoaHoc->tien_to);
+    }
 
 
 

@@ -22,7 +22,7 @@
             <div class="col-lg-9">
                 <select name="khoa_hoc_ids[]" class="form-control chosen-select aiz-selectpicker" data-live-search="true" data-selected-text-format="count" required multiple>
                     @foreach($khoaHocs as $khoaHoc)
-                        <option value="{{$khoaHoc->id}}">{{ $khoaHoc->ten_khoa_hoc }}</option>
+                        <option value="{{$khoaHoc->id}}" {{in_array($khoaHoc->id,json_decode($coupon->chi_tiet_khoa)) ? 'selected' : ''}}>{{$khoaHoc->ten_khoa_hoc}}</option>
                     @endforeach
                 </select>
             </div>
@@ -62,6 +62,8 @@
 
     $(document).ready(function(){
         $(".chosen-select").chosen();
+        // $('.chosen-select').trigger('chosen:update');
+        
     });
 
 </script>

@@ -32,13 +32,17 @@ class KhuyenmaiRequest extends FormRequest
                 switch ($ActionCurrent) {
                         // nếu là method thêm mới bản ghi
                     case 'store':
+                        // dd($request->all());
+                        if($request->loai_giam_gia == 2) {
+                            $rules['loai_giam_gia'] = 'max:100';
+                        }
                         $rules = [
-                            'ma_khuyen_mai' => 'required|unique:khuyen_mai,ma_khuyen_mai',
-                            // 'mo_ta' => 'required | min:20 |',
-                            'loai_khuyen_mai' => 'required',
-                            'giam_gia' => 'required | integer | max:100',
-                            'ngay_bat_dau' => 'required | after:now',
-                            'ngay_ket_thuc' => 'required | after:ngay_bat_dau'
+                            'ma_khuyen_mai' => '|unique:khuyen_mai,ma_khuyen_mai',
+                            // 'mo_ta' => ' | min:20 |',
+                            'loai_khuyen_mai' => '',
+                            // 'giam_gia' => 'max:100': '',
+                            'ngay_bat_dau' => '  after:now',
+                            // 'ngay_ket_thuc' => '  after:ngay_bat_dau'
                         ];
                         break;
 
@@ -50,7 +54,7 @@ class KhuyenmaiRequest extends FormRequest
                             // 'mo_ta' => 'required | min:20 |',
                             'ma_khuyen_mai' => 'required|min:3|max:30|unique:khuyen_mai,ma_khuyen_mai,'.$id,
                             'loai_khuyen_mai' => 'required',
-                            'giam_gia' => 'required | integer | max:100',
+                            'giam_gia' => 'required | max:100',
                             'ngay_bat_dau' => 'required | after:today',
                             'ngay_ket_thuc' => 'required | after:ngay_bat_dau',
                         ];
