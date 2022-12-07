@@ -132,6 +132,8 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
 ========================================-->
     <script src="{{asset('client/js/main.js')}}"></script>
     @yield('js')
+
+   
 </body>
 
 

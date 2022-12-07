@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Mail;
 
 class DoiLopKhoaController extends Controller
 {
+    protected $giangvien;
+    public function __construct()
+    {
+        $this->giangvien = new GiangVien();
+    }
+
     public function index(Request $request)
     {
         $status = $request->trang_thai;
@@ -181,11 +187,14 @@ class DoiLopKhoaController extends Controller
     {
         // dd($request->all());
         $attribute = Lop::find($request->id_lop_moi);
-        $giangvien = GiangVien::find($attribute->id_giang_vien);
+        
+        $giangvien = $this->giangvien->SearchGVWithIdUser($attribute->id_giang_vien);
+        $giangvien = $giangvien->ten_giang_vien;
         $ghe_trong = $attribute->so_luong;
 
-        // dd($giangvien->ten_giang_vien);
-        return response()->json(['success' => true, 'ghe_trong' => $ghe_trong, 'giangvien' => $giangvien->ten_giang_vien]);
+        // dd( $attribute);
+        // 'giangvien' => $giangvien->ten_giang_vien
+        return response()->json(['success' => true, 'ghe_trong' => $ghe_trong , 'giangvien' => $giangvien ]);
     }
     public function store(Request $request)
     {

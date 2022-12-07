@@ -69,7 +69,7 @@
     <script>
         $(document).ready(function() {
             $(document).on('change', '#id_lop_moi', function(event) {
-                console.log(1)
+                console.log(1, 22)
                 const url = $(this).data('url')
                 const data = $(this).val();
                 console.log(url, data);
@@ -80,7 +80,7 @@
                         id_lop_moi: data
                     },
                     success: function(res) {
-                        console.log(res)
+                        console.log(res, 1122)
                         let so_luong = res.ghe_trong;
                         let giang_vien = res.giangvien;
                         console.log(so_luong);
