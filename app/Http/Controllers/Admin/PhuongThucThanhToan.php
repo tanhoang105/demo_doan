@@ -175,7 +175,12 @@ class PhuongThucThanhToan extends Controller
             $params['cols'] = array_map(function($item){
                 return $item;
             } , $request->all());
-            unset($params['_token']);
+            unset($params['cols']['_token']);
+            if (count(($params['cols'])) <= 0) {
+                // dd(123);
+                Session::flash('error , "Xóa không thành công');
+                return back();
+            }
             $res = $this->phuong_thuc_thanh_toan->remoAll($params);
             // dd($res);
 

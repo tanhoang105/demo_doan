@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Session;
 class CaThuController extends Controller
 {
 
-    protected $v,  $cahoc, $thu, $cathu;
+    protected $v,  $cahoc, $thu, $cathu  , $lop;
     public function __construct()
     {
         $this->v = [];
         $this->cahoc  = new CaHoc();
         $this->thu = new ThuHoc();
         $this->cathu = new CaThu();
+        $this->lop = new Lop();
     }
     /**
      * Display a listing of the resource.
@@ -40,6 +41,18 @@ class CaThuController extends Controller
         $this->v['thu'] = $this->thu->index(null, false, null);
         $this->v['list'] = $this->cathu->index($this->v['params'], true, 10);
 
+
+        // lọc những id trong bảng ca_thu có trong bảng lớp học 
+        $listLop = $this->lop->index(null, false , null);
+        $arrayidCaThu = [];
+        // dd($listLop);
+        foreach($listLop as  $item){
+            $arrayidCaThu[] = $item->ca_thu_id ;
+        }
+        $arrayidCaThu = array_unique($arrayidCaThu);
+        // dd($arrayidCaThu);
+        $this->v['arrayidCaThu']  = $arrayidCaThu;
+        /// end lọc
 
 
         return view('admin.lichhoc.index', $this->v);
@@ -354,6 +367,12 @@ class CaThuController extends Controller
                 return $item;
             }, $request->all());
             unset($params['cols']['_token']);
+        
+            if (count(($params['cols'])) <= 0) {
+                // dd(123);
+                Session::flash('error , "Xóa không thành công');
+                return back();
+            }
             $res = $this->cathu->remoAll($params);
 
 
