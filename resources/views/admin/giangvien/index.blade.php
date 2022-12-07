@@ -58,7 +58,7 @@
                 @foreach ($list as $key => $item)
                     <tr>
                         {{-- value="{{ $item->id_user }}" --}}
-                        <td><input {{in_array($item->id_user , $arrayIdGiangVienCuaLop) == true ? '' : 'value=' . $item->id_user }} class="checkitem" type="checkbox" name="id[]" /></td>
+                        <td><input {{in_array($item->id_user , $arrayIdGiangVienCuaLop) == true ? 'hidden' : 'value=' . $item->id_user }} class="checkitem" type="checkbox" name="id[]" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_giang_vien }}</td>
                         <td>

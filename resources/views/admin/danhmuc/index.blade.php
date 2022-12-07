@@ -52,7 +52,7 @@
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input {{ in_array($item->id, $arrayIdDanhMuc) ? '' : 'value=' . $item->id }} class="checkitem" type="checkbox" name="id[]"  /></td>
+                        <td><input {{ in_array($item->id, $arrayIdDanhMuc) ? 'hidden' : 'value=' . $item->id }} class="checkitem" type="checkbox" name="id[]"  /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_danh_muc }}</td>
                         <td>
