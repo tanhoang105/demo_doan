@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CaHocRequest;
 use App\Models\CaHoc;
+use App\Models\CaThu;
+use App\Models\Lop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -12,11 +14,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class CaHocController extends Controller
 {
     protected $v = [];
-    protected $cahoc;
+    protected $cahoc , $lop;
     public function __construct()
     {
         $this->v = [];
         $this->cahoc = new CaHoc();
+        $this->lop = new Lop();
     }
     /**
      * Display a listing of the resource.
@@ -26,6 +29,30 @@ class CaHocController extends Controller
     public function index(Request $request)
     {
         $this->authorize(mb_strtoupper('xem ca học') );
+        // dd(12);
+
+        // lọc 
+
+        $listLop = $this->lop->index(null, false , null);
+        $arrayidCaThu = [];
+        // dd($listLop);
+        foreach($listLop as  $item){
+            $arrayidCaThu[] = $item->ca_thu_id ;
+        }
+        $arrayidCaThu = array_unique($arrayidCaThu);
+        // dd($arrayidCaThu);
+        $arrayCaThu = CaThu::whereIn('id' , $arrayidCaThu )->get();
+        // dd($arrayCaThu);
+        $arrayIdCa = [];
+        foreach($arrayCaThu  as $item){
+            $arrayIdCa[] = $item->ca_id;
+        }
+         $arrayIdCa = array_unique($arrayIdCa);
+
+        // dd($arrayIdCa);
+        $this->v['arrayIDCa'] = $arrayIdCa;
+
+        // end lọc
         $this->v['params'] = $request->all();
         $this->v['list']  = $this->cahoc->index($this->v['params'], true, 5);
 
@@ -184,17 +211,25 @@ class CaHocController extends Controller
             $params['cols'] = array_map(function($item){
                 return $item;
             } , $request->all());
-            unset($params['_token']);
-            $res = $this->cahoc->remoAll($params);
-            // dd($res);
-
-            if($res > 0){
-                Session::flash('success , "Xóa thành công');
-                return back();
+            unset($params['cols']['_token']);
+            if (count(($params['cols'])) <= 0) {
+                // dd(123);
+                Session::flash('error , "Xóa không thành công');
+                // return back();
             }else {
-                Session::flash('error , "Xóa thành công');
-                return back();
+
+                $res = $this->cahoc->remoAll($params);
+                // dd($res);
+    
+                if($res > 0){
+                    Session::flash('success , "Xóa thành công');
+                    // return back();
+                }else {
+                    Session::flash('error , "Xóa thành công');
+                    // return back();
+                }
             }
+            return back();
           
         }
     }
