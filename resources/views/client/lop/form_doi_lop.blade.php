@@ -19,12 +19,21 @@
 
                 <div class="col-lg-12 font-weight-bold pt-2">
                     <label class="">Lớp học mới</label>
-                    <select class="form-control" name="id_lop_moi">
+                    <select class="form-control" data-url="{{ route('siso_doilop') }}" id="id_lop_moi" name="id_lop_moi">
                         <option value="">----- Chọn lớp mới muốn đổi ------</option>
                         @foreach ($lop_moi as $value )
                         <option value="{{$value->id}}">{{$value->ten_lop}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="col-lg-12 font-weight-bold pt-2">
+                    <label class="">Ghế trống</label>
+                    <input disabled class="form-control" name="so_luong" id="so_luong" type="text">
+                </div>
+
+                <div class="col-lg-12 font-weight-bold pt-2">
+                    <label class="">Giảng viên</label>
+                    <input disabled class="form-control" name="" id="giang_vien" name="giang_vien" type="text">
                 </div>
 
                 <div class="col-lg-12 font-weight-bold pt-2">
@@ -41,4 +50,35 @@
 
         </form>
     </div>
+@endsection
+@section('js')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#id_lop_moi', function(event) {
+                console.log(1, 22)
+                const url = $(this).data('url')
+                const data = $(this).val();
+                console.log(url, data);
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: {
+                        id_lop_moi: data
+                    },
+                    success: function(res) {
+                        console.log(res, 1122)
+                        let so_luong = res.ghe_trong;
+                        let giang_vien = res.giangvien;
+                        console.log(so_luong);
+                        console.log(giang_vien);
+                        $('#so_luong').val(so_luong)
+                        $('#giang_vien').val(giang_vien)
+
+                    }
+                })
+
+            })
+        })
+    </script>
 @endsection
