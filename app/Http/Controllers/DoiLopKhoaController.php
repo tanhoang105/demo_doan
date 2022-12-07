@@ -187,14 +187,14 @@ class DoiLopKhoaController extends Controller
     {
         // dd($request->all());
         $attribute = Lop::find($request->id_lop_moi);
-        
+
         $giangvien = $this->giangvien->SearchGVWithIdUser($attribute->id_giang_vien);
         $giangvien = $giangvien->ten_giang_vien;
         $ghe_trong = $attribute->so_luong;
 
-        // dd( $attribute);
+        // dd( $attribute); 
         // 'giangvien' => $giangvien->ten_giang_vien
-        return response()->json(['success' => true, 'ghe_trong' => $ghe_trong , 'giangvien' => $giangvien ]);
+        return response()->json(['success' => true, 'ghe_trong' => $ghe_trong, 'giangvien' => $giangvien]);
     }
     public function store(Request $request)
     {
