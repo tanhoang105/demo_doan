@@ -63,7 +63,7 @@
 
 
                         </td>
-                        <td> {{ $item->ngay_thanh_toan }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_thanh_toan)) }}</td>
                         <td> {{ number_format($item->gia, 0, '.', ',') }}</td>
                         {{-- <td>
                             <a class="btn btn-primary" style="color: #fff"

@@ -58,7 +58,7 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td> {{ $item->ten_lop }}</td>
                         <td> {{ $item->ten_giang_vien }}</td>
-                        <td> {{ $item->ngay_dang_ky }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_dang_ky)) }}</td>
                         {{-- <td> {{ $item->ca_hoc }}</td> --}}
                         <td> {{ $item->ten_phong }}</td>
                         <td>

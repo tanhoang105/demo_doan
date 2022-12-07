@@ -59,8 +59,8 @@
                         <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : "Đối với tất cả khóa học" }}</td>
                         <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : "Đối với phần trăm" }}</td>
                         <td> {{  $item->loai_giam_gia == 1 ? number_format($item->giam_gia  , 0, '.' ,'.').' VNĐ' : $item->giam_gia . '%' }}</td>
-                        <td> {{ $item->ngay_bat_dau }}</td>
-                        <td> {{ $item->ngay_ket_thuc }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_bat_dau)) }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_ket_thuc)) }}</td>
                         <td> {!! $item->mo_ta !!}</td>
                         <td>
                                 <a class="btn btn-success" style="color: #fff"

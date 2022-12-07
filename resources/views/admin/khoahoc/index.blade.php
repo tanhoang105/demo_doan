@@ -100,7 +100,7 @@
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ $item->ten_danh_muc }}</td>
-                        <td> {{ number_format($item->gia_khoa_hoc) }} VNĐ</td>
+                        <td> {{ number_format($item->gia_khoa_hoc, 0, '.' ,'.') }} VNĐ</td>
                         <td> <img width="150px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
                         {{-- <td> {!! $item->luot_xem !!}</td> --}}
                         <td>

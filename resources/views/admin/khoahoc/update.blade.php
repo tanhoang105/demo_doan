@@ -63,9 +63,9 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Ảnh</label>
                     <input value="{{ old('hinh_anh') ?? $khoahoc->hinh_anh }}" type="file" name="hinh_anh"
-                    class="form-control" id="" aria-describedby="emailHelp">
+                    class="form-control" id="" onchange="loadFile(event)">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
-                    <img width="200px" src="{{ Storage::url($khoahoc->hinh_anh)}}" alt=""><br>
+                    <img class="pt-3" src="{{ Storage::url($khoahoc->hinh_anh)}}" id="preview" alt="" style="width: 580px;height: 350px;"><br>
                     @error('hinh_anh')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -80,5 +80,13 @@
     <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace('ckeditor3');
+    </script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script>
+        var loadFile = function(event) {;
+            var preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+        }
     </script>
 @endsection
