@@ -59,7 +59,7 @@
                     <tr>
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
-                        <td> {{ $item->ngay_dang_ky }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->ngay_dang_ky)) }}</td>
                         <td> {{ $item->ten_hoc_vien }}</td>
                         <td> {{ $item->ten_lop }}</td>
                         <td> {{ $item->ten_khoa_hoc }}</td>

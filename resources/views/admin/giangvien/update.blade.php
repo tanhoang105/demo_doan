@@ -98,7 +98,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Mô Tả</label>
-                    <textarea id="ckeditor2" class="form-control" name="mo_ta" value="{{ old('mo_ta') ?? request()->mo_ta ?? $res->mo_ta }}" id=""></textarea>
+                    <textarea id="ckeditor2" class="form-control" name="mo_ta" value="{{ old('mo_ta') ?? request()->mo_ta ?? $res->mo_ta }}" id="">{{ $res->mo_ta}}</textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
