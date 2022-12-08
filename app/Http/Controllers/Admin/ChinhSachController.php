@@ -95,9 +95,20 @@ class ChinhSachController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id , Request $request)
     {
-        //
+        if ($id) {
+            // dd($id);
+            $this->v['params'] = $request->all();
+            $request->session()->put('id', $id);
+            $result = $this->chinh_sach->show($id);
+            $this->v['res'] = $result;
+            return view('admin.chinhsach.update', $this->v);
+        } else {
+            // nếu không tìm thấy id của bản ghi
+            Session::flash('error', 'Lỗi');
+            return back();
+        }
     }
 
     /**
@@ -107,9 +118,30 @@ class ChinhSachController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id  = session('id');
+        $params = [];
+        $params['cols'] = array_map(function ($item) {
+            if ($item == '') {
+                $item  = null;
+            }
+            if (is_string($item)) {
+                $item = $item;
+            }
+
+            return $item;
+        }, $request->post());
+        unset($params['cols']['_token']);
+        $params['cols']['id'] = $id;
+        $res  = $this->chinh_sach->saveupdate($params);
+        if ($res > 0) {
+            Session::flash('success', 'Cập nhập thành công');
+            return redirect()->route('route_BE_Admin_List_Chinh_Sach');
+        } else {
+            Session::flash('error', 'Cập nhập không thành công');
+            return back();
+        }
     }
 
     /**
@@ -120,6 +152,14 @@ class ChinhSachController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = $this->chinh_sach->remove($id);
+        if ($res > 0) {
+            $this->chinh_sach->remove(null, $id);
+            Session::flash('success', "Xóa thành công");
+            return back();
+        } else {
+            Session::flash('error', 'Xóa không thành công');
+            return back();
+        }
     }
 }

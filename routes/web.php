@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ThuHocController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\QuenMatKhauController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\Client\ChinhSachController as ClientChinhSachController;
 use App\Http\Controllers\Client\DangKyController as ClientDangKyController;
 use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Controllers\GhiNoController;
@@ -89,6 +90,8 @@ Route::get('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController
 Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitForgetPasswordForm'])->name('quen_mat_khau');
 Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
+
+Route::get('/chinh-sach', [\App\Http\Controllers\Client\ClientChinhSachController::class, 'index'])->name('client_chinh_sach');
 
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
