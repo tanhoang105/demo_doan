@@ -44,7 +44,7 @@
                 <tr>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{$item->doi_tuong_ap_dung}} </td>
-                    <td> <a href=" {{route('route_BE_Admin_Xem_Noi_Dung' , ['id' => $item->id])}} ">Xem nội dung</a> </td>
+                    <td> <a class="btn btn-primary" href=" {{route('route_BE_Admin_Xem_Noi_Dung' , ['id' => $item->id])}} ">Xem nội dung</a> </td>
                     <td>
                         <a class="btn btn-success" style="color: aliceblue"
                             href=" {{ route('route_BE_Admin_Edit_Chinh_Sach', ['id' => $item->id]) }} ">Sửa</a>

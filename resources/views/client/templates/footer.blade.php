@@ -43,7 +43,7 @@
                     <h5>Danh mục</h5>
                     <ul>
                         <li>
-                            <a href="courses.html">Quyền riêng tư & Chính sách</a>
+                            <a href="{{ route('client_chinh_sach') }}">Quyền riêng tư & Chính sách</a>
                         </li>
                         <li>
                             <a href="courses.html">Điều khoản & Điều kiện</a>
