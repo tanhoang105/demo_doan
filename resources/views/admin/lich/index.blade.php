@@ -167,7 +167,7 @@
                         </td>
 
                         <td>
-                            <input type="text"  value="{{$item->ngay_hoc}}">
+                            <input type="text"   value=" {{ date('d/m/Y', strtotime($item->ngay_hoc)) }}">
                             {{-- <input name="ngay_hoc" type="date" value=" {{ date_format($item->ngay_hoc,"m/d/y") }}"> --}}
                         </td>
 

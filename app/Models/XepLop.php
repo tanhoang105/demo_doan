@@ -31,6 +31,9 @@ class XepLop extends Model
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.id_lop', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere('lop.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere('giang_vien.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere('khoa_hoc.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();

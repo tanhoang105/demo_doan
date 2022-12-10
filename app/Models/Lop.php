@@ -44,6 +44,7 @@ class Lop extends Model
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                    // $q->orWhere('khoa_hoc.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -87,6 +88,9 @@ class Lop extends Model
             if (!empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_lop', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere($this->table . '.so_luong', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere('khoa_hoc.ten_khoa_hoc', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere('giang_vien.ten_giang_vien', 'like', '%' . $params['loc']['keyword']  . '%');
                 });
             }
 
@@ -105,6 +109,10 @@ class Lop extends Model
                     if (!empty($params['loc']['ca_thu'])) {
 
                         $q->Where($this->table . '.ca_thu_id',  $params['loc']['ca_thu']  );
+                    }
+                    if (!empty($params['loc']['ngay_bat_dau'])) {
+
+                        $q->Where($this->table . '.ngay_bat_dau',  $params['loc']['ngay_bat_dau']  );
                     }
                     
                    
