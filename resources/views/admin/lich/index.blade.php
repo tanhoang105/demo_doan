@@ -227,16 +227,23 @@
                                                     ->where('ca_id', $item->ca_id)
                                                     ->whereNotIn('giang_vien_id' , [$item->giang_vien_id])
                                                     ->get();
-                                               
-                                                foreach ($res as $key => $value) {
-                                                    // echo $value->giang_vien_id . '<br>';
-                                                    if( $value->giang_vien_id == $itemGiangVien->id_user ){
-                                                    }else  {
-                                                        echo '<option value="' . $itemGiangVien->id_user . ' ">
-                                                   ' . $itemGiangVien->ten_giang_vien . '</option>';
+                                                if(count($res) >= 1){
+
+                                                    foreach ($res as $key => $value) {
+                                                        // echo $value->giang_vien_id . '<br>';
+                                                        if( $value->giang_vien_id == $itemGiangVien->id_user ){
+                                                            
+                                                        }else  {
+                                                            echo '<option value="' . $itemGiangVien->id_user . ' ">
+                                                       ' . $itemGiangVien->ten_giang_vien . '</option>';
+                                                        }
+                                                        
                                                     }
-                                                    
+                                                }else {
+                                                    echo '<option value="' . $itemGiangVien->id_user . ' ">
+                                                       ' . $itemGiangVien->ten_giang_vien . '</option>';
                                                 }
+                                                
                                                 
                                                 ?>
 
