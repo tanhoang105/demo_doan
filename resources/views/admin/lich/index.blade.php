@@ -231,6 +231,7 @@
                                                 foreach ($res as $key => $value) {
                                                     // echo $value->giang_vien_id . '<br>';
                                                     if( $value->giang_vien_id == $itemGiangVien->id_user ){
+                                                        
                                                     }else  {
                                                         echo '<option value="' . $itemGiangVien->id_user . ' ">
                                                    ' . $itemGiangVien->ten_giang_vien . '</option>';
