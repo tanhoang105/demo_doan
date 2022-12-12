@@ -85,7 +85,7 @@
 
                         <td>
                                 <a class="btn btn-success" style="color:aliceblue" href="{{ route('route_BE_Admin_Edit_Ca_Thu', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa</a>
+                                    <i class="fas fa-edit "></i> Sửa </a>
                         </td>
                         <td>
                                 <a {{ in_array($item->id, $arrayidCaThu) == true ? 'hidden' : '' }}  onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color:aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Thu', ['id' => $item->id]) }}">
