@@ -25,7 +25,7 @@ class LichHocController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien ,$xeplop;
+    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien, $xeplop;
     public function __construct()
     {
         $this->v  = [];
@@ -40,16 +40,16 @@ class LichHocController extends Controller
     }
     public function index(Request $request)
     {
-        $this->authorize(mb_strtoupper('xem lịch học') );
+        $this->authorize(mb_strtoupper('xem lịch học'));
+        // dd(123);
         // hiển thị ra danh sách lớp học 
         $this->v['params']  = $request->all();
-       
+
         unset($this->v['params']['_token']);
-        $this->v['list']  = $this->lop->index($this->v['params'] , true , 10);
-        $this->v['xepLop'] = $this->xeplop->index(null , false , null);
+        $this->v['list']  = $this->lop->index($this->v['params'], true, 10);
+        $this->v['xepLop'] = $this->xeplop->index(null, false, null);
         //  dd($this->v['list']);
         return view('admin.lich.listlop', $this->v);
-        
     }
 
     /**
@@ -70,7 +70,7 @@ class LichHocController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize(mb_strtoupper('thêm lịch học') );
+        $this->authorize(mb_strtoupper('thêm lịch học'));
 
         $this->v['ca'] = $this->ca->index(null, false, null);
         $this->v['thu'] = $this->thu->index(null, false, null);
@@ -108,9 +108,10 @@ class LichHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id , Request $request)
+    public function show($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('xem chi tiết lịch học') );
+        $this->authorize(mb_strtoupper('xem chi tiết lịch học'));
+        // dd(123);
 
         // hiển thị lịch học của lớp học khi ấn vào lớp học đó 
         $this->v['params'] = $request->all();
@@ -122,9 +123,9 @@ class LichHocController extends Controller
         $this->v['khoahoc'] = $this->khoahoc->index(null, false, null);
         $this->v['lop'] = $this->lop->index(null, false, null);
         $this->v['giangvien'] = $this->giangvien->index(null, false, null);
-        $this->v['list'] = $this->lich->index($this->v['params'] , true , 10);
-// dd(123);
-        // dd($this->v['list']);    
+        $this->v['list'] = $this->lich->index($this->v['params'], true, 10);
+        // dd(123);
+        // dd($this->v['list'][0]->ngay_hoc);    
         return view('admin.lich.index', $this->v);
     }
 
@@ -136,7 +137,7 @@ class LichHocController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $this->authorize(mb_strtoupper('edit lịch học') );
+        $this->authorize(mb_strtoupper('edit lịch học'));
 
         if ($id) {
             $this->v['ca'] = $this->ca->index(null, false, null);
@@ -161,37 +162,37 @@ class LichHocController extends Controller
     public function update(Request $request)
     {
         // dd($request->all());
-        $this->authorize(mb_strtoupper('update lịch học') );
-        
-            $params = [];
-            $params['cols'] = array_map(function ($item) {
-                if ($item == '') {
-                    $item = null;
-                }
-                if (is_string($item)) {
-                    $item = trim($item);
-                }
-                return $item;
-            }, $request->post());
+        $this->authorize(mb_strtoupper('update lịch học'));
 
-            unset($params['cols']['_token']);
-            // dd($params);
-            // $params['cols']['id'] = session('id');
-            $res = $this->lich->saveupdate($params);
-            // dd($res);
-            if ($res > 0) {
-                return response()->json([
-                    'success' => true,
-                    'msg' => 'Cập nhật thành công'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'msg' => 'Cập nhật không thành công'
-                ]);
+        $params = [];
+        $params['cols'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
             }
-            // return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
-       
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->post());
+
+        unset($params['cols']['_token']);
+        // dd($params);
+        // $params['cols']['id'] = session('id');
+        $res = $this->lich->saveupdate($params);
+        // dd($res);
+        if ($res > 0) {
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật thành công'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Cập nhật không thành công'
+            ]);
+        }
+        // return redirect()->route('route_BE_Admin_List_Lich_Hoc'); 
+
     }
 
     /**
@@ -202,7 +203,7 @@ class LichHocController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize(mb_strtoupper('xóa lịch học') );
+        $this->authorize(mb_strtoupper('xóa lịch học'));
 
         if ($id) {
             // dd($id);
@@ -217,17 +218,18 @@ class LichHocController extends Controller
     }
 
 
-    public function destroyAll(Request $request){
+    public function destroyAll(Request $request)
+    {
         // dd($request->all);
         // $request  =  $request->all();
         // $this->authorize(mb_strtoupper('xóa khuyến mại') );
-        $this->authorize(mb_strtoupper('xóa lịch học') );
+        $this->authorize(mb_strtoupper('xóa lịch học'));
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $params = [];
-            $params['cols'] = array_map(function($item){
+            $params['cols'] = array_map(function ($item) {
                 return $item;
-            } , $request->all());
+            }, $request->all());
             unset($params['cols']['_token']);
             if (count(($params['cols'])) <= 0) {
                 // dd(123);
@@ -237,14 +239,13 @@ class LichHocController extends Controller
             $res = $this->lich->remoAll($params);
             // dd($res);
 
-            if($res > 0){
+            if ($res > 0) {
                 Session::flash('success , "Xóa thành công');
                 return back();
-            }else {
+            } else {
                 Session::flash('error , "Xóa thành công');
                 return back();
             }
-          
         }
     }
 }
