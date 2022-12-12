@@ -37,6 +37,13 @@
                 </button>
             </div>
         @endif
+        <div class="alert alert-danger alert-dismissible d-none" role="alert">
+            <strong>Bạn đã đăng ký khóa học hoặc đã trùng ca này !</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <ul>
@@ -50,10 +57,12 @@
                 </button>
             </div>
         @endif
-        <form method="post" enctype="multipart/form-data">
-            @csrf
+        
         <div class="row">
-            <div class="row col-8">
+            <div class="col-8">
+                <form method="post" action="{{route('client_post_dang_ky',$loadDangKy->id)}}" enctype="multipart/form-data" id="form">
+                @csrf
+                <div class="row">
                 <div class="col-12">
                     <h3>Thông tin cá nhân</h3>
                 </div>
@@ -61,7 +70,8 @@
                 <input type="text" name="khuyen_mai_id" id="khuyen_mai_id" hidden>
                 <input type="text" name="user_id" id="" value="{{Auth::user()->id??""}}" hidden>
                 <input type="text" name="lop_id" id="" value="{{isset($loadDangKy->id) ? ($loadDangKy->id): "" }}" hidden>
-                <input type="text" name="thu_hoc_id" id="" value="{{isset($loadDangKy->thu_hoc_id) ? ($loadDangKy->thu_hoc_id): "" }}" hidden>                        <input type="text" name="ca_id" id="" value="{{isset($loadDangKy->ca_id) ? ($loadDangKy->ca_id): "" }}" hidden>
+                <input type="text" name="thu_hoc_id" id="" value="{{isset($loadDangKy->thu_hoc_id) ? ($loadDangKy->thu_hoc_id): "" }}" hidden>
+                <input type="text" name="ca_id" id="" value="{{isset($loadDangKy->ca_id) ? ($loadDangKy->ca_id): "" }}" hidden>
                 <input type="text" name="id_khoa_hoc" id="id_khoa_hoc" hidden value="{{isset($loadDangKy->id_khoa_hoc) ? ($loadDangKy->id_khoa_hoc): "" }}">
                 <input type="text" name="gia_khoa_hoc" id="gia_khoa_hoc"  value="{{isset($loadDangKy->gia_khoa_hoc) ? ($loadDangKy->gia_khoa_hoc): "" }}" hidden>
 
@@ -115,20 +125,15 @@
                     </select>
                     
                 </div>
+                </div>
+            </form>
             </div>
 
-            {{-- <div class="col-4">
-                
-            </div> --}}
 
             <div class="col-4">
                 <div class="col-12">
                     <h3>Thông tin chi tiết</h3>
                 </div>
-
-                {{-- <div class="col-12">
-                    <img style="height: 70px" src="{{ Storage::url($loadDangKy->hinh_anh) }}">
-                </div> --}}
 
                 <div class="col-12 pt-2 d-flex justify-content-between" >
                     <label class="text-dark" style="font-size:18px;">Khóa học</label>
@@ -146,7 +151,7 @@
                     <span style="font-size:16px;">{{$thu->ten_thu}}</span>
                     @endforeach
 
-                    <div style="font-size:16px;"> {{$loadDangKy->ca_hoc .' - '. $loadDangKy->thoi_gian_bat_dau . ' - ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
+                    <div style="font-size:16px;"> {{$loadDangKy->ca_hoc .' - '. $loadDangKy->thoi_gian_bat_dau . ' từ ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                 </div>
 
                 <div class="col-12 pt-2 d-flex justify-content-between">
@@ -180,11 +185,19 @@
                 </div>
 
                 <hr>
-                <div class="col-12 d-flex justify-content-end">
-                    <button class="btn btn-primary rounded" id="submit" type="submit">Xác nhận</button>
-                </div>
             </div>
         </div>
+
+        <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-primary rounded" data-url="{{route('client_post_dang_ky',$loadDangKy->id)}}" id="submit" type="button">Xác nhận</button>
+        </div>
+
+        <form action="" method="post" id="form-payment" hidden>
+            @csrf
+            <input type="text" name="gia_khoa_hoc_payment" id="gia_khoa_hoc_payment" >
+            <input type="text" name="id" id="id_dang_ky" >
+            <input type="text"  id="" name="redirect">
+           
         </form>
 
     </div>
@@ -194,7 +207,35 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            $('.radio_input')[0].checked = true;
+
+            $('#submit').on('click',function(e) {
+                let payment = $('#select_payment').val();
+                let url = $(this).data('url')
+                if(payment == 1) {
+                    $('#form').submit();
+                }else{
+                    let data = $('#form').serialize();
+                    $.ajax({
+                        type: 'post',
+                        url: url,
+                        data: data,
+                        success: function(res) {
+                            if(res.success == true){
+                            $('#gia_khoa_hoc_payment').val(res.gia_khoa_hoc);
+                            $('#id_dang_ky').val(res.id_dang_ky);
+                            $('#form-payment').attr('action',`/vnp_payment/${res.id_dang_ky}`)
+                            $('#form-payment').submit();
+                            }
+                            else{
+                                $('.alert.d-none').removeClass('d-none')
+                            }
+
+                        }
+                    })
+                }
+
+            })
+            
             let checkEmail=false;
             $('#email').blur(function () {
                 let email=$(this).val();
@@ -204,7 +245,6 @@
                     url :url,
                     data:{
                         email:email,
-
                     },
                     success:function (res) {
                         if(res['status']==200){

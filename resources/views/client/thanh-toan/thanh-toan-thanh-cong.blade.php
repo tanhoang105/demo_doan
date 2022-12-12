@@ -10,9 +10,9 @@
                 <!-- Icon -->
                 <div class="p-4 d-inline-flex align-items-center justify-content-center circle bg-light-success text-success mx-auto mb-4"><i class="lni lni-heart-filled fs-lg"></i></div>
                 <!-- Heading -->
-                <h2 class="mb-2 ft-bold">Đơn hàng của bạn đã được thanh toán</h2>
+                <h2 class="mb-2 ft-bold">Khóa học của bạn đã được thanh toán</h2>
                 <!-- Text -->
-                <p class="ft-regular fs-md mb-5">Đơn hàng <span class="text-body text-dark"></span> đã thanh toán. Chi tiết đơn hàng của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
+                <p class="ft-regular fs-md mb-5">Khóa học <span class="text-body text-dark"></span> đã thanh toán. Chi tiết khóa học của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
                 <!-- Button -->
                 <a class="btn btn-dark" href="{{route('home')}}">Xem chi tiết</a>
             </div>

@@ -49,6 +49,10 @@
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
+               
+
+            </div>
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học </label>
                     <input type="text" name="ten_khoa_hoc" id="" disabled value="{{$loadDangKy->ten_khoa_hoc}}" class="form-control">
@@ -83,7 +87,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
 
             </div>
 
