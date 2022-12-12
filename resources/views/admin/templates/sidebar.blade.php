@@ -265,6 +265,14 @@
                         </li>
                     </ul>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('route_BE_Admin_List_Chinh_Sach') }}" class="nav-link ">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Chính sách
+                    </p>
+                </a>
+            </li>
               @endhasRoles
               {{-- end tác vụ đào tạo --}}
 

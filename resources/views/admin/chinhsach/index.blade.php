@@ -40,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($list as $key => $item)a
+            @foreach ($list as $key => $item)
                 <tr>
                     <th scope="row"> {{ $loop->iteration }}</th>
                     <td> {{$item->doi_tuong_ap_dung}} </td>
