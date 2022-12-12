@@ -1,7 +1,7 @@
 @extends('Admin.templates.layout')
 
 @section('form-search')
-    {{route('route_BE_Admin_List_Dang_Ky')}}
+    {{ route('route_BE_Admin_List_Dang_Ky') }}
 @endsection
 
 @section('content')
@@ -67,19 +67,24 @@
                         <td>
                             @if ($item->trang_thai_thanh_toan == 2)
                                 <button class="btn btn-primary">Đã thanh toán</button>
-                            @else
+                            @elseif($item->trang_thai_thanh_toan == 1)
                                 <button class="btn btn-warning">Chưa thanh toán</button>
+                            @else
+                                <button class="btn btn-danger">Đã hủy</button>
                             @endif
                         </td>
 
 
                         <td>
-                                <a class="btn btn-warning" style="color: aliceblue" href="{{ route('route_BE_Admin_Edit_Dang_Ky', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa</a>
+                            <a class="btn btn-warning" style="color: aliceblue"
+                                href="{{ route('route_BE_Admin_Edit_Dang_Ky', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
-                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
-                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
+                                style="color: aliceblue"
+                                href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
+                                <i class="fas fa-trash-alt"></i> Xóa</a>
                         </td>
                     </tr>
                 @endforeach

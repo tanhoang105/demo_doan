@@ -39,6 +39,7 @@
                     <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
                     <th scope="col">Tên lớp</th>
+                    {{-- <th scope="col">Khóa học</th> --}}
                     <th scope="col">Giảng viên</th>
                     <th scope="col">Ngày Khai giảng</th>
                     {{-- <th scope="col">Ca học </th> --}}
@@ -57,6 +58,7 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id_xep_lop }}" /></td>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td> {{ $item->ten_lop }}</td>
+                        {{-- <td> {{ $item->id_ }}</td> --}}
                         <td> {{ $item->ten_giang_vien }}</td>
                         <td> {{ date('d/m/Y', strtotime($item->ngay_dang_ky)) }}</td>
                         {{-- <td> {{ $item->ca_hoc }}</td> --}}

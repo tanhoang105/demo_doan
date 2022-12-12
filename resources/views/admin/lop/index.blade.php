@@ -113,10 +113,10 @@
                     @endforeach
                 </select>
             </div> --}}
-            {{-- <div class="col-2"> --}}
+             <div class="col-2"> 
                 {{-- <label for=""> bắt đầu</label> --}}
-                {{-- <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau"> --}}
-            {{-- </div> --}}
+                <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau">
+            </div>
 
             {{-- <div class="col-2"> --}}
                 {{-- <select class="form-control" name="" id="">
