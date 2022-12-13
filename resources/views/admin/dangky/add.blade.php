@@ -50,6 +50,11 @@
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
+                
+
+
+            </div>
+            <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học </label>
                     <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}" required>
@@ -82,8 +87,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-
             </div>
 
         </div>

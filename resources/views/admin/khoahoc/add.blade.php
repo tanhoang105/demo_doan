@@ -59,6 +59,9 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
+
+                
+                
                 
             </div>
 
@@ -66,15 +69,14 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Ảnh</label><br>
                     {{--                    <img width="200px" id="anh" src="" alt=""><br> --}}
-                    <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%"
-                        width="100px" height="100px" alt="">
-
                     <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file"
                         name="hinh_anh" class="form-control" accept=".png, .jpg, .jpeg">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
+                    <img id="anh" src="" style="border-radius: 100%"
+                        width="100px" height="100px" alt="">
                 </div>
 
                 <div class="mb-3">
@@ -84,7 +86,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
 
             </div>
 
