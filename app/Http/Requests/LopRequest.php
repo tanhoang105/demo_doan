@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\GiangVien;
+use App\Models\Lop;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LopRequest extends FormRequest
@@ -22,6 +24,7 @@ class LopRequest extends FormRequest
      */
     public function rules()
     {
+        $data = $this->all();
         $rules = [];
         $ActionCurrent  = $this->route()->getActionMethod(); // trả về method đang hoạt động 
         switch ($this->method()) {
@@ -32,23 +35,43 @@ class LopRequest extends FormRequest
                         $rules = [
                             'ten_lop' => 'required | unique:lop,ten_lop',
                             'id_giang_vien' => 'numeric|min:1',
-                            'ca_thu_id' => 'numeric|min:1',
+                            'ca_thu_id' => [
+                                function ($attribute, $value, $fali) use ($data) {
+
+                                    $check_trung = Lop::where('id_giang_vien', '=', $data['id_giang_vien'])
+                                        ->where('ca_thu_id', '=', $value)
+                                        ->get();
+                                    // dd($check_trung);
+                                    if ($check_trung->count() > 0) {
+                                        return $fali('Ca học đã bị trung lịch của giang viên đã chọn.');
+                                    }
+                                }
+                            ],
                             'id_khoa_hoc' => 'numeric|min:1',
-                            'so_luong' => 'required | integer | min:1 | max:40',
                             'ngay_bat_dau' => 'required | date | after:today',
-                            'ngay_ket_thuc' => 'required | date | after:ngay_bat_dau',
+                            'thoi_gian' => 'required | numeric'
                         ];
                         break;
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'ten_lop' => 'required',
+                            'ten_lop' => 'required | unique:lop,ten_lop',
                             'id_giang_vien' => 'numeric|min:1',
-                            'ca_thu_id' => 'numeric|min:1',
+                            'ca_thu_id' => [
+                                function ($attribute, $value, $fali) use ($data) {
+
+                                    $check_trung = Lop::where('id_giang_vien', '=', $data['id_giang_vien'])
+                                        ->where('ca_thu_id', '=', $value)
+                                        ->get();
+                                    // dd($check_trung);
+                                    if ($check_trung->count() > 0) {
+                                        return $fali('Ca học đã bị trung lịch của giang viên đã chọn.');
+                                    }
+                                }
+                            ],
                             'id_khoa_hoc' => 'numeric|min:1',
-                            'so_luong' => 'required | integer | min:1 | max:40',
                             'ngay_bat_dau' => 'required | date | after:today',
-                            'ngay_ket_thuc' => 'required | date | after:ngay_bat_dau',
+                            'thoi_gian' => 'required | numeric'
                         ];
                         break;
                     default:
@@ -75,7 +98,8 @@ class LopRequest extends FormRequest
             'id_giang_vien.min' => 'Giảng viên bắt buộc phải chọn',
             'ca_thu_id.min' => 'Lịch học bắt buộc phải chọn',
             'id_khoa_hoc.min' => 'Khóa học bắt buộc phải chọn',
-            'integer' => ':attribute định dạng bắt buộc là số'
+            'integer' => ':attribute định dạng bắt buộc là số',
+            'numeric' => ':attribute định dạng bắt buộc là số'
         ];
     }
     public function attributes()

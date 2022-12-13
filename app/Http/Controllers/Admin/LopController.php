@@ -426,7 +426,7 @@ class LopController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store(LopRequest $request)
     {
         //
         // dd(123);

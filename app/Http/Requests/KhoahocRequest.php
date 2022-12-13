@@ -35,7 +35,8 @@ class KhoahocRequest extends FormRequest
                                     'ten_khoa_hoc' => 'required | unique:khoa_hoc,ten_khoa_hoc',
                                     'id_danh_muc' => 'numeric|min:1',
                                     'gia_khoa_hoc' => 'required | numeric|min:1000',
-                                    'hinh_anh' => 'required'
+                                    // 'hinh_anh' => 'required',
+                                    'tien_to' => 'required'
                                 ];
                             break;
 
@@ -81,7 +82,7 @@ class KhoahocRequest extends FormRequest
             'ten_danh_muc' => 'Khóa học',
             'mo_ta' => 'Mô tả',
             'hinh_anh' => 'Hình ảnh',
-
+            'tien_to' => 'Tiền tố',
         ];
     }
 }

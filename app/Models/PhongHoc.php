@@ -11,7 +11,6 @@ class PhongHoc extends Model
     use HasFactory;
     protected $table = 'phong_hoc';
     protected $guarded = [];
-
     public function index($params, $pagination = true, $perpage)
     {
         if ($pagination) {
