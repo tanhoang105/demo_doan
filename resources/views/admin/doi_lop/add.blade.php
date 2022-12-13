@@ -25,6 +25,9 @@
                     <label for="" class="form-label">Mã sinh viên</label>
                     <input class="form-control" value="" name="id_user" id="ma_hoc_vien" type="text"
                         placeholder="Mã sinh viên">
+                        @error('id_user')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
@@ -40,6 +43,9 @@
                                 <option  value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
                             @endforeach --}}
                     </select>
+                    @error('id_lop_cu')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
                 <script>
                     $('#ma_hoc_vien').keyup(function(e) {
@@ -76,12 +82,18 @@
                             <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
                         @endforeach
                     </select>
+                    @error('id_khoa_hoc')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
                     <select class="form-control" name="id_lop_moi" data-url="{{ route('siso_doilop') }}" id="id_lop">
                         <option>--Chọn Lớp--</option>
                     </select>
+                    @error('id_lop_moi')
+                    <span style="color: red"> {{ $message }} </span>
+                @enderror
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Học phí</label>

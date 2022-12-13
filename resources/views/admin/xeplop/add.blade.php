@@ -21,7 +21,7 @@
             @csrf
             <div class="col-6">
 
-                
+
 
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Ngày đăng ký <span class="text-danger">*</span></label>
@@ -36,11 +36,11 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="">
-                            <option value="0">--- Chọn lớp học ---</option>
+                        <option value="0">--- Chọn lớp học ---</option>
                         @foreach ($lopxep as $item)
-                            <option value="{{$item->id}}">{{ $item->ten_lop }}</option>
+                            <option value="{{ $item->id }}">{{ $item->ten_lop }}</option>
                         @endforeach
-                    </select>
+                    </select>   
                     @error('id_lop')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -66,9 +66,9 @@
 
         </div>
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <a style="color: aliceblue" class="btn btn-danger" href=" {{route('route_BE_Admin_Xep_Lop')}} ">Quay lại </a>
+        <a style="color: aliceblue" class="btn btn-danger" href=" {{ route('route_BE_Admin_Xep_Lop') }} ">Quay lại </a>
 
-        
+
 
     </form>
 @endsection

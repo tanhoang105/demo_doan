@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DoilopRequest;
 use App\Mail\SendMail;
 use App\Mail\sendmail3;
 use App\Mail\Senmail2;
@@ -196,7 +197,7 @@ class DoiLopKhoaController extends Controller
         // 'giangvien' => $giangvien->ten_giang_vien
         return response()->json(['success' => true, 'ghe_trong' => $ghe_trong, 'giangvien' => $giangvien]);
     }
-    public function store(Request $request)
+    public function store(DoilopRequest $request)
     {
         // dd($request->all());
         $data = new DoiLopKhoa();

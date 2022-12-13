@@ -28,44 +28,55 @@ class TaiKhoanRequest extends FormRequest
 
         switch ($this->method()) {
             case 'POST':
-                    switch ($ActionCurrent) {
+                switch ($ActionCurrent) {
                         // nếu là method thêm mới bản ghi
-                        case 'store':
-                                $rules = [
-                                    'name' => 'required',
-                                    'email' => 'required | email | unique:users',
-                                    'vai_tro_id' => 'numeric|min:1',
-                                    'password' => 'required | min:6',
-                                ];
-                            break;
+                    case 'store':
+                        $rules = [
+                            'name' => 'required',
+                            'email' => 'required | email | unique:users,email',
+                            'vai_tro_id' => 'numeric|min:1',
+                            'password' => 'required | min:6',
+                            'sdt' => 'required | min:10 | max:11',
+                            'dia_chi' => 'required'
+                        ];
+                        break;
 
-                            // nếu là method chỉnh sửa bản ghi
-                            case 'update':
-                                $rules = [
-                                    'name' => 'required',
-                                    'email' => 'required | email',
-                                    
-                                ];
-                            break;    
-                        
-                        default:
-                            # code...
-                            break;
-                    }
+                        // nếu là method chỉnh sửa bản ghi
+                    case 'update':
+                        $rules = [
+                            'name' => 'required',
+                            'email' => 'required | email',
+                            'vai_tro_id' => 'required | numeric | min:1',
+                            'password' => 'required | min:6',
+                            'sdt' => 'required | min:10 | max:11 ',
+                            'dia_chi' => 'required'
+                        ];
+                        break;
+
+                    default:
+                        # code...
+                        break;
+                }
                 break;
 
             default:
                 # code...
                 break;
         }
-        return $rules ;
+        return $rules;
     }
 
     public function messages()
     {
         return [
             'name.required' => 'Tên tài khoản bắt buộc phải nhập',
-            'vai_tro_id.min' => 'Vai trò bắt buộc phải chọn',
+            'sdt.required' => 'Số điện thoại bắt buộc phải nhập',
+            'sdt.min' => 'Số điện thoại tối thiểu 10 kí tự ',
+            'sdt.max' => 'Số điện thoại tối đa 11 kí tự',
+            // 'sdt.integer' => 'Số điện thoại nhập sai định dạng',
+            'dia_chi.required' => 'Địa chỉ bắt buộc phải nhập',
+            'vai_tro_id.required' => 'Vai trò không được để trống',
+            'vai_tro_id.min' => 'Vai trò tối thiểu 1 kí tự',
             'email.required' => 'Email bắt buộc phải nhập',
             'email.email' => 'Sai định dạng Email',
             'email.unique' => 'Email đã tồn tại',

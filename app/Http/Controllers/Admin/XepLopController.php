@@ -12,6 +12,7 @@ use App\Models\PhongHoc;
 use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Stmt\Echo_;
 
 class XepLopController extends Controller
 {
@@ -45,8 +46,8 @@ class XepLopController extends Controller
 
 
         $list = $this->xep_lop->index($this->v['params'], true, 10);
-
         $this->v['list'] = $list;
+        //dd($list);
         return view('admin.xeplop.index', $this->v);
     }
 
@@ -73,6 +74,29 @@ class XepLopController extends Controller
 
         //
         if ($request->isMethod('POST')) {
+            // check logic
+            // dd($request->all());
+            // cos id_phong
+            // tu id_lop lay -> ca_thu_id
+            // tu xep_lop join lop lay ra duoc ca thu lay ra duoc ca_thu_id va id_phong
+            // $lop = Lop::find($request->id_lop);
+            // $xep_lop_all = XepLop::join('lop', 'lop.id', '=', 'xep_lop.id_lop')
+            //     ->select('xep_lop.*', 'lop.ca_thu_id')
+            //     ->get();
+            // // dd($xep_lop_all);
+            // foreach ($xep_lop_all as $value) {
+
+            //     if ($value->id_phong_hoc == $request->id_phong_hoc) {
+            //         dd(3);
+            //         if ($value->ca_thu_id == $lop->ca_thu_id) {
+            //             dd('loi');
+            //         } else {
+            //             dd('duoc roi');
+            //         }
+            //     } else {
+            //         dd('ok roi ');
+            //     }
+            // }
             // thêm sản phẩm
             $params = [];
             $params['cols'] = array_map(function ($item) {
@@ -114,7 +138,7 @@ class XepLopController extends Controller
             }
         }
         // dd($arrayLopChuaXep);
-        $this->v['lopxep'] =$arrayLopChuaXep;
+        $this->v['lopxep'] = $arrayLopChuaXep;
         return view('admin.xeplop.add', $this->v);
     }
 

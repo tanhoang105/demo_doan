@@ -13,6 +13,15 @@ class XepLop extends Model
     protected $table = 'xep_lop';
     protected $guarded = [];
 
+    /**
+     * Get the user that owns the XepLop
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function lop()
+    {
+        return $this->belongsTo(Lop::class, 'id_lop');
+    }
     public function index($params, $pagination = true,  $perpage)
     {
         // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang

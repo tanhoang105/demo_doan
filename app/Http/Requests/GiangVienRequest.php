@@ -35,6 +35,8 @@ class GiangVienRequest extends FormRequest
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users',
                                     'password' => 'required | min:6',
+                                    'sdt' => 'required | min:10 | max:11 ',
+                                    'dia_chi' => 'required'
                                 ];
                             break;
 
@@ -44,6 +46,8 @@ class GiangVienRequest extends FormRequest
                                     'name' => 'required',
                                     'email' => 'required | email',
                                     // 'password' => 'required | min:6',
+                                    'sdt' => 'required | min:10 | max:11 ',
+                                    'dia_chi' => 'required'
                                 ];
                             break;    
                         
@@ -69,6 +73,10 @@ class GiangVienRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Mật khẩu bắt buộc phải nhập',
             'password.min' => 'Mật khẩu bắt buộc nhiều hơn 6 ký tự',
+            'sdt.required' => 'Số điện thoại bắt buộc phải nhập',
+            'sdt.min' => 'Số điện thoại tối thiểu 10 kí tự ',
+            'sdt.max' => 'Số điện thoại tối đa 11 kí tự',
+            'dia_chi.required' => 'Địa chỉ bắt buộc phải nhập',
 
         ];
     }
