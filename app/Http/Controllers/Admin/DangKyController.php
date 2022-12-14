@@ -129,6 +129,7 @@ class DangKyController extends Controller
                         'id_phuong_thuc_thanh_toan'=>1,
                         'ngay_thanh_toan'=>date('Y-m-d'),
                         'gia'=>$request->gia_khoa_hoc,
+                        'trang_thai'=>2,
                     ]);
 
 
@@ -154,7 +155,6 @@ class DangKyController extends Controller
                             'id_thanh_toan'=>$inserThanhToan,
                             'email'=>$request->email,
                         ];
-                        
                         $tinhSoLuong = $loadDangKy->so_luong - 1;
                         $soLuongLop = DB::table('lop')
                             ->where('id', $request->id_lop)
