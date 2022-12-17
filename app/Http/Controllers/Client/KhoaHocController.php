@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormDoiLopClientRequest;
 use App\Models\DangKy;
 use App\Models\DanhMuc;
 use App\Models\DoiLopKhoa;
@@ -135,11 +136,23 @@ class KhoaHocController extends Controller
         // dd($lop_moi);
         return view('client.khoa-hoc.khoa_hoc_dang_ki.form_dang_ky_lop', compact('khoa_hoc_moi', 'lop_moi', 'khoa_hoc_cu', 'lop_cu'));
     }
-    public function doi_khoa_hoc(Request $request)
+    public function doi_khoa_hoc(FormDoiLopClientRequest $request)
     {
         // dd($request->all());
         $lop_cu = Lop::find($request->id_lop_cu);
         $lop_moi = Lop::find($request->id_lop_moi);
+        // 
+        // check trung lop ca_thu 
+        $all_lop_cu = DangKy::where('dang_ky.id_user','=',Auth::user()->id)
+        ->join('lop','lop.id','=','dang_ky.id_lop')
+        ->whereNotIn('dang_ky.id_lop',[$lop_cu->id])
+        ->where('lop.ca_thu_id','=',$lop_moi->ca_thu_id)
+        ->get();
+
+        if($all_lop_cu->count() > 0){
+            session()->flash('loi_trung','Bạn đã đăng kí trùng ca đang học');
+            return redirect()->back();
+        } 
         // 
         $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
         $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
