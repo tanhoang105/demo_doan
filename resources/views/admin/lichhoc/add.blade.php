@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ca Học</label>
+                    <label for="" class="form-label">Ca Học <span class="text-danger">*</span></label>
                     <select name="ca_id" class="form-control" id="">
                         <option value="">Chọn ca học</option>
                         @foreach ($ca as $item)
@@ -33,7 +33,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Chọn thứ *</label>
+                    <label for="" class="form-label">Chọn thứ <span class="text-danger">*</span></label>
 
                     @foreach ($thuhoc as $item)
                         <div>

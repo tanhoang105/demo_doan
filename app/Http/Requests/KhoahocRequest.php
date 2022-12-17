@@ -45,6 +45,7 @@ class KhoahocRequest extends FormRequest
                                 $rules = [
                                     'ten_khoa_hoc' => 'required',
                                     'gia_khoa_hoc' => 'required | numeric|min:1000',
+                                    'tien_to' => 'required'
                                     // 'hinh_anh' => 'required'
                                 ];
                             break;    

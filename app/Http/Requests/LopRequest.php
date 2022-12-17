@@ -55,7 +55,7 @@ class LopRequest extends FormRequest
                         // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'ten_lop' => 'required | unique:lop,ten_lop',
+                            'ten_lop' => 'required',
                             'id_giang_vien' => 'numeric|min:1',
                             'ca_thu_id' => [
                                 function ($attribute, $value, $fali) use ($data) {
