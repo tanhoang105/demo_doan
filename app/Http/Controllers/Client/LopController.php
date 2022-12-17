@@ -78,8 +78,36 @@ class LopController extends Controller
             ->where('lop.so_luong', '>', 0)
             ->where('lop.ngay_bat_dau', '>=', date(now()))
             ->select('lop.*')->get();
+
+        // hiển thị ca học cho lớp 
+         // dd($list_lop_moi);
+         $this->v['params'] = $request->all();
+         $this->v['cathu'] = $this->cathu->index($this->v['params'], false, null);
+         $cathu =  $this->v['cathu'];
+         $this->v['thu'] = $this->thu->index(null, false, null);
+         $thu =  $this->v['thu'];
+         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+         $cahoc =  $this->v['cahoc'];
+         
+ 
+         $xeplop = $this->xeplop->index($this->v['params'], true, 6);
+         $this->v['khaigiang'] = $xeplop;
+         //    dd($xeplop);
+         $lopList  = $this->lop->index(null, false, null);
+         $this->v['lopList'] = $lopList;
+         $array = [];
+         for ($i = 0; $i < count($xeplop); $i++) {
+             for ($j = 0; $j < count($lopList); $j++) {
+                 if ($xeplop[$i]->id_lop == $lopList[$j]->id) {
+                     $array[] =  $lopList[$j];
+                 }
+             }
+         }
+         // dd($array);
+         $this->v['array'] = $array;
+
         // dd($lop_moi);
-        return view('client.lop.form_doi_lop', compact('lop_cu', 'lop_moi', 'xep_lop'));
+        return view('client.lop.form_doi_lop', compact('lop_cu', 'lop_moi', 'xep_lop' , 'array' , 'cathu' , 'thu' , 'cahoc'));
     }
     public function doi_lop(Request $request)
     {

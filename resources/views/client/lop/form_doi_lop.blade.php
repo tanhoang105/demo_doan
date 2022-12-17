@@ -3,17 +3,16 @@
     Đăng kí đổi lớp
 @endsection
 @section('content')
-
     <div class="container">
         <h2>Đăng ký đổi lớp</h2>
 
-        <form action="{{route('doi_lop')}}" method="POST">
+        <form action="{{ route('doi_lop') }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-lg-12 font-weight-bold pt-2">
                     <label class="">Lớp học cũ</label>
-                    <input type="text" class="form-control" value="{{$lop_cu->ten_lop}}" disabled>
-                    <input type="text" name="id_lop_cu" value="{{$lop_cu->id}}" hidden>
+                    <input type="text" class="form-control" value="{{ $lop_cu->ten_lop }}" disabled>
+                    <input type="text" name="id_lop_cu" value="{{ $lop_cu->id }}" hidden>
                     {{-- <input type="text" name="id_xeplop" value="{{$xep_lop->id}}" hidden> --}}
                 </div>
 
@@ -21,8 +20,53 @@
                     <label class="">Lớp học mới</label>
                     <select class="form-control" data-url="{{ route('siso_doilop') }}" id="id_lop_moi" name="id_lop_moi">
                         <option value="">----- Chọn lớp mới muốn đổi ------</option>
-                        @foreach ($lop_moi as $value )
-                        <option value="{{$value->id}}">{{$value->ten_lop}}</option>
+                        @foreach ($lop_moi as $value)
+                            <option value="{{ $value->id }}">{{ $value->ten_lop . ' -- ' }}
+                                <?php 
+                                foreach ($array as $item) {
+                                    if ($item->id == $value->id) {
+                                        // tìm ca thu
+                                        // echo  $item->ca_thu_id;
+                                        foreach ($cathu as $itemCaThu) {
+                                            if ($item->ca_thu_id == $itemCaThu->id) {
+                                                // echo $itemCaThu->ca_id;
+                                                // lấy ra ca hoc
+                                                foreach ($cahoc as $key => $itemCaHoc) {
+                                                    if ($itemCaThu->ca_id == $itemCaHoc->id) {
+                                                        echo '<li>' . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc . ')' . '</li>';
+                                                    }
+                                                }
+                                                // lấy ra ngày học
+                                                // echo $itemCaThu->thu_hoc_id;
+                                                $arrayThu = explode(',', $itemCaThu->thu_hoc_id);
+                                                for ($i = 0; $i < count($arrayThu); $i++) {
+                                                    foreach ($thu as $key => $itemThu) {
+                                                        if ($i == 0) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '( ' . $itemThu->ten_thu . ' & ';
+                                                            }
+                                                        } elseif ($i == count($arrayThu) - 1) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ')';
+                                                            }
+                                                        } else {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ' & ';
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                
+                                                // ===
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                ?>
+
+
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -43,8 +87,9 @@
 
                 <div class="pt-2">
                     <input type="text" name="status" id="" value="0" hidden>
-                    <input type="text" name="id_user" id="" value="{{Auth::user()->id}}" hidden>
-                    <button type="submit" onclick="return confirm('Bạn có chắc muốn đổi lóp ')" class="btn btn-primary">Gửi yêu cầu </button>
+                    <input type="text" name="id_user" id="" value="{{ Auth::user()->id }}" hidden>
+                    <button type="submit" onclick="return confirm('Bạn có chắc muốn đổi lóp ')" class="btn btn-primary">Gửi
+                        yêu cầu </button>
                 </div>
             </div>
 
