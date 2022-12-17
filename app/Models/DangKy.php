@@ -28,7 +28,8 @@ class DangKy extends Model
                 ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
                 ->join('hoc_vien', 'hoc_vien.user_id', '=', $this->table . '.id_user')
                 ->join('thanh_toan', 'thanh_toan.id', '=', $this->table . '.id_thanh_toan')
-                ->select('hoc_vien.*', 'thanh_toan.trang_thai as trang_thai_thanh_toan', 'khoa_hoc.*', 'lop.*', $this->table . '.*')
+                ->join('phuong_thuc_thanh_toan', 'phuong_thuc_thanh_toan.id', '=','thanh_toan.id_phuong_thuc_thanh_toan')
+                ->select('hoc_vien.*','phuong_thuc_thanh_toan.ten as ten_phuong_thuc_thanh_toan', 'thanh_toan.trang_thai as trang_thai_thanh_toan', 'khoa_hoc.*', 'lop.*', $this->table . '.*')
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
