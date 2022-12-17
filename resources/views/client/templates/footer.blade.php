@@ -8,13 +8,13 @@
                     <img src="{{asset('client/images/logo.png')}}" alt="">
                     <ul>
                         <li>
-                            <a href="#">(+84) 01 2345 6789 </a>
+                            <a href="#">(+84) 392725483 </a>
                         </li>
                         <li>
-                            <a href="services.html">contact@domain.com</a>
+                            <a href="services.html">tkw_6@gmail.com</a>
                         </li>
                         <li>
-                            <a href="services.html">Washington, United State</a>
+                            <a href="services.html">Trịnh Văn Bô</a>
                         </li>
                     </ul>
                     <div class="footer_socil">
@@ -43,19 +43,13 @@
                     <h5>Danh mục</h5>
                     <ul>
                         <li>
-                            <a href="{{ route('client_chinh_sach') }}">Quyền riêng tư & Chính sách</a>
+                            <a href="{{ route('client_chinh_sach') }}">Chính sách</a>
                         </li>
                         <li>
-                            <a href="courses.html">Điều khoản & Điều kiện</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Giới thiệu</a>
                         </li>
                         <li>
-                            <a href="courses.html">Hỗ trợ khách hàng</a>
-                        </li>
-                        <li>
-                            <a href="courses.html">Cho doanh nghiệp</a>
-                        </li>
-                        <li>
-                            <a href="courses.html">Ủng hộ</a>
+                            <a href="{{ route('client_giang_vien') }}">Giảng viên</a>
                         </li>
                     </ul>
                 </div>
@@ -71,16 +65,16 @@
                             <a href="{{ route('client_gioi_thieu') }}">Giới thiệu</a>
                         </li>
                         <li>
-                            <a href="courses.html">Tham khảo một người bạn</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Tham khảo một người bạn</a>
                         </li>
                         <li>
-                            <a href="courses.html">Scolarship</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Scolarship</a>
                         </li>
                         <li>
-                            <a href="courses.html">Tiếp thị</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Tiếp thị</a>
                         </li>
                         <li>
-                            <a href="courses.html">Các khóa học miễn phí</a>
+                            <a href="{{ route('client_gioi_thieu') }}">Các khóa học miễn phí</a>
                         </li>
                     </ul>
                 </div>
@@ -104,7 +98,7 @@
     </div>
     <!-- Start:Subfooter -->
     <div class="subfooter">
-        <p> Copyright © 2021 <a href="index-2.html">Aducat.</a> All rights Reserved.</p>
+        <p> Copyright © 2022 <a href="index-2.html">Aducat.</a> All rights Reserved.</p>
     </div>
     <!-- End:Subfooter -->
 </footer>

@@ -14,7 +14,12 @@
                 <!-- Text -->
                 <p class="ft-regular fs-md mb-5">Khóa học <span class="text-body text-dark"></span> đã thanh toán. Chi tiết khóa học của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
                 <!-- Button -->
-                <a class="btn btn-dark" href="{{route('home')}}">Xem chi tiết</a>
+                @if (Auth::user())
+                    <a class="btn btn-dark" href="{{ route('client_lich_su_dang_ky', [Auth::user()->id]) }}">Xem chi tiết</a>
+                @else
+                <a class="btn btn-dark" href="{{ route('auth.loginForm') }}">Đăng nhập để xem chi tiết</a>
+                @endif
+
             </div>
         </div>
     </div>

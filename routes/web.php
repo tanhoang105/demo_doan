@@ -91,7 +91,7 @@ Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauControlle
 Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
 
-Route::get('/chinh-sach', [\App\Http\Controllers\Client\ClientChinhSachController::class, 'index'])->name('client_chinh_sach');
+Route::get('/chinh-sach', [\App\Http\Controllers\Client\ChinhSachController::class, 'index'])->name('client_chinh_sach');
 
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
