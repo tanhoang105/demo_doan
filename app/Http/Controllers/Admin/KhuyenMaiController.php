@@ -406,6 +406,8 @@ class KhuyenMaiController extends Controller
             return response()->json([
                 'success' => true,
                 'gia_khoa_hoc' => $giaKhoaHoc,
+                'loai_giam_gia' =>$km->loai_giam_gia,
+                'giam_gia' =>$km->giam_gia,
                 'id_km' => $km->id
             ]);
         } else {
