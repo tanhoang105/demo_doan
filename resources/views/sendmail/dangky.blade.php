@@ -62,7 +62,7 @@
            </tr>
         <tr>
             <th>
-                <a href="{{route('home')}}">Đăng nhập để xem chi tiết đơn hàng</a>
+                <a href="{{route('home')}}">Đăng nhập để xem chi tiết</a>
             </th>
         </tr>
         </tbody>
