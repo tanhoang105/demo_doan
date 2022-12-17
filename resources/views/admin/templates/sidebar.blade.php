@@ -41,6 +41,7 @@
               @hasRoles(['admin'])
 
               <li class="nav-item">
+                
                   <a href=" {{ route('route_BE_Admin_Thong_Ke') }}" class="nav-link ">
                       <i class="nav-icon fas fa-chart-pie"></i>
                       <p>
