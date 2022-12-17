@@ -4,25 +4,32 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KhuyenmaiRequest;
+use App\Mail\KhuyenMai as MailKhuyenMai;
+use App\Mail\SendMail;
+use App\Models\HocVien;
 use App\Models\KhuyenMai;
 use App\Models\KhoaHoc;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use function Termwind\render;
 
 class KhuyenMaiController extends Controller
 {
     protected $v;
-    protected $khuyenmai;
+    protected $khuyenmai , $hocvien , $khoaHoc;
 
     public function __construct()
     {
         $this->v = [];
         $this->khuyenmai = new KhuyenMai();
+        $this->hocvien = new HocVien();
+        $this->khoaHoc = new KhoaHoc();
     }
     /**
      * Display a listing of the resource.
@@ -409,7 +416,32 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function sendKM(Request $request){
-        dd($request->all());
+    public function sendKM($id ,Request $request){
+        $khuyenmai = $this->khuyenmai->show($id);
+        $loaigiamg = null ;
+        if($khuyenmai->loai_giam_gia == 1){
+            $loaigiamg  = 'giảm giá theo khóa học với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ' ;
+        }else {
+            $loaigiamg  = 'giảm giá theo khóa học với mệnh giá : ' . $khuyenmai->giam_gia . '%' ;
+
+        }
+        // dd(json_decode($khuyenmai->chi_tiet_khoa));
+        $khoaHoc = $this->khoaHoc->DanhSachKhoaHocTheoIDKhoa(json_decode($khuyenmai->chi_tiet_khoa));
+        $arrayKhoaHocKhuyenMai = [];
+        foreach($khoaHoc as $itemKh){
+            $arrayKhoaHocKhuyenMai[] = $itemKh->ten_khoa_hoc;
+        }
+        // dd($arrayKhoaHocKhuyenMai);
+        $HocVien = $this->hocvien->index(null , false , null);
+        foreach($HocVien  as $itemHocVien){
+            // dd($itemHocVien->email);
+
+            Mail::to('hoangnhattan2k2@gmail.com')->send(new MailKhuyenMai ([
+                'ma' => $khuyenmai->ma_khuyen_mai,
+                'giam_gia' => $loaigiamg ,
+                'khoa_hoc' => $arrayKhoaHocKhuyenMai,
+            ]));
+        }
+        return back();
     }
 }
