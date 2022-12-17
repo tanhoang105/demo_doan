@@ -64,36 +64,36 @@
                         <h3>Thông tin đăng ký</h3>
                     </div>
                     <div class="col-12 pt-2" >
-                        <label class="text-lg" style="padding-left: 13px;">Tên khóa học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Tên khóa học: </label>
+                        <span style="font-size: 15px;">{{$loadDangKy->ten_khoa_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Tên lớp học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_lop}}</span>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Tên lớp học: </label>
+                        <span style="font-size: 15px;">{{$loadDangKy->ten_lop}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Ca học:</label>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Ca học:</label>
                         @foreach($layThu as $thu)
-                        <span style="font-size: 18px;color: red">{{$thu->ten_thu}}</span>
+                        <span style="font-size: 15px;">{{$thu->ten_thu}}</span>
                         @endforeach
                         {{-- <br> --}}
-                        <div style="margin-left: 12px;font-size: 18px;color: red"> {{$loadDangKy->ca_hoc .' : '. $loadDangKy->thoi_gian_bat_dau . ' từ ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
+                        <div style="margin-left: 12px;font-size: 15px;"> {{$loadDangKy->ca_hoc .' : '. $loadDangKy->thoi_gian_bat_dau . ' từ ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Giảng viên:</label>
+                        <span style="font-size: 15px;">{{$loadDangKy->ten_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Ngày khai giảng:</label>
-                        <span style="font-size: 18px;color: red"> {{$loadDangKy->ngay_bat_dau}}</span>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Ngày khai giảng:</label>
+                        <span style="font-size: 15px;"> {{$loadDangKy->ngay_bat_dau}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Số lượng:</label>
-                        <span style="font-size: 18px;color: red"> {{$loadDangKy->so_luong}}</span>
+                        <label class="text-dark" style="font-size: 18px;padding-left: 13px;">Số lượng:</label>
+                        <span style="font-size: 15px;"> {{$loadDangKy->so_luong}}</span>
                     </div>
 
                     <div class="col-12 p-3">
-                        <label class="text-lg text-danger" >Học phí:</label>
+                        <label class="text-danger" style="font-size: 18px;">Học phí:</label>
                         <h3 id="gia_kh">{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
                     </div>
                     <div>

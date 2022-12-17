@@ -78,12 +78,12 @@
                         </div>
 
                         <div class="col-3 pt-4">
-                            <button class="btn btn-success" type="submit">Cập nhật</button>
+                            <button class="btn btn-success" type="submit" style="border-radius: 10px">Cập nhật</button>
                         </div>
 
                         <div class="col-3 p-0 pt-4">
                             <a href=" {{ route('client_doi_mat_khau') }}">
-                                <button class="btn btn-primary" type="button">Đổi mật khẩu</button>
+                                <button class="btn btn-primary" type="button" style="border-radius: 10px">Đổi mật khẩu</button>
                             </a>
 
                         </div>

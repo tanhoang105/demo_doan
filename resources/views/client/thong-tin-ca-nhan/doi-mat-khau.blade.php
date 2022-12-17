@@ -57,12 +57,12 @@
                         @enderror
 
                         <div class="col-3 pt-4">
-                            <button class="btn btn-success" type="submit">Cập nhật</button>
+                            <button class="btn btn-success" type="submit" style="border-radius: 10px">Cập nhật</button>
                         </div>
 
                         <div class="col-3 p-0 pt-4">
                             <a href=" {{ route('client_thong_tin_ca_nhan') }}">
-                                <button class="btn btn-danger" type="button">Hủy</button>
+                                <button class="btn btn-danger" type="button" style="border-radius: 10px">Hủy</button>
                             </a>
 
                         </div>
