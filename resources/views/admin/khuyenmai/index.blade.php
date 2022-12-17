@@ -41,7 +41,7 @@
                     <th scope="col">Giảm giá </th>
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc</th>
-                    <th scope="col">Mô tả</th>
+                    <th scope="col">Gửi mã khuyến mại</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -56,22 +56,27 @@
                         <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ma_khuyen_mai }}</td>
-                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : "Đối với tất cả khóa học" }}</td>
-                        <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : "Đối với phần trăm" }}</td>
-                        <td> {{  $item->loai_giam_gia == 1 ? number_format($item->giam_gia  , 0, '.' ,'.').' VNĐ' : $item->giam_gia . '%' }}</td>
+                        <td> {{ $item->loai_khuyen_mai == 1 ? 'Đối với khóa học' : 'Đối với tất cả khóa học' }}</td>
+                        <td> {{ $item->loai_giam_gia == 1 ? 'Đối với giá tiềm' : 'Đối với phần trăm' }}</td>
+                        <td> {{ $item->loai_giam_gia == 1 ? number_format($item->giam_gia, 0, '.', '.') . ' VNĐ' : $item->giam_gia . '%' }}
+                        </td>
                         <td> {{ date('d/m/Y', strtotime($item->ngay_bat_dau)) }}</td>
                         <td> {{ date('d/m/Y', strtotime($item->ngay_ket_thuc)) }}</td>
-                        <td> {!! $item->mo_ta !!}</td>
                         <td>
-                                <a class="btn btn-success" style="color: #fff"
-                                    href="{{ route('route_BE_Admin_Edit_Khuyen_Mai', ['id' => $item->id]) }}">
-                                    <i class="fas fa-edit "></i> Sửa</a>
+                            <button type="button" class="btn btn-primary">
+                                Gửi mã khuyến mại
+                            </button>
+                        </td>
+                        <td>
+                            <a class="btn btn-success" style="color: #fff"
+                                href="{{ route('route_BE_Admin_Edit_Khuyen_Mai', ['id' => $item->id]) }}">
+                                <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
 
-                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff"
-                                    href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
-                                    <i class="fas fa-trash-alt"></i> Xóa</a>
+                            <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff"
+                                href="{{ route('route_BE_Admin_Xoa_Khuyen_Mai', ['id' => $item->id]) }}">
+                                <i class="fas fa-trash-alt"></i> Xóa</a>
 
                         </td>
 
@@ -86,4 +91,31 @@
             {{ $list->appends('params')->links() }}
         </div>
     </div>
+    <!-- Modal -->
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Chọn đối tượng </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
 @endsection

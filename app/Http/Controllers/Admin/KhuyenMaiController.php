@@ -408,4 +408,8 @@ class KhuyenMaiController extends Controller
             ]);
         }
     }
+
+    public function sendKM(Request $request){
+        dd($request->all());
+    }
 }

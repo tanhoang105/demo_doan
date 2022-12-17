@@ -313,6 +313,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('get-form', [KhuyenMaiController::class, 'get_coupon_form'])->name('Coupon_Form');
         Route::get('get-form-edit', [KhuyenMaiController::class, 'get_coupon_form_edit'])->name('Khuyen_mai_form_edit');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
+        Route::post('send-khuyen-mai', [KhuyenMaiController::class, 'sendKM'])->name('Send_Khuyen_Mai');
     });
 
 

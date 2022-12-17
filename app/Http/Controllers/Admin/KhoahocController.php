@@ -51,6 +51,19 @@ class KhoahocController extends Controller
             $params['loc']['keyword'] = $request->keyword;
             
         }
+
+        // tìm khóa học đã có lớp 
+        $lop = $this->lop->index(null, false, null);
+        $arrayIdKhoaHoc = [];
+        foreach ($lop as  $itemLop) {
+            $arrayIdKhoaHoc[] =  $itemLop->id_khoa_hoc;
+        }
+        $arrayIdKhoaHoc = array_unique($arrayIdKhoaHoc);
+        // $listKh = $this->khoahoc->DanhSachKhoaHocTheoIDKhoa($arrayIdKhoaHoc);
+        
+        $this->v['arrayIdKhoaHoc'] = $arrayIdKhoaHoc;
+
+
         $khoahoc =  $this->khoahoc->index($params, true, 10);
         $this->v['list'] = $khoahoc;
 
