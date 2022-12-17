@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="">
-                        <option value="0">--- Chọn lớp học ---</option>
+                        <option value="">--- Chọn lớp học ---</option>
                         @foreach ($lopxep as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_lop }}</option>
                         @endforeach
@@ -51,7 +51,7 @@
                 <div class="mb-3">
                     <label for="" class="form-label">Phòng học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_phong_hoc" id="">
-                        <option value="0">--- Chọn phòng học ---</option>
+                        <option value="">--- Chọn phòng học ---</option>
                         @foreach ($phonghoc as $item)
                             <option value="{{ $item->id }}">{{ $item->ten_phong }}</option>
                         @endforeach
