@@ -18,11 +18,8 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="" class="form-label">Ảnh Banner</label>
-
-                    {{-- <img id="anh" width="1000px" src=" {{ Storage::url($banner->anh_banner) }} " alt=""> --}}
-                    <input id="hinhanh" value="{{ old('anh_banner' ?? $banner->anh_banner) }}" type="file"
+                    <input id="hinhanh" value="{{ old('anh_banner') ?? $banner->anh_banner }}" type="file"
                            name="anh_banner" class="form-control" id="" aria-describedby="" onchange="loadFile(event)">
-
                     @error('anh_banner')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror

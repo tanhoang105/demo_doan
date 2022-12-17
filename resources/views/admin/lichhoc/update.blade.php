@@ -21,7 +21,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Ca Học</label>
+                    <label for="" class="form-label">Ca Học <span class="text-danger">*</span></label>
                     <select name="ca_id" class="form-control" id="">
                         @foreach ($ca as $item)
                             @if ($res->ca_id == $item->id)
@@ -36,7 +36,7 @@
                 </div>
                 <div class="mb-3">
                     {{-- <label for="" class="form-label">Thứ</label> --}}
-
+                    <label for="" class="form-label">Chọn thứ <span class="text-danger">*</span></label>
                     @foreach ($thuhoc as $item)
                         <div>
                             <input <?php

@@ -4,15 +4,15 @@
 </div>
 <input type="text" name="id" value="{{$coupon->id}}" hidden>
 <div class="form-group row">
-    <label class="col-lg-3 col-from-label" for="coupon_code">Ma </label>
+    <label class="col-lg-3 col-from-label" for="coupon_code">Mã giảm giá</label>
     <div class="col-lg-9">
-        <input type="text" placeholder="Nhap ma" value="{{$coupon->ma_khuyen_mai}}" id="ma_km" name="ma_khuyen_mai" class="form-control" required>
+        <input type="text" placeholder="Nhập mã giảm giá" value="{{$coupon->ma_khuyen_mai}}" id="ma_km" name="ma_khuyen_mai" class="form-control" required>
     </div>
 </div>
 <div class="form-group row">
     <label class="col-md-3 col-from-label">Mô tả</label>
     <div class="col-md-9">
-        <textarea class="aiz-text-editor" value="{{$coupon->mo_ta}}" name="mo_ta" rows="9"></textarea>
+        <textarea class="aiz-text-editor form-control" value="{{$coupon->mo_ta}}" name="mo_ta" rows="7"></textarea>
     </div>
 </div>
 <div class="product-choose-list">

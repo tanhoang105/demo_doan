@@ -91,7 +91,7 @@ Route::post('/forget-password', [\App\Http\Controllers\Auth\QuenMatKhauControlle
 Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'showResetPasswordForm'])->name('form_doi_mat_khau');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\QuenMatKhauController::class, 'submitResetPasswordForm'])->name('doi_mat_khau');
 
-Route::get('/chinh-sach', [\App\Http\Controllers\Client\ClientChinhSachController::class, 'index'])->name('client_chinh_sach');
+Route::get('/chinh-sach', [\App\Http\Controllers\Client\ChinhSachController::class, 'index'])->name('client_chinh_sach');
 
 // tk ghi no
 Route::get('/tk_ghi_no', [\App\Http\Controllers\GhiNoController::class, 'tk_ghi_no'])->name('tk_ghi_no');
@@ -313,7 +313,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('get-form', [KhuyenMaiController::class, 'get_coupon_form'])->name('Coupon_Form');
         Route::get('get-form-edit', [KhuyenMaiController::class, 'get_coupon_form_edit'])->name('Khuyen_mai_form_edit');
         Route::post('xoa-all', [KhuyenMaiController::class, 'destroyAll'])->name('Xoa_All_Khuyen_Mai');
-        Route::post('send-khuyen-mai', [KhuyenMaiController::class, 'sendKM'])->name('Send_Khuyen_Mai');
+        Route::get('send-khuyen-mai/{id}', [KhuyenMaiController::class, 'sendKM'])->name('Send_Khuyen_Mai');
     });
 
 

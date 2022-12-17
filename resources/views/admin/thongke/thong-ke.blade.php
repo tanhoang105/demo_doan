@@ -191,7 +191,7 @@ use App\Models\DangKy;
                     <tr>
                         <th scope="col" class="col-6">Khóa học</th>
                         <th scope="col">Doanh thu</th>
-                        <th scope="col">Học viên nhập học</th>
+                        {{-- <th scope="col">Học viên nhập học</th> --}}
                     </tr>
                 </thead>
 
@@ -205,25 +205,7 @@ use App\Models\DangKy;
                                 <td>0 VNĐ</td>
                             @endif
                            
-                                <?php
-                                $query = DB::table('dang_ky')
-                                    ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
-                                    ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
-                                    ->groupBy('khoa_hoc.id')
-                                    ->having('khoa_hoc.id', $item->id_khoa_hoc)
-                                    ->select(DB::raw('COUNT(dang_ky.id_user) as hv'))
-                                    ->first();
                                 
-                                if(!empty($query)){
-                                    echo '<td>' . $query->hv . '</td>';
-                                }else  {
-                                    echo '<td>' . 0 . ' </td>';
-                                }
-                                    
-
-                                    
-                                
-                                ?>
 
                             
                         </tr>

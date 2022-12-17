@@ -80,7 +80,7 @@
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="{{ route('client_lien_he') }}">Liên Hệ</a></li>
+                <li><a href="{{ route('client_chinh_sach') }}">Chính sách</a></li>
                 <li><a href="{{ route('client_gioi_thieu') }}">Giới Thiệu</a></li>
             </ul>
         </div>

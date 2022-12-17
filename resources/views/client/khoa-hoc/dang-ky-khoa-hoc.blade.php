@@ -64,41 +64,43 @@
                         <h3>Thông tin đăng ký</h3>
                     </div>
                     <div class="col-12 pt-2" >
-                        <label class="text-lg" style="padding-left: 13px;">Tên khóa học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
+                        <label class="" style="padding-left: 13px;">Tên khóa học: </label>
+                        <span style="font-size: 15px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Tên lớp học: </label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_lop}}</span>
+                        <label class="" style="padding-left: 13px;">Tên lớp học: </label>
+                        <span style="font-size: 15px;color: red">{{$loadDangKy->ten_lop}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Ca học:</label>
+                        <label class="" style="padding-left: 13px;">Ca học:</label>
                         @foreach($layThu as $thu)
-                        <span style="font-size: 18px;color: red">{{$thu->ten_thu}}</span>
+                        <span style="font-size: 15px;color: red">{{$thu->ten_thu}}</span>
                         @endforeach
                         {{-- <br> --}}
-                        <div style="margin-left: 12px;font-size: 18px;color: red"> {{$loadDangKy->ca_hoc .' : '. $loadDangKy->thoi_gian_bat_dau . ' từ ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
+                        <div style="margin-left: 12px;font-size: 15px;color: red"> {{$loadDangKy->ca_hoc .' từ '. $loadDangKy->thoi_gian_bat_dau . ' đến ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Giảng viên:</label>
-                        <span style="font-size: 18px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
+                        <label class="" style="padding-left: 13px;">Giảng viên:</label>
+                        <span style="font-size: 15px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Ngày khai giảng:</label>
-                        <span style="font-size: 18px;color: red"> {{$loadDangKy->ngay_bat_dau}}</span>
+                        <label class="" style="padding-left: 13px;">Ngày khai giảng:</label>
+                        <span style="font-size: 15px;color: red"> {{$loadDangKy->ngay_bat_dau}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-lg" style="padding-left: 13px;">Số lượng:</label>
-                        <span style="font-size: 18px;color: red"> {{$loadDangKy->so_luong}}</span>
+                        <label class="text-justify" style="padding-left: 13px;">Số lượng:</label>
+                        <span style="font-size: 15px;color: red"> {{$loadDangKy->so_luong}}</span>
                     </div>
-
                     <div class="col-12 p-3">
-                        <label class="text-lg text-danger" >Học phí:</label>
+                        <label class=" text-danger" >Học phí:</label>
                         <h3 id="gia_kh">{{number_format($loadDangKy->gia_khoa_hoc)}} VNĐ</h3>
                     </div>
-                    <div>
+                    <div class="col-12">
+                        <label  class="text-justify" id="khuyen_mai" style="padding-left: 13px;font-size: 15px;color: red"></label>
+                    </div>
+                    <div style="padding-left: 13px;">
                         <input class="form-control coupon-value"  placeholder="Nhập mã khuyến mại ..."/> 
-                        <button class="btn btn-danger btn-sm mt-1 mb-4 btn-apply" data-url="{{route('apply_coupon')}}">Áp dụng</button>
+                        <button class="btn btn-danger btn-sm mt-2 mb-4 rounded btn-apply" data-url="{{route('apply_coupon')}}">Áp dụng</button>
                     </div>
                     
                 </div>
@@ -256,13 +258,20 @@
                             gia_khoa_hoc: gia_khoa_hoc 
                         }, 
                         function(data){
-                            console.log(data.success);
+                            console.log(data.loai_giam_gia);
                             $('#khuyen_mai_id').val(data.id_km);
                             if(data.success) {
                                 let gia = data.gia_khoa_hoc.toLocaleString();
                                 $('#gia_kh').html(gia + ' VNĐ');
                                 $('#gia_khoa_hoc').val(data.gia_khoa_hoc);
-                                alert('Áp dụng mã giảm giá thành công');
+                                if(data.loai_giam_gia == 1){
+                                    $('#khuyen_mai').html('Giảm giá ' + data.giam_gia + ' VNĐ')
+                                    alert('Áp dụng mã giảm giá thành công')
+                                }
+                                else{
+                                    $('#khuyen_mai').html('Giảm giá ' + data.giam_gia + '%')
+                                    alert('Áp dụng mã giảm giá thành công') 
+                                }
                             }else {
                                 alert(data.msg);
                             }

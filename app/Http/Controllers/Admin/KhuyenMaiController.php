@@ -4,25 +4,32 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\KhuyenmaiRequest;
+use App\Mail\KhuyenMai as MailKhuyenMai;
+use App\Mail\SendMail;
+use App\Models\HocVien;
 use App\Models\KhuyenMai;
 use App\Models\KhoaHoc;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 use function Termwind\render;
 
 class KhuyenMaiController extends Controller
 {
     protected $v;
-    protected $khuyenmai;
+    protected $khuyenmai , $hocvien , $khoaHoc;
 
     public function __construct()
     {
         $this->v = [];
         $this->khuyenmai = new KhuyenMai();
+        $this->hocvien = new HocVien();
+        $this->khoaHoc = new KhoaHoc();
     }
     /**
      * Display a listing of the resource.
@@ -399,6 +406,8 @@ class KhuyenMaiController extends Controller
             return response()->json([
                 'success' => true,
                 'gia_khoa_hoc' => $giaKhoaHoc,
+                'loai_giam_gia' =>$km->loai_giam_gia,
+                'giam_gia' =>$km->giam_gia,
                 'id_km' => $km->id
             ]);
         } else {
@@ -409,7 +418,44 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function sendKM(Request $request){
-        dd($request->all());
+    public function sendKM($id ,Request $request){
+        $khuyenmai = $this->khuyenmai->show($id);
+        $loaigiamgia = null ;
+        if($khuyenmai->loai_giam_gia == 1){
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ' ;
+        }else {
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . '%' ;
+
+        }
+        $loai_khuyen_mai = null ;
+        if($khuyenmai->loai_khuyen_mai == 1){
+            $loai_khuyen_mai = 'đối với khóa học';
+        }else {
+            $loai_khuyen_mai = 'Đối với tất cả khóa học';
+        }
+        $arrayKhoaHocKhuyenMai = [];
+        if($khuyenmai->chi_tiet_khoa != null){
+            $khoaHoc = $this->khoaHoc->DanhSachKhoaHocTheoIDKhoa(json_decode($khuyenmai->chi_tiet_khoa));
+            foreach($khoaHoc as $itemKh){
+                $arrayKhoaHocKhuyenMai[] = $itemKh->ten_khoa_hoc;
+            }
+
+        }
+        // dd($arrayKhoaHocKhuyenMai);
+        $HocVien = $this->hocvien->index(null , false , null);
+        $data = [];
+        foreach($HocVien  as $itemHocVien){
+            // dd($itemHocVien->email);
+            $data['email'][] = $itemHocVien->email; 
+
+        }
+        // dd($data['email']);  
+        Mail::to($data['email'])->send(new MailKhuyenMai ([
+            'ma' => $khuyenmai->ma_khuyen_mai,
+            'giam_gia' => $loaigiamgia ,
+            'khoa_hoc' => $arrayKhoaHocKhuyenMai,
+            'loai' => $loai_khuyen_mai,
+        ]));
+        return back();
     }
 }

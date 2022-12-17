@@ -63,9 +63,7 @@
                         <td> {{ date('d/m/Y', strtotime($item->ngay_bat_dau)) }}</td>
                         <td> {{ date('d/m/Y', strtotime($item->ngay_ket_thuc)) }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary">
-                                Gửi mã khuyến mại
-                            </button>
+                            <a class="btn btn-info" style="color: #fff" href=" {{route('route_BE_Admin_Send_Khuyen_Mai'  , ['id' => $item->id])}} ">Gửi mã khuyến mại</a>
                         </td>
                         <td>
                             <a class="btn btn-success" style="color: #fff"
@@ -102,10 +100,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-              
+                <div class="modal-body">
+                    <label for=""><input class="" name="doituong[]" type="radio"> Tất cả học viên</label>
+                    <label for=""><input class="" name="doituong[]" style="margin-left: 20px"type="radio">
+                        Chọn học viên</label>
+                    <div class="list-hocvien">
+                        Hoàng nhật tân
+                    </div>
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Gửi</button>
+                    <button type="submit" class="btn btn-primary">Gửi</button>
                 </div>
             </div>
         </div>
@@ -115,7 +121,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
+           $()
         });
     </script>
 @endsection

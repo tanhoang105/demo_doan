@@ -304,15 +304,15 @@
                         <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
-                                Đăng ký
+                                Danh sách đăng ký
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href=" {{ route('route_BE_Admin_List_Thanh_Toan') }} " class="nav-link">
+                        <a href=" {{ route('route_BE_Admin_Add_Dang_Ky') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
-                                Thanh Toán
+                                Thêm đăng ký
                             </p>
                         </a>
                     </li>

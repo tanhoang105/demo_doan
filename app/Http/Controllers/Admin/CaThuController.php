@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CaThuRequest;
 use App\Models\CaHoc;
 use App\Models\CaThu;
 use App\Models\LichHoc;
@@ -74,7 +75,7 @@ class CaThuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CaThuRequest $request)
     {
         //
         $this->authorize(mb_strtoupper('thêm ca thứ') );
@@ -300,7 +301,7 @@ class CaThuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(CaThuRequest $request)
     {
         $this->authorize(mb_strtoupper('update ca thứ') );
 

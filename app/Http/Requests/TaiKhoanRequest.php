@@ -76,7 +76,7 @@ class TaiKhoanRequest extends FormRequest
             // 'sdt.integer' => 'Số điện thoại nhập sai định dạng',
             'dia_chi.required' => 'Địa chỉ bắt buộc phải nhập',
             'vai_tro_id.required' => 'Vai trò không được để trống',
-            'vai_tro_id.min' => 'Vai trò tối thiểu 1 kí tự',
+            'vai_tro_id.min' => 'Vai trò bắt buộc phải chọn',
             'email.required' => 'Email bắt buộc phải nhập',
             'email.email' => 'Sai định dạng Email',
             'email.unique' => 'Email đã tồn tại',
