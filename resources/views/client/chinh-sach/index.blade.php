@@ -9,7 +9,7 @@
         <section id="about" class="about">
             <div class="container">
                 <div class="pt-3">
-                    <h2 style="text-align: center;">Chính sách trung tâm</h2>
+                    <h2 style=" text-align: center; mt-6">Chính sách trung tâm</h2>
                 </div>
 
                 @foreach ($chinhsach as $value)

@@ -83,6 +83,7 @@
                         @endif
                     </td>
                     <td>
+                    
                         @if ($item->trang_thai==1)
                             <center><button class="btn btn-primary" style="width: 100px;height: 95px">Đã duyệt</button></center>
                         @else
@@ -90,12 +91,17 @@
                         @endif
                     </td>
                     <td>
+
                         @if ($item->trang_thai==1)
+                        @if ($item->trang_thai_thanh_toan==2)
+                        <center><button class="btn btn-warning" style="width: 100px;height: 95px">Không thể hủy</button></center>
+                        @else
                         <form method="post" action="{{route('huy_dang_ky',[$item->id])}}">
                             @csrf
                             <input type="text" name="trang_thai" value="3" hidden>
                             <button onclick="confirm('Bạn đã hủy thành công!')" class="btn btn-success" type="submit" style="width: 100px;height: 95px">Hủy</button>
                         </form>
+                        @endif
                         @else
                         <center><button class="btn btn-success" style="width: 100px;height: 95px">Hủy</button></center>
                         @endif
