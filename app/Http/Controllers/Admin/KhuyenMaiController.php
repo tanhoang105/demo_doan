@@ -441,16 +441,19 @@ class KhuyenMaiController extends Controller
         }
         // dd($arrayKhoaHocKhuyenMai);
         $HocVien = $this->hocvien->index(null , false , null);
+        $data = [];
         foreach($HocVien  as $itemHocVien){
             // dd($itemHocVien->email);
+            $data['email'][] = $itemHocVien->email; 
 
-            Mail::to('hoangnhattan2k2@gmail.com')->send(new MailKhuyenMai ([
-                'ma' => $khuyenmai->ma_khuyen_mai,
-                'giam_gia' => $loaigiamgia ,
-                'khoa_hoc' => $arrayKhoaHocKhuyenMai,
-                'loai' => $loai_khuyen_mai,
-            ]));
         }
+        // dd($data['email']);  
+        Mail::to($data['email'])->send(new MailKhuyenMai ([
+            'ma' => $khuyenmai->ma_khuyen_mai,
+            'giam_gia' => $loaigiamgia ,
+            'khoa_hoc' => $arrayKhoaHocKhuyenMai,
+            'loai' => $loai_khuyen_mai,
+        ]));
         return back();
     }
 }
