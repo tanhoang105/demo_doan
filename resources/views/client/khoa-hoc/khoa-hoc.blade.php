@@ -250,7 +250,9 @@
                                 </a>
                                 <div class="feat_cour_lesson">
                                     <span
-                                        hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
+                                        hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)
+                                        ->join('giang_vien','giang_vien.id_user','=','lop.id_giang_vien')
+                                        ->get() }}</span>
                                     <span hidden>{{ $total = 0 }}</span>
                                     @foreach ($sl_lop as $data)
                                         <span hidden>{{ $lg_sv = 40 - $data->so_luong }}</span>

@@ -69,6 +69,14 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('id_lop_moi')
+                        <span style="color: red"> {{ $message }} </span>
+                    @enderror
+                    @if (session()->has('loi_trung'))
+                    <span style="color: red">
+                        {{ session()->get('loi_trung') }}
+                    </span>
+                    @endif
                 </div>
                 <div class="col-lg-12 font-weight-bold pt-2">
                     <label class="">Ghế trống</label>

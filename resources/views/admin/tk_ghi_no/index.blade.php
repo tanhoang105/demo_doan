@@ -10,7 +10,7 @@
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div> --}}
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="put" action="" enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">
             <thead>

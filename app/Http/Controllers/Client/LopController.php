@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FormDoiLopClientRequest;
 use App\Models\CaHoc;
 use App\Models\CaThu;
 use App\Models\DangKy;
@@ -32,14 +33,14 @@ class LopController extends Controller
     public function index(Request $request)
     {
         $list = DangKy::join('lop', 'dang_ky.id_lop', '=', 'lop.id')
-        ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
-        ->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')
-        ->join('ca_thu', 'ca_thu.id', '=', 'lop.ca_thu_id')
-        ->where('dang_ky.id_user', '=', Auth::user()->id)
-        ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_thu.ca_id','lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
-        ->get();
+            ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
+            ->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')
+            ->join('ca_thu', 'ca_thu.id', '=', 'lop.ca_thu_id')
+            ->where('dang_ky.id_user', '=', Auth::user()->id)
+            ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_thu.ca_id', 'lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
+            ->get();
         $this->v['list'] = $list;
-    //    dd($list);
+        //    dd($list);
         $list_lop_moi = XepLop::join('lop', 'xep_lop.id_lop', '=', 'lop.id')
             ->where('lop.so_luong', '<', 40)
             ->select('xep_lop.*', 'lop.*')
@@ -50,7 +51,7 @@ class LopController extends Controller
         $this->v['cathu'] = $this->cathu->index($this->v['params'], false, null);
         $this->v['thu'] = $this->thu->index(null, false, null);
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
-        
+
 
         $xeplop = $this->xeplop->index($this->v['params'], true, 6);
         $this->v['khaigiang'] = $xeplop;
@@ -109,9 +110,24 @@ class LopController extends Controller
         // dd($lop_moi);
         return view('client.lop.form_doi_lop', compact('lop_cu', 'lop_moi', 'xep_lop' , 'array' , 'cathu' , 'thu' , 'cahoc'));
     }
-    public function doi_lop(Request $request)
+    public function doi_lop(FormDoiLopClientRequest $request)
     {
         // dd($request->all());
+        $lop_cu = Lop::find($request->id_lop_cu);
+        $lop_moi = Lop::find($request->id_lop_moi);
+        // 
+        // check trung lop ca_thu 
+        $all_lop_cu = DangKy::where('dang_ky.id_user', '=', Auth::user()->id)
+            ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
+            ->whereNotIn('dang_ky.id_lop', [$lop_cu->id])
+            ->where('lop.ca_thu_id', '=', $lop_moi->ca_thu_id)
+            ->get();
+        // dd($all_lop_cu);
+        if ($all_lop_cu->count() > 0) {
+            session()->flash('loi_trung', 'Bạn đã đăng kí trùng ca đang học');
+            return redirect()->back();
+        }
+        // 
         $doi_lop = new DoiLopKhoa();
         $doi_lop->fill($request->all());
         $doi_lop->save();

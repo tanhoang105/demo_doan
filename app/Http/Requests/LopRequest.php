@@ -35,11 +35,12 @@ class LopRequest extends FormRequest
                         $rules = [
                             'ten_lop' => 'required | unique:lop,ten_lop',
                             'id_giang_vien' => 'numeric|min:1',
-                            'ca_thu_id' => [
+                            'ca_thu_id' => 'required', [
                                 function ($attribute, $value, $fali) use ($data) {
 
                                     $check_trung = Lop::where('id_giang_vien', '=', $data['id_giang_vien'])
                                         ->where('ca_thu_id', '=', $value)
+                                        // ->where($data['ngay_bat_dau'],'<','lop.ngay_ket_thuc')
                                         ->get();
                                     // dd($check_trung);
                                     if ($check_trung->count() > 0) {
@@ -59,7 +60,6 @@ class LopRequest extends FormRequest
                             'id_giang_vien' => 'numeric|min:1',
                             'ca_thu_id' => [
                                 function ($attribute, $value, $fali) use ($data) {
-
                                     $check_trung = Lop::where('id_giang_vien', '=', $data['id_giang_vien'])
                                         ->where('ca_thu_id', '=', $value)
                                         ->get();
@@ -99,13 +99,15 @@ class LopRequest extends FormRequest
             'ca_thu_id.min' => 'Lịch học bắt buộc phải chọn',
             'id_khoa_hoc.min' => 'Khóa học bắt buộc phải chọn',
             'integer' => ':attribute định dạng bắt buộc là số',
-            'numeric' => ':attribute định dạng bắt buộc là số'
+            'numeric' => ':attribute định dạng bắt buộc là số',
+            'ca_thu_id.required' => 'Lịch học không được để trống'
         ];
     }
     public function attributes()
     {
         return [
             'ten_lop' => 'Tên lớp',
+            // 'ca_thu_id' => 'Ca thứ',
             'so_luong' => 'Số lượng ghế',
             'ngay_bat_dau' => 'Ngày bắt đầu',
             'ngay_ket_thuc' => 'Ngày kết thúc',
