@@ -16,51 +16,16 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-center flex-wrap align-content-center" style="height: 100px;">
-            <img src="logo.png" style="width: 185px; height: 45px;">
+    <div class="">
+        <div class="">
+            <h2>Lấy lại mật khẩu</h2>
         </div>
 
-        <div class="bg-white">
-            <div class="w-100" style="height: 50px;"></div>
+        <div class="">
+            <p>Chúng tôi nhận được yêu cầu lấy lại mật khẩu từ bạn. Để thay đổi mật khẩu mới vui lòng truy cập vào link <a href="{{ route('form_doi_mat_khau', $token) }}">tại đây</a>.</p>
 
-            <div class="d-flex justify-content-center">
-                <h2>Thay Đổi Mật Khẩu</h2>
-            </div>
-
-            <div class="w-100" style="height: 50px;"></div>
-
-            <div class="d-flex justify-content-center">
-                <p class="font-weight-bold" style="text-align: center;">
-                    Chúng tôi nhận được yêu cầu lấy lại mật khẩu từ tài khoản của bạn.   
-                    <br>
-                    Để thay đổi mật khẩu mới vui lòng truy cập vào link bên dưới:
-                </p>
-            </div>
-
-            <div class="">
-                <div class="w-100" style="height: 30px;"></div>
-
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('form_doi_mat_khau', $token) }}">
-                      <button class="btn btn-primary" style="height: 50px; width: 200px; font-size: 18px;">
-                        Thay Đổi Mật Khẩu 
-                    </button>  
-                    </a> 
-                </div>
-
-                <div class="w-100" style="height: 40px;"></div>
-            </div>
-
-            <div class="d-flex justify-content-center">
-                <p style="text-align: center;">
-                    Nếu bạn không gửi yêu cầu lấy lại mật khẩu, hãy đảm bảo rằng tải khoản của bạn vẫn an toàn,
-                    <br>
-                    hoặc liên hệ với chúng tôi để được hỗ trợ. Xin cảm ơn.
-                </p>
-            </div>
-
-            <div class="w-100" style="height: 50px;"></div>
+            <p>Nếu bạn không gửi yêu cầu lấy lại mật khẩu, hãy đảm bảo rằng tải khoản của bạn vẫn an toàn,
+                hoặc liên hệ với chúng tôi để được hỗ trợ. Xin cảm ơn!</p>
         </div>
     </div>
     

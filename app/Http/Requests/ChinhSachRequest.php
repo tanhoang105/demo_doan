@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DoimatkhauRequest extends FormRequest
+class ChinhSachRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,12 +29,19 @@ class DoimatkhauRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 switch ($ActionCurrent) {
-                    // nếu là method chỉnh sửa bản ghi
-                    case 'update_password':
+                    // nếu là method thêm mới bản ghi
+                    case 'store':
                         $rules = [
-                            'old_password' => 'required',
-                            'new_password' => 'required | same:password_confirmation',
-                            'password_confirmation' => 'required | same:new_password'
+                            'noi_dung' => 'required',
+                            'doi_tuong_ap_dung' => 'required',
+                        ];
+                        break;
+
+                    // nếu là method chỉnh sửa bản ghi
+                    case 'update':
+                        $rules = [
+                            'noi_dung' => 'required',
+                            'doi_tuong_ap_dung' => 'required',
                         ];
                         break;
 
@@ -51,15 +58,13 @@ class DoimatkhauRequest extends FormRequest
         return $rules ;
     }
 
+
     public function messages()
     {
         return [
-           'old_password.required' => 'Bắt buộc nhập mật khẩu cũ',
-           'new_password.required' => 'Bắt buộc nhập mật khẩu mới',
-           'new_password.confirmed' => 'Xác nhận mật khẩu không khớp',
-           'new_password.same' => 'Xác nhận mật khẩu mới không khớp',
-           'password_confirmation.required' => 'Bắt buộc nhập nhập lại mật khẩu',
-           'password_confirmation.same' => 'Xác nhận mật khẩu mới không khớp',
+            'noi_dung.required' => 'Bắt buộc phải nhập nội dung',
+            'doi_tuong_ap_dung.required' => 'Bắt buộc phải nhập đối tượng áp dụng',
         ];
     }
+
 }

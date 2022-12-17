@@ -66,7 +66,7 @@
             <div class="col-6">
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Số điện thoại</label>
+                    <label for="" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
                     <input type="text" name="sdt" id="" class="form-control" value=" {{ $res->sdt}} " >
                     @error('sdt')
                         <span style="color: red"> {{ $message }} </span>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Địa chỉ</label>
+                    <label for="" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
                     <input value="{{ old('dia_chi') ?? request()->dia_chi ?? $res->dia_chi      }}" type="text" name="dia_chi"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}

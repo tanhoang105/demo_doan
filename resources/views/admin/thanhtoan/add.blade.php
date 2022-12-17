@@ -54,11 +54,12 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Mô tả</label>
-                    <input class="form-control" type="text" name="mo_ta" id="">
+                    <input class="form-control" id="ckeditor2" type="text" name="mo_ta">
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
+
             </div>
 
         </div>
@@ -68,4 +69,8 @@
 
     </form>
 
+    <script src="//cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('ckeditor2');
+    </script>
 @endsection
