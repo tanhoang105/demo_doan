@@ -11,7 +11,8 @@
 <body>
 
     <p> Trung tâm gửi tặng bạn mã khuyến mại {{ $emails['giam_gia'] }} </p>
-    @if (isset($emails['khoa_hoc']))
+    
+    @if (isset($emails['khoa_hoc']) && $emails['khoa_hoc'] != null)
         <p> Những khóa học đc áp dụng mã là :
             @for ($i = 0; $i < count($emails['khoa_hoc']); $i++)
                 @if($i ==  ( count($emails['khoa_hoc']) - 1 ))
@@ -22,6 +23,9 @@
             @endfor
 
         </p>
+     @else 
+     
+     <p>Áp dụng cho tất cả khóa học của trung tâm</p>
     @endif
     <p>Mã khuyến mại : {{ $emails['ma'] }}</p>
 </body>

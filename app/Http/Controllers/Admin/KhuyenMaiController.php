@@ -418,18 +418,26 @@ class KhuyenMaiController extends Controller
 
     public function sendKM($id ,Request $request){
         $khuyenmai = $this->khuyenmai->show($id);
-        $loaigiamg = null ;
+        $loaigiamgia = null ;
         if($khuyenmai->loai_giam_gia == 1){
-            $loaigiamg  = 'giảm giá theo khóa học với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ' ;
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ' ;
         }else {
-            $loaigiamg  = 'giảm giá theo khóa học với mệnh giá : ' . $khuyenmai->giam_gia . '%' ;
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . '%' ;
 
         }
-        // dd(json_decode($khuyenmai->chi_tiet_khoa));
-        $khoaHoc = $this->khoaHoc->DanhSachKhoaHocTheoIDKhoa(json_decode($khuyenmai->chi_tiet_khoa));
+        $loai_khuyen_mai = null ;
+        if($khuyenmai->loai_khuyen_mai == 1){
+            $loai_khuyen_mai = 'đối với khóa học';
+        }else {
+            $loai_khuyen_mai = 'Đối với tất cả khóa học';
+        }
         $arrayKhoaHocKhuyenMai = [];
-        foreach($khoaHoc as $itemKh){
-            $arrayKhoaHocKhuyenMai[] = $itemKh->ten_khoa_hoc;
+        if($khuyenmai->chi_tiet_khoa != null){
+            $khoaHoc = $this->khoaHoc->DanhSachKhoaHocTheoIDKhoa(json_decode($khuyenmai->chi_tiet_khoa));
+            foreach($khoaHoc as $itemKh){
+                $arrayKhoaHocKhuyenMai[] = $itemKh->ten_khoa_hoc;
+            }
+
         }
         // dd($arrayKhoaHocKhuyenMai);
         $HocVien = $this->hocvien->index(null , false , null);
@@ -438,8 +446,9 @@ class KhuyenMaiController extends Controller
 
             Mail::to('hoangnhattan2k2@gmail.com')->send(new MailKhuyenMai ([
                 'ma' => $khuyenmai->ma_khuyen_mai,
-                'giam_gia' => $loaigiamg ,
+                'giam_gia' => $loaigiamgia ,
                 'khoa_hoc' => $arrayKhoaHocKhuyenMai,
+                'loai' => $loai_khuyen_mai,
             ]));
         }
         return back();
