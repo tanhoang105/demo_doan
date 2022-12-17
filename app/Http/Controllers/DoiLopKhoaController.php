@@ -12,6 +12,7 @@ use App\Models\GhiNo;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,9 @@ class DoiLopKhoaController extends Controller
     }
     public function updateStatus($doilop, Request $request)
     {
+        $user = User::find($request->user_id);
+        $mail=$user->email;
+        // dd($mail);
         // dd($request->all());
         $data = DoiLopKhoa::find($doilop);
         // dd($data->status);
@@ -55,7 +59,7 @@ class DoiLopKhoaController extends Controller
             // dd('123');
             // $data = DoiLopKhoa::find($doilop);
             $data->status = $request->status;
-            session()->flash('sucssec', 'đơn hàng đã được cập nhật');
+            session()->flash('sucssec', 'Trạng thái yêu cầu đã được cập nhật');
             // $data->save();
             // lop cu thay doi so luong
             $lop_cu = Lop::find($request->id_lopcu);
@@ -69,7 +73,8 @@ class DoiLopKhoaController extends Controller
                 ->update(['dang_ky.id_lop' => $lop_moi->id]);
             // dd($dang_ky);
             // luu du lieu
-            Mail::to('hoandepzai00@gmail.com')->send(new sendmail3([
+            
+            Mail::to($mail)->send(new sendmail3([
                 'message' => 'Xin chào bạn , Bạn vừa đăng ký đổi lớp thành công'
             ]));
             $lop_cu->save();
@@ -82,7 +87,7 @@ class DoiLopKhoaController extends Controller
                 // dd(1);
                 $data->status = $request->status;
                 $data->save();
-                Mail::to('hoandepzai00@gmail.com')->send(new Senmail2([
+                Mail::to($mail)->send(new Senmail2([
                     'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi'
                 ]));
                 session()->flash('sucssec', 'Yêu cầu đã được cập nhật');
