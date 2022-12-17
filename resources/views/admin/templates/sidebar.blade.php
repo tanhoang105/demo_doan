@@ -40,7 +40,7 @@
                  with font-awesome or any other icon font library -->
               @hasRoles(['admin'])
 
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href=" {{ route('route_BE_Admin_Thong_Ke') }}" class="nav-link ">
                       <i class="nav-icon fas fa-chart-pie"></i>
                       <p>
@@ -58,7 +58,7 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_Tai_Khoan') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
@@ -66,7 +66,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_List_Hoc_Vien') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
@@ -74,7 +74,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_List_Giang_Vien') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
@@ -84,7 +84,7 @@
                     </li>
                   </ul>
               </li>
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href=" {{ route('route_BE_Admin_Vai_Tro') }} " class="nav-link">
                       <i class="nav-icon fas fa-bars"></i>
                       <p>
@@ -92,7 +92,7 @@
                       </p>
                   </a>
                     {{-- <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
+                        {{-- <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Quyen') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -100,7 +100,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Cap_Quyen') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -108,7 +108,7 @@
                                 </p>
                             </a>
                         </li> --}}
-                        {{-- <li class="nav-item">
+                        {{-- <li class="nav-item nav-active">
                             <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -119,7 +119,7 @@
                     {{-- </ul>  --}}
               </li>
               {{-- <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href="pages/layout/top-nav.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Top Navigation</p>
@@ -127,7 +127,7 @@
                     </li>
                 </ul> --}}
 
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href="{{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                       <p>
@@ -137,7 +137,7 @@
 
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href=" {{ route('route_BE_Admin_Khuyen_Mai') }} " class="nav-link">
                       <i class="nav-icon fas fa-percent"></i>
                       <p>
@@ -147,7 +147,7 @@
 
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href="{{ route('route_BE_Admin_Banner') }}" class="nav-link">
                       <i class="nav-icon fas fa-image"></i>
                       <p>
@@ -171,7 +171,7 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href="{{ route('route_Admin_BE_Danh_Muc_Khoa_Hoc') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
@@ -179,7 +179,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href="{{ route('route_BE_Admin_Khoa_Hoc') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
@@ -199,7 +199,7 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Lop') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -207,7 +207,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_Xep_Lop') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -215,7 +215,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_danh_sach_doi_lop') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -223,7 +223,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -231,7 +231,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Ca_Thu') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -239,7 +239,7 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
+                        {{-- <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_List_Thu_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -247,7 +247,7 @@
                                 </p>
                             </a>
                         </li> --}}
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_Ca_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -255,7 +255,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item nav-active">
                             <a href="{{ route('route_BE_Admin_Phong_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
@@ -265,7 +265,7 @@
                         </li>
                     </ul>
               </li>
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                 <a href="{{ route('route_BE_Admin_List_Chinh_Sach') }}" class="nav-link ">
                     <i class="nav-icon fas fa-edit"></i>
                     <p>
@@ -277,7 +277,7 @@
               {{-- end tác vụ đào tạo --}}
 
               @hasRoles(['giảng viên'])
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href=" {{ route('route_BE_Admin_Lich_Day_Giang_Vien') }} " class="nav-link">
                       <i class="nav-icon fas fa-calendar"></i>
                       <p>
@@ -300,7 +300,7 @@
                       </p>
                   </a>
                   <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
@@ -308,7 +308,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_Add_Dang_Ky') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>      
@@ -316,7 +316,7 @@
                             </p>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
+                    {{-- <li class="nav-item nav-active">
                         <a href=" {{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }} " class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
@@ -329,7 +329,7 @@
               </li>
               @endhasRoles
 
-              <li class="nav-item">
+              <li class="nav-item nav-active">
                   <a href=" {{ route('logout') }} " class="nav-link">
                       <i class="nav-icon fas fa-arrow-left"></i>
                       <p>
