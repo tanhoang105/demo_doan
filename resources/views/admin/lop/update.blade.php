@@ -65,8 +65,6 @@
             </div>
 
             <div class="col-6">
-               
-
                 <div class="mb-3">
                     <label for="" class="form-label">Số ghế <span class="text-danger">*</span></label>
                     <input value=" {{ $lop->so_luong }} " class="form-control" type="text" name="so_luong"
@@ -75,9 +73,6 @@
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
-
-               
-
                 <div class="mb-3">
                     <label for="" class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
                     <input value="{{ old('ngay_bat_dau') ?? $lop->ngay_bat_dau }}" type="date" name="ngay_bat_dau"
