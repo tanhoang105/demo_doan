@@ -46,6 +46,7 @@
                     <th scope="col">Lớp học đăng ký</th>
                     <th scope="col">Khóa học đăng ký</th>
                     <th scope="col">Học phí</th>
+                    <th scope="col">Phương thức thanh toán </th>
                     <th scope="col">Thanh toán</th>
                     <th scope="col">Sửa</th>
 
@@ -64,6 +65,7 @@
                         <td> {{ $item->ten_lop }}</td>
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
+                        <td> {{ $item->ten_phuong_thuc_thanh_toan }}</td>
                         <td>
                             @if ($item->trang_thai_thanh_toan == 2)
                                 <button class="btn btn-primary">Đã thanh toán</button>
