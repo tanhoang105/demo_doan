@@ -231,9 +231,12 @@
    
    $(function () {
     var url = window.location;
-    // for single sidebar menu
-    $('ul.nav-sidebar a').filter(function () {
-        return this.href == url;
+
+    // // for sidebar menu entirely but not cover treeview
+    $('li.nav-active a').filter(function() {
+        if (this.href) {
+            return this.href == url || url.href.indexOf(this.href) == 0;
+        }
     }).addClass('active');
 
     // for sidebar menu and treeview

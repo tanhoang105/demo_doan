@@ -271,7 +271,7 @@
                                             // lấy ra ca hoc
                                             foreach ($cahoc as $key => $itemCaHoc) {
                                                 if ($itemCaThu->ca_id == $itemCaHoc->id) {
-                                                    echo  "<li>" . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc  . ')' . '</li>';
+                                                    echo  "<li style=" . '"list-style: none"' . ">" . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc  . ')' . '</li>';
                                                 }
                                             }
                                             // lấy ra ngày học
@@ -305,7 +305,7 @@
                         </label>
                     </div>
                     <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <a href=" {{route('client_dang_ky',['id'=> $item->id])}} ">
+                        <a href=" {{route('client_dang_ky',['id'=> $value->id_lop])}} ">
                             <button class="text-white"
                                 style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">
                                 ĐĂNG KÝ</button>
@@ -319,91 +319,5 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Calendar Section
-                            ==================================================-->
-
-    <!-- Start:  Learners Feedback Section
-                            ==================================================-->
-    {{-- <section class="lfeedback-section">
-        <!-- Container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="lfeedback_img" id="scene3">
-                        <img src="{{ asset('client/images/feedback.png') }}" alt="image" class="layer"
-                            data-depth="0.28">
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-12" id="lfeedback_cur">
-                    <div class="lfeedback_item">
-                        <!-- Start: Heading -->
-                        <div class="base-header">
-                            <h3> Phản hồi của Học viên </h3>
-                        </div>
-                        <!-- Best Book Image 1 -->
-                        <div class="lfeedback_text">
-                            <p> Đó là một nỗi sợ hãi mà hầu hết trải nghiệm của tôi là tôi cảm thấy một giả định tuyệt vời
-                                rằng không bao giờ nghĩ rằng điều đó sẽ xảy ra Nhưng những điều khiêu khích tuyệt vời mà
-                                những điều được chấp thuận nhận được mà không có đủ điều kiện thực sự xảy ra mà không bao
-                                giờ nghĩ rằng điều đó sẽ xảy ra với một trải nghiệm sợ hãi nhất. </p>
-                            <h4> David Benjamin </h4>
-                            <h5>Washington, United States</h5>
-                        </div>
-                    </div>
-                    <div class="lfeedback_item">
-                        <!-- Start: Heading -->
-                        <div class="base-header">
-                            <h3> Phản hồi của Học viên </h3>
-                        </div>
-                        <!-- Best Book Image 1 -->
-                        <div class="lfeedback_text">
-                            <p> Đó là một nỗi sợ hãi mà hầu hết trải nghiệm của tôi là tôi cảm thấy một giả định tuyệt vời
-                                rằng không bao giờ nghĩ rằng điều đó sẽ xảy ra Nhưng những điều khiêu khích tuyệt vời mà
-                                những điều được chấp thuận nhận được mà không có đủ điều kiện thực sự xảy ra mà không bao
-                                giờ nghĩ rằng điều đó sẽ xảy ra với một trải nghiệm sợ hãi nhất. </p>
-                            <h4> David Benjamin </h4>
-                            <h5>Washington, United States</h5>
-                        </div>
-                    </div>
-                </div>
-                <!--/ col-md-12  -->
-            </div>
-            <!--/ row - -->
-        </div>
-        <!--/ Container - -->
-    </section> --}}
-    <!--   End: Learners Feedback Section
-                            ==================================================-->
-
-
-
-    <!-- Start: Newsletter Section
-                            ==================================================-->
-    {{-- <section class="newsletter-section pb-130">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="newsletter_wrap">
-                        <!-- Start: Heading -->
-                        <div class="base-header">
-                            <h3> Đăng Kí Với Chúng Tôi </h3>
-                        </div>
-                        <span>
-                            Theo dõi bản tin của chúng tôi và nhận được nhiều <br />
-                            điều thú vị mỗi tuần
-                        </span>
-                        <div class="newsletter_form">
-                            <input class="newsletter_field" name="search" id="search_field" type="text"
-                                placeholder="Nhập địa chỉ email của bạn" />
-                            <a href="#"> ĐĂNG KÝ </a>
-                        </div>
-                        <!-- Best Book Image 1 -->
-                    </div>
-                </div>
-            </div>
-            <!-- /. row -->
-        </div>
-        <!-- /. container -->
-    </section> --}}
-    <!-- End: Newsletter Section
                             ==================================================-->
 @endsection

@@ -26,6 +26,12 @@
                     Lớp học
                 </a>
             </li>
+            <li class="nav-item" style="height: 50px;">
+                <a class="nav-link" href=" {{ route('tk_ghi_no') }} ">
+                    <span data-feather="dollar-sign"></span>
+                    Số dư
+                </a>
+            </li>
         </ul>
 
     </div>
