@@ -55,7 +55,7 @@ class DoiLopKhoaController extends Controller
             // dd('123');
             // $data = DoiLopKhoa::find($doilop);
             $data->status = $request->status;
-            session()->flash('sucssec', 'đơn hàng đã được cập nhật');
+            session()->flash('sucssec', 'Cập nhật thành công');
             // $data->save();
             // lop cu thay doi so luong
             $lop_cu = Lop::find($request->id_lopcu);
