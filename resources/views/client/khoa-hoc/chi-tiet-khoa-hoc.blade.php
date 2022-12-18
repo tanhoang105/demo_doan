@@ -63,7 +63,7 @@
                                         aria-selected="false" type="button"> Mô tả</button>
                                 </li>
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <button class="nav-link" id="pills-curriculum-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-curriculum" role="tab" aria-controls="pills-curriculum"
                                         aria-selected="false" type="button">Chương trình</button>
@@ -73,7 +73,7 @@
                                     <button class="nav-link" id="pills-reviews-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-reviews" role="tab" aria-controls="pills-reviews"
                                         aria-selected="false" type="button">Nhận xét</button>
-                                </li>
+                                </li> --}}
                             </ul>
                             <div class="tab-content course_tab_cont" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-discription"
@@ -96,7 +96,7 @@
                                         <tbody>
                                             @foreach ($lop as $key => $item)
                                                 <tr>
-                                                    <th scope="row">{{ $item->id }}</th>
+                                                    <th scope="row">{{ $loop->iteration }}</th>
                                                     <td> {{ $item->ten_lop }}</td>
                                                     <td> {{ $item->so_luong }}</td>
                                                     <td> {{ date('d-m-Y', strtotime($item->ngay_bat_dau)) }}</td>
@@ -125,13 +125,13 @@
                                         </tbody>
 
                                     </table>
-                                    <div class="share_course">
+                                    {{-- <div class="share_course">
                                         <span> Chia sẻ khóa học : </span>
                                         <a href="#" class="fab fa-facebook-f"></a>
                                         <a href="#" class="fab fa-pinterest"></a>
                                         <a href="#" class="fab fa-twitter"></a>
                                         <a href="#" class="fa fa-link"></a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <!-- End:: discription-tab  -->
                                 <div class="tab-pane fade" id="pills-curriculum" aria-labelledby="pills-curriculum-tab"
@@ -292,14 +292,14 @@
                             <span> <i class="far fa-layer-group"></i>Level </span>
                             <span> Advance </span>
                         </div> --}}
-                        <div class="course-detail-list">
+                        {{-- <div class="course-detail-list">
                             <span> <i class="far fa-globe"></i>Trạng thái </span>
                             <span> @if ($detail->id_danh_muc == 1)
                                 Đang hoạt động
                                 @else
                                 Không hoạt động
                             @endif </span>
-                        </div>
+                        </div> --}}
                         <div class="course-detail-list">
                             <span> <i class="far fa-book-spells"></i>Danh mục khóa học </span>
                             @foreach ($danhmuc as $value )

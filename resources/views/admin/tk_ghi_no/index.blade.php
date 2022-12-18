@@ -10,7 +10,7 @@
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
     </div> --}}
-    <form method="put" action="" enctype="multipart/form-data">
+    {{-- <form method="put" action="" enctype="multipart/form-data"> --}}
         @csrf
         <table class="table table-bordered">
             <thead>
@@ -77,7 +77,7 @@
             </tbody>
         </table>
  
-    </form>
+    {{-- </form> --}}
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">
             {{ $ghi_no->appends('params')->links() }}
