@@ -48,7 +48,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th> <input id="check_all" type="checkbox" /></th>
+                {{-- <th> <input id="check_all" type="checkbox" /></th> --}}
                 <th scope="col">STT</th>
                 <th scope="col">Mã học viên </th>
                 <th scope="col">Tên học viên </th>
@@ -58,7 +58,7 @@
                 <th scope="col">Khóa học mới </th>
                 <th scope="col">Tiền nợ </th>
                 <th scope="col">Trạng thái</th>
-                <th style="text-align: center">Hành động </th>
+                {{-- <th style="text-align: center">Hành động </th> --}}
                 {{-- <th scope="col">Sửa</th> --}}
                 {{-- <th scope="col">
                 <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -69,7 +69,7 @@
         <tbody>
             @foreach ($doi_lop_khoa as $key => $item)
                 <tr>
-                    <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                    {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                     <td> {{ $loop->iteration }}</td>
                     <td> {{ $item->user_id }}</td>
                     <td> {{ $item->name }}</td>
@@ -158,9 +158,9 @@
                             </form>
                         @endif
                     </td>
-                    <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
+                    {{-- <td> <button onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"><a
                                 href="{{ route('route_BE_Admin_Xoa_Yc_doi_Khoa_Hoc', ['id' => $item->id]) }}">
-                                <i class="fas fa-trash-alt"></i> Xóa</a></button></td>
+                                <i class="fas fa-trash-alt"></i> Xóa</a></button></td> --}}
                 </tr>
             @endforeach
 

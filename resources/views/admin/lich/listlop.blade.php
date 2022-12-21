@@ -51,7 +51,7 @@
                             <td> {{ $item->ten_lop }}</td>
 
 
-                            <td><button class="bt btn-primary"><a style="color: aliceblue"
+                            <td><button class="btn btn-primary"><a style="color: aliceblue"
                                         href=" {{ route('route_BE_Admin_Detail_Lich', ['id' => $item->id_lop]) }} ">Chi
                                         tiết</a></button></td>
 
