@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <!-- Start: Hero Section
-                            ==================================================-->
+                                ==================================================-->
     <div class="slider_owl">
         @foreach ($banner as $item)
             <div class="hero-section hero_two">
@@ -57,11 +57,11 @@
         @endforeach
     </div>
     <!-- End: Hero Section
-                            ==================================================-->
+                                ==================================================-->
 
 
     <!-- Start: Work Flow Section
-                            ==================================================-->
+                                ==================================================-->
     <section class="workflow-section pt-120">
         <!-- Container -->
         <div class="container">
@@ -74,8 +74,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <!-- category 1 -->
                     <div class="workflow_item">
-                        <i class="pe-7s-search"></i>
-                        <h4> Tìm khóa học</h4>
+                        <a href="{{ route('client_khoa_hoc') }}"><i class="pe-7s-search"></i></a>
+                        <a href="{{ route('client_khoa_hoc') }}">
+                            <h4> Tìm khóa học</h4>
+                        </a>
                         <p></p>
                     </div>
                 </div>
@@ -94,8 +96,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <!-- category 1 -->
                     <div class="workflow_item">
-                        <i class="pe-7s-medal"></i>
-                        <h4> Chứng nhận </h4>
+                        <a href="{{ route('client_chinh_sach') }}"><i class="pe-7s-medal"></i></a>
+                        <a href="{{ route('client_chinh_sach') }}">
+                            <h4> Chính sách </h4>
+                        </a>
                         <p></p>
                     </div>
                 </div>
@@ -106,12 +110,12 @@
         <!--/ Container - -->
     </section>
     <!--   End: Work Flow Section
-                            ==================================================-->
+                                ==================================================-->
 
 
 
     <!-- Start:  About US  Section
-                            ==================================================-->
+                                ==================================================-->
     <section class="about-section">
         <!-- Container -->
         <div class="container">
@@ -149,7 +153,7 @@
                             nonumy eirmod eirmod như vất vả và đau đớn là điều tuyệt vời đối với một số người, nhưng diam
                             voluptua. Nhưng quả thực tôi sẽ buộc tội họ và chỉ cần hai nỗi đau và tôi sẽ lấy lại chúng. Anh
                             ta đã đứng.</p>
-                        <a href="{{ route('client_lien_he') }}" class="more-link"> Tìm hiểu thêm </a>
+                        {{-- <a href="{{ route('client_lien_he') }}" class="more-link"> Tìm hiểu thêm </a> --}}
                     </div>
                 </div>
                 <!--/ col-md-12  -->
@@ -159,11 +163,11 @@
         <!--/ Container - -->
     </section>
     <!--   End: About US  Section
-                            ==================================================-->
+                                ==================================================-->
 
 
     <!-- Start: Featured Courses Section
-                            ==================================================-->
+                                ==================================================-->
     <section class="feat-course-section">
         <div class="container">
             <!-- Start: Heading -->
@@ -181,25 +185,27 @@
                             </a>
                             <div class="feat_cour_price">
                                 <span class="feat_cour_tag"> {{ $value->ten_danh_muc }} </span>
-                                <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc,0,'.','.') }} VNĐ </span>
+                                <span class="feat_cour_p"> {{ number_format($value->gia_khoa_hoc, 0, '.', '.') }} VNĐ </span>
                             </div>
                             <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
                                 <h4 class="feat_cour_tit"> {{ $value->ten_khoa_hoc }} </h4>
                             </a>
                             <div class="feat_cour_lesson">
-                                <span hidden>{{ $count_lop = DB::table('lop')
-                                            ->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
+                                <span
+                                    hidden>{{ $count_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->get() }}</span>
                                 <span hidden>{{ $total = 0 }}</span>
                                 @foreach ($count_lop as $data)
-                                    <span hidden>{{ $count_sv = 40 - ($data->so_luong) }}</span>
+                                    <span hidden>{{ $count_sv = 40 - $data->so_luong }}</span>
                                     <span hidden>{{ $total = $total + $count_sv }}</span>
                                 @endforeach
-                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> {{ count($count_lop) }} Lớp </span>
-                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> {{ $total }} Học viên </span>
+                                <span class="feat_cour_less"> <i class="pe-7s-note2"></i> {{ count($count_lop) }} Lớp
+                                </span>
+                                <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> {{ $total }} Học viên
+                                </span>
                             </div>
                             <div class="feat_cour_rating">
                                 <span class="feat_cour_stu">
-                                    <i class="pe-7s-look"></i>  {{ number_format($value->luot_xem) }} Lượt xem </span>
+                                    <i class="pe-7s-look"></i> {{ number_format($value->luot_xem) }} Lượt xem </span>
                                 </span>
                                 <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
                                         class="arrow_right"></i>
@@ -217,10 +223,10 @@
         <!-- /. container -->
     </section>
     <!-- End: Featured Courses Section
-                            ==================================================-->
+                                ==================================================-->
 
     <!-- Start: Featured Calendar Section
-                            ==================================================-->
+                                ==================================================-->
     <section class="feat-course-section">
         <div class="container">
             <!-- Start: Heading -->
@@ -243,81 +249,83 @@
                     <h4>Ca học</h4>
                 </div>
                 <div class="col pt-3"></div>
-            </div> 
+            </div>
 
             @foreach ($khaigiang as $value)
-                @if( (date('d-m-Y', strtotime($value->ngay_bat_dau))) >= date('d-m-Y', time()) ) 
-                <div class="row text-dark align-content-center"
-                    style="text-align: center;height: 100px;border-top: 1px solid #DEDEDE">
-                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{ $value->ten_lop }} </label>
-                    </div>
-                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{ $value->ten_khoa_hoc }} </label>
-                    </div>
-                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label> {{  date('d/m/Y', strtotime($value->ngay_bat_dau)) . ' -- ' . date('d/m/Y', strtotime($value->ngay_ket_thuc)) }} </label>
-                    </div>
-                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <label>
-                            <?php
-                            foreach ($array as $item) {
-                                if ($item->id == $value->id_lop) {
-                                    // tìm ca thu
-                                    // echo  $item->ca_thu_id;
-                                    foreach ($cathu as $itemCaThu) {
-                                        if ($item->ca_thu_id == $itemCaThu->id) {
-                                            // echo $itemCaThu->ca_id;
-                                            // lấy ra ca hoc
-                                            foreach ($cahoc as $key => $itemCaHoc) {
-                                                if ($itemCaThu->ca_id == $itemCaHoc->id) {
-                                                    echo  "<li style=" . '"list-style: none"' . ">" . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc  . ')' . '</li>';
+                @if (date('d-m-Y', strtotime($value->ngay_bat_dau)) >= date('d-m-Y', time()))
+                    <div class="row text-dark align-content-center"
+                        style="text-align: center;height: 100px;border-top: 1px solid #DEDEDE">
+                        <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                            <label> {{ $value->ten_lop }} </label>
+                        </div>
+                        <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                            <label> {{ $value->ten_khoa_hoc }} </label>
+                        </div>
+                        <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                            <label>
+                                {{ date('d/m/Y', strtotime($value->ngay_bat_dau)) . ' -- ' . date('d/m/Y', strtotime($value->ngay_ket_thuc)) }}
+                            </label>
+                        </div>
+                        <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                            <label>
+                                <?php
+                                foreach ($array as $item) {
+                                    if ($item->id == $value->id_lop) {
+                                        // tìm ca thu
+                                        // echo  $item->ca_thu_id;
+                                        foreach ($cathu as $itemCaThu) {
+                                            if ($item->ca_thu_id == $itemCaThu->id) {
+                                                // echo $itemCaThu->ca_id;
+                                                // lấy ra ca hoc
+                                                foreach ($cahoc as $key => $itemCaHoc) {
+                                                    if ($itemCaThu->ca_id == $itemCaHoc->id) {
+                                                        echo '<li style=' . '"list-style: none"' . '>' . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc . ')' . '</li>';
+                                                    }
                                                 }
-                                            }
-                                            // lấy ra ngày học
-                                            // echo $itemCaThu->thu_hoc_id;
-                                            $arrayThu = explode(',', $itemCaThu->thu_hoc_id);
-                                            for ($i = 0; $i < count($arrayThu); $i++) {
-                                                foreach ($thu as $key => $itemThu) {
-                                                    if ($i == 0) {
-                                                        if ($arrayThu[$i] == $itemThu->id) {
-                                                            echo '( ' . $itemThu->ten_thu . ' & ';
-                                                        }
-                                                    } elseif($i == (count($arrayThu) - 1) ) {
-                                                        if ($arrayThu[$i] == $itemThu->id) {
-                                                            echo '' . $itemThu->ten_thu . ')';
-                                                        }
-                                                    }else {
-                                                        if ($arrayThu[$i] == $itemThu->id) {
-                                                            echo '' . $itemThu->ten_thu . ' & ';
+                                                // lấy ra ngày học
+                                                // echo $itemCaThu->thu_hoc_id;
+                                                $arrayThu = explode(',', $itemCaThu->thu_hoc_id);
+                                                for ($i = 0; $i < count($arrayThu); $i++) {
+                                                    foreach ($thu as $key => $itemThu) {
+                                                        if ($i == 0) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '( ' . $itemThu->ten_thu . ' & ';
+                                                            }
+                                                        } elseif ($i == count($arrayThu) - 1) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ')';
+                                                            }
+                                                        } else {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ' & ';
+                                                            }
                                                         }
                                                     }
                                                 }
+                                
+                                                // ===
                                             }
-                            
-                                            // ===
                                         }
                                     }
                                 }
-                            }
-                            
-                            ?>
-                        </label>
+                                
+                                ?>
+                            </label>
+                        </div>
+                        <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                            <a href=" {{ route('client_dang_ky', ['id' => $value->id_lop]) }} ">
+                                <button class="text-white"
+                                    style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">
+                                    ĐĂNG KÝ</button>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col d-flex align-content-center flex-wrap justify-content-center">
-                        <a href=" {{route('client_dang_ky',['id'=> $value->id_lop])}} ">
-                            <button class="text-white"
-                                style="background: #00938D;border-radius: 8px;border: none;width: 120px;height: 40px;">
-                                ĐĂNG KÝ</button>
-                        </a>
-                    </div>
-                </div>
-            @endif            
+                @endif
             @endforeach
 
         </div>
         <!-- /. container -->
     </section>
     <!-- End: Featured Calendar Section
-                            ==================================================-->
+                                ==================================================-->
 @endsection
