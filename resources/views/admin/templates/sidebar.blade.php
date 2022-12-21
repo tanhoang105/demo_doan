@@ -291,42 +291,14 @@
 
               {{-- tác vụ của kế toán --}}
               @hasRoles(['tuyển sinh','admin','kế toán'])
-              <li class="nav-item">
-                  <a href="" class="nav-link">
-                      <i class="nav-icon fas fa-user-plus"></i>
-                      <p>
-                          Đăng ký
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item nav-active">
-                        <a href=" {{ route('route_BE_Admin_List_Dang_Ky') }} " class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>      
-                                Danh sách đăng ký
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item nav-active">
-                        <a href=" {{ route('route_BE_Admin_Add_Dang_Ky') }} " class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>      
-                                Thêm đăng ký
-                            </p>
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item nav-active">
-                        <a href=" {{ route('route_BE_Admin_Phuong_Thuc_Thanh_Toan') }} " class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>
-                                Pương thức thanh toán
-                            </p>
-                        </a>
-                    </li> --}}
-                  </ul>
-
-              </li>
+              <li class="nav-item nav-active">
+                <a href="{{ route('route_BE_Admin_List_Dang_Ky') }}" class="nav-link ">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                        Đăng ký
+                    </p>
+                </a>
+            </li>
               @endhasRoles
 
               <li class="nav-item nav-active">
