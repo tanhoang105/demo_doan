@@ -6,6 +6,7 @@ use App\Http\Requests\DoilopRequest;
 use App\Mail\SendMail;
 use App\Mail\sendmail3;
 use App\Mail\Senmail2;
+use App\Mail\Thanh_toan_thanh_cong;
 use App\Models\DangKy;
 use App\Models\DoiLopKhoa;
 use App\Models\GhiNo;
@@ -49,8 +50,11 @@ class DoiLopKhoaController extends Controller
     }
     public function updateStatus($doilop, Request $request)
     {
+        $lop_cu = Lop::find($request->id_lopcu);
+        $lop_moi = Lop::find($request->id_lopmoi);
+        // 
         $user = User::find($request->user_id);
-        $mail=$user->email;
+        $mail = $user->email;
         // dd($mail);
         // dd($request->all());
         $data = DoiLopKhoa::find($doilop);
@@ -73,9 +77,11 @@ class DoiLopKhoaController extends Controller
                 ->update(['dang_ky.id_lop' => $lop_moi->id]);
             // dd($dang_ky);
             // luu du lieu
-            
             Mail::to($mail)->send(new sendmail3([
-                'message' => 'Xin chào bạn , Bạn vừa đăng ký đổi lớp thành công'
+                'message' => 'Xin chào bạn , Bạn vừa đăng ký đổi lớp thành công',
+                'lop_cu' => $lop_cu->ten_lop,
+                'lop_moi' => $lop_moi->ten_lop,
+                'ngay_xac_nhan' => date(now()),
             ]));
             $lop_cu->save();
             $lop_moi->save();
@@ -87,8 +93,17 @@ class DoiLopKhoaController extends Controller
                 // dd(1);
                 $data->status = $request->status;
                 $data->save();
+                $kk = DoiLopKhoa::find($doilop);
+                $khoa_hoc_cu = KHoaHoc::find($lop_cu->id_khoa_hoc);
+                $khoa_hoc_moi = KHoaHoc::find($lop_moi->id_khoa_hoc);
+                $khoan_no = $khoa_hoc_moi->gia_khoa_hoc - $khoa_hoc_cu->gia_khoa_hoc;
+                // dd($khoa_hoc_cu);
                 Mail::to($mail)->send(new Senmail2([
-                    'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi'
+                    'message' => 'Xin chào bạn, yêu cầu đổi khóa học của bạn đã được xác nhận',
+                    'khoa_hoc_cu' => $khoa_hoc_cu->ten_khoa_hoc,
+                    'khoa_hoc_moi' => $khoa_hoc_moi->ten_khoa_hoc,
+                    'khoan_no' => $khoan_no,
+                    'ngay_xac_nhan' => date(now()),
                 ]));
                 session()->flash('sucssec', 'Yêu cầu đã được cập nhật');
                 return redirect()->back();
@@ -131,14 +146,18 @@ class DoiLopKhoaController extends Controller
                         $lop_moi->save();
                         $lop_cu->save();
                         $data->save();
+                        Mail::to($mail)->send(new Thanh_toan_thanh_cong([]));
                         session()->flash('sucssec', 'Yêu cầu đã được cập nhật');
+                        return redirect()->back();
                     } elseif ($value->tien_no < 0) {
+                        dd($value->tien_no);
                         // $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                         //     ->update(['tien_no' => $tien]);
                         // // 
                         // $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                         //     ->update(['trang_thai' => 2]); //trung tam  no           
                         session()->flash('error', 'Tài khoản chưa thanh toán khoản nợ !');
+                        return redirect()->back();
                     } else {
                         // $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                         //     ->update(['tien_no' => $tien]);
@@ -152,6 +171,7 @@ class DoiLopKhoaController extends Controller
                         $lop_cu->save();
                         $data->save();
                         session()->flash('sucssec', 'Yêu vầu đã được cập nhật');
+                        Mail::to($mail)->send(new Thanh_toan_thanh_cong([]));
                         return redirect()->back();
                     }
                     // $value->tien_no = $tien;

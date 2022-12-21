@@ -1,5 +1,6 @@
 @extends('Client.templates.layout')
-@section('title') - Giảng viên
+@section('title')
+    - Giảng viên
 @endsection
 @section('content')
 
@@ -20,28 +21,30 @@
         <!-- End: Header Content -->
     </header>
     <!--/. header -->
-    <!--/    
-==================================================-->
+    <!--/
+            ==================================================-->
 
 
 
     <!-- Start: Teacher Section
-==================================================-->
+            ==================================================-->
     <section class="single-teacher-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-5 col-sm-12">
+                <div style="margin-top: 60px" class="col-lg-4 col-md-5 col-sm-12">
                     <div class="teacher_left">
                         <div class="teacher_avatar">
                             <img src="{{ Storage::url($giang_vien->hinh_anh) }}" alt="">
-                            <h3> {{$giang_vien->ten_giang_vien}} </h3>
-                            <span>@if ($giang_vien->gioi_tinh == 1)
-                                Nam
+                            <h3> {{ $giang_vien->ten_giang_vien }} </h3>
+                            {{-- <span>
+                                @if ($giang_vien->gioi_tinh == 1)
+                                    Nam
                                 @else
-                                Nữ
-                            @endif</span>
-                            <span> {{$giang_vien->email}}</span>
-                            <span>{{$giang_vien->sdt}}</span>
+                                    Nữ
+                                @endif
+                            </span> --}}
+                            <span> {{ $giang_vien->email }}</span>
+                            <span>{{ $giang_vien->sdt }}</span>
                         </div>
                         {{-- <div class="teacher_social">
                             <a href="#" class="fab fa-facebook-f"></a>
@@ -49,7 +52,7 @@
                             <a href="#" class="fab fa-twitter"></a>
                             <a href="#" class="fab fa-youtube"></a>
                         </div> --}}
-                        <div class="teacher_achieve" >
+                        <div class="teacher_achieve">
                             {{-- <div class="teacher_achieve_list">
                                 <i class="fal fa-user-friends"></i>
                                 <h3> 56,890 </h3>
@@ -77,56 +80,72 @@
                 <div class="col-lg-8 col-md-7 col-sm-12 teach_course_tab">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="course-tab" data-bs-toggle="tab"
-                                data-bs-target="#course" type="button" role="tab" aria-controls="course"
-                                aria-selected="true">Danh sách khóa học </button>
+                            <button class="nav-link active" id="course-tab" data-bs-toggle="tab" data-bs-target="#course"
+                                type="button" role="tab" aria-controls="course" aria-selected="true">Danh sách khóa học
+                            </button>
                         </li>
                         <!-- end: ourse-tab -->
-                        <li class="nav-item" role="presentation">
+                        {{-- <li class="nav-item" role="presentation">
                             <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews"
                                 type="button" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</button>
-                        </li>
+                        </li> --}}
                         <!-- end: reviews-tab -->
                     </ul>
                     <!-- End:  nav-tabs -->
 
                     <div class="tab-content" id="myTabContent">
-                       <div class="tab-pane fade show active" id="course" role="tabpanel" aria-labelledby="course-tab">
-                        <div class="row teacher_course">
-                          @foreach ($khoa_hoc as $value )
-                          <div class="col-lg-6 col-sm-12">
-                            <div class="feat_course_item">
-                                <img src="{{ Storage::url($value->hinh_anh) }}" alt="image">
-                                <div class="feat_cour_price">
-                                    <span class="feat_cour_tag"> Development </span>
-                                    <span class="feat_cour_p">{{$value->gia_khoa_hoc}}</span>
-                                </div>
-                                <h4 class="feat_cour_tit">{{$value->ten_khoa_hoc}}</h4>
-                                <div class="feat_cour_lesson">
-                                    <span class="feat_cour_less"> <i class="pe-7s-note2"></i> 20 lessons
-                                    </span>
-                                    <span class="feat_cour_stu"> <i class="pe-7s-add-user"></i> 237 Students
-                                    </span>
-                                </div>
-                                <div class="feat_cour_rating">
-                                    <span class="feat_cour_rat">
-                                        4.6
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        (3,539)
-                                    </span>
-                                    <a href="{{route('client_chi_tiet_khoa_hoc',$value->id)}}"> <i class="arrow_right"></i> </a>
-                                </div>
+                        <div class="tab-pane fade show active" id="course" role="tabpanel" aria-labelledby="course-tab">
+                            <div class="row teacher_course">
+                                @foreach ($khoa_hoc as $value)
+                                    <div class="col-lg-6 col-sm-12">
+                                        <div class="feat_course_item">
+                                            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image">
+                                            <div class="feat_cour_price">
+                                                <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
+                                                <span
+                                                    class="feat_cour_p">{{ number_format($value->gia_khoa_hoc, 0, '.', '.') }}
+                                                    VND</span>
+                                            </div>
+                                            <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}">
+                                                <h4 class="feat_cour_tit">{{ $value->ten_khoa_hoc }}</h4>
+                                            </a>
+                                            <div class="feat_cour_lesson">
+                                                <span
+                                                    hidden>{{ $sl_lop = DB::table('lop')->where('lop.id_khoa_hoc', '=', $value->id)->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')->get() }}</span>
+                                                <span hidden>{{ $total = 0 }}</span>
+                                                @foreach ($sl_lop as $data)
+                                                    <span hidden>{{ $lg_sv = 40 - $data->so_luong }}</span>
+                                                    <span hidden>{{ $total = $total + $lg_sv }}</span>
+                                                @endforeach
+
+                                                <span class="feat_cour_less"> <i
+                                                        class="pe-7s-note2"></i>{{ count($sl_lop) }}
+                                                    Lớp học</span>
+                                                <span class="feat_cour_stu"> <i class="fas fa-user"> {{ $total }}
+                                                        Học
+                                                        viên</i></span>
+                                            </div>
+                                            <div class="feat_cour_rating">
+                                                <span class="feat_cour_rat">
+                                                    <span>Lượt xem</span>
+                                                    ({{ number_format($value->luot_xem) }})
+                                                </span>
+                                                <a href="{{ route('client_chi_tiet_khoa_hoc', $value->id) }}"> <i
+                                                        class="arrow_right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                          @endforeach
+                        <div class="">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                {{ $khoa_hoc->appends('params')->links() }}
+                            </div>
                         </div>
-                    </div>
                         <!-- End: Course List Content -->
-                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        {{-- <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <div class="row teacher_review">
                                 <div class="col-lg-6 col-sm-12">
                                     <div class="lfeedback_text">
@@ -209,7 +228,7 @@
                                 </div>
                                 <!-- end: review col-->
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End: Reviews Content -->
 
                     </div>
@@ -228,7 +247,7 @@
         <!-- /. container -->
     </section>
     <!--   End: Teacher Section
-==================================================-->
+            ==================================================-->
 
 
 @endsection
