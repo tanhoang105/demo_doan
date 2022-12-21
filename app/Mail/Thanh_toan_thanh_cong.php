@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class sendmail3 extends Mailable
+class Thanh_toan_thanh_cong extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class sendmail3 extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Sendmail3',
+            subject: 'Thanh Toan Thanh Cong',
         );
     }
 
@@ -59,7 +59,7 @@ class sendmail3 extends Mailable
     public function build()
     {
         return $this->subject("Trung Tâm Dạy Học IT ")
-            ->view('sendmail.xac_nhan_doi_lop')
+            ->view('sendmail.thanh_toan_thanh_cong')
             ->with('emails', $this->email);
     }
 }

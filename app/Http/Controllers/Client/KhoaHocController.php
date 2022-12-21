@@ -138,21 +138,30 @@ class KhoaHocController extends Controller
     }
     public function doi_khoa_hoc(FormDoiLopClientRequest $request)
     {
+
         // dd($request->all());
+        $check_trung = DoiLopKhoa::where('doi_lop_khoa.id_lop_cu', '=', $request->id_lop_cu)
+            ->where('doi_lop_khoa.status', '<', 4)
+            ->get();
+        // dd($check_trung->count());
+        if ($check_trung->count() > 0) {
+            session()->flash('error', 'Yêu cầu đổi khóa đã tồn tại và đang chờ hệ thống xác nhận');
+            return redirect()->back();
+        }
         $lop_cu = Lop::find($request->id_lop_cu);
         $lop_moi = Lop::find($request->id_lop_moi);
         // 
         // check trung lop ca_thu 
-        $all_lop_cu = DangKy::where('dang_ky.id_user','=',Auth::user()->id)
-        ->join('lop','lop.id','=','dang_ky.id_lop')
-        ->whereNotIn('dang_ky.id_lop',[$lop_cu->id])
-        ->where('lop.ca_thu_id','=',$lop_moi->ca_thu_id)
-        ->get();
+        $all_lop_cu = DangKy::where('dang_ky.id_user', '=', Auth::user()->id)
+            ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
+            ->whereNotIn('dang_ky.id_lop', [$lop_cu->id])
+            ->where('lop.ca_thu_id', '=', $lop_moi->ca_thu_id)
+            ->get();
 
-        if($all_lop_cu->count() > 0){
-            session()->flash('loi_trung','Bạn đã đăng kí trùng ca đang học');
+        if ($all_lop_cu->count() > 0) {
+            session()->flash('loi_trung', 'Bạn đã đăng kí trùng ca đang học');
             return redirect()->back();
-        } 
+        }
         // 
         $khoahoc_cu = KhoaHoc::find($lop_cu->id_khoa_hoc);
         $khoahoc_moi = KhoaHoc::find($lop_moi->id_khoa_hoc);
