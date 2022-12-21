@@ -79,7 +79,6 @@
 
             </tbody>
         </table>
-
     {{-- </form> --}}
     <div class="">
         <div class="d-flex align-items-center justify-content-between flex-wrap">

@@ -164,7 +164,7 @@
                                 {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                                 <th scope="row"> {{ $loop->iteration }}</th>
                                 <td>
-                                    <select name="ma_thu" id="">
+                                    <select class="form-control" name="ma_thu" id="">
                                         @foreach ($thu as $itemThu)
                                             @if ($item->ma_thu == $itemThu->ma_thu)
                                                 <option selected value=" {{ $itemThu->ma_thu }} ">{{ $itemThu->ten_thu }}
@@ -179,13 +179,13 @@
 
                                 <td>
 
-                                    <input type="text" value=" {{ date('d/m/Y', strtotime($item->ngay_hoc)) }}">
+                                    <input class="form-control" type="text" value=" {{ date('d/m/Y', strtotime($item->ngay_hoc)) }}">
                                     {{-- <input name="ngay_hoc" type="date" value=" {{ date_format($item->ngay_hoc,"m/d/y") }}"> --}}
 
                                 </td>
 
                                 <td>
-                                    <select name="phong_id" id="">
+                                    <select class="form-control" name="phong_id" id="">
                                         @foreach ($phong as $itemPhongHoc)
                                             @if ($item->phong_id == $itemPhongHoc->id)
                                                 <option selected value="{{ $itemPhongHoc->id }} ">
@@ -216,7 +216,7 @@
                                 </td>
 
                                 <td>
-                                    <select name="giang_vien_id" id="">
+                                    <select class="form-control" name="giang_vien_id" id="">
                                         @foreach ($giangvien as $itemGiangVien)
                                             @if ($item->giang_vien_id == $itemGiangVien->id_user)
                                                 <option selected value="  {{ $itemGiangVien->id_user }} ">
@@ -256,7 +256,7 @@
                                 </td>
 
                                 <td>
-                                    <select name="ca_id" id="">
+                                    <select class="form-control" name="ca_id" id="">
                                         @foreach ($ca as $itemCa)
                                             @if ($item->ca_id == $itemCa->id)
                                                 <option selected value="  {{ $itemCa->id }} ">

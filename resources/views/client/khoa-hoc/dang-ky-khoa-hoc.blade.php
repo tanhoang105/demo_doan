@@ -6,8 +6,8 @@
         <div class="row text-center wow fadeInUp" data-wow-delay="0.5s">
             <div class="col-sm-12">
                 <!-- Headline Goes Here -->
-                <h3>Signup Form</h3>
-                <h4><a href="index-2.html"> Home </a> <span> &vert; </span> Signup </h4>
+                <h3>Đăng ký khóa học</h3>
+                <h4><a href="/"> Trang chủ </a> <span> &vert; </span> Đăng ký </h4>
             </div>
         </div>
         <!-- End: .row -->
@@ -64,15 +64,15 @@
                         <h3>Thông tin đăng ký</h3>
                     </div>
                     <div class="col-12 pt-2" >
-                        <label class="" style="padding-left: 13px;">Tên khóa học: </label>
+                        <label class="text-dark" style="padding-left: 13px;">Tên khóa học: </label>
                         <span style="font-size: 15px;color: red">{{$loadDangKy->ten_khoa_hoc}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="" style="padding-left: 13px;">Tên lớp học: </label>
+                        <label class="text-dark" style="padding-left: 13px;">Tên lớp học: </label>
                         <span style="font-size: 15px;color: red">{{$loadDangKy->ten_lop}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="" style="padding-left: 13px;">Ca học:</label>
+                        <label class="text-dark" style="padding-left: 13px;">Ca học:</label>
                         @foreach($layThu as $thu)
                         <span style="font-size: 15px;color: red">{{$thu->ten_thu}}</span>
                         @endforeach
@@ -80,15 +80,15 @@
                         <div style="margin-left: 12px;font-size: 15px;color: red"> {{$loadDangKy->ca_hoc .' từ '. $loadDangKy->thoi_gian_bat_dau . ' đến ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="" style="padding-left: 13px;">Giảng viên:</label>
+                        <label class="text-dark" style="padding-left: 13px;">Giảng viên:</label>
                         <span style="font-size: 15px;color: red">{{$loadDangKy->ten_giang_vien}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="" style="padding-left: 13px;">Ngày khai giảng:</label>
+                        <label class="text-dark" style="padding-left: 13px;">Ngày khai giảng:</label>
                         <span style="font-size: 15px;color: red"> {{$loadDangKy->ngay_bat_dau}}</span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="text-justify" style="padding-left: 13px;">Số lượng:</label>
+                        <label class="text-dark text-justify" style="padding-left: 13px;">Số lượng:</label>
                         <span style="font-size: 15px;color: red"> {{$loadDangKy->so_luong}}</span>
                     </div>
                     <div class="col-12 p-3">
