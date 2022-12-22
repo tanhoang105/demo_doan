@@ -20,7 +20,7 @@ class ThongKeController extends Controller
         $hocvien = HocVien::count('id');
         $dangky = DangKy::count('id');
         $khoahoc = KhoaHoc::count('id');
-        $doanhthutong = DangKy::sum('gia');
+        $doanhthutong = DangKy::where('dang_ky.delete_at',1)->sum('gia');
         $doanhthudathu = DB::table('dang_ky')
         ->join('thanh_toan' ,'thanh_toan.id','=','dang_ky.id_thanh_toan')
         ->where('thanh_toan.trang_thai',2)

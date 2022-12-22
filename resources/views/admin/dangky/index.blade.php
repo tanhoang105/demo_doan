@@ -69,14 +69,6 @@
             </div>
 
             <div class="col-2">
-                <select class="form-control" name="trang_thai" id="">
-                    <option value="">Lọc theo trạng thái</option>
-                    <option value="1">Đã duyệt</option>
-                    <option value="3">Đã hủy</option>
-                </select>
-            </div>
-
-            <div class="col-2">
                 <select class="form-control" name="thanh_toan" id="">
                     <option value="">Lọc theo thanh toán</option>
                     <option value="2">Đã thanh toán</option>
@@ -106,7 +98,7 @@
                     <th scope="col">Khóa học đăng ký</th>
                     <th scope="col">Học phí</th>
                     <th scope="col">Phương thức thanh toán </th>
-                    <th scope="col">Trạng thái</th>
+                    {{-- <th scope="col">Trạng thái</th> --}}
                     <th scope="col">Thanh toán</th>
                     <th scope="col">Sửa</th>
 
@@ -126,13 +118,13 @@
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
                         <td> {{ $item->ten_phuong_thuc_thanh_toan }}</td>
-                        <td>
+                        {{-- <td>
                             @if ($item->trang_thai == 1)
                                 <button class="btn btn-primary">Đã duyệt</button>
                             @else
                                 <button class="btn btn-danger">Đã hủy</button>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
                             @if ($item->trang_thai_thanh_toan == 2)
                                 <button class="btn btn-primary">Đã thanh toán</button>
