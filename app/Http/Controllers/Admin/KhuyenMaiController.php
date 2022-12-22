@@ -22,7 +22,7 @@ use function Termwind\render;
 class KhuyenMaiController extends Controller
 {
     protected $v;
-    protected $khuyenmai , $hocvien , $khoaHoc;
+    protected $khuyenmai, $hocvien, $khoaHoc;
 
     public function __construct()
     {
@@ -41,7 +41,23 @@ class KhuyenMaiController extends Controller
         $this->authorize(mb_strtoupper('xem khuyến mại'));
 
         $this->v['params']  = $request->all();
-        $this->v['list'] = $this->khuyenmai->index($this->v['params'], true, 10);
+        // lọc
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        // dd($params);
+        if ($request->keyword) {
+
+            $params['loc']['keyword'] = $request->keyword;
+        }
+        $this->v['list'] = $this->khuyenmai->index($params, true, 10);
         return view('admin.khuyenmai.index', $this->v);
     }
 
@@ -50,6 +66,19 @@ class KhuyenMaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function detail($id)
+    {
+        $this->v['result'] = $this->khuyenmai->show($id);
+        // dd($this->v['result']);
+        // dd($this->v['result']->chi_tiet_khoa);
+        $this->v['khoa_hoc'] = $this->khoaHoc->index(null , false , null);
+        $this->v['list'] =  json_decode($this->v['result']->chi_tiet_khoa);
+        // dd($this->v['list']);
+
+        return view('admin.khuyenmai.detail', $this->v);
+
+    }
     public function create()
     {
         //
@@ -181,7 +210,6 @@ class KhuyenMaiController extends Controller
                 // array_push($cupon_details, $data);
             }
             $coupon->chi_tiet_khoa = json_encode($cupon_details);
-
         } elseif ($request->loai_khuyen_mai == 2) {
             $coupon->loai_khuyen_mai = $request->loai_khuyen_mai;
             $coupon->ma_khuyen_mai = $request->ma_khuyen_mai;
@@ -344,24 +372,20 @@ class KhuyenMaiController extends Controller
                     ['id_user', Auth::user()->id],
                     ['khuyen_mai_id', $km->id]
                 ])->first();
-                if(empty($checkUsed)) {
-                    if($km->loai_khuyen_mai == 1) {
+                if (empty($checkUsed)) {
+                    if ($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
-                        if($km->loai_giam_gia==1){
+                        if ($km->loai_giam_gia == 1) {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                        }
-                        else{
+                        } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
-                       
-                    }else {
-                        if($km->loai_giam_gia==1){
+                    } else {
+                        if ($km->loai_giam_gia == 1) {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                        }
-                        else{
+                        } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
-
                     }
                 } else {
                     return response()->json([
@@ -381,33 +405,28 @@ class KhuyenMaiController extends Controller
                         'msg' => 'Mã khuyến mãi đã được sử dụng hoặc đã hết hạn',
                         'success' => false,
                     ]);
-
-                }else {
-                    if($km->loai_khuyen_mai == 1) {
+                } else {
+                    if ($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
-                        if($km->loai_giam_gia==1){
+                        if ($km->loai_giam_gia == 1) {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                        }
-                        else{
+                        } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
-                       
-                    }else {
-                        if($km->loai_giam_gia==1){
+                    } else {
+                        if ($km->loai_giam_gia == 1) {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
-                        }
-                        else{
+                        } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
-
                     }
                 }
             }
             return response()->json([
                 'success' => true,
                 'gia_khoa_hoc' => $giaKhoaHoc,
-                'loai_giam_gia' =>$km->loai_giam_gia,
-                'giam_gia' =>$km->giam_gia,
+                'loai_giam_gia' => $km->loai_giam_gia,
+                'giam_gia' => $km->giam_gia,
                 'id_km' => $km->id
             ]);
         } else {
@@ -418,41 +437,39 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function sendKM($id ,Request $request){
+    public function sendKM($id, Request $request)
+    {
         $khuyenmai = $this->khuyenmai->show($id);
-        $loaigiamgia = null ;
-        if($khuyenmai->loai_giam_gia == 1){
-            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ' ;
-        }else {
-            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . '%' ;
-
+        $loaigiamgia = null;
+        if ($khuyenmai->loai_giam_gia == 1) {
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . 'VNĐ';
+        } else {
+            $loaigiamgia  = 'giảm giá với mệnh giá : ' . $khuyenmai->giam_gia . '%';
         }
-        $loai_khuyen_mai = null ;
-        if($khuyenmai->loai_khuyen_mai == 1){
+        $loai_khuyen_mai = null;
+        if ($khuyenmai->loai_khuyen_mai == 1) {
             $loai_khuyen_mai = 'đối với khóa học';
-        }else {
+        } else {
             $loai_khuyen_mai = 'Đối với tất cả khóa học';
         }
         $arrayKhoaHocKhuyenMai = [];
-        if($khuyenmai->chi_tiet_khoa != null){
+        if ($khuyenmai->chi_tiet_khoa != null) {
             $khoaHoc = $this->khoaHoc->DanhSachKhoaHocTheoIDKhoa(json_decode($khuyenmai->chi_tiet_khoa));
-            foreach($khoaHoc as $itemKh){
+            foreach ($khoaHoc as $itemKh) {
                 $arrayKhoaHocKhuyenMai[] = $itemKh->ten_khoa_hoc;
             }
-
         }
         // dd($arrayKhoaHocKhuyenMai);
-        $HocVien = $this->hocvien->index(null , false , null);
+        $HocVien = $this->hocvien->index(null, false, null);
         $data = [];
-        foreach($HocVien  as $itemHocVien){
+        foreach ($HocVien  as $itemHocVien) {
             // dd($itemHocVien->email);
-            $data['email'][] = $itemHocVien->email; 
-
+            $data['email'][] = $itemHocVien->email;
         }
         // dd($data['email']);  
-        Mail::to($data['email'])->send(new MailKhuyenMai ([
+        Mail::to($data['email'])->send(new MailKhuyenMai([
             'ma' => $khuyenmai->ma_khuyen_mai,
-            'giam_gia' => $loaigiamgia ,
+            'giam_gia' => $loaigiamgia,
             'khoa_hoc' => $arrayKhoaHocKhuyenMai,
             'loai' => $loai_khuyen_mai,
         ]));

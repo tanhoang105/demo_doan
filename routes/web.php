@@ -305,6 +305,7 @@ Route::prefix('/admin')->group(function () {
     //khuyến mại
     Route::prefix('/khuyen-mai')->name('route_BE_Admin_')->group(function () {
         Route::get('/list', [KhuyenMaiController::class, 'index'])->name('Khuyen_Mai');
+        Route::get('/detail/{id}', [KhuyenMaiController::class, 'detail'])->name('Detail_Khuyen_Mai');
         Route::get('/xoa/{id}', [KhuyenMaiController::class, 'destroy'])->name('Xoa_Khuyen_Mai');
         Route::get('/edit/{id}', [KhuyenMaiController::class, 'edit'])->name('Edit_Khuyen_Mai');
         Route::post('/update/{id}', [KhuyenMaiController::class, 'update'])->name('Update_Khuyen_Mai');

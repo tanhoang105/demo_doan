@@ -11,6 +11,12 @@
         <a style="color: red" href=" {{ route('route_BE_Admin_Add_Dang_Ky') }} "> <button class='btn btn-primary'> <i
                     class="fas fa-plus "></i> Thêm</button>
         </a>
+
+
+
+        <a style="color: red ; margin-left: 10px" href=" {{ route('route_BE_Admin_List_Dang_Ky') }} "> <button class='btn btn-warning'> <i
+                    class="fas fa-plus "></i> Tất cả danh sách</button>
+        </a>
     </div>
     @if (Session::has('error'))
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -34,6 +40,59 @@
             </button>
         </div>
     @endif
+    <form action="" method="get">
+        @csrf
+        <div class="row p-3">
+            <div class="col-2">
+                <select class="form-control" name="khoa_hoc" id="">
+                    <option value="">Lọc theo khóa học</option>
+                    @foreach ($khoa_hoc as $itemKhoaHoc)
+                        <option value="{{ $itemKhoaHoc->id }}"> {{ $itemKhoaHoc->ten_khoa_hoc }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-2">
+                <select class="form-control" name="lop_hoc" id="">
+                    <option value="">Lọc theo lớp học</option>
+                    @foreach ($lop as $itemLop)
+                        <option value="{{ $itemLop->id }}"> {{ $itemLop->ten_lop }} </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="phuong_thuc_thanh_toan" id="">
+                    <option value="">Lọc theo phương thức thanh toán</option>
+                    <option value="2">Thanh toán online</option>
+                    <option value="1">Thanh toán offline</option>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="trang_thai" id="">
+                    <option value="">Lọc theo trạng thái</option>
+                    <option value="1">Đã duyệt</option>
+                    <option value="3">Đã hủy</option>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="thanh_toan" id="">
+                    <option value="">Lọc theo thanh toán</option>
+                    <option value="2">Đã thanh toán</option>
+                    <option value="1">Chưa thanh toán</option>
+                </select>
+            </div>
+
+
+
+
+            <div class="col-1">
+                <button class="btn btn-success">Lọc</button>
+            </div>
+
+        </div>
+    </form>
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Dang_Ky') }}" enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">
@@ -67,11 +126,11 @@
                         <td> {{ $item->ten_khoa_hoc }}</td>
                         <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
                         <td> {{ $item->ten_phuong_thuc_thanh_toan }}</td>
-                        <td> 
-                            @if ($item->trang_thai ==1)
-                            <button class="btn btn-primary">Đã duyệt</button>
+                        <td>
+                            @if ($item->trang_thai == 1)
+                                <button class="btn btn-primary">Đã duyệt</button>
                             @else
-                            <button class="btn btn-danger">Đã hủy</button>
+                                <button class="btn btn-danger">Đã hủy</button>
                             @endif
                         </td>
                         <td>
