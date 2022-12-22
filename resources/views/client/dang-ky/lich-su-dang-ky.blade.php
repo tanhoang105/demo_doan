@@ -103,7 +103,7 @@
                         </form>
                         @endif
                         @else
-                        <center><button class="btn btn-success" style="width: 100px;height: 95px">Hủy</button></center>
+                        
                         @endif
 
                     </td>
