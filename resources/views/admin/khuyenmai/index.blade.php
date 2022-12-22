@@ -1,8 +1,16 @@
 @extends('Admin.templates.layout')
+@section('form-search')
+    {{ route('route_BE_Admin_Khuyen_Mai') }}
+@endsection
 @section('content')
     <div class="row p-3">
         <a style="color: red" href=" {{ route('route_BE_Admin_create') }}">
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
+
+        </a>
+
+        <a style="color: red ; margin-left:10px" href=" {{ route('route_BE_Admin_Khuyen_Mai') }}">
+            <button class='btn btn-warning'> <i class="fas fa-plus "></i> Tất cả danh sách</button>
 
         </a>
     </div>
@@ -28,6 +36,48 @@
             </button>
         </div>
     @endif
+
+    <form action="" method="get">
+        @csrf
+        <div class="row p-3">
+            <div class="col-2">
+                <select class="form-control" name="loai_giam_gia" id="">
+                    <option value="">Lọc theo loại giảm giá</option>
+                    <option value="1">Giảm giá theo tiền</option>
+                    <option value="2">Giảm giá theo phần trăm</option>
+                   
+                </select>
+            </div>
+
+            <div class="col-2">
+                <select class="form-control" name="loai_khuyen_mai" id="">
+                    <option value="">Lọc theo loại khuyến mại</option>
+                    <option value="2">Giảm giá tất cả </option>
+                    <option value="1">Giảm giá theo khóa</option>
+                   
+                </select>
+            </div>
+            
+             <div class="col-2"> 
+               
+                <input type="date" class="form-control" placeholder="ngày bắt đầu" name="ngay_bat_dau">
+            </div>
+
+
+            <div class="col-2"> 
+               
+                <input type="date" class="form-control" placeholder="ngày kết thúc" name="ngay_ket_thuc">
+            </div>
+          
+
+            <div class="col-1">
+                <button class="btn btn-success">Lọc</button>
+            </div>
+
+        </div>
+    </form>
+
+
     <form method="post" action="{{ route('route_BE_Admin_Xoa_All_Khuyen_Mai') }}" enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">
@@ -42,6 +92,7 @@
                     <th scope="col">Ngày bắt đầu </th>
                     <th scope="col">Ngày kết thúc</th>
                     <th scope="col">Gửi mã khuyến mại</th>
+                    <th scope="col">Chi tiết</th>
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
@@ -64,6 +115,11 @@
                         <td> {{ date('d/m/Y', strtotime($item->ngay_ket_thuc)) }}</td>
                         <td>
                             <a class="btn btn-info" style="color: #fff" href=" {{route('route_BE_Admin_Send_Khuyen_Mai'  , ['id' => $item->id])}} ">Gửi mã khuyến mại</a>
+                        </td>
+                        <td>
+                            @if( $item->loai_khuyen_mai == 1)
+                                <a href=" {{route('route_BE_Admin_Detail_Khuyen_Mai' , ['id' => $item->id])}} " class="btn btn-warning">Chi tiết</a>
+                            @endif
                         </td>
                         <td>
                             <a class="btn btn-success" style="color: #fff"

@@ -22,18 +22,50 @@ class DangKy extends Model
     public function index($params, $pagination = true, $perpage)
     {
         if ($pagination) {
+            // dd(123);
             $query  = DB::table($this->table)
                 ->where($this->table  . '.delete_at', '=', 1)
                 ->join('lop', 'lop.id', '=', $this->table . '.id_lop')
                 ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
                 ->join('hoc_vien', 'hoc_vien.user_id', '=', $this->table . '.id_user')
                 ->join('thanh_toan', 'thanh_toan.id', '=', $this->table . '.id_thanh_toan')
-                ->join('phuong_thuc_thanh_toan', 'phuong_thuc_thanh_toan.id', '=','thanh_toan.id_phuong_thuc_thanh_toan')
-                ->select('hoc_vien.*','phuong_thuc_thanh_toan.ten as ten_phuong_thuc_thanh_toan', 'thanh_toan.trang_thai as trang_thai_thanh_toan', 'khoa_hoc.*', 'lop.*', $this->table . '.*')
+                ->join('phuong_thuc_thanh_toan', 'phuong_thuc_thanh_toan.id', '=', 'thanh_toan.id_phuong_thuc_thanh_toan')
+                ->select('hoc_vien.*', 'phuong_thuc_thanh_toan.ten as ten_phuong_thuc_thanh_toan', 'thanh_toan.trang_thai as trang_thai_thanh_toan', 'khoa_hoc.*', 'lop.*', $this->table . '.*')
                 ->orderByDesc($this->table . '.id');
-            if (!empty($params['keyword'])) {
+            if (!empty($params['loc']['keyword'])) {
+
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.id_ngay_dang_ky', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ngay_dang_ky', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere('hoc_vien.ten_hoc_vien', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere('khoa_hoc.ten_khoa_hoc', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere('lop.ten_lop', 'like', '%' . $params['loc']['keyword']  . '%');
+                });
+            }
+
+            if (empty($params['loc']['keyword'])) {
+                $query =  $query->where(function ($q) use ($params) {
+                    // dd($params);
+                    // if (!empty($params['khoa_hoc'])) {
+                    if (!empty($params['loc']['khoa_hoc'])) {
+
+                        $q->Where('khoa_hoc.id',  $params['loc']['khoa_hoc']);
+                    }
+                    if (!empty($params['loc']['lop_hoc'])) {
+
+                        $q->Where('lop.id',  $params['loc']['lop_hoc']);
+                    }
+                    if (!empty($params['loc']['phuong_thuc_thanh_toan'])) {
+
+                        $q->Where('phuong_thuc_thanh_toan.id',  $params['loc']['phuong_thuc_thanh_toan']);
+                    }
+                    if (!empty($params['loc']['trang_thai'])) {
+
+                        $q->Where($this->table . '.trang_thai',  $params['loc']['trang_thai']);
+                    }
+                    if (!empty($params['loc']['thanh_toan'])) {
+
+                        $q->Where( 'thanh_toan.trang_thai',  $params['loc']['thanh_toan']);
+                    }
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();

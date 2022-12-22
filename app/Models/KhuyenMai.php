@@ -26,11 +26,38 @@ class KhuyenMai extends Model
                 ->select($this->table . '.*')
                 ->where('delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
-            if (!empty($params['keyword'])) {
+            if (!empty($params['loc']['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.   ', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['loc']['keyword']  . '%');
+                    $q->orWhere($this->table . '.ma_khuyen_mai', 'like', '%' . $params['loc']['keyword']  . '%');
                 });
             }
+
+            if (empty($params['loc']['keyword'])) {
+                $query =  $query->where(function ($q) use ($params) {
+                    // dd($params);
+                    // if (!empty($params['khoa_hoc'])) {
+                    if (!empty($params['loc']['loai_khuyen_mai'])) {
+
+                        $q->Where($this->table . '.loai_khuyen_mai',  $params['loc']['loai_khuyen_mai']);
+                    }
+                    if (!empty($params['loc']['loai_giam_gia'])) {
+
+                        $q->Where($this->table . '.loai_giam_gia',  $params['loc']['loai_giam_gia']);
+                    }
+                   
+                    if (!empty($params['loc']['ngay_bat_dau'])) {
+
+                        $q->Where($this->table . '.ngay_bat_dau',  $params['loc']['ngay_bat_dau']);
+                    }
+                    if (!empty($params['loc']['ngay_ket_thuc'])) {
+
+                        $q->Where($this->table .  '.ngay_ket_thuc',  $params['loc']['ngay_ket_thuc']);
+                    }
+                });
+            }
+
+
             $list = $query->paginate($perpage)->withQueryString();
         } else {
             // nếu không phần trang
