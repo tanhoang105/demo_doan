@@ -43,7 +43,28 @@ class DangKyController extends Controller
         $this->authorize(mb_strtoupper('xem đăng ký') );
 
         $this->v['params'] = $request->all();
-        $this->v['list'] = $this->dangky->index($this->v['params'], true, 10);
+       
+        $this->v['khoa_hoc'] = $this->khoahoc->index(null , false , null);
+        $this->v['lop'] = $this->lop->index(null , false , null);
+        // lọc 
+         // lọc
+         $params = [];
+         $params['loc'] = array_map(function ($item) {
+             if ($item == '') {
+                 $item = null;
+             }
+             if (is_string($item)) {
+                 $item = trim($item);
+             }
+             return $item;
+         }, $request->all());
+         // dd($params);
+         if($request->keyword){
+            
+             $params['loc']['keyword'] = $request->keyword;
+             
+         }
+         $this->v['list'] = $this->dangky->index($params, true, 10);
 
         // dd($this->v['list']);
         return view('admin.dangky.index', $this->v);
