@@ -26,6 +26,13 @@ class GhiNoController extends Controller
     public function cap_nhat_so_du(Request $request, $id)
     {
         // dd($request->all());
+        if ($request->tien_no_new === null) {
+            $request->tien_no_new = 0;
+        } elseif (!is_numeric($request->tien_no_new)) {
+            session()->flash('error', 'Số dư bắt buộc phải là số');
+            return redirect()->back();
+        }
+
         $data = GhiNo::find($id);
         $data->tien_no = $request->tien_no_new;
         $data->save();
