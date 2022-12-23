@@ -60,7 +60,7 @@
                     <td>{{$item->email}}</td>
                     <td>{{$item->ten_lop}}</td>
                     <td>{{$item->ten_khoa_hoc}}</td>
-                    <td>{{number_format($item->gia_khoa_hoc)}} VNĐ</td>
+                    <td>{{number_format($item->gia)}} VNĐ</td>
                     <td>{{$item->dia_chi}}</td>
                     <td>{{$item->sdt}}</td>
                     <td>
@@ -68,7 +68,7 @@
                            @if ($item->trang_thai==1)
                            <form action="{{route('payment',[$item->id])}}" method="post">
                             @csrf
-                            <input type="text" name="gia_khoa_hoc_payment" value="{{$item->gia_khoa_hoc}}" hidden>
+                            <input type="text" name="gia_khoa_hoc_payment" value="{{$item->gia}}" hidden>
                             <input type="text" name="id" value="{{$item->id}}" hidden>
                             <div class="form-group">
                                 <button type="submit" id="btn-payment" name="redirect" class="btn btn-dark btm-md">Thanh Toán VNPAY</button>

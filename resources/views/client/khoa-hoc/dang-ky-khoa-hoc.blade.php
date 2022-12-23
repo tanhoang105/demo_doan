@@ -203,7 +203,9 @@
 @section('js')
     <script>
         $(document).ready(function () {
-
+            function formatNumber (num) {
+                return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            }
             $('#submit').on('click',function(e) {
                 let payment = $('#select_payment').val();
                 let url = $(this).data('url')
@@ -281,7 +283,7 @@
                                 $('#gia_kh').html(gia + ' VNĐ');
                                 $('#gia_khoa_hoc').val(data.gia_khoa_hoc);
                                 if(data.loai_giam_gia == 1){
-                                    $('#khuyen_mai').html('Giảm giá ' + data.giam_gia + ' VNĐ')
+                                    $('#khuyen_mai').html('Giảm giá ' + formatNumber(data.giam_gia) + ' VNĐ')
                                     alert('Áp dụng mã giảm giá thành công')
                                 }
                                 else{

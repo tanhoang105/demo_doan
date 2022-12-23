@@ -96,7 +96,7 @@
                     <th scope="col">Người đăng ký</th>
                     <th scope="col">Lớp học đăng ký</th>
                     <th scope="col">Khóa học đăng ký</th>
-                    <th scope="col">Học phí</th>
+                    <th scope="col">Giá</th>
                     <th scope="col">Phương thức thanh toán </th>
                     {{-- <th scope="col">Trạng thái</th> --}}
                     <th scope="col">Thanh toán</th>
@@ -116,7 +116,7 @@
                         <td> {{ $item->ten_hoc_vien }}</td>
                         <td> {{ $item->ten_lop }}</td>
                         <td> {{ $item->ten_khoa_hoc }}</td>
-                        <td> {{ number_format($item->gia_khoa_hoc, 0, '.', '.') . ' vnđ' }}</td>
+                        <td> {{ number_format($item->gia, 0, '.', '.') . ' vnđ' }}</td>
                         <td> {{ $item->ten_phuong_thuc_thanh_toan }}</td>
                         {{-- <td>
                             @if ($item->trang_thai == 1)
