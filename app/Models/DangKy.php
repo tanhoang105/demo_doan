@@ -64,7 +64,7 @@ class DangKy extends Model
                     }
                     if (!empty($params['loc']['thanh_toan'])) {
 
-                        $q->Where( 'thanh_toan.trang_thai',  $params['loc']['thanh_toan']);
+                        $q->Where('thanh_toan.trang_thai',  $params['loc']['thanh_toan']);
                     }
                 });
             }
@@ -242,6 +242,7 @@ class DangKy extends Model
     {
 
         $query =  DB::table('dang_ky')
+            ->where($this->table . 'delete_at', '=', 1)
             ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
             ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
             ->groupBy('khoa_hoc.id')
@@ -251,4 +252,17 @@ class DangKy extends Model
 
         return $query;
     }
+
+    public function TimHVTheoIdLop($id_lop)
+    {
+        $query =  DB::table('dang_ky')
+            ->where($this->table . '.delete_at', '=', 1)
+            ->where($this->table . '.id_lop', $id_lop)
+            ->select($this->table . '.id_user')
+            ->get();
+
+        return $query;
+    }
+
+    
 }

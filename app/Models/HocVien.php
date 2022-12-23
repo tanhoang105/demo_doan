@@ -125,4 +125,13 @@ class HocVien extends Model
 
     }
 
+    public function TimHVTheoListId($params)
+    {
+        $query =  DB::table($this->table)
+            ->where('delete_at', 1)
+            ->whereIn('user_id', $params)
+            ->get();
+        return $query;
+    }
+
 }
