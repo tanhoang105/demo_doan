@@ -36,35 +36,35 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th> <input id="check_all" type="checkbox" /></th>
+                    {{-- <th> <input id="check_all" type="checkbox" /></th> --}}
                     <th scope="col">STT</th>
                     <th scope="col">Tên Vai Tro </th>
                     {{-- <th scope="col">Quyền tài khoản</th> --}}
                     <th scope="col">Thêm quyền tài khoản</th>
-                    <th scope="col">Sửa</th>
+                    {{-- <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
 
-                    </th>
+                    </th> --}}
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_vai_tro }}</td>
 
                         {{-- <td> <a class="btn btn-primary" href="">Xem Quyền</a> </td> --}}
                         <td> <a class="btn btn-dark" href=" {{route('route_BE_Admin_Detail_Cap_Quyen' , [ 'id' => $item->id ])}} ">Cấp Quyền</a> </td>
-                        <td>
+                        {{-- <td>
                                 <a  class="btn btn-success" style="color: #fff" href="{{ route('route_BE_Admin_Edit_Vai_Tro', ['id' => $item->id]) }}">
                                     <i class="fas fa-edit "></i> Sửa</a>
                         </td>
                         <td>
                                 <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: #fff" href="{{ route('route_BE_Admin_Xoa_Vai_Tro', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
-                        </td>
+                        </td> --}}
 
                     </tr>
                 @endforeach

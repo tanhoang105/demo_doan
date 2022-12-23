@@ -111,10 +111,11 @@
 
                 <td>
                     {{-- <button class="btn btn-success"> --}}
-                    <a style="color: aliceblue " class="btn btn-success"
-                        href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
-                        <i class="fas fa-edit "></i> Sửa </a>
-                    {{-- </button> --}}
+                    @if ($item->vai_tro_id != 1)
+                        <a style="color: aliceblue " class="btn btn-success"
+                            href="{{ route('route_BE_Admin_Edit_Tai_Khoan', ['id' => $item->id]) }}">
+                            <i class="fas fa-edit "></i> Sửa </a>
+                    @endif
                 </td>
                 <td>
 
