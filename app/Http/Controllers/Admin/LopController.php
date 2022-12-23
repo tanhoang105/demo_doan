@@ -50,7 +50,7 @@ class LopController extends Controller
 
         $this->authorize(mb_strtoupper('xem lớp học'));
 
-        $this->v['params'] =  $request->all();
+        // $this->v['params'] =  $request->all();
         // dd($this->v['params']);
         // dd($request->get());
         $this->v['khoa_hoc'] = $this->khoahoc->index(null, false, null);
@@ -78,7 +78,7 @@ class LopController extends Controller
         $list = $this->lophoc->index($params, true, 10);
         $this->v['list'] = $list;
 
-        $this->v['giangvien'] = $this->giangvien->index($this->v['params'], false, null);
+        $this->v['giangvien'] = $this->giangvien->index($params, false, null);
         // dd($this->v['giangvien'][2]);   
 
 
