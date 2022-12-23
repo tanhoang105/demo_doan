@@ -73,9 +73,25 @@
                     </div>
                     <div class="col-12 pt-2">
                         <label class="text-dark" style="padding-left: 13px;">Ca học:</label>
+                        {{-- {{dd($layThu)}} --}}
+                        @for ($i = 0; $i < count($layThu); $i++)
                         @foreach($layThu as $thu)
-                        <span style="font-size: 15px;color: red">{{$thu->ten_thu}}</span>
+                        @if ($i == 0)
+                            @if ($layThu[$i]->id == $thu->id)
+                            <span style="font-size: 15px;color: red">{{$thu->ten_thu . ' &'}}</span>
+                            @endif
+                        @elseif($i == count($layThu)-1)
+                            @if ($layThu[$i]->id == $thu->id)
+                            <span style="font-size: 15px;color: red">{{$thu->ten_thu . ''}}</span>
+                            @endif
+                        @else
+                        @if ($layThu[$i]->id == $thu->id)
+                        <span style="font-size: 15px;color: red">{{$thu->ten_thu . ' &'}}</span>
+                        @endif
+                        @endif
+                           
                         @endforeach
+                        @endfor
                         {{-- <br> --}}
                         <div style="margin-left: 12px;font-size: 15px;color: red"> {{$loadDangKy->ca_hoc .' từ '. $loadDangKy->thoi_gian_bat_dau . ' đến ' . $loadDangKy->thoi_gian_ket_thuc}}</div>
                     </div>

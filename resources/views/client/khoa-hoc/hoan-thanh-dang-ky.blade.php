@@ -18,9 +18,24 @@
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Tên lớp: <span class="text-body text-dark">{{$complete->ten_lop}}</span></p>   
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Thời gian học: 
                             <span class="text-body text-dark">
+                                @for ($i = 0; $i < count($layThu); $i++)
                                 @foreach($layThu as $thu)
-                                {{$thu->ten_thu}}
+                                @if ($i == 0)
+                                    @if ($layThu[$i]->id == $thu->id)
+                                    {{$thu->ten_thu . ' &'}}
+                                    @endif
+                                @elseif($i == count($layThu)-1)
+                                    @if ($layThu[$i]->id == $thu->id)
+                                    {{$thu->ten_thu . ''}}
+                                    @endif
+                                @else
+                                @if ($layThu[$i]->id == $thu->id)
+                                {{$thu->ten_thu . ' &'}}
+                                @endif
+                                @endif
+                                   
                                 @endforeach
+                                @endfor
                                 -- {{$complete->ca_hoc . ' từ ' .$complete->thoi_gian_bat_dau .' đến ' .$complete->thoi_gian_ket_thuc}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Ngày bắt đầu - Ngày kết thúc: <span class="text-body text-dark">{{$complete->ngay_bat_dau}} - {{$complete->ngay_ket_thuc}}</span></p>
                         <p style="margin: 20px;text-align: left" class="mb-2 ft-bold">Người nhận hàng: <span class="text-body text-dark">{{$complete->name}} - {{$complete->sdt}}</span></p>
