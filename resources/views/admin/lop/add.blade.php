@@ -165,7 +165,7 @@
                         let dd = today.getDate();
                         let mm = today.getMonth() + 1;
                         let yyyy = today.getFullYear();
-                        $('#tenLop1').val(res + dd + mm + yyyy);
+                        $('#tenLop1').val(res + dd + mm);
                     }
                 })
             })
