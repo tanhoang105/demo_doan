@@ -383,7 +383,9 @@ class DangKyController extends Controller
     public function completeDangKy($code){
         $objDangKy=new DangKy();
         $complete=$objDangKy->completeDangKy($code);
-        return view('client.khoa-hoc.hoan-thanh-dang-ky',compact('complete'));
+        $ca_thu_id=explode(',',$complete->thu_hoc_id);
+        $layThu=$objDangKy->layThu($ca_thu_id);
+        return view('client.khoa-hoc.hoan-thanh-dang-ky',compact('complete','layThu'));
     }
 
     // lịch sử đăng ký
