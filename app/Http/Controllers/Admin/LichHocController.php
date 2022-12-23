@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DoiLich;
 use App\Models\CaHoc;
+use App\Models\DangKy;
 use App\Models\GiangVien;
+use App\Models\HocVien;
 use App\Models\KhoaHoc;
 use App\Models\Lich;
 use App\Models\Lop;
@@ -12,6 +15,7 @@ use App\Models\PhongHoc;
 use App\Models\ThuHoc;
 use App\Models\XepLop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Svg\Tag\Rect;
 
@@ -25,7 +29,7 @@ class LichHocController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien, $xeplop;
+    protected $v, $ca, $thu, $lich, $phong, $khoahoc, $lop, $giangvien, $xeplop, $dangky, $hocvien;
     public function __construct()
     {
         $this->v  = [];
@@ -37,11 +41,13 @@ class LichHocController extends Controller
         $this->lop = new Lop();
         $this->giangvien = new GiangVien();
         $this->xeplop = new XepLop();
+        $this->dangky = new DangKy();
+        $this->hocvien = new HocVien();
     }
     public function index(Request $request)
     {
         $this->authorize(mb_strtoupper('xem lịch học'));
-        // dd(123);
+
         // hiển thị ra danh sách lớp học 
         $this->v['params']  = $request->all();
 
@@ -111,7 +117,9 @@ class LichHocController extends Controller
     public function show($id, Request $request)
     {
         $this->authorize(mb_strtoupper('xem chi tiết lịch học'));
-        // dd(123);
+        // dd(123); 
+        // dd($request->id);
+        $request->session()->put('id_lop', $id);
 
         // hiển thị lịch học của lớp học khi ấn vào lớp học đó 
         $this->v['params'] = $request->all();
@@ -163,6 +171,29 @@ class LichHocController extends Controller
     {
         // dd($request->all());
         $this->authorize(mb_strtoupper('update lịch học'));
+        // dd(123);
+        if (session('id_lop')) {
+            // lấy danh sách học viên theo id_lop
+            $list_id_user = $this->dangky->TimHVTheoIdLop(session('id_lop'));
+            // dd($list_id_user[0]->id_user);
+            $id_user = [];
+            for ($i = 0; $i < count($list_id_user); $i++) {
+                $id_user[] =  $list_id_user[$i]->id_user;
+            }
+            // dd($id_user);
+            $list_hocvien = $this->hocvien->TimHVTheoListId($id_user);
+            // dd($list_hocvien , 123);
+            $data = [];
+            foreach ($list_hocvien  as $itemHocVien) {
+                // dd($itemHocVien->email);
+                $data['email'][] = $itemHocVien->email;
+            }
+            dd($data['email']);
+            Mail::to($data['email'])->send(new DoiLich([
+                'mes' => "Cảm ơn bạn đã xem mail này"
+            ]));
+        }
+
 
         $params = [];
         $params['cols'] = array_map(function ($item) {

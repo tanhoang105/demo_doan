@@ -145,7 +145,6 @@
                     <th scope="col">Lớp</th>
                     <th scope="col">Giảng viên</th>
                     <th scope="col">Ca</th>
-
                     <th scope="col">Sửa</th>
                     <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
