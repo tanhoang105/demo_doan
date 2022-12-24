@@ -145,7 +145,7 @@ return [
 
     'from' => [
         'address' => 'blackcrystal108@gmail.com',
-        'name' => 'Trung tâm Aducat',
+        'name' => 'Trung tâm TH',
     ],
 
     /*
