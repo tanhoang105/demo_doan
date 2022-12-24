@@ -35,10 +35,10 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users',
-                                    'sdt' => 'required | min:6',
+                                    'sdt' => 'required|min:10|numeric',
                                     'dia_chi' => 'required | min:6',
-                                    'id_khoa_hoc' => 'required | min:6',
-                                    'id_lop' => 'required | min:6',
+                                    'id_khoa_hoc' => 'numeric|min:1',
+                                    'id_lop' => 'numeric|min:1',
                                 ];
                             break;
 
@@ -48,15 +48,15 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users,email,'.$id,
-                                    'sdt' => 'required | min:6',
+                                    'sdt' => 'required|min:10|numeric',
                                     'dia_chi' => 'required | min:6',
                                 ];
                             break;   
                             case 'postDangKy':
                                 $rules = [
                                     'name' => 'required',
-                                    'email' => 'required',
-                                    'sdt' => 'required | min:6',
+                                    'email' => 'required | email',
+                                    'sdt' => 'required|min:10|numeric',
                                     'dia_chi' => 'required | min:6',
                                 ];
                                 break;
@@ -81,6 +81,9 @@ class DangKyRequest extends FormRequest
             'email.email' => 'Sai định dạng Email',
             'email.unique' => 'Email đã tồn tại',
             'sdt.required' => 'Số điện thoại bắt buộc nhập',
+            'min'=> ':attribute lớn hơn 6 ký tự',
+            'id_khoa_hoc' => 'Bắt buộc phải chọn khóa học',
+            'id_lop'=>'Bắt buộc phải chọn lớp',
             'dia_chi.required' => 'Địa chỉ bắt buộc nhập',
         ];
     }
