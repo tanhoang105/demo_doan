@@ -34,7 +34,7 @@ class DoiLopKhoaController extends Controller
         $doi_lop_khoa = DoiLopKhoa::join('users', 'users.id', '=', 'id_user')
             ->join('lop', 'id_lop_moi', '=', 'lop.id')
             ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
-            ->select('doi_lop_khoa.*', 'users.id as user_id', 'users.name', 'lop.ten_lop', 'lop.id as lop_id', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')
+            ->select('doi_lop_khoa.*','users.email', 'users.id as user_id', 'users.name', 'lop.ten_lop', 'lop.id as lop_id', 'khoa_hoc.ten_khoa_hoc', 'khoa_hoc.gia_khoa_hoc')
             ->search()
             ->get();
         $data = DB::table('lop')->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
@@ -150,7 +150,7 @@ class DoiLopKhoaController extends Controller
                         session()->flash('sucssec', 'Yêu cầu đã được cập nhật');
                         return redirect()->back();
                     } elseif ($value->tien_no < 0) {
-                        dd($value->tien_no);
+                        // dd($value->tien_no);
                         // $trang_thai_ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
                         //     ->update(['tien_no' => $tien]);
                         // // 
@@ -226,7 +226,11 @@ class DoiLopKhoaController extends Controller
     {
         // dd($request->all());
         $data = new DoiLopKhoa();
-        $data->fill($request->all());
+        $data->id_user = $request->id_user;   
+        $data->id_lop_cu = $request->id_lop_cu;   
+        $data->id_lop_moi = $request->id_lop_moi;   
+        $data->ly_do = $request->ly_do;
+        $data->status = $request->status;   
         $data->save();
         // lop cu thay doi so luong
         $lop_cu = Lop::find($request->id_lop_cu);
@@ -255,7 +259,7 @@ class DoiLopKhoaController extends Controller
     }
     public function loc_theo_trang_thai(Request $request)
     {
-        dd($request->trang_thai);
+        // dd($request->trang_thai);
         if ($request->trang_thai == 0) {
             $result = DoiLopKhoa::where('status', '=', 2)->get();
             // 
@@ -278,5 +282,20 @@ class DoiLopKhoaController extends Controller
             $result = DoiLopKhoa::where('status', '=', 5)->get();
             return redirect()->route('route_BE_Admin_danh_sach_doi_lop', compact('data'));
         }
+    }
+    public function dd(Request $request)
+    {
+        // dd($request->all());
+        $user = User::where('email','=',$request->email)->select('users.id')->first();
+        // dd($user);
+        $khoahoc = DangKy::where('dang_ky.id_user', '=', $user->id)
+        ->join('lop', 'lop.id', '=', 'dang_ky.id_lop')
+        ->join('khoa_hoc', 'khoa_hoc.id', '=', 'lop.id_khoa_hoc')
+        ->join('users', 'users.id', '=', 'dang_ky.id_user')
+        ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'users.name', 'lop.id as id_lop')
+        ->get();
+    // dd($khoahoc);
+        return response()->json(['success' => true, 'id_user' => $user->id,'khoa_hoc' => $khoahoc]);
+
     }
 }

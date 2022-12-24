@@ -30,6 +30,7 @@ use App\Http\Controllers\DoiLopKhoaController;
 use App\Http\Controllers\GhiNoController;
 use App\Http\Requests\XeplopRequest;
 use App\Http\Resources\LopCollection;
+use App\Models\DoiLopKhoa;
 use App\Models\VaiTro;
 use Illuminate\Support\Facades\Route;
 //use LDAP\ResultEntry;
@@ -368,6 +369,7 @@ Route::prefix('/auth')->name('auth.')->group(function () {
     Route::post('/store', [AuthController::class, 'store'])->name('store');
 });
 Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('dd', [DoiLopKhoaController::class, 'dd'])->name('dd');
 
 // demo pusher
 // Route::get('welcome' , function(){

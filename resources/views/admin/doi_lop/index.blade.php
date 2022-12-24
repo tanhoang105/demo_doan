@@ -48,10 +48,9 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th> <input id="check_all" type="checkbox" /></th>
                     <th scope="col">STT</th>
-                    <th scope="col">Mã học viên </th>
                     <th scope="col">Tên học viên </th>
+                    <th scope="col">Email</th>
                     <th scope="col">Lớp cũ </th>
                     <th scope="col">Lớp mới </th>
                     <th scope="col">Khóa học cũ </th>
@@ -66,10 +65,9 @@
             <tbody>
                 @foreach ($doi_lop_khoa as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
                         <td> {{ $loop->iteration }}</td>
-                        <td> {{ $item->user_id }}</td>
                         <td> {{ $item->name }}</td>
+                        <td> {{ $item->email }}</td>
                         <td>
                             <span hidden>{{ $id_lopcu = 0 }}</span>
                             @foreach ($data as $value)

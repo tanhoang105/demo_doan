@@ -33,6 +33,8 @@ class KhoahocController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->all());
+        
         $this->authorize(mb_strtoupper('xem khóa học'));
         // $this->v['params'] = $request->all();
         $params = [];

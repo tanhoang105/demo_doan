@@ -113,8 +113,15 @@ class KhoaHocController extends Controller
         $lopcu_id = $request->lopcu_id;
         $dangky_id = $request->dangky_id;
         // 
+        $khoa_hoc_da_dang_ky = DangKy::join('lop','lop.id','=','dang_ky.id_lop')
+        ->join('khoa_hoc','lop.id_khoa_hoc','=','khoa_hoc.id')
+        ->where('id_user','=',Auth::user()->id)
+        ->select('khoa_hoc.id')
+        ->get()->toArray();
+
         $list = KhoaHoc::join('danh_muc', 'danh_muc.id', '=', 'khoa_hoc.id_danh_muc')
             ->whereNotIn('khoa_hoc.id', [$request->khoahoc_id])
+            ->whereNotIn('khoa_hoc.id',$khoa_hoc_da_dang_ky)
             ->select('khoa_hoc.*', 'danh_muc.ten_danh_muc')
             ->get();
         return view('client.khoa-hoc.khoa_hoc_dang_ki.khoa_hoc_dang_ki', compact('list', 'dangky_id', 'lopcu_id'));
