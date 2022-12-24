@@ -23,14 +23,14 @@
                 <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="" hidden>
                 <div class="mb-3">
                     <label for="" class="form-label">Tên </label>
-                    <input class="form-control" value="" name="name" id="name" type="text" placeholder="Tên" required>
+                    <input class="form-control" value="" name="name" id="name" type="text" placeholder="Tên">
                     @error('name')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Email </label>
-                    <input class="form-control" value="" name="email" id="email" type="text" placeholder="Email" required>
+                    <input class="form-control" value="" name="email" id="email" type="text" placeholder="Email">
                     <span class="msg_err_email"></span>
                     @error('email')
                     <span style="color: red"> {{ $message }} </span>
@@ -38,14 +38,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Sđt </label>
-                    <input class="form-control" value="" name="sdt" id="sdt" type="text" placeholder="Số điện thoại" required>
+                    <input class="form-control" value="" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
                     @error('sdt')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Địa chỉ </label>
-                    <input class="form-control" value="" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ" required>
+                    <input class="form-control" value="" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
                     @error('dia_chi')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -57,7 +57,7 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Khóa học </label>
-                    <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}" required>
+                    <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}">
                         <option>-- Chọn khóa học --</option>
                             @foreach ($listKhoaHoc as $item)
                                 <option  value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lớp </label>
-                    <select class="form-control" name="id_lop" id="id_lop" required>
+                    <select class="form-control" name="id_lop" id="id_lop">
                         <option>--Chọn Lớp--</option>
                     </select>
                     <span class="msg_err_lop"></span>

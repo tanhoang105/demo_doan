@@ -95,8 +95,16 @@ class DangKyController extends Controller
         return response()->json(['success'=>true ,'lop'=>$listLop , 'gia_khoa_hoc'=>$gia_khoa_hoc->gia_khoa_hoc,] );
     }
 
-    public function store(Request $request)
+    public function store(DangKyRequest $request)
     {
+        // $validated  = $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required | email | unique:users',
+        //     'sdt' => 'required | min:6',
+        //     'dia_chi' => 'required | min:6',
+        //     'id_khoa_hoc' => 'required | min:6',
+        //     'id_lop' => 'required | min:6',
+        // ]);
         $this->authorize(mb_strtoupper('thêm đăng ký') );
         $lop = $this->lop->index(null, false, null);
         $this->v['lop'] =  $lop;
