@@ -35,7 +35,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users',
-                                    'sdt' => 'required|min:10|numeric',
+                                    'sdt' => 'required|min:11|numeric',
                                     'dia_chi' => 'required | min:6',
                                     'id_khoa_hoc' => 'numeric|min:1',
                                     'id_lop' => 'numeric|min:1',
@@ -48,7 +48,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users,email,'.$id,
-                                    'sdt' => 'required|min:10|numeric',
+                                    'sdt' => 'required|min:11|numeric',
                                     'dia_chi' => 'required | min:6',
                                 ];
                             break;   
@@ -56,7 +56,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email',
-                                    'sdt' => 'required|min:10|numeric',
+                                    'sdt' => 'required|min:11|numeric',
                                     'dia_chi' => 'required | min:6',
                                 ];
                                 break;
