@@ -55,12 +55,13 @@
                         <label class="col-4">Ca học: </label>
                         <span class="col-8 p-0">
                             <?php
-                            foreach ($array as $item) {
-                                if ($item->id == $value->id_lop) {
+                            // foreach ($array as $item) {
+                                // if ($item->id == $value->id_lop) {
                                     // tìm ca thu
                                     // echo  $item->ca_thu_id;
+                                    // dd($value->ca_thu_id);
                                     foreach ($cathu as $itemCaThu) {
-                                        if ($item->ca_thu_id == $itemCaThu->id) {
+                                        if ($value->ca_thu_id == $itemCaThu->id) {
                                             // echo $itemCaThu->ca_id;
                                             // lấy ra ca hoc
                                             foreach ($cahoc as $key => $itemCaHoc) {
@@ -92,8 +93,8 @@
                                           
                                         }
                                     }
-                                }
-                            }
+                                // }
+                            // }
                             
                             ?>
                         </span>

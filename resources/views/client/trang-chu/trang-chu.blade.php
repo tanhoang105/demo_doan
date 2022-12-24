@@ -252,7 +252,7 @@
             </div>
 
             @foreach ($khaigiang as $value)
-                @if (date('d-m-Y', strtotime($value->ngay_bat_dau)) >= date('d-m-Y', time()))
+                @if ( date($value->ngay_bat_dau) > date('Y-m-d'))
                     <div class="row text-dark align-content-center"
                         style="text-align: center;height: 100px;border-top: 1px solid #DEDEDE">
                         <div class="col d-flex align-content-center flex-wrap justify-content-center">

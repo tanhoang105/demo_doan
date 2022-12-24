@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FormDoiLopClientRequest;
+use App\Models\CaHoc;
+use App\Models\CaThu;
 use App\Models\DangKy;
 use App\Models\DanhMuc;
 use App\Models\DoiLopKhoa;
@@ -11,6 +13,7 @@ use App\Models\GhiNo;
 use App\Models\GiangVien;
 use App\Models\KhoaHoc;
 use App\Models\Lop;
+use App\Models\ThuHoc;
 use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +22,18 @@ use function Symfony\Component\String\length;
 
 class KhoaHocController extends Controller
 {
+    protected $v;
+    protected $xeplop, $cathu, $thu, $cahoc, $lop;
+
+    public function __construct()
+    {
+        $this->v = [];
+        $this->xeplop = new XepLop();
+        $this->cahoc = new CaHoc();
+        $this->cathu = new CaThu();
+        $this->lop = new Lop();
+        $this->thu = new ThuHoc();
+    }
     //
     public function index(Request $request)
     {
@@ -131,17 +146,26 @@ class KhoaHocController extends Controller
     {
         // dd($id);
         // dd($request->all());
+        $this->v['params'] = $request->all();
         $lop_cu = $request->lopcu_id;
+        $this->v['lop_cu'] = $lop_cu;
         $khoa_hoc_cu = Lop::join('khoa_hoc', 'id_khoa_hoc', '=', 'khoa_hoc.id')->where('lop.id', '=', $request->lopcu_id)->get();
+        $this->v['khoa_hoc_cu'] = $khoa_hoc_cu;
         // dd($khoa_hoc_cu);
         $khoa_hoc_moi = KhoaHoc::find($id);
+        $this->v['khoa_hoc_moi'] = $khoa_hoc_moi;
         $lop_moi = Lop::where('lop.id_khoa_hoc', '=', $id)
             ->whereNotIn('id', [$request->lopcu_id])
             ->where('lop.so_luong', '>', 0)
             ->where('lop.ngay_bat_dau', '>=', date(now()))
             ->select('lop.*')->get();
         // dd($lop_moi);
-        return view('client.khoa-hoc.khoa_hoc_dang_ki.form_dang_ky_lop', compact('khoa_hoc_moi', 'lop_moi', 'khoa_hoc_cu', 'lop_cu'));
+        $this->v['lop_moi'] = $lop_moi;
+        
+        $this->v['cathu'] = $this->cathu->index($this->v['params'], false, null);
+        $this->v['thu'] = $this->thu->index(null, false, null);
+        $this->v['cahoc'] = $this->cahoc->index(null, false, null);
+        return view('client.khoa-hoc.khoa_hoc_dang_ki.form_dang_ky_lop', $this->v);
     }
     public function doi_khoa_hoc(FormDoiLopClientRequest $request)
     {

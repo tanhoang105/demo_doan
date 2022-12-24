@@ -37,7 +37,7 @@ class LopController extends Controller
             ->join('giang_vien', 'giang_vien.id_user', '=', 'lop.id_giang_vien')
             ->join('ca_thu', 'ca_thu.id', '=', 'lop.ca_thu_id')
             ->where('dang_ky.id_user', '=', Auth::user()->id)
-            ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_thu.ca_id', 'lop.ten_lop', 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
+            ->select('dang_ky.*', 'khoa_hoc.ten_khoa_hoc', 'giang_vien.ten_giang_vien', 'ca_thu.ca_id', 'lop.ten_lop', 'lop.ca_thu_id' , 'lop.ngay_bat_dau', 'lop.so_luong', 'lop.id as lop_id', 'khoa_hoc.id as khoa_hoc_id')
             ->get();
         $this->v['list'] = $list;
         //    dd($list);
@@ -53,21 +53,6 @@ class LopController extends Controller
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
 
 
-        $xeplop = $this->xeplop->index($this->v['params'], true, 6);
-        $this->v['khaigiang'] = $xeplop;
-        //    dd($xeplop);
-        $lopList  = $this->lop->index(null, false, null);
-        $this->v['lopList'] = $lopList;
-        $array = [];
-        for ($i = 0; $i < count($xeplop); $i++) {
-            for ($j = 0; $j < count($lopList); $j++) {
-                if ($xeplop[$i]->id_lop == $lopList[$j]->id) {
-                    $array[] =  $lopList[$j];
-                }
-            }
-        }
-        // dd($array);
-        $this->v['array'] = $array;
         return view('client.lop.lop', $this->v);
     }
     public function form_doi_lop($id, Request $request)

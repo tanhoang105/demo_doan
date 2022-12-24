@@ -34,7 +34,53 @@
                     <select data-url="{{ route('siso_doilop') }}" class="form-control" name="id_lop_moi" id="id_lop_moi">
                         <option value="">-----Chọn lớp mới muốn đổi------</option>
                         @foreach ($lop_moi as $value)
-                            <option value="{{ $value->id }}">{{ $value->ten_lop }}</option>
+                            <option value="{{ $value->id }}">{{ $value->ten_lop }} -- 
+                            
+                                <?php 
+                                // foreach ($array as $item) {
+                                //     if ($item->id == $value->id) {
+                                        // tìm ca thu
+                                        // echo  $item->ca_thu_id;
+                                        foreach ($cathu as $itemCaThu) {
+                                            if ($value->ca_thu_id == $itemCaThu->id) {
+                                                // echo $itemCaThu->ca_id;
+                                                // lấy ra ca hoc
+                                                foreach ($cahoc as $key => $itemCaHoc) {
+                                                    if ($itemCaThu->ca_id == $itemCaHoc->id) {
+                                                        echo '<li>' . $itemCaHoc->ca_hoc . ' ( ' . $itemCaHoc->thoi_gian_bat_dau . ' - ' . $itemCaHoc->thoi_gian_ket_thuc . ')' . '</li>';
+                                                    }
+                                                }
+                                                // lấy ra ngày học
+                                                // echo $itemCaThu->thu_hoc_id;
+                                                $arrayThu = explode(',', $itemCaThu->thu_hoc_id);
+                                                for ($i = 0; $i < count($arrayThu); $i++) {
+                                                    foreach ($thu as $key => $itemThu) {
+                                                        if ($i == 0) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '( ' . $itemThu->ten_thu . ' & ';
+                                                            }
+                                                        } elseif ($i == count($arrayThu) - 1) {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ')';
+                                                            }
+                                                        } else {
+                                                            if ($arrayThu[$i] == $itemThu->id) {
+                                                                echo '' . $itemThu->ten_thu . ' & ';
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                
+                                                // ===
+                                            }
+                                        }
+                                //     }
+                                // }
+                                
+                                ?>
+                            </option>
+
+                            
                         @endforeach
                     </select>
                     @error('id_lop_moi')

@@ -23,12 +23,12 @@
                         @foreach ($lop_moi as $value)
                             <option value="{{ $value->id }}">{{ $value->ten_lop . ' -- ' }}
                                 <?php 
-                                foreach ($array as $item) {
-                                    if ($item->id == $value->id) {
+                                // foreach ($array as $item) {
+                                //     if ($item->id == $value->id) {
                                         // tìm ca thu
                                         // echo  $item->ca_thu_id;
                                         foreach ($cathu as $itemCaThu) {
-                                            if ($item->ca_thu_id == $itemCaThu->id) {
+                                            if ($value->ca_thu_id == $itemCaThu->id) {
                                                 // echo $itemCaThu->ca_id;
                                                 // lấy ra ca hoc
                                                 foreach ($cahoc as $key => $itemCaHoc) {
@@ -60,8 +60,8 @@
                                                 // ===
                                             }
                                         }
-                                    }
-                                }
+                                //     }
+                                // }
                                 
                                 ?>
 
