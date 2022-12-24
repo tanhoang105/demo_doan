@@ -149,6 +149,7 @@ class KhoaHocController extends Controller
         // dd($request->all());
         $check_trung = DoiLopKhoa::where('doi_lop_khoa.id_lop_cu', '=', $request->id_lop_cu)
             ->where('doi_lop_khoa.status', '<', 4)
+            ->where('doi_lop_khoa.status', '>', 1)
             ->get();
         // dd($check_trung->count());
         if ($check_trung->count() > 0) {
