@@ -22,30 +22,30 @@
             <div class="col-6">
                 <input class="signup-field" name="gia_khoa_hoc" id="gia_khoa_hoc" type="text" value="" hidden>
                 <div class="mb-3">
-                    <label for="" class="form-label">Tên </label>
-                    <input class="form-control" value="" name="name" id="name" type="text" placeholder="Tên">
+                    <label for="" class="form-label">Tên <span class="text-danger">*</span></label>
+                    <input class="form-control" value="{{ old('name') ?? request()->name }}" name="name" id="name" type="text" placeholder="Tên">
                     @error('name')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Email </label>
-                    <input class="form-control" value="" name="email" id="email" type="text" placeholder="Email">
+                    <label for="" class="form-label">Email <span class="text-danger">*</span></label>
+                    <input class="form-control" value="{{ old('email') ?? request()->email }}" name="email" id="email" type="text" placeholder="Email">
                     <span class="msg_err_email"></span>
                     @error('email')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Sđt </label>
-                    <input class="form-control" value="" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
+                    <label for="" class="form-label">Điện thoại <span class="text-danger">*</span></label>
+                    <input class="form-control" value="{{ old('sdt') ?? request()->sdt }}" name="sdt" id="sdt" type="text" placeholder="Số điện thoại">
                     @error('sdt')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Địa chỉ </label>
-                    <input class="form-control" value="" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
+                    <label for="" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
+                    <input class="form-control" value="{{ old('dia_chi') ?? request()->dia_chi }}" name="dia_chi" id="dia_chi" type="text" placeholder="Địa chỉ">
                     @error('dia_chi')
                     <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -56,11 +56,11 @@
             </div>
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Khóa học </label>
+                    <label for="chuyenBay" class="form-label">Khóa học <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_khoa_hoc" id="id_khoa_hoc" data-url="{{route('admin_dang_ky')}}">
                         <option>-- Chọn khóa học --</option>
                             @foreach ($listKhoaHoc as $item)
-                                <option  value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
+                                <option  value="{{ $item->id }}" {{ (collect(old('id_khoa_hoc'))->contains($item->id)) ? 'selected':'' }}>{{ $item->ten_khoa_hoc }}</option>
                             @endforeach
                     </select>
                     @error('id_khoa_hoc')
@@ -68,7 +68,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Lớp </label>
+                    <label for="chuyenBay" class="form-label">Lớp <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_lop" id="id_lop">
                         <option>--Chọn Lớp--</option>
                     </select>

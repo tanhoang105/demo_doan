@@ -60,18 +60,10 @@ class DanhMucRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => ':attribute bắt buộc phải nhập',
-            'min' => ':attribute lớn hơn 4 ký tự',
-            'unique' => ':attribute đã tồn tại'
-
+            'ten_danh_muc.required' => 'Tên danh mục bắt buộc phải nhập',
+            'ten_danh_muc.min' => 'Tên danh mục nhiều hơn 4 ký tự',
+            'ten_danh_muc.unique' => 'Tên danh mục đã tồn tại',
         ];
     }
 
-    public function attributes()
-    {
-        return [
-
-            'ten_danh_muc' => 'Danh mục',
-        ];
-    }
 }

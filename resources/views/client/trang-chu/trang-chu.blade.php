@@ -323,6 +323,12 @@
                 @endif
             @endforeach
 
+            <div class="row pt-3">
+                <div class="col d-flex align-content-center flex-wrap justify-content-center">
+                    {{ $khaigiang->appends('params')->links() }}
+                </div>
+            </div>
+
         </div>
         <!-- /. container -->
     </section>

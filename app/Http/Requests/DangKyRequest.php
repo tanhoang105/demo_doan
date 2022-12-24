@@ -35,7 +35,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users',
-                                    'sdt' => 'required|regex:/(0)[0-9]{9}/',
+                                    'sdt' => 'required|regex:/(0)[0-9]{9}/ | min:10 | max:11',
                                     'dia_chi' => 'required | min:6',
                                     'id_khoa_hoc' => 'numeric|min:1',
                                     'id_lop' => 'numeric|min:1',
@@ -48,7 +48,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users,email,'.$id,
-                                    'sdt' => 'required|regex:/(0)[0-9]{9}/',
+                                    'sdt' => 'required|regex:/(0)[0-9]{9}/ | min:10 | max:11',
                                     'dia_chi' => 'required | min:6',
                                 ];
                             break;   
@@ -56,7 +56,7 @@ class DangKyRequest extends FormRequest
                                 $rules = [
                                     'name' => 'required',
                                     'email' => 'required | email',
-                                    'sdt' => 'required|regex:/(0)[0-9]{9}/',
+                                    'sdt' => 'required|regex:/(0)[0-9]{9}/ | min:10 | max:11',
                                     'dia_chi' => 'required | min:6',
                                 ];
                                 break;
@@ -82,6 +82,8 @@ class DangKyRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại',
             'sdt.required' => 'Số điện thoại bắt buộc nhập',
             'sdt.regex'=>'Số điện thoại không đúng định dạng',
+            'sdt.min' => 'Số điện thoại tối thiểu 10 kí tự ',
+            'sdt.max' => 'Số điện thoại tối đa 11 kí tự',
             'min'=> ':attribute lớn hơn 6 ký tự',
             'id_khoa_hoc' => 'Bắt buộc phải chọn khóa học',
             'id_lop'=>'Bắt buộc phải chọn lớp',

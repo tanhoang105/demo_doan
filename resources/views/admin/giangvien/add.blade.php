@@ -63,7 +63,7 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Avatar</label>
+                    <label for="" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
                     <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%" width="100px" height="100px" alt="">
                     <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
                            class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
@@ -80,7 +80,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
-                    <input type="text" name="sdt" id="" class="form-control">
+                    <input type="text" name="sdt" value="{{ old('sdt') ?? request()->sdt }}" id="" class="form-control">
                     @error('sdt')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror
@@ -98,8 +98,8 @@
     
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mô Tả</label>
-                    <textarea id="ckeditor2" class="form-control" name="mo_ta" id=""></textarea>
+                    <label for="" class="form-label">Mô Tả <span class="text-danger">*</span></label>
+                    <textarea id="ckeditor2" class="form-control" value="{{ old('sdt') ?? request()->sdt }}" name="mo_ta" id=""></textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>
                     @enderror

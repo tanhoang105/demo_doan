@@ -46,7 +46,7 @@ class HomeController extends Controller
         $this->v['cahoc'] = $this->cahoc->index(null, false, null);
 
 
-        $xeplop = $this->xeplop->index($this->v['params'], true, 6);
+        $xeplop = $this->xeplop->index($this->v['params'], true, 4);
         $this->v['khaigiang'] = $xeplop;
         //    dd($xeplop);
         $lopList  = $this->lop->index(null, false, null);
