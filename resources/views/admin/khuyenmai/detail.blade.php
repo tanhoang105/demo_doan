@@ -28,8 +28,6 @@
                     <th scope="col">STT</th>
                     <th scope="col">Tên khóa</th>
 
-
-
                 </tr>
             </thead>
             <tbody>

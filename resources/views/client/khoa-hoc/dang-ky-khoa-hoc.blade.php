@@ -136,35 +136,39 @@
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Họ Tên</label>
-                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control" name="name" type="text" placeholder="Họ Tên">
+                                <input style="margin: 10px;height: 50px" value="{{Auth::user()->name??''}}" class="form-control input" name="name" type="text" placeholder="Họ Tên" data-name="Họ tên">
                                 @error('name')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
+                                <div class="text-danger msg_error error_name"></div>
+
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Email</label>
-                                <input style="margin: 10px;height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" class="form-control" id="email" name="email" type="text" placeholder="Email">
+                                <input style="margin: 10px;height: 50px" data-url="{{route('client_check_email')}}" value="{{Auth::user()->email??''}}" class="form-control input" id="email" data-name="Email" name="email" type="text" placeholder="Email">
                                 @error('email')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
-                                <div class="text-danger error_email"></div>
+                                <div class="text-danger msg_error error_email"></div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Số điện thoại</label>
-                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->sdt??''}}" name="sdt" type="text" placeholder="Số điện thoại">
+                                <input style="margin: 10px;height: 50px" class="form-control input" value="{{Auth::user()->sdt??''}}" id="phone" data-name="Số điện thoại" name="sdt" type="text" placeholder="Số điện thoại">
                                 @error('sdt')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
+                                <div class="text-danger msg_error error_sdt"></div>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <label class="signup-field">Địa chỉ</label>
-                                <input style="margin: 10px;height: 50px" class="form-control" value="{{Auth::user()->dia_chi??''}}" name="dia_chi" type="text" placeholder="Địa chỉ">
+                                <input style="margin: 10px;height: 50px" class="form-control input" value="{{Auth::user()->dia_chi??''}}" data-name="Địa chỉ" name="dia_chi" type="text" placeholder="Địa chỉ">
                                 @error('dia_chi')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
+                                <div class="text-danger msg_error error_address"></div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 {{-- <label class="signup-field">Chọn phương thức thanh toán</label> --}}
@@ -203,59 +207,101 @@
                 return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
             }
             $('#submit').on('click',function(e) {
+                let error = false;
+                let checkEmail = true;
+                    $('.input').each(function() {
+                        if($(this).val() == '') {
+                            error = true
+                            let name = $(this).data('name')
+                            $(this).parent().find('.msg_error').html(`${name} bắt buộc nhập`)
+                        }else {
+                            if($(this).attr('name') != 'email') {
+                                $(this).parent().find('.msg_error').html('')
+                            }
+                        }
+                    })
+
+                    if ($('#phone').val() != '') {
+                        var phone = $('#phone').val();
+                        var phoneRegex = /^(84|0)(9\d{8}|8\d{8}|3\d{8}|5\d{8}|7\d{8})$/;
+                        if (!phoneRegex.test(phone)) {
+                            $('#phone').parent().find('.msg_error').html('Số không đúng dạng')
+                            error = true;
+                        } else {
+                            $('#phone').parent().find('.msg_error').html('')
+                        }
+                    } 
+                    
+                    if ($('#email').val() != '') {
+                        var email = $('#email').val();
+                        var emailRegex =
+                            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        if (!emailRegex.test(email)) {
+                            $('#email').parent().find('.msg_error').html('Email không đúng dạng')
+                            error = true;
+                        } else {
+                            let url=$('#email').data('url');
+                            $.ajax({
+                                type:'GET',
+                                url :url,
+                                data:{
+                                    email:email,
+                                },
+                                success:function (res) {
+                                    console.log(res);
+                                    if(res['status']==200){
+                                        $('#email').parent().find('.msg_error').html('')
+                                    }
+                                    else {
+                                        error=true;
+                                        console.log('abc: ',error);
+                                        $('#email').parent().find('.msg_error').html('Email này đã đăng ký tài khoản')
+                                    }
+                                    if(!error) {
+                                        submitForm()
+                                    }
+                                }
+                            })
+                        }
+
+                    } 
+
+            })
+
+            function submitForm() {
                 let payment = $('#select_payment').val();
                 let url = $(this).data('url')
                 if(payment == 1) {
                     $('#form').submit();
-                }else{
+                }
+                else{
                     let data = $('#form').serialize();
-                    $.ajax({
+
+                        $.ajax({
                         type: 'post',
                         url: url,
                         data: data,
                         success: function(res) {
+                            console.log(res);
                             if(res.success == true){
-                            $('#gia_khoa_hoc_payment').val(res.gia_khoa_hoc);
-                            $('#id_dang_ky').val(res.id_dang_ky);
-                            $('#form-payment').attr('action',`/vnp_payment/${res.id_dang_ky}`)
-                            $('#form-payment').submit();
+                                $('#gia_khoa_hoc_payment').val(res.gia_khoa_hoc);
+                                $('#id_dang_ky').val(res.id_dang_ky);
+                                $('#form-payment').attr('action',`/vnp_payment/${res.id_dang_ky}`)
+                                $('#form-payment').submit();
                             }
                             else{
                                 $('.alert.d-none').removeClass('d-none')
                             }
 
+                        },
+                        error: function (res) {
+                            console.log(res);
                         }
                     })
                 }
-
-            })
+            }
             
-            let checkEmail=false;
-            $('#email').blur(function () {
-                let email=$(this).val();
-                let url=$(this).data('url');
-                $.ajax({
-                    type:'GET',
-                    url :url,
-                    data:{
-                        email:email,
-                    },
-                    success:function (res) {
-                        if(res['status']==200){
-                            checkEmail=true;
-                            $('.error_email').html('')
-                            $('#submit').attr('disabled',false)
-                        }
-                        else {
-                            checkEmail=false;
-                            $('.error_email').html('Email này đã đăng ký tài khoản')
-                            $('#submit').attr('disabled',true)
-                        }
-                    }
-
-                })
-
-            })
+           
             let gia_khoa_hoc_old = $('#gia_khoa_hoc').val()
 
             $('.btn-apply').on('click',function() {

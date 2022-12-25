@@ -52,14 +52,6 @@ class DangKyRequest extends FormRequest
                                     'dia_chi' => 'required | min:6',
                                 ];
                             break;   
-                            case 'postDangKy':
-                                $rules = [
-                                    'name' => 'required',
-                                    'email' => 'required | email',
-                                    'sdt' => 'required|regex:/(0)[0-9]{9}/ | min:10 | max:11',
-                                    'dia_chi' => 'required | min:6',
-                                ];
-                                break;
                         default:
                             # code...
                             break;

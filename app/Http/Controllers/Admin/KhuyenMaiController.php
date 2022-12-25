@@ -376,13 +376,13 @@ class KhuyenMaiController extends Controller
                     if ($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
                         if ($km->loai_giam_gia == 1) {
-                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia > 0 ? (int)$request->gia_khoa_hoc - (int)$km->giam_gia : 0;
                         } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
                     } else {
                         if ($km->loai_giam_gia == 1) {
-                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia > 0 ? (int)$request->gia_khoa_hoc - (int)$km->giam_gia : 0;
                         } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
@@ -409,13 +409,13 @@ class KhuyenMaiController extends Controller
                     if ($km->loai_khuyen_mai == 1) {
                         // dd($request->gia_khoa_hoc);
                         if ($km->loai_giam_gia == 1) {
-                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia > 0 ? (int)$request->gia_khoa_hoc - (int)$km->giam_gia : 0;
                         } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }
                     } else {
                         if ($km->loai_giam_gia == 1) {
-                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia;
+                            $giaKhoaHoc = (int)$request->gia_khoa_hoc - (int)$km->giam_gia > 0 ?  (int)$request->gia_khoa_hoc - (int)$km->giam_gia : 0;
                         } else {
                             $giaKhoaHoc = (int)$request->gia_khoa_hoc - ((int)$request->gia_khoa_hoc * (int)$km->giam_gia / 100);
                         }

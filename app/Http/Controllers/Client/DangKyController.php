@@ -43,6 +43,7 @@ class DangKyController extends Controller
     }
     public function postDangKy(DangKyRequest $request ,$id)
     {
+        // dd($request->all());
 //        try {
 //            DB::beginTransaction();
         $objDangKy = new DangKy();
@@ -187,23 +188,37 @@ class DangKyController extends Controller
                     ->where('users.id',Auth::user()->id)
                     // ->andWhere('')
                     ->first();
-                    if(empty($query)) {
 
+                    if(!empty($query)) {
+                        $currentTime = $date = date('Y-m-d', time());
+                        $queryLop = DB::table('lop')
+                                    ->where('id',$id)
+                                    ->where('ngay_ket_thuc','<',$currentTime )
+                                    ->first();
+                    }
+                    // dd($queryLop, $currentTime);
+                    
+                    if(empty($query) || (!empty($query) && !empty($queryLop))) {
+                        // dd(1);
                         $user = Auth::user();
-
-
-                        $caHoc = DB::table('dang_ky')
+                        // if(empty($query)) {
+                            $queryCaHoc = DB::table('dang_ky')
                                 ->join('lop','lop.id','=','dang_ky.id_lop')
                                 ->join('ca_thu','ca_thu.id','=','lop.ca_thu_id')
-                                ->where('dang_ky.id_user',$user->id)
-                                ->select('lop.ca_thu_id','ca_thu.ca_id','ca_thu.thu_hoc_id')
-                                ->get();
-                        foreach ($caHoc as $item) {
-                            if($request->ca_id == $item->ca_id  && $request->thu_hoc_id == $item->thu_hoc_id ) {
-                                Session::flash('error', 'Ca học đã trùng với khóa học đã đăng ký');
-                                return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                ->where('dang_ky.id_user',$user->id);
+                            if(!empty($query) && !empty($queryLop)) {
+                                $queryCaHoc = $queryCaHoc->where('lop.id','<>',$id);
                             }
-                        }
+                            $caHoc = $queryCaHoc->select('lop.ca_thu_id','lop.id as id_lop','ca_thu.ca_id','ca_thu.thu_hoc_id')
+                                    ->get();
+                            foreach ($caHoc as $item) {
+                                if($request->ca_id == $item->ca_id  && $request->thu_hoc_id == $item->thu_hoc_id) {
+                                    Session::flash('error', 'Ca học đã trùng với khóa học đã đăng ký');
+                                    return redirect()->route('client_dang_ky', ['id' => $request->id]);
+                                }
+                                
+                            }
+                        // }
 
                         $objHocvien = new HocVien();
                         $query = $objHocvien->getHocVien($request->user_id);
@@ -222,10 +237,8 @@ class DangKyController extends Controller
                             ];
                         }
                         $insertThanhToan = $objThanhToan->saveNew($dataThanhToan);
-                    // }
                     // kiểm tra user đăng nhập đã là học viên
-//                    dd($query);
-                    if (!empty($query->user_id) > 0) {
+                        if (!empty($query->user_id) > 0) {
                             // ->where('user_id',$user->id)
                             if (!empty($insertThanhToan) > 0) {
                                 $data = [
@@ -279,11 +292,9 @@ class DangKyController extends Controller
 
                     }
                     else {
-                    //    dd(2);
                         // kiểm tra user đăng nhập không là học viên
                         $params['cols']['ten_hoc_vien'] = $request->name;
                         $dataHocVien = $params;
-//                        dd($dataHocVien);
                         unset($dataHocVien['cols']['lop_id']);
                         unset($dataHocVien['cols']['ten']);
                         unset($dataHocVien['cols']['name']);
@@ -348,8 +359,8 @@ class DangKyController extends Controller
                             }
                         }
                     }
-
-                }else {
+                }
+                else {
                     if($request->ten == 2) {
                         return response()->json([
                             'success'=>false
