@@ -33,7 +33,7 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lịch học <span class="text-danger">*</span></label>
                     <select class="form-control" name="ca_thu_id" id="">
-                        <option value="0">--- Chọn lịch học ---</option>
+                        <option value="">--- Chọn lịch học ---</option>
                         @foreach ($cathu as $item)
                             <option value="{{ $item->id }}" {{ (collect(old('ca_thu_id'))->contains($item->id)) ? 'selected':'' }}>
 

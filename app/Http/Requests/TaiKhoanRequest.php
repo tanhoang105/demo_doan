@@ -35,7 +35,7 @@ class TaiKhoanRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required | email | unique:users,email',
                             'vai_tro_id' => 'numeric | min:1',
-                            'password' => 'required | min:6',
+                            'password' => 'required | min:6 | max:32',
                             'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
@@ -48,7 +48,7 @@ class TaiKhoanRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required | email',
                             'vai_tro_id' => 'numeric | min:1',
-                            'password' => 'required | min:6',
+                            'password' => 'required | min:6 | max:32',
                             'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
@@ -83,9 +83,10 @@ class TaiKhoanRequest extends FormRequest
             'email.email' => 'Sai định dạng Email',
             'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Mật khẩu bắt buộc phải nhập',
+            'password.max' => 'Mật khẩu tối đa là 32 kí tự',
             'password.min' => 'Mật khẩu bắt buộc nhiều hơn 6 ký tự',
             'hinh_anh.required' => 'Ảnh đại diện bắt buộc phải chọn',
             'hinh_anh.image' => 'Ảnh đại diện phải có định dạng: jpeg, png, jpg',
-        ];
+            ];
     }
 }
