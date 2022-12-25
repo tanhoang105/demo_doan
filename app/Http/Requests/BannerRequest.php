@@ -32,14 +32,14 @@ class BannerRequest extends FormRequest
                     // nếu là method thêm mới bản ghi
                     case 'store':
                         $rules = [
-                            'anh_banner' => 'required',
+                            'anh_banner' => 'required | image',
                         ];
                         break;
 
                     // nếu là method chỉnh sửa bản ghi
                     case 'update':
                         $rules = [
-                            'anh_banner' => 'required'
+                            'anh_banner' => 'required | image'
                         ];
                         break;
 
@@ -60,14 +60,9 @@ class BannerRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => ':attribute bắt buộc phải nhập',
+            'anh_banner.required' => 'Ảnh Banner bắt buộc phải chọn',
+            'anh_banner.image' => 'Ảnh Banner phải có định dạng: jpeg, png, jpg',
         ];
     }
 
-    public function attributes()
-    {
-        return [
-            'anh_banner' => 'Banner',
-        ];
-    }
 }

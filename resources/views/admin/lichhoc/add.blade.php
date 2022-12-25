@@ -25,7 +25,7 @@
                     <select name="ca_id" class="form-control" id="">
                         <option value="">Chọn ca học</option>
                         @foreach ($ca as $item)
-                            <option value="{{ $item->id }}"> {{ $item->ca_hoc . ' ( ' . $item->thoi_gian_bat_dau  . ' - ' . $item->thoi_gian_ket_thuc . ' ) ' }} </option>
+                            <option value="{{ $item->id }}" {{ (collect(old('ca_id'))->contains($item->id)) ? 'selected':'' }}> {{ $item->ca_hoc . ' ( ' . $item->thoi_gian_bat_dau  . ' - ' . $item->thoi_gian_ket_thuc . ' ) ' }} </option>
                         @endforeach
                     </select>
                     @error('ca_id')

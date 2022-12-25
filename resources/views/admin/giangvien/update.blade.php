@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Avatar</label>
+                    <label for="" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
                     <td>
                          <img id="anh" style="border-radius: 100% ; width:100px ; height:100px "   src=" {{Storage::URL($res ->hinh_anh)}} " alt="">
                      </td>
@@ -99,7 +99,7 @@
                 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mô Tả</label>
+                    <label for="" class="form-label">Mô Tả <span class="text-danger">*</span></label>
                     <textarea id="ckeditor2" class="form-control" name="mo_ta" value="{{ old('mo_ta') ?? request()->mo_ta ?? $res->mo_ta }}" id="">{{ $res->mo_ta}}</textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>

@@ -32,7 +32,7 @@
                     <select class="form-control" name="id_danh_muc" id="">
                             <option value="0">--- Chọn danh mục khóa học ---</option>
                         @foreach ($danhmuc as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_danh_muc }}</option>
+                            <option value="{{ $item->id }}" {{ (collect(old('id_danh_muc'))->contains($item->id)) ? 'selected':'' }}>{{ $item->ten_danh_muc }}</option>
                         @endforeach
                     </select>
                     @error('id_danh_muc')
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="chuyenBay" class="form-label">Tiền tố<span class="text-danger">*</span></label>
+                    <label for="chuyenBay" class="form-label">Tiền tố <span class="text-danger">*</span></label>
                     <input value="{{ old('tien_to') ?? request()->tien_to }}" type="text" name="tien_to"
                         class="form-control" id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -67,7 +67,7 @@
 
             <div class="col-6">
                 <div class="mb-3">
-                    <label for="" class="form-label">Ảnh</label><br>
+                    <label for="" class="form-label">Ảnh khóa học <span class="text-danger">*</span></label><br>
                     {{--                    <img width="200px" id="anh" src="" alt=""><br> --}}
                     <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file"
                         name="hinh_anh" class="form-control" accept=".png, .jpg, .jpeg">
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Mô Tả</label>
+                    <label for="" class="form-label">Mô Tả <span class="text-danger">*</span></label>
                     <textarea id="ckeditor2" class="form-control" name="mo_ta" id=""></textarea>
                     @error('mo_ta')
                         <span style="color: red"> {{ $message }} </span>

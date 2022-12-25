@@ -22,10 +22,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">
-                    <input id="check_all" type="checkbox" />
+                {{-- <th scope="col">
+                    <input id="check_all" type="checkbox" /> --}}
                     {{-- <button type="submit" class="btn" style="">Xóa</button> --}}
-                </th>
+                {{-- </th> --}}
                 <th scope="col">STT</th>
                 {{-- <th scope="col">Mã học viên </th> --}}
                 <th scope="col">Tên học viên</th>
@@ -36,8 +36,8 @@
         <tbody>
             @foreach ($ghi_no as $key => $item)
                 <tr>
-                    <td><input class="checkitem" type="checkbox" name="id[]" value="" /></td>
-                    <th scope="row"> {{ $item->id }}</th>
+                    {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="" /></td> --}}
+                    <th scope="row"> {{ $loop->iteration }}</th>
                     {{-- <td> {{ $item->user_id }}</td> --}}
                     <td>
                         {{ $item->name }}

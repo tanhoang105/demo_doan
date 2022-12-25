@@ -33,9 +33,9 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Lịch học <span class="text-danger">*</span></label>
                     <select class="form-control" name="ca_thu_id" id="">
-                        <option value="0">--- Chọn lịch học ---</option>
+                        <option value="">--- Chọn lịch học ---</option>
                         @foreach ($cathu as $item)
-                            <option value="{{ $item->id }}">
+                            <option value="{{ $item->id }}" {{ (collect(old('ca_thu_id'))->contains($item->id)) ? 'selected':'' }}>
 
                                 @foreach ($cahoc as $itemCa)
                                     {{-- {{$itemCa->ca_hoc}} --}}
@@ -82,7 +82,7 @@
                         data-url='{{ route('admin_lay_tien_to') }}'>
                         <option value="0">--- Chọn khóa học ---</option>
                         @foreach ($khoahoc as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_khoa_hoc }}</option>
+                            <option value="{{ $item->id }}" {{ (collect(old('id_khoa_hoc'))->contains($item->id)) ? 'selected':'' }}>{{ $item->ten_khoa_hoc }}</option>
                         @endforeach
                     </select>
                     @error('id_khoa_hoc')
@@ -127,9 +127,9 @@
                 <div class="mb-3">
                     <label for="chuyenBay" class="form-label">Giảng Viên <span class="text-danger">*</span></label>
                     <select class="form-control" name="id_giang_vien" id="">
-                        <option value="">--- Chọn giảng viên ---</option>
+                        <option value="0">--- Chọn giảng viên ---</option>
                         @foreach ($giangvien as $item)
-                            <option value="{{ $item->id_user }}">{{ $item->ten_giang_vien }}</option>
+                            <option value="{{ $item->id_user }}" {{ (collect(old('id_giang_vien'))->contains($item->id_user)) ? 'selected':'' }}>{{ $item->ten_giang_vien }}</option>
                         @endforeach
                     </select>
                     @error('id_giang_vien')
