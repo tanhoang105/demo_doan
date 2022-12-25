@@ -30,10 +30,10 @@
                                     <img src="{{ Storage::url($item->anh_banner) }}" alt="" data-depth="0.10"
                                         class="layer">
                                 </div>
-                                <div class="hero_stu">
+                                {{-- <div class="hero_stu">
                                     <h4> 13k+ Học Viên</h4>
                                     <img src="{{ asset('client/images/hero_students.png') }}" alt="">
-                                </div>
+                                </div> --}}
                                 <img src="{{ asset('client/images/pencil.png') }}" alt="" class="pencil">
                                 <!-- /.hero_stu-->
                             </div>
@@ -121,7 +121,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="abt_rating">
+                    {{-- <div class="abt_rating">
                         <h4> 4.9+</h4>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -129,13 +129,13 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <span> Đánh giá của người dùng </span>
-                    </div>
+                    </div> --}}
                     <!-- /.abt_rating-->
                     <div class="about_img" id="scene2">
                         <img src="{{ asset('client/images/about.png') }}" alt="image" class="layer" data-depth="0.28">
                     </div>
                     <!-- /.about_img-->
-                    <div class="abt_course">
+                    {{-- <div class="abt_course">
                         <h4>47K+</h4>
                         <i class="fa fa-heart"></i>
                         <i class="fa fa-heart"></i>
@@ -143,7 +143,7 @@
                         <i class="fa fa-heart"></i>
                         <i class="fa fa-heart"></i>
                         <span> Các khóa học hoạt động </span>
-                    </div>
+                    </div> --}}
                     <!-- /.abt_course-->
                 </div>
                 <div class="col-md-6 col-sm-12">

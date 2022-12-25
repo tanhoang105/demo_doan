@@ -5,11 +5,11 @@
 
 @section('content')
     <h2 style="text-align: center;padding-top: 20px; margin-bottom: 20px">Quản Lý Số dư tài khoản</h2>
-    {{-- <div class="row p-3">
-        <a style="color: red" href=" {{ route('route_BE_Admin_Add_Giang_Vien') }}">
-            <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
+    <div class="row p-3">
+        <a style="color: red" href=" {{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}">
+            <button class='btn btn-primary'> Tất cả danh sách</button>
         </a>
-    </div> --}}
+    </div>
     {{-- <form method="put" action="" enctype="multipart/form-data">
         @csrf --}}
     <div>
@@ -29,6 +29,7 @@
                 <th scope="col">STT</th>
                 {{-- <th scope="col">Mã học viên </th> --}}
                 <th scope="col">Tên học viên</th>
+                <th scope="col">Email</th>
                 <th scope="col">Số dư tài khoản </th>
                 <th scope="col">Hành động</th>
             </tr>
@@ -41,6 +42,9 @@
                     {{-- <td> {{ $item->user_id }}</td> --}}
                     <td>
                         {{ $item->name }}
+                    </td>
+                    <td>
+                        {{ $item->email }}
                     </td>
                     <td> {{ number_format($item->tien_no) }} VND
                     </td>

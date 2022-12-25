@@ -15,6 +15,7 @@ class LichHoc extends Model
 
     public function index($params, $pagination = true, $perpage)
     {
+        // dd(123);
         if ($pagination) {
             $query = DB::table($this->table)
                 ->where($this->table . '.delete_at', '=', 1)

@@ -25,6 +25,7 @@ class HocVien extends Model
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_hoc_vien', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.email', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -40,6 +41,7 @@ class HocVien extends Model
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
                     $q->orWhere($this->table . '.ten_hoc_vien', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.email', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();

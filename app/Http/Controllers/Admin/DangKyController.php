@@ -199,6 +199,7 @@ class DangKyController extends Controller
                             'thuhoc'=>$layThu,
                             'message' => 'Xin chào bạn , Bạn vừa đăng ký thành công khóa học của chúng tôi']));
                     }
+                    return redirect()->route('route_BE_Admin_List_Dang_Ky');
                 } else {
                     Session::flash('error', 'Lỗi đăng ký');
                 }

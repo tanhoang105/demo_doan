@@ -58,6 +58,14 @@ class XepLop extends Model
                 ->select($this->table . '.*', $this->table . '.id  as  id_xep_lop', 'lop.*', 'khoa_hoc.*', 'giang_vien.*', 'phong_hoc.*')
                 ->where($this->table . '.delete_at', '=', 1)
                 ->orderByDesc($this->table . '.id');
+                if (!empty($params['keyword'])) {
+                    $query =  $query->where(function ($q) use ($params) {
+                        $q->orWhere($this->table . '.id_lop', 'like', '%' . $params['keyword']  . '%');
+                        $q->orWhere('lop.ten_lop', 'like', '%' . $params['keyword']  . '%');
+                        $q->orWhere('giang_vien.ten_giang_vien', 'like', '%' . $params['keyword']  . '%');
+                        $q->orWhere('khoa_hoc.ten_khoa_hoc', 'like', '%' . $params['keyword']  . '%');
+                    });
+                }
 
             $list = $query->get();
         }

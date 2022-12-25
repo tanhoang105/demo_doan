@@ -38,9 +38,8 @@
               data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-              @hasRoles(['admin'])
-
-              <li class="nav-item nav-active">
+                 @hasRoles(['admin','kế toán'])
+                 <li class="nav-item nav-active">
                   <a href=" {{ route('route_BE_Admin_Thong_Ke') }}" class="nav-link ">
                       <i class="nav-icon fas fa-chart-pie"></i>
                       <p>
@@ -48,7 +47,9 @@
                       </p>
                   </a>
               </li>
+                 @endhasRoles
 
+              @hasRoles(['admin'])
               <li class="nav-item">
                   <a href="" class="nav-link ">
                       <i class="nav-icon fas fa-address-card"></i>

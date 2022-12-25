@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PhonghocRequest;
 use App\Models\PhongHoc;
+use App\Models\XepLop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -12,12 +13,13 @@ class PhongHocController extends Controller
 {
 
     protected $v;
-    protected $phonghoc;
+    protected $phonghoc , $xeplop;
 
     public function __construct()
     {
         $this->v = [];
         $this->phonghoc = new PhongHoc();
+        $this->xeplop = new XepLop();
     }
     /**
      * Display a listing of the resource.
@@ -31,6 +33,19 @@ class PhongHocController extends Controller
         $this->v['params'] = $request->all();
         $list = $this->phonghoc->index($this->v['params'], true, 10);
         $this->v['list'] = $list;
+        
+        $list_xep_lop = $this->xeplop->index(null , false , null);
+        // dd($list_xep_lop[0]->id_phong_hoc);
+        $listIdPhong = [];
+        foreach($list_xep_lop  as $item){
+            $listIdPhong[] = $item->id_phong_hoc;
+        }
+        $listIdPhong = array_unique($listIdPhong);
+        // dd($listIdPhong);
+        $this->v['listIdPhong'] = $listIdPhong;
+        
+
+
         return view('admin.phonghoc.index', $this->v);
     }
 

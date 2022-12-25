@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class GhiNoController extends Controller
 {
+    protected $ghi_no;
+    public function __construct()
+    {
+        $this->ghi_no = new GhiNo();
+    }
     public function tk_ghi_no()
     {
         $ghi_no = GhiNo::where('user_id', '=', Auth::user()->id)
@@ -16,11 +21,30 @@ class GhiNoController extends Controller
             ->get();
         return view('client.ghi_no.index', compact('ghi_no'));
     }
-    public function quan_ly_tk_ghi_no()
+    public function quan_ly_tk_ghi_no(Request $request)
     {
-        $ghi_no = GhiNo::join('users', 'users.id', '=', 'ghi_no.user_id')
-            ->select('ghi_no.*', 'users.name')
-            ->paginate(6);
+        // $ghi_no = GhiNo::join('users', 'users.id', '=', 'ghi_no.user_id')
+        //     ->select('ghi_no.*', 'users.name')
+        //     ->paginate(6);
+
+        $params = [];
+        $params['loc'] = array_map(function ($item) {
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->all());
+        // dd($params);
+        if($request->keyword){
+           
+            $params['loc']['keyword'] = $request->keyword;
+            
+        }
+        $ghi_no = $this->ghi_no->index($params, true, 10);
+ 
         return view('Admin.tk_ghi_no.index', compact('ghi_no'));
     }
     public function cap_nhat_so_du(Request $request, $id)

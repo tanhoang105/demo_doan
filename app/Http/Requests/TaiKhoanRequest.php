@@ -36,7 +36,7 @@ class TaiKhoanRequest extends FormRequest
                             'email' => 'required | email | unique:users,email',
                             'vai_tro_id' => 'numeric | min:1',
                             'password' => 'required | min:6 | max:32',
-                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                            'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
                         ];
@@ -49,7 +49,7 @@ class TaiKhoanRequest extends FormRequest
                             'email' => 'required | email',
                             'vai_tro_id' => 'numeric | min:1',
                             'password' => 'required | min:6 | max:32',
-                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11',
+                            'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
                         ];
