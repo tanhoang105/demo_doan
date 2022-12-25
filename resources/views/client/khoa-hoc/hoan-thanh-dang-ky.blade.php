@@ -45,7 +45,7 @@
 
                     </div><br>
                     <!-- Text -->
-                    <p class="ft-regular fs-md mb-5">Mã đăng ký <span class="text-body text-dark">{{$complete->id}}#</span> đã hoàn thành. Chi tiết đơn hàng của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
+                    <p class="ft-regular fs-md mb-5">Mã đăng ký <span class="text-body text-dark">{{$complete->id}}#</span> đã hoàn thành. Chi tiết khóa học của bạn được hiển thị cho tài khoản cá nhân của bạn.</p>
                     <!-- Button -->
                     
                 </div>

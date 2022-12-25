@@ -21,7 +21,7 @@ class DanhMuc extends Model
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_danh_muc', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -32,7 +32,7 @@ class DanhMuc extends Model
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere($this->table . '.ten', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ten_danh_muc', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list = $query->get();

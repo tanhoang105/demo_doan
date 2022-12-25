@@ -48,7 +48,7 @@
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        <td><input {{ in_array($item->id, $listIdPhong) ? 'hidden' : 'value=' . $item->id }} class="checkitem" type="checkbox" name="id[]"  /></td>
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ $item->ten_phong }}</td>
 
@@ -60,7 +60,7 @@
 
                         </td>
                         <td>
-                                <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
+                                <a  {{ in_array($item->id, $listIdPhong) ? 'hidden' : ''}} onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger" style="color: aliceblue" href="{{ route('route_BE_Admin_Xoa_Phong_Hoc', ['id' => $item->id]) }}">
                                     <i class="fas fa-trash-alt"></i> Xóa</a>
                         </td>
                     </tr>

@@ -33,7 +33,7 @@ class DanhMucKhoaHoc extends Controller
     {
         $this->authorize(mb_strtoupper('xem danh mục khóa học'));
         $this->v['pramas'] = $request->all();
-        $list = $this->danh_muc->index($this->v, true, 10);
+        $list = $this->danh_muc->index($this->v['pramas'], true, 10);
         $this->v['list'] = $list;
         $lop = $this->lop->index(null, false, null);
         $arrayIdKhoaHoc = [];

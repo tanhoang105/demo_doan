@@ -9,6 +9,10 @@
         <a href="{{ route('route_BE_Admin_Add_Lop') }}">
             <button class='btn btn-primary'> <i class="fas fa-plus "></i> Thêm</button>
         </a>
+
+        <a style="margin-left : 20px" href="{{ route('route_BE_Admin_List_Lich_Hoc') }}">
+            <button class='btn btn-warning'> Tất cả danh sách</button>
+        </a>
     </div>
     {{-- hiển thị massage đc gắn ở session::flash('error') --}}
     @if (Session::has('error'))

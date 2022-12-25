@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -46,6 +45,7 @@ class LichHocController extends Controller
     }
     public function index(Request $request)
     {
+        // dd(12);
         $this->authorize(mb_strtoupper('xem lịch học'));
 
         // hiển thị ra danh sách lớp học 
@@ -53,7 +53,7 @@ class LichHocController extends Controller
 
         unset($this->v['params']['_token']);
         $this->v['list']  = $this->lop->index($this->v['params'], true, 10);
-        $this->v['xepLop'] = $this->xeplop->index(null, false, null);
+        $this->v['xepLop'] = $this->xeplop->index($this->v['params'], false, null);
         //  dd($this->v['list']);
         return view('admin.lich.listlop', $this->v);
     }

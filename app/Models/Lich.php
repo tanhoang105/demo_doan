@@ -15,7 +15,7 @@ class Lich extends Model
 
     public function index($params, $pagination = true,  $perpage)
     {
-        // dd($params);
+        // dd(123);
         // hàm có 3 tham số truyền vào lần lượt là mảng keyword , có phần trang hay không , số bản ghi trong 1 trang
         if ($pagination) {
             // nếu phần trang
