@@ -52,14 +52,15 @@ class DangKyRequest extends FormRequest
                                     'dia_chi' => 'required | min:6',
                                 ];
                             break;   
-                            case 'postDangKy':
-                                $rules = [
-                                    'name' => 'required',
-                                    'email' => 'required | email',
-                                    'sdt' => 'required|regex:/(0)[0-9]{9}/',
-                                    'dia_chi' => 'required | min:6',
-                                ];
-                                break;
+                            // case 'postDangKy':
+                            //     // dd($request->all());
+                            //     $rules = [
+                            //         'name' => 'required',
+                            //         'email' => 'required | email' ,
+                            //         'sdt' => 'required|regex:/(0)[0-9]{9}/',
+                            //         'dia_chi' => 'required | min:6',
+                            //     ];
+                            //     break;
                         default:
                             # code...
                             break;
