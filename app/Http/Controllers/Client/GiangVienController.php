@@ -26,7 +26,9 @@ class GiangVienController extends Controller
         // dd($giang_vien);
         $khoa_hoc = Lop::join('khoa_hoc', 'lop.id_khoa_hoc', '=', 'khoa_hoc.id')
         ->join('danh_muc','danh_muc.id','=','khoa_hoc.id_danh_muc')
+ 
             ->where('lop.id_giang_vien', '=', $giang_vien->id_user)
+            ->groupBy('khoa_hoc.id')
             ->select('khoa_hoc.*','danh_muc.ten_danh_muc')
             ->paginate(4);
         // dd($khoa_hoc);

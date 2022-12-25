@@ -60,7 +60,7 @@
                                 <li class="nav-item">
                                     <button class="nav-link" id="pills-instructors-tab" data-bs-toggle="tab"
                                         data-bs-target="#pills-instructors" role="tab" aria-controls="pills-instructors"
-                                        aria-selected="false" type="button"> Mô tả</button>
+                                        aria-selected="false" type="button"> Lộ trình khóa học</button>
                                 </li>
 
                                 {{-- <li class="nav-item">
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-instructors" aria-labelledby="pills-instructors-tab"
                                     role="tabpanel">
-                                    <span> Mô tả : </span>
+                                    <span> Lộ trình khóa học : </span>
                                     <p>
                                         {!!$detail->mo_ta!!}
                                     </p>

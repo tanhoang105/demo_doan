@@ -66,9 +66,9 @@
         <!-- Container -->
         <div class="container">
             <!-- Start: Heading -->
-            <div class="base-header text-center">
+            {{-- <div class="base-header text-center">
                 <h3> Công Việc Của Chúng Tôi </h3>
-            </div>
+            </div> --}}
             <!-- End: Heading -->
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -172,7 +172,7 @@
         <div class="container">
             <!-- Start: Heading -->
             <div class="base-header">
-                <h3> Các Khóa Học Nổi Bật </h3>
+                <h3> Các Khóa Học Của Chúng Tôi </h3>
             </div>
             <!-- End: Heading -->
             <div class="row">

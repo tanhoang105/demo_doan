@@ -172,27 +172,26 @@ class LichHocController extends Controller
         // dd($request->all());
         $this->authorize(mb_strtoupper('update lịch học'));
         // dd(123);
-        if (session('id_lop')) {
-            // lấy danh sách học viên theo id_lop
-            $list_id_user = $this->dangky->TimHVTheoIdLop(session('id_lop'));
-            // dd($list_id_user[0]->id_user);
-            $id_user = [];
-            for ($i = 0; $i < count($list_id_user); $i++) {
-                $id_user[] =  $list_id_user[$i]->id_user;
-            }
-            // dd($id_user);
-            $list_hocvien = $this->hocvien->TimHVTheoListId($id_user);
-            // dd($list_hocvien , 123);
-            $data = [];
-            foreach ($list_hocvien  as $itemHocVien) {
-                // dd($itemHocVien->email);
-                $data['email'][] = $itemHocVien->email;
-            }
-            dd($data['email']);
-            Mail::to($data['email'])->send(new DoiLich([
-                'mes' => "Cảm ơn bạn đã xem mail này"
-            ]));
-        }
+        // if (session('id_lop')) {
+        //     // lấy danh sách học viên theo id_lop
+        //     $list_id_user = $this->dangky->TimHVTheoIdLop(session('id_lop'));
+        //     dd($list_id_user[0]->id_user);
+        //     $id_user = [];
+        //     for ($i = 0; $i < count($list_id_user); $i++) {
+        //         $id_user[] =  $list_id_user[$i]->id_user;
+        //     }
+        //     // dd($id_user);
+        //     $list_hocvien = $this->hocvien->TimHVTheoListId($id_user);
+        //     // dd($list_hocvien , 123);
+        //     $data = [];
+        //     foreach ($list_hocvien  as $itemHocVien) {
+        //         // dd($itemHocVien->email);
+        //         $data['email'][] = $itemHocVien->email;
+        //     }
+        //     Mail::to($data['email'])->send(new DoiLich([
+        //         'mes' => "Cảm ơn bạn đã xem mail này"
+        //     ]));
+        // }
 
 
         $params = [];
@@ -212,6 +211,7 @@ class LichHocController extends Controller
         $res = $this->lich->saveupdate($params);
         // dd($res);
         if ($res > 0) {
+
             return response()->json([
                 'success' => true,
                 'msg' => 'Cập nhật thành công'

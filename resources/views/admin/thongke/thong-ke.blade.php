@@ -119,7 +119,7 @@ use App\Models\DangKy;
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('route_BE_Admin_List_Thanh_Toan') }}" class="small-box-footer">Xem chi tiết <i
+                        <a href="{{ route('route_BE_Admin_List_Dang_Ky') }}" class="small-box-footer">Xem chi tiết <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -134,7 +134,7 @@ use App\Models\DangKy;
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('route_BE_Admin_List_Thanh_Toan') }}" class="small-box-footer">Xem chi tiết <i
+                        <a href="{{ route('route_BE_Admin_List_Dang_Ky') }}" class="small-box-footer">Xem chi tiết <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

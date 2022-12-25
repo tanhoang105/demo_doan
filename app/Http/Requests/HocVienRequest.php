@@ -35,7 +35,7 @@ class HocVienRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required | email | unique:users',
                             'password' => 'required | min:6',
-                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                            'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
                         ];
@@ -46,7 +46,7 @@ class HocVienRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'email' => 'required | email',
-                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                            'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                             'dia_chi' => 'required',
                             'hinh_anh' => 'required | image',
                             // 'password' => 'required | min:6',
