@@ -98,10 +98,10 @@
 
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Avatar</label>
-                    <img id="anh" src="{{ asset('custom/images/avatar-01.png') }}" style="border-radius: 100%" width="100px" height="100px" alt="">
+                    <label for="" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
+                    <img id="anh" style="border-radius: 100%" width="100px" height="100px" alt="">
                     <input id="hinhanh" value="{{ old('hinh_anh') ?? request()->hinh_anh }}" type="file" name="hinh_anh"
-                           class="form-control" accept=".jpg, .png" multiplaccept=".jpg, .png">
+                           class="form-control" accept=".jpg, .png, .jpeg" multiplaccept=".jpg, .png, .jpeg">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('hinh_anh')
                     <span style="color: red"> {{ $message }} </span>

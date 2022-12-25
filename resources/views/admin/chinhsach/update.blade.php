@@ -18,7 +18,7 @@
             <div class="col-6">
      
                 <div class="mb-3">
-                    <label for="" class="form-label">Tối tượng áp dụng</label>
+                    <label for="" class="form-label">Tối tượng áp dụng <span class="text-danger">*</span></label>
                     <input value="{{ $res->doi_tuong_ap_dung ?? old('doi_tuong_ap_dung') }}" type="text"
                         name="doi_tuong_ap_dung" class="form-control" id="" aria-describedby="emailHelp">
                         {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="" class="form-label">Nội dung chính sách</label>
+                    <label for="" class="form-label">Nội dung chính sách <span class="text-danger">*</span></label>
                     <textarea id="ckeditor2" class="form-control" name="noi_dung" value="{{ $res->noi_dung ?? old('noi_dung') }}" id="">{{ $res->noi_dung }}</textarea>
                     @error('noi_dung')
                         <span style="color: red"> {{ $message }} </span>

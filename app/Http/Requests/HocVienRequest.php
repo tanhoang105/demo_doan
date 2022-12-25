@@ -35,8 +35,9 @@ class HocVienRequest extends FormRequest
                             'name' => 'required',
                             'email' => 'required | email | unique:users',
                             'password' => 'required | min:6',
-                            'sdt' => 'required | min:10 | max:11 ',
-                            'dia_chi' => 'required'
+                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                            'dia_chi' => 'required',
+                            'hinh_anh' => 'required | image',
                         ];
                         break;
 
@@ -45,8 +46,9 @@ class HocVienRequest extends FormRequest
                         $rules = [
                             'name' => 'required',
                             'email' => 'required | email',
-                            'sdt' => 'required | min:10 | max:11 ',
-                            'dia_chi' => 'required'
+                            'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                            'dia_chi' => 'required',
+                            'hinh_anh' => 'required | image',
                             // 'password' => 'required | min:6',
                         ];
                         break;
@@ -74,9 +76,13 @@ class HocVienRequest extends FormRequest
             'password.required' => 'Mật khẩu bắt buộc phải nhập',
             'password.min' => 'Mật khẩu bắt buộc nhiều hơn 6 ký tự',
             'sdt.required' => 'Số điện thoại bắt buộc phải nhập',
+            'sdt.integer' => 'Số điện thoại sai định dạng',
+            'sdt.regex' => 'Số điện thoại sai định dạng',
             'sdt.min' => 'Số điện thoại tối thiểu 10 kí tự ',
             'sdt.max' => 'Số điện thoại tối đa 11 kí tự',
             'dia_chi.required' => 'Địa chỉ bắt buộc phải nhập',
+            'hinh_anh.required' => 'Ảnh đại diện bắt buộc phải chọn',
+            'hinh_anh.image' => 'Ảnh đại diện phải có định dạng: jpeg, png, jpg',
 
         ];
     }

@@ -38,7 +38,7 @@
                     <select class="form-control" name="id_lop" id="">
                         <option value="">--- Chọn lớp học ---</option>
                         @foreach ($lopxep as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_lop }}</option>
+                            <option value="{{ $item->id }}" {{ (collect(old('id_lop'))->contains($item->id)) ? 'selected':'' }}>{{ $item->ten_lop }}</option>
                         @endforeach
                     </select>   
                     @error('id_lop')
@@ -53,7 +53,7 @@
                     <select class="form-control" name="id_phong_hoc" id="">
                         <option value="">--- Chọn phòng học ---</option>
                         @foreach ($phonghoc as $item)
-                            <option value="{{ $item->id }}">{{ $item->ten_phong }}</option>
+                            <option value="{{ $item->id }}" {{ (collect(old('id_phong_hoc'))->contains($item->id)) ? 'selected':'' }}>{{ $item->ten_phong }}</option>
                         @endforeach
                     </select>
                     @error('id_phong_hoc')

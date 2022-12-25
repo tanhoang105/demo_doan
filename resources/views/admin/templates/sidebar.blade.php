@@ -15,7 +15,7 @@
               </div>
               <div class="info d-flex align-content-center flex-wrap">
 
-                  <a href="#" class="d-block">{{ $objUser->name }}</a>
+                  <a href="/admin" class="d-block">{{ $objUser->name }}</a>
               </div>
           @endif
       </div>

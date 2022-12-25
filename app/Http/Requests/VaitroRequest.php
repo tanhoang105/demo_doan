@@ -62,7 +62,7 @@ class VaitroRequest extends FormRequest
         return [
             'required' => ':attribute bắt buộc phải nhập',
             'min' => ':attribute lớn hơn 4 ký tự',
-            'unique' => ':attribute đã tồn tại'
+            'unique' => ':attribute đã tồn tại',
 
         ];
     }

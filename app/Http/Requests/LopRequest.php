@@ -34,7 +34,7 @@ class LopRequest extends FormRequest
                     case 'store':
                         $rules = [
                             'ten_lop' => 'required | unique:lop,ten_lop',
-                            'id_giang_vien' => 'numeric|min:1',
+                            'id_giang_vien' => 'numeric | min:1',
                             'ca_thu_id' => 'required', [
                                 function ($attribute, $value, $fali) use ($data) {
 
@@ -50,7 +50,7 @@ class LopRequest extends FormRequest
                             ],
                             'id_khoa_hoc' => 'numeric|min:1',
                             'ngay_bat_dau' => 'required | date | after:today',
-                            'thoi_gian' => 'required | numeric'
+                            'thoi_gian' => 'required | numeric | min:1'
                         ];
                         break;
                         // nếu là method chỉnh sửa bản ghi
@@ -91,8 +91,15 @@ class LopRequest extends FormRequest
             'min' => ':attribute không được nhỏ hơn 0',
             'after' => ':attribute không được nhỏ hơn hoặc bằng ngày hôm nay',
             'integer' => ':attribute định dạng bắt buộc là số',
-            'numeric' => ':attribute định dạng bắt buộc là số',
-            'ca_thu_id.required' => 'Lịch học không được để trống'
+            // 'numeric' => ':attribute định dạng bắt buộc là số',
+            'ca_thu_id.required' => 'Lịch học không được để trống',
+            // 'ten_lop.regex' => 'Tên lớp chứa ký tự không hợp lệ',
+            'id_khoa_hoc.min' => 'Khóa học bắt buộc phải chọn',
+            'id_giang_vien.min' => 'Giảng viên bắt buộc phải chọn',
+            'ca_thu_id.min' => 'Vai trò bắt buộc phải chọn',
+            'thoi_gian.required' => 'Thời gian bắt buộc phải nhập',
+            'thoi_gian.numeric' => 'Thời gian sai định dạng',
+            'thoi_gian.min' => 'Thời gian không thể nhỏ hơn 1',
         ];
     }
     public function attributes()
