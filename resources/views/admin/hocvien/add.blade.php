@@ -51,7 +51,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input value="{{ old('email') ?? request()->email }}" type="email" name="email" class="form-control"
+                    <input value="{{ old('email') ?? request()->email }}" type="" name="email" class="form-control"
                         id="" aria-describedby="emailHelp">
                     {{-- hiển thị lỗi validate -  funciton message trong file DanhMucRequest --}}
                     @error('email')
