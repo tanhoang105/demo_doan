@@ -138,7 +138,7 @@
                                         <option value="">Mặc định</option>
                                         <option value="asc">Giá tăng dần</option>
                                         <option value="desc">Giá giảm dần</option>
-                                        <option value="new">Sản phẩm mới</option>
+                                        <option value="new">Khóa học mới nhất</option>
                                         <option value="view">Lượt xem nhiều nhất</option>
                                     </select>
                                 </div>

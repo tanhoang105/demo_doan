@@ -104,7 +104,6 @@ class Lich extends Model
     {
         $data = array_merge($params['cols'], [
             'updated_at' => date('Y-m-d H:i:s'),
-
         ]);
         // dd($data);
         $query =  DB::table($this->table)

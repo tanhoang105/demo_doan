@@ -99,7 +99,7 @@
                                 @foreach ($khoa_hoc as $value)
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="feat_course_item">
-                                            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image">
+                                            <img src="{{ Storage::url($value->hinh_anh) }}" alt="image" style="width: 380px;height: 200px;-radius: 15px;">
                                             <div class="feat_cour_price">
                                                 <span class="feat_cour_tag">{{ $value->ten_danh_muc }}</span>
                                                 <span

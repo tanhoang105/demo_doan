@@ -40,7 +40,7 @@
                 <th scope="col">STT</th>
                 <th scope="col">Khóa học </th>
                 <th scope="col">Tên Lớp </th>
-                <th scope="col">Chi tiết</th>
+                <th scope="col">Xem lịch</th>
 
             </tr>
         </thead>
@@ -55,9 +55,8 @@
                             <td> {{ $item->ten_lop }}</td>
 
 
-                            <td><button class="btn btn-primary"><a style="color: aliceblue"
-                                        href=" {{ route('route_BE_Admin_Detail_Lich', ['id' => $item->id_lop]) }} ">Chi
-                                        tiết</a></button></td>
+                            <td><button class="btn btn-success"><a style="color: aliceblue"
+                                        href=" {{ route('route_BE_Admin_Detail_Lich', ['id' => $item->id_lop]) }} ">Xem lịch</a></button></td>
 
 
 

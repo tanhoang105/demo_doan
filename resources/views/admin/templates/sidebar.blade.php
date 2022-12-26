@@ -220,7 +220,7 @@
                             <a href="{{ route('route_BE_Admin_danh_sach_doi_lop') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Yêu Cầu Đổi Lớp
+                                    Yêu Cầu Đổi Khóa - Lớp
                                 </p>
                             </a>
                         </li>
@@ -228,7 +228,7 @@
                             <a href="{{ route('route_BE_Admin_List_Lich_Hoc') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
-                                    Lịch Học của học viên
+                                    Quản Lý Lịch Học
                                 </p>
                             </a>
                         </li>

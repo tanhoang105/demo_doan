@@ -10,9 +10,9 @@
         </div>
 
         <div class="row align-content-center bg-cfcece font-weight-bold" style="height: 50px;">
-            <div class="col text-dark">
+            {{-- <div class="col text-dark">
                 <label>STT</label>
-            </div>
+            </div> --}}
             <div class="col text-dark">
                 <label>Thứ</label>
             </div>
@@ -43,9 +43,9 @@
         @foreach ($list as $value )
             @if($value->ngay_hoc >= date('Y-m-d'))
             <div class="row align-content-center bg-dedede" style="height: 50px; border-top: 1px solid #CFCECE">
-                <div class="col">
+                {{-- <div class="col">
                     <span class="text-dark"> {{ $loop->iteration }} </span>
-                </div>
+                </div> --}}
                 <div class="col">
                     <span class="text-dark">
                         @foreach ($thuhoc as $item)

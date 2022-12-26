@@ -90,7 +90,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th> <input id="check_all" type="checkbox" /></th>
+                    {{-- <th> <input id="check_all" type="checkbox" /></th> --}}
                     <th scope="col">STT</th>
                     <th scope="col">Ngày đăng ký</th>
                     <th scope="col">Người đăng ký</th>
@@ -102,15 +102,15 @@
                     <th scope="col">Thanh toán</th>
                     <th scope="col">Sửa</th>
 
-                    <th scope="col">
+                    {{-- <th scope="col">
                         <button class="btn btn-default" type="submit" class="btn" style="">Xóa</button>
-                    </th>
+                    </th> --}}
                 </tr>
             </thead>
             <tbody>
                 @foreach ($list as $key => $item)
                     <tr>
-                        <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td>
+                        {{-- <td><input class="checkitem" type="checkbox" name="id[]" value="{{ $item->id }}" /></td> --}}
                         <th scope="row"> {{ $loop->iteration }}</th>
                         <td> {{ date('d/m/Y', strtotime($item->ngay_dang_ky)) }}</td>
                         <td> {{ $item->ten_hoc_vien }}</td>
@@ -141,12 +141,12 @@
                                 href="{{ route('route_BE_Admin_Edit_Dang_Ky', ['id' => $item->id]) }}">
                                 <i class="fas fa-edit "></i> Sửa</a>
                         </td>
-                        <td>
+                        {{-- <td>
                             <a onclick="return confirm('Bạn có chắc muốn xóa ?')" class="btn btn-danger"
                                 style="color: aliceblue"
                                 href="{{ route('route_BE_Admin_Xoa_Ca_Hoc', ['id' => $item->id]) }}">
                                 <i class="fas fa-trash-alt"></i> Xóa</a>
-                        </td>
+                        </td> --}}
                     </tr>
                 @endforeach
 

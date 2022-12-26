@@ -35,7 +35,7 @@ class GiangVienRequest extends FormRequest
                                     'name' => 'required',
                                     'email' => 'required | email | unique:users',
                                     'password' => 'required | min:6',
-                                    'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                                    'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                                     'dia_chi' => 'required',
                                     'hinh_anh' => 'required | image',
                                     'mo_ta' => 'required'
@@ -48,7 +48,7 @@ class GiangVienRequest extends FormRequest
                                     'name' => 'required',
                                     'email' => 'required | email',
                                     // 'password' => 'required | min:6',
-                                    'sdt' => 'required | integer | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
+                                    'sdt' => 'required | regex:/(0)[0-9]{9}/ | min:10 | max:11 ',
                                     'dia_chi' => 'required',
                                     'hinh_anh' => 'required | image',
                                     'mo_ta' => 'required'
