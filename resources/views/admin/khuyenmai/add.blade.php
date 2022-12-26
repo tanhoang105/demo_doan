@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="form-group mb-0 text-right">
-                        <button type="submit" class="btn btn-submit btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-submit btn-primary" disabled>Thêm</button>
                     </div>
                 </form>
             </div>
@@ -53,11 +53,13 @@
 
         function coupon_form(){
             var coupon_type = $('#coupon_type').val();
-            console.log(12123);
-            $.get('{{ route('route_BE_Admin_Coupon_Form') }}',{ coupon_type:coupon_type}, function(data){
+                    $('.btn-submit').removeAttr("disabled");
+                $.get('{{ route('route_BE_Admin_Coupon_Form') }}',{ coupon_type:coupon_type}, function(data){
                 console.log(data);
                 $('#coupon_form').html(data);
-            });
+
+                });
+     
         }
 
         function changeCouponType() {

@@ -127,7 +127,11 @@
                         </a>
                     </li>
                 </ul> --}}
-
+                @endhasRoles
+              {{-- end admin --}}
+              
+              {{-- tác vụ của đào tạo  --}}
+              @hasRoles(['admin' , 'đào tạo'])
               <li class="nav-item nav-active">
                   <a href="{{ route('route_BE_Admin_quan_ly_tk_ghi_no') }}" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
@@ -157,12 +161,7 @@
                   </a>
 
               </li>
-              @endhasRoles
-              {{-- end admin --}}
 
-
-              {{-- tác vụ của đào tạo  --}}
-              @hasRoles(['admin' , 'đào tạo'])
               <li class="nav-item">
                   <a href="" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
